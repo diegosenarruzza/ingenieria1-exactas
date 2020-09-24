@@ -21,28 +21,28 @@ TestCase subclass: #CustomerBookTest
 	poolDictionaries: ''
 	category: 'CodigoRepetido-Ejercicio'!
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/19/2020 21:35:20'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/24/2020 00:52:04'!
 test01AddingCustomerShouldNotTakeMoreThan50Milliseconds
 
-	| customerBook addOperation |
+	| customerBook add |
 	
 	customerBook := CustomerBook new.
-	addOperation := [customerBook addCustomerNamed: (self johnLennonCustomer)] .
+	add := [customerBook addCustomerNamed: (self johnLennonCustomer)] .
 	
-	self assert: (self checkTimeOfOperation: addOperation withMillisecondsAllowed: 50 ).! !
+	self timeOfOperation: add mustBeLessThan: 50*millisecond.! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/19/2020 21:37:43'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/24/2020 00:53:05'!
 test02RemovingCustomerShouldNotTakeMoreThan100Milliseconds
 
-	| customerBook paulMcCartney removeOperation |
+	| customerBook paulMcCartney remove |
 	
 	customerBook := CustomerBook new.
 	paulMcCartney := self paulMcCartneyCustomer.
 	customerBook addCustomerNamed: paulMcCartney.
 	
-	removeOperation :=  [customerBook removeCustomerNamed: (self paulMcCartneyCustomer)].
+	remove :=  [customerBook removeCustomerNamed: (self paulMcCartneyCustomer)].
 	
-	self assert: (self checkTimeOfOperation: removeOperation withMillisecondsAllowed: 100 ).! !
+	self timeOfOperation: remove mustBeLessThan: 100*millisecond.! !
 
 !CustomerBookTest methodsFor: 'testing' stamp: 'HernanWilkinson 5/9/2012 18:12'!
 test03CanNotAddACustomerWithEmptyName 
@@ -58,65 +58,64 @@ test03CanNotAddACustomerWithEmptyName
 			self assert: anError messageText = CustomerBook customerCanNotBeEmptyErrorMessage.
 			self assert: customerBook isEmpty ]! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/20/2020 00:58:28'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/24/2020 00:40:29'!
 test04CanNotRemoveAnInvalidCustomer
 	
-	| sampleCustomerBook operation customer |
+	| sampleCustomerBook remove paulMcCartney |
 
 	sampleCustomerBook := self johnLennonCustomerBook .
-	operation := #removeCustomerNamed:.
-	customer := self paulMcCartneyCustomer.
+	remove := #removeCustomerNamed:.
+	paulMcCartney := self paulMcCartneyCustomer.
 
-	self sampleBook: sampleCustomerBook isInmutableWhen: operation with: customer wakeUp: NotFound.! !
+	self sampleBook: sampleCustomerBook mustBeInmutableWhenOperation: remove withCustomer: paulMcCartney raiseError: NotFound.! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/20/2020 00:58:03'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/24/2020 00:56:51'!
 test05SuspendingACustomerShouldNotRemoveItFromCustomerBook
 
-	| sampleCustomerBook paulMcCartney zeroActiveCustomers oneSuspendedCustomers |
+	| sampleCustomerBook paulMcCartney zeroCustomers oneCustomer |
 	
 	sampleCustomerBook  := self paulMcCartneySuspendedCustomerBook.
 	paulMcCartney  := self paulMcCartneyCustomer.
-	zeroActiveCustomers := 0.
-	oneSuspendedCustomers  := 1.
-	
-	self sampleBook: sampleCustomerBook has: zeroActiveCustomers and: oneSuspendedCustomers.
+	zeroCustomers := 0.
+	oneCustomer  := 1.
+
+	self sampleBook: sampleCustomerBook mustHasActives: zeroCustomers andSuspended: oneCustomer.
 	self assert: (sampleCustomerBook includesCustomerNamed: paulMcCartney).! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/20/2020 00:57:11'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/24/2020 00:56:58'!
 test06RemovingASuspendedCustomerShouldRemoveItFromCustomerBook
 
-	| sampleCustomerBook paulMcCartney zeroActiveCustomers zeroSuspendedCustomers |
+	| sampleCustomerBook paulMcCartney zeroCustomers |
 	
 	sampleCustomerBook  := self paulMcCartneySuspendedCustomerBook.
 	paulMcCartney  := self paulMcCartneyCustomer.
 	sampleCustomerBook removeCustomerNamed: paulMcCartney.
-	zeroActiveCustomers := 0.
-	zeroSuspendedCustomers  := 0.
-	
-	self sampleBook: sampleCustomerBook has: zeroActiveCustomers and: zeroSuspendedCustomers.
+	zeroCustomers := 0.
+
+	self sampleBook: sampleCustomerBook mustHasActives: zeroCustomers andSuspended: zeroCustomers.
 	self deny: (sampleCustomerBook includesCustomerNamed: paulMcCartney).! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/20/2020 00:38:40'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/24/2020 00:40:56'!
 test07CanNotSuspendAnInvalidCustomer
 	
-	| sampleCustomerBook operation customer |
+	| sampleCustomerBook suspended georgeHarrison |
 
 	sampleCustomerBook := self johnLennonCustomerBook.
-	operation := #suspendCustomerNamed:.
-	customer := self georgeHarrisonCustomer.
+	suspended := #suspendCustomerNamed:.
+	georgeHarrison := self georgeHarrisonCustomer.
 
-	self sampleBook: sampleCustomerBook isInmutableWhen: operation with: customer wakeUp: CantSuspend.! !
+	self sampleBook: sampleCustomerBook mustBeInmutableWhenOperation: suspended withCustomer: georgeHarrison raiseError: CantSuspend.! !
 
-!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/20/2020 00:38:33'!
+!CustomerBookTest methodsFor: 'testing' stamp: 'DS 9/24/2020 00:41:03'!
 test08CanNotSuspendAnAlreadySuspendedCustomer
 	
-	| sampleCustomerBook operation customer |
+	| sampleCustomerBook suspended johnLennon |
 
 	sampleCustomerBook := self johnLennonSuspendedCustomerBook.
-	operation := #suspendCustomerNamed:.
-	customer := self johnLennonCustomer.
+	suspended := #suspendCustomerNamed:.
+	johnLennon := self johnLennonCustomer.
 
-	self sampleBook: sampleCustomerBook isInmutableWhen: operation with: customer wakeUp: CantSuspend.! !
+	self sampleBook: sampleCustomerBook mustBeInmutableWhenOperation: suspended withCustomer: johnLennon raiseError: CantSuspend.! !
 
 
 !CustomerBookTest methodsFor: 'sample data' stamp: 'DS 9/19/2020 21:29:52'!
@@ -167,30 +166,8 @@ paulMcCartneySuspendedCustomerBook
 	^ customerBook .! !
 
 
-!CustomerBookTest methodsFor: 'helpers' stamp: 'DS 9/19/2020 20:49:51'!
-checkTimeOfOperation: operationToRun withMillisecondsAllowed: millisecondsAllowed
-
-	|millisecondsBeforeRunning millisecondsAfterRunning|
-
-	millisecondsBeforeRunning := Time millisecondClockValue * millisecond.
-	operationToRun value.
-	millisecondsAfterRunning := Time millisecondClockValue * millisecond.
-	
-	^ (millisecondsAfterRunning-millisecondsBeforeRunning) < (millisecondsAllowed * millisecond).! !
-
-!CustomerBookTest methodsFor: 'helpers' stamp: 'DS 9/20/2020 00:36:58'!
-sampleBook: customerBook has: activeCustomers and: suspendedCustomers
-
-	| totalCustomers |
-
-	totalCustomers := activeCustomers + suspendedCustomers.
-
-	self assert: activeCustomers equals: customerBook numberOfActiveCustomers.
-	self assert: suspendedCustomers equals: customerBook numberOfSuspendedCustomers.
-	self assert: totalCustomers equals: customerBook numberOfCustomers.! !
-
-!CustomerBookTest methodsFor: 'helpers' stamp: 'DS 9/21/2020 18:44:19'!
-sampleBook: customerBook isInmutableWhen: operation with: customer wakeUp: signalError
+!CustomerBookTest methodsFor: 'helpers' stamp: 'DS 9/24/2020 00:40:14'!
+sampleBook: customerBook mustBeInmutableWhenOperation: operation withCustomer: customer raiseError: signalError
 
 	| sampleCustomer |
 
@@ -202,6 +179,28 @@ sampleBook: customerBook isInmutableWhen: operation with: customer wakeUp: signa
 			do: [ :anError |
 				self assert: customerBook numberOfCustomers = 1.
 				self assert: (customerBook includesCustomerNamed: sampleCustomer)].! !
+
+!CustomerBookTest methodsFor: 'helpers' stamp: 'DS 9/24/2020 00:56:40'!
+sampleBook: customerBook mustHasActives: numberOfActives andSuspended: numberOfSuspended
+
+	| totalCustomers |
+
+	totalCustomers := numberOfActives + numberOfSuspended.
+
+	self assert: numberOfActives equals: customerBook numberOfActiveCustomers.
+	self assert: numberOfSuspended equals: customerBook numberOfSuspendedCustomers.
+	self assert: totalCustomers equals: customerBook numberOfCustomers.! !
+
+!CustomerBookTest methodsFor: 'helpers' stamp: 'DS 9/24/2020 00:53:55'!
+timeOfOperation: operationToRun mustBeLessThan: timeAllowed
+
+	| timeBeforeRunning timeAfterRunning |
+
+	timeBeforeRunning := Time millisecondClockValue * millisecond.
+	operationToRun value.
+	timeAfterRunning := Time millisecondClockValue * millisecond.
+	
+	self assert: (timeBeforeRunning-timeAfterRunning) < timeAllowed.! !
 
 
 !classDefinition: #CustomerBook category: #'CodigoRepetido-Ejercicio'!
@@ -229,11 +228,11 @@ initialize
 	suspended:= OrderedCollection new.! !
 
 
-!CustomerBook methodsFor: 'errors management' stamp: 'DS 9/21/2020 18:42:03'!
-wakeUpSignalError: signal
+!CustomerBook methodsFor: 'errors management' stamp: 'DS 9/24/2020 00:37:43'!
+raiseErrorWithMessage: message
 
 	| errorMessage |
-	errorMessage := signal sendTo: (self class).
+	errorMessage := message sendTo: (self class).
 
 	self error: errorMessage. ! !
 
@@ -275,15 +274,15 @@ removeCustomerNamed: aName
 
     ^ NotFound signal! !
 
-!CustomerBook methodsFor: 'customer management' stamp: 'DS 9/21/2020 23:19:06'!
+!CustomerBook methodsFor: 'customer management' stamp: 'DS 9/24/2020 00:38:17'!
 signalCustomerAlreadyExists 
 
-	self wakeUpSignalError: #customerAlreadyExistsErrorMessage.! !
+	self raiseErrorWithMessage: #customerAlreadyExistsErrorMessage.! !
 
-!CustomerBook methodsFor: 'customer management' stamp: 'DS 9/21/2020 18:41:49'!
+!CustomerBook methodsFor: 'customer management' stamp: 'DS 9/24/2020 00:38:01'!
 signalCustomerNameCannotBeEmpty 
 
-	self wakeUpSignalError: #customerCanNotBeEmptyErrorMessage.! !
+	self raiseErrorWithMessage: #customerCanNotBeEmptyErrorMessage.! !
 
 !CustomerBook methodsFor: 'customer management' stamp: 'NR 4/3/2019 10:14:26'!
 suspendCustomerNamed: aName 
