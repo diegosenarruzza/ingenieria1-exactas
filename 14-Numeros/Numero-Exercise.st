@@ -319,10 +319,31 @@ invalidNumberType
 
 	self error: self class invalidNumberTypeErrorDescription! !
 
-!Numero methodsFor: 'arithmetic operations' stamp: 'NR 9/23/2018 23:37:13'!
+
+!Numero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:28:07'!
+addFraction: aFraction
+
+	self subclassResponsibility.! !
+
+!Numero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:27:59'!
+addInteger: anInteger
+
+	self subclassResponsibility.! !
+
+!Numero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:53:12'!
+multiplyFraction: aMultiplier
+
+	self subclassResponsibility.! !
+
+!Numero methodsFor: 'xxx' stamp: 'DS 9/28/2020 21:02:01'!
+multiplyInteger: aMultiplier
+
+	self subclassResponsibility.! !
+
+!Numero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:38:57'!
 negated
-	
-	^self * (Entero with: -1)! !
+
+	self subclassResponsibility.! !
 
 
 !Numero methodsFor: 'testing' stamp: 'NR 9/23/2018 23:36:49'!
@@ -364,28 +385,47 @@ Numero subclass: #Entero
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/27/2020 13:43:38'!
-* aMultiplier 
+!Entero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:24:35'!
+addFraction: aFraction
+
+	^aFraction addInteger: self.! !
+
+!Entero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:24:08'!
+addInteger: anInteger
+
+	^self class with: value + anInteger integerValue.! !
+
+!Entero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:57:29'!
+multiplyFraction: aFraction
 	
-	^(aMultiplier isKindOf: Entero) ifTrue: [self class with: value * aMultiplier integerValue]
-	ifFalse: [ self * aMultiplier numerator / aMultiplier denominator ].
+	^aFraction multiplyInteger: self.! !
+
+!Entero methodsFor: 'xxx' stamp: 'DS 9/28/2020 21:30:09'!
+multiplyInteger: anInteger
+	
+	^self class with: value * anInteger integerValue.
 	! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/27/2020 13:37:30'!
+!Entero methodsFor: 'xxx' stamp: 'DS 9/28/2020 21:30:21'!
+negated
+
+	^self class with: value negated.! !
+
+
+!Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 21:02:18'!
+* aMultiplier
+
+	^aMultiplier multiplyInteger: self.! !
+
+!Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 20:56:43'!
 + anAdder 
 	
-	^(anAdder isKindOf: Entero) ifTrue: [self class with: value + anAdder integerValue]
-	ifFalse: [(self * anAdder denominator + anAdder numerator) / anAdder denominator].
-	
-! !
+	^anAdder addInteger: self.! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/27/2020 13:56:09'!
-- aSubtrahend 
-	
-	^(aSubtrahend isKindOf: Entero) ifTrue: [self class with: value - aSubtrahend integerValue]
-	ifFalse: [(self * aSubtrahend denominator - aSubtrahend numerator) / aSubtrahend denominator].
-	
-! !
+!Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 20:56:38'!
+- aSubtrahend
+
+	^(aSubtrahend negated) + self.! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/27/2020 13:47:24'!
 / aDivisor 
@@ -491,38 +531,51 @@ Numero subclass: #Fraccion
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'DS 9/27/2020 13:45:27'!
-* aMultiplier 
+!Fraccion methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:26:01'!
+addFraction: aFraction
 	
-	^ (aMultiplier isKindOf: Entero) ifTrue: [ (numerator * aMultiplier) / denominator ]
-	ifFalse: [(numerator * aMultiplier numerator) / (denominator * aMultiplier denominator)].
+	| newNumerator newDenominator |
 	
-	! !
+	newNumerator := (numerator * aFraction denominator) + (denominator * aFraction numerator).
+	newDenominator := denominator * aFraction denominator.
+	
+	^newNumerator / newDenominator.! !
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'DS 9/27/2020 13:41:21'!
+!Fraccion methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:25:54'!
+addInteger:  anInteger
+
+	^(self denominator * anInteger + self numerator) / self denominator.! !
+
+!Fraccion methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:59:29'!
+multiplyFraction: aFraction
+
+	^(numerator * aFraction numerator) / (denominator * aFraction denominator).! !
+
+!Fraccion methodsFor: 'xxx' stamp: 'DS 9/28/2020 21:14:52'!
+multiplyInteger: anInteger
+
+	^(numerator * anInteger) / denominator.! !
+
+!Fraccion methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:41:42'!
+negated
+
+	^ numerator negated / denominator.! !
+
+
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 20:58:18'!
+* aMultiplier
+
+	^aMultiplier multiplyFraction: self.	! !
+
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 20:26:17'!
 + anAdder 
 	
-	| newNumerator newDenominator |
-	
-	(anAdder isKindOf: Entero) ifTrue: [ ^(anAdder + self) ].
-	
-	newNumerator := (numerator * anAdder denominator) + (denominator * anAdder numerator).
-	newDenominator := denominator * anAdder denominator.
-	
-	^newNumerator / newDenominator ! !
+	^anAdder addFraction: self. ! !
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'DS 9/27/2020 14:02:53'!
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 20:42:18'!
 - aSubtrahend 
-	
-	| newNumerator newDenominator |
-	
-	(aSubtrahend isKindOf: Entero) ifTrue: [ ^self numerator - (aSubtrahend * self denominator) / self denominator].
-	
-	newNumerator := (numerator * aSubtrahend denominator) - (denominator * aSubtrahend numerator).
-	newDenominator := denominator * aSubtrahend denominator.
-	
-	^newNumerator / newDenominator 
-! !
+
+	^(aSubtrahend negated) + self.! !
 
 !Fraccion methodsFor: 'arithmetic operations' stamp: 'DS 9/27/2020 13:54:13'!
 / aDivisor 
