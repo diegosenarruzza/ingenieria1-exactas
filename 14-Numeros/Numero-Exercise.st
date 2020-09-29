@@ -66,14 +66,13 @@ test09FraccionMultipliesWithFraccionCorrectly
 
 	self assert: oneFifth * twoFifth equals: twoTwentyfifth! !
 
-!NumeroTest methodsFor: 'tests' stamp: 'HernanWilkinson 5/7/2016 20:56'!
+!NumeroTest methodsFor: 'tests' stamp: 'Federico 9/29/2020 15:05:02'!
 test10FraccionDividesFraccionCorrectly
 "
     La division de fracciones es:
 	 
 	(a/b) / (c/d) = (a.d) / (b.c)
 "
-
 	self assert: oneHalf / oneFifth equals: fiveHalfs! !
 
 !NumeroTest methodsFor: 'tests' stamp: 'HernanWilkinson 5/7/2016 21:07'!
@@ -294,6 +293,37 @@ Object subclass: #Numero
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
+!Numero methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 20:28:07'!
+addFraction: aFraction
+
+	self subclassResponsibility.! !
+
+!Numero methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 20:27:59'!
+addInteger: anInteger
+
+	self subclassResponsibility.! !
+
+!Numero methodsFor: 'typed arithmetic operations' stamp: 'Federico 9/29/2020 16:25:15'!
+asDivisorOfFraction: aFraction
+
+	self subclassResponsibility.! !
+
+!Numero methodsFor: 'typed arithmetic operations' stamp: 'Federico 9/29/2020 16:25:30'!
+asDivisorOfInteger: anInteger
+
+	self subclassResponsibility.! !
+
+!Numero methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 20:53:12'!
+multiplyFraction: aMultiplier
+
+	self subclassResponsibility.! !
+
+!Numero methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 21:02:01'!
+multiplyInteger: aMultiplier
+
+	self subclassResponsibility.! !
+
+
 !Numero methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 22:48'!
 * aMultiplier
 
@@ -319,28 +349,7 @@ invalidNumberType
 
 	self error: self class invalidNumberTypeErrorDescription! !
 
-
-!Numero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:28:07'!
-addFraction: aFraction
-
-	self subclassResponsibility.! !
-
-!Numero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:27:59'!
-addInteger: anInteger
-
-	self subclassResponsibility.! !
-
-!Numero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:53:12'!
-multiplyFraction: aMultiplier
-
-	self subclassResponsibility.! !
-
-!Numero methodsFor: 'xxx' stamp: 'DS 9/28/2020 21:02:01'!
-multiplyInteger: aMultiplier
-
-	self subclassResponsibility.! !
-
-!Numero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:38:57'!
+!Numero methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 20:38:57'!
 negated
 
 	self subclassResponsibility.! !
@@ -385,31 +394,37 @@ Numero subclass: #Entero
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!Entero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:24:35'!
+!Entero methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 20:24:35'!
 addFraction: aFraction
 
 	^aFraction addInteger: self.! !
 
-!Entero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:24:08'!
+!Entero methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 20:24:08'!
 addInteger: anInteger
 
 	^self class with: value + anInteger integerValue.! !
 
-!Entero methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:57:29'!
+!Entero methodsFor: 'typed arithmetic operations' stamp: 'Federico 9/29/2020 16:23:46'!
+asDivisorOfFraction: aFraction
+	
+	^aFraction numerator / (aFraction denominator * self).! !
+
+!Entero methodsFor: 'typed arithmetic operations' stamp: 'Federico 9/29/2020 16:23:38'!
+asDivisorOfInteger: anInteger
+	
+	^Fraccion with: anInteger over: self.
+	! !
+
+!Entero methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 20:57:29'!
 multiplyFraction: aFraction
 	
 	^aFraction multiplyInteger: self.! !
 
-!Entero methodsFor: 'xxx' stamp: 'DS 9/28/2020 21:30:09'!
+!Entero methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 21:30:09'!
 multiplyInteger: anInteger
 	
 	^self class with: value * anInteger integerValue.
 	! !
-
-!Entero methodsFor: 'xxx' stamp: 'DS 9/28/2020 21:30:21'!
-negated
-
-	^self class with: value negated.! !
 
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 21:02:18'!
@@ -417,9 +432,8 @@ negated
 
 	^aMultiplier multiplyInteger: self.! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 20:56:43'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'Federico 9/29/2020 16:09:53'!
 + anAdder 
-	
 	^anAdder addInteger: self.! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 20:56:38'!
@@ -427,12 +441,9 @@ negated
 
 	^(aSubtrahend negated) + self.! !
 
-!Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/27/2020 13:47:24'!
+!Entero methodsFor: 'arithmetic operations' stamp: 'Federico 9/29/2020 16:24:35'!
 / aDivisor 
-	
-	^ (aDivisor isKindOf: Entero) ifTrue: [Fraccion with: self over: aDivisor]
-		ifFalse: [(self * aDivisor denominator) / aDivisor numerator].
-	! !
+	^aDivisor asDivisorOfInteger: self! !
 
 !Entero methodsFor: 'arithmetic operations' stamp: 'HernanWilkinson 5/7/2016 21:55'!
 // aDivisor 
@@ -457,6 +468,11 @@ fibonacci
 greatestCommonDivisorWith: anEntero 
 	
 	^self class with: (value gcd: anEntero integerValue)! !
+
+!Entero methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 21:30:21'!
+negated
+
+	^self class with: value negated.! !
 
 
 !Entero methodsFor: 'comparing' stamp: 'HernanWilkinson 5/7/2016 21:01'!
@@ -531,7 +547,7 @@ Numero subclass: #Fraccion
 	poolDictionaries: ''
 	category: 'Numero-Exercise'!
 
-!Fraccion methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:26:01'!
+!Fraccion methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 20:26:01'!
 addFraction: aFraction
 	
 	| newNumerator newDenominator |
@@ -541,25 +557,30 @@ addFraction: aFraction
 	
 	^newNumerator / newDenominator.! !
 
-!Fraccion methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:25:54'!
+!Fraccion methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 20:25:54'!
 addInteger:  anInteger
 
 	^(self denominator * anInteger + self numerator) / self denominator.! !
 
-!Fraccion methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:59:29'!
+!Fraccion methodsFor: 'typed arithmetic operations' stamp: 'Federico 9/29/2020 16:23:52'!
+asDivisorOfFraction: aFraction
+
+	^ (self denominator * aFraction numerator) / (self numerator * aFraction denominator)! !
+
+!Fraccion methodsFor: 'typed arithmetic operations' stamp: 'Federico 9/29/2020 16:24:01'!
+asDivisorOfInteger: anInteger
+
+	^(anInteger * self denominator) / self numerator! !
+
+!Fraccion methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 20:59:29'!
 multiplyFraction: aFraction
 
 	^(numerator * aFraction numerator) / (denominator * aFraction denominator).! !
 
-!Fraccion methodsFor: 'xxx' stamp: 'DS 9/28/2020 21:14:52'!
+!Fraccion methodsFor: 'typed arithmetic operations' stamp: 'DS 9/28/2020 21:14:52'!
 multiplyInteger: anInteger
 
 	^(numerator * anInteger) / denominator.! !
-
-!Fraccion methodsFor: 'xxx' stamp: 'DS 9/28/2020 20:41:42'!
-negated
-
-	^ numerator negated / denominator.! !
 
 
 !Fraccion methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 20:58:18'!
@@ -577,11 +598,14 @@ negated
 
 	^(aSubtrahend negated) + self.! !
 
-!Fraccion methodsFor: 'arithmetic operations' stamp: 'DS 9/27/2020 13:54:13'!
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'Federico 9/29/2020 16:24:44'!
 / aDivisor 
-	
-	^ (aDivisor isKindOf: Entero) ifTrue: [self numerator / (self denominator * aDivisor)]
-		ifFalse: [(numerator * aDivisor denominator) / (denominator * aDivisor numerator)]! !
+	^aDivisor asDivisorOfFraction: self.! !
+
+!Fraccion methodsFor: 'arithmetic operations' stamp: 'DS 9/28/2020 20:41:42'!
+negated
+
+	^ numerator negated / denominator.! !
 
 
 !Fraccion methodsFor: 'comparing' stamp: 'HernanWilkinson 5/7/2016 20:42'!
