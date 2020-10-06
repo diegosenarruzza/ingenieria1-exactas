@@ -139,10 +139,66 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 
 !classDefinition: #SentenceFinderByPrefixTest category: #'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'stack emptyPrefix spacePrefix winterPrefix'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
+
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/5/2020 21:18:25'!
+test01EmptyStackShouldFindNothing
+
+	| sentenceFinder  prefix |
+
+	prefix := 'winter'.
+	sentenceFinder := SentenceFinderByPrefix with: stack.
+	
+	self assert: (sentenceFinder find: prefix) isEmpty.! !
+
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/5/2020 21:19:44'!
+test02CannotFindWhenPrefixIsEmpty
+
+	| sentenceFinder |
+
+	sentenceFinder := SentenceFinderByPrefix with: stack.
+	
+	self
+		should: [ sentenceFinder find: emptyPrefix ]
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = SentenceFinderByPrefix prefixEmptyErrorDescription ].! !
+
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/5/2020 21:19:25'!
+test03CannotFindWhenPrefixHasSpaces
+
+	| sentenceFinder |
+
+	sentenceFinder := SentenceFinderByPrefix with: stack.
+	
+	self
+		should: [ sentenceFinder find: spacePrefix ]
+		raise: Error - MessageNotUnderstood 
+		withExceptionDo: [ :anError |
+			self assert: anError messageText = SentenceFinderByPrefix prefixSpacesErrorDescription ].! !
+
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/5/2020 21:29:14'!
+test04FindWithPrefixSentenceContainsItself
+
+	| sentenceFinder |
+	
+	stack push: winterPrefix.
+	
+	sentenceFinder := SentenceFinderByPrefix with: stack.
+	
+	self assert: (sentenceFinder find: winterPrefix) = (OrderedCollection with: winterPrefix).! !
+
+
+!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'Federico 10/5/2020 21:17:18'!
+setUp
+	stack := OOStack new.
+	emptyPrefix := ''.
+	spacePrefix := ' '.
+	winterPrefix := 'winter'.
+! !
 
 
 !classDefinition: #OOStack category: #'Stack-Exercise'!
@@ -152,10 +208,10 @@ Object subclass: #OOStack
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!OOStack methodsFor: 'initialization' stamp: 'DS 10/4/2020 16:00:10'!
+!OOStack methodsFor: 'initialization' stamp: 'DS 10/5/2020 21:48:36'!
 initialize
 
-	head := NonElement new.
+	head := BaseElement new.
 	hight := 0.! !
 
 
@@ -192,10 +248,10 @@ top
 	^head value.! !
 
 
-!OOStack methodsFor: 'testing' stamp: 'DS 10/4/2020 16:06:59'!
+!OOStack methodsFor: 'testing' stamp: 'DS 10/5/2020 21:49:09'!
 isEmpty
 
-	^head isAnElement not.! !
+	^head isBase.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -239,6 +295,47 @@ isAnElement
 	self subclassResponsibility.! !
 
 
+!classDefinition: #BaseElement category: #'Stack-Exercise'!
+OOStackElement subclass: #BaseElement
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Stack-Exercise'!
+
+!BaseElement methodsFor: 'operations' stamp: 'DS 10/4/2020 15:24:40'!
+stackOn: anElement
+
+	self error: self class stackOnErrorDescription.! !
+
+!BaseElement methodsFor: 'operations' stamp: 'DS 10/4/2020 15:54:14'!
+unstack
+
+	self error: OOStack stackEmptyErrorDescription.! !
+
+
+!BaseElement methodsFor: 'value' stamp: 'DS 10/4/2020 14:42:21'!
+value
+
+	self error: OOStack stackEmptyErrorDescription.! !
+
+
+!BaseElement methodsFor: 'testing' stamp: 'DS 10/5/2020 21:48:51'!
+isBase
+
+	^true.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'BaseElement class' category: #'Stack-Exercise'!
+BaseElement class
+	instanceVariableNames: ''!
+
+!BaseElement class methodsFor: 'error descriptions' stamp: 'DS 10/4/2020 15:24:45'!
+stackOnErrorDescription
+
+	^'a Non Element cannot stack on anyone element'! !
+
+
 !classDefinition: #Element category: #'Stack-Exercise'!
 OOStackElement subclass: #Element
 	instanceVariableNames: 'value lower'
@@ -246,11 +343,11 @@ OOStackElement subclass: #Element
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!Element methodsFor: 'initialization' stamp: 'DS 10/4/2020 15:49:39'!
-initializeWith: aValue on: anElement
+!Element methodsFor: 'initialization' stamp: 'DS 10/5/2020 17:26:44'!
+initializeWith: aValue on: stack
 
 	value := aValue.
-	lower := anElement.! !
+	lower := stack.! !
 
 
 !Element methodsFor: 'operations' stamp: 'DS 10/4/2020 15:48:01'!
@@ -270,10 +367,10 @@ value
 	^value.! !
 
 
-!Element methodsFor: 'testing' stamp: 'DS 10/4/2020 15:58:24'!
-isAnElement
+!Element methodsFor: 'testing' stamp: 'DS 10/5/2020 21:49:02'!
+isBase
 
-	^true.! !
+	^false.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -281,56 +378,64 @@ isAnElement
 Element class
 	instanceVariableNames: ''!
 
-!Element class methodsFor: 'initialization' stamp: 'DS 10/4/2020 16:16:07'!
-with: aValue on: anElement
+!Element class methodsFor: 'initialization' stamp: 'DS 10/5/2020 17:26:35'!
+with: aValue on: stack
 
-	^self new initializeWith: aValue on: anElement.! !
-
-
-!classDefinition: #NonElement category: #'Stack-Exercise'!
-OOStackElement subclass: #NonElement
-	instanceVariableNames: ''
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'Stack-Exercise'!
-
-!NonElement methodsFor: 'operations' stamp: 'DS 10/4/2020 15:24:40'!
-stackOn: anElement
-
-	self error: self class stackOnErrorDescription.! !
-
-!NonElement methodsFor: 'operations' stamp: 'DS 10/4/2020 15:54:14'!
-unstack
-
-	self error: OOStack stackEmptyErrorDescription.! !
-
-
-!NonElement methodsFor: 'value' stamp: 'DS 10/4/2020 14:42:21'!
-value
-
-	self error: OOStack stackEmptyErrorDescription.! !
-
-
-!NonElement methodsFor: 'testing' stamp: 'DS 10/4/2020 16:03:21'!
-isAnElement
-
-	^false.! !
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'NonElement class' category: #'Stack-Exercise'!
-NonElement class
-	instanceVariableNames: ''!
-
-!NonElement class methodsFor: 'error descriptions' stamp: 'DS 10/4/2020 15:24:45'!
-stackOnErrorDescription
-
-	^'a Non Element cannot stack on anyone element'! !
+	^self new initializeWith: aValue on: stack.! !
 
 
 !classDefinition: #SentenceFinderByPrefix category: #'Stack-Exercise'!
 Object subclass: #SentenceFinderByPrefix
-	instanceVariableNames: ''
+	instanceVariableNames: 'stack'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
+
+!SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'Federico 10/5/2020 21:20:24'!
+find: prefix
+
+	| collection top |
+	
+	prefix isEmpty ifTrue: [^self error: self class prefixEmptyErrorDescription].
+	(prefix includesSubString: ' ') ifTrue: [^self error: self class prefixSpacesErrorDescription].
+
+	collection := OrderedCollection new.
+	
+	stack isEmpty ifTrue: [^collection].
+
+	top := stack pop.
+	(top 	includesSubString: prefix) ifTrue: [collection add: top].
+	
+	collection addAllLast: (self find: prefix).
+	stack push: top.
+	
+
+	^collection.! !
+
+
+!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'DS 10/5/2020 17:56:42'!
+initializeWIth: anStack 
+
+	stack := anStack.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'SentenceFinderByPrefix class' category: #'Stack-Exercise'!
+SentenceFinderByPrefix class
+	instanceVariableNames: ''!
+
+!SentenceFinderByPrefix class methodsFor: 'initialization' stamp: 'DS 10/5/2020 17:55:18'!
+with: anStack
+
+	^self new initializeWIth: anStack.! !
+
+
+!SentenceFinderByPrefix class methodsFor: 'error description' stamp: 'DS 10/5/2020 18:35:57'!
+prefixEmptyErrorDescription
+
+	^'prefix cannot be empty'.! !
+
+!SentenceFinderByPrefix class methodsFor: 'error description' stamp: 'DS 10/5/2020 20:56:00'!
+prefixSpacesErrorDescription
+
+	^'prefix cannot has spaces'.! !
