@@ -139,27 +139,27 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 
 !classDefinition: #SentenceFinderByPrefixTest category: #'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
-	instanceVariableNames: 'stack emptyPrefix spacePrefix winterPrefix'
+	instanceVariableNames: 'emptyPrefix spacePrefix winterPrefix'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/5/2020 21:18:25'!
-test01EmptyStackShouldFindNothing
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:05:24'!
+test01AddNothingFindNothing
 
 	| sentenceFinder  prefix |
 
 	prefix := 'winter'.
-	sentenceFinder := SentenceFinderByPrefix with: stack.
+	sentenceFinder := SentenceFinderByPrefix new.
 	
 	self assert: (sentenceFinder find: prefix) isEmpty.! !
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/5/2020 21:19:44'!
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/6/2020 23:37:19'!
 test02CannotFindWhenPrefixIsEmpty
 
 	| sentenceFinder |
 
-	sentenceFinder := SentenceFinderByPrefix with: stack.
+	sentenceFinder := SentenceFinderByPrefix new.
 	
 	self
 		should: [ sentenceFinder find: emptyPrefix ]
@@ -167,12 +167,12 @@ test02CannotFindWhenPrefixIsEmpty
 		withExceptionDo: [ :anError |
 			self assert: anError messageText = SentenceFinderByPrefix prefixEmptyErrorDescription ].! !
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/5/2020 21:19:25'!
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/6/2020 23:37:26'!
 test03CannotFindWhenPrefixHasSpaces
 
 	| sentenceFinder |
 
-	sentenceFinder := SentenceFinderByPrefix with: stack.
+	sentenceFinder := SentenceFinderByPrefix new.
 	
 	self
 		should: [ sentenceFinder find: spacePrefix ]
@@ -180,21 +180,71 @@ test03CannotFindWhenPrefixHasSpaces
 		withExceptionDo: [ :anError |
 			self assert: anError messageText = SentenceFinderByPrefix prefixSpacesErrorDescription ].! !
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/5/2020 21:29:14'!
-test04FindWithPrefixSentenceContainsItself
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:16:42'!
+test04FindWithPrefixAsSentenceContainsItself
 
 	| sentenceFinder |
 	
-	stack push: winterPrefix.
+	sentenceFinder := SentenceFinderByPrefix with: winterPrefix.
 	
-	sentenceFinder := SentenceFinderByPrefix with: stack.
+	self assert: (sentenceFinder find: winterPrefix) = (OrderedCollection with: winterPrefix)! !
+
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:17:46'!
+test05FindPrefixOfSentenceIsCorrect
+
+	| sentenceFinder sentence |
 	
-	self assert: (sentenceFinder find: winterPrefix) = (OrderedCollection with: winterPrefix).! !
+	sentence := 'winter is coming'.
+	sentenceFinder := SentenceFinderByPrefix with: sentence.
+	
+	self assert: (sentenceFinder find: winterPrefix) = (OrderedCollection with: sentence).! !
+
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:23:43'!
+test06AddRepeatedSentenceFindItRepeated
+
+	| sentenceFinder sentence |
+	
+	sentence := 'winter is coming'.
+	sentenceFinder := SentenceFinderByPrefix new.
+	sentenceFinder
+		add: sentence;
+		add: sentence;
+		add: sentence.
+	
+	self assert: (sentenceFinder find: winterPrefix) = (OrderedCollection with: sentence with: sentence with: sentence).! !
+
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:39:15'!
+test07FindIsCorrectWhenHasDifferentSentences
+
+	| sentenceFinder sentenceToFind1 sentenceToFind2 expectedCollection |
+	
+	sentenceToFind1 := 'winter is coming'.
+	sentenceToFind2 := 'winter is here'.
+	sentenceFinder := SentenceFinderByPrefix with: sentenceToFind1.
+	sentenceFinder
+		add: 'the north remember';
+		add: 'the king in the north';
+		add: sentenceToFind2.
+
+	expectedCollection  := OrderedCollection with: sentenceToFind1 with: sentenceToFind2.
+
+	self assert: (sentenceFinder find: winterPrefix) sort = expectedCollection sort.! !
+
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:41:44'!
+test08FindIsKeySensitive
+
+	| sentenceFinder sentenceToFind |
+	
+	sentenceToFind := 'winter is coming'.
+	sentenceFinder := SentenceFinderByPrefix with: sentenceToFind.
+	sentenceFinder 		add: 'Winter is here'.
+
+	self assert: (sentenceFinder find: winterPrefix) sort = (OrderedCollection with: sentenceToFind).! !
 
 
-!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'Federico 10/5/2020 21:17:18'!
+!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'DS 10/6/2020 23:36:50'!
 setUp
-	stack := OOStack new.
+
 	emptyPrefix := ''.
 	spacePrefix := ' '.
 	winterPrefix := 'winter'.
@@ -215,7 +265,7 @@ initialize
 	hight := 0.! !
 
 
-!OOStack methodsFor: 'operations' stamp: 'DS 10/4/2020 16:00:39'!
+!OOStack methodsFor: 'accesing' stamp: 'DS 10/4/2020 16:00:39'!
 pop
 
 	| oldTop |
@@ -226,7 +276,7 @@ pop
 
 	^oldTop.! !
 
-!OOStack methodsFor: 'operations' stamp: 'DS 10/4/2020 16:00:23'!
+!OOStack methodsFor: 'accesing' stamp: 'DS 10/4/2020 16:00:23'!
 push: aValue
 
 	| newHead |
@@ -236,13 +286,12 @@ push: aValue
 	head := newHead.
 	hight := hight + 1.! !
 
-
-!OOStack methodsFor: 'value' stamp: 'DS 10/4/2020 16:00:46'!
+!OOStack methodsFor: 'accesing' stamp: 'DS 10/4/2020 16:00:46'!
 size
 
 	^hight.! !
 
-!OOStack methodsFor: 'value' stamp: 'DS 10/4/2020 14:49:14'!
+!OOStack methodsFor: 'accesing' stamp: 'DS 10/4/2020 14:49:14'!
 top
 
 	^head value.! !
@@ -272,18 +321,17 @@ Object subclass: #OOStackElement
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!OOStackElement methodsFor: 'operations' stamp: 'DS 10/4/2020 15:21:44'!
+!OOStackElement methodsFor: 'accesing' stamp: 'DS 10/4/2020 15:21:44'!
 stackOn: anElement
 
 	self subclassResponsibility.! !
 
-!OOStackElement methodsFor: 'operations' stamp: 'DS 10/4/2020 16:10:42'!
+!OOStackElement methodsFor: 'accesing' stamp: 'DS 10/4/2020 16:10:42'!
 unstack
 
 	self subclassResponsibility.! !
 
-
-!OOStackElement methodsFor: 'value' stamp: 'DS 10/4/2020 16:11:48'!
+!OOStackElement methodsFor: 'accesing' stamp: 'DS 10/4/2020 16:11:48'!
 value
 
 	self subclassResponsibility.! !
@@ -302,18 +350,17 @@ OOStackElement subclass: #BaseElement
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!BaseElement methodsFor: 'operations' stamp: 'DS 10/4/2020 15:24:40'!
+!BaseElement methodsFor: 'accesing' stamp: 'DS 10/4/2020 15:24:40'!
 stackOn: anElement
 
 	self error: self class stackOnErrorDescription.! !
 
-!BaseElement methodsFor: 'operations' stamp: 'DS 10/4/2020 15:54:14'!
+!BaseElement methodsFor: 'accesing' stamp: 'DS 10/4/2020 15:54:14'!
 unstack
 
 	self error: OOStack stackEmptyErrorDescription.! !
 
-
-!BaseElement methodsFor: 'value' stamp: 'DS 10/4/2020 14:42:21'!
+!BaseElement methodsFor: 'accesing' stamp: 'DS 10/4/2020 14:42:21'!
 value
 
 	self error: OOStack stackEmptyErrorDescription.! !
@@ -350,18 +397,17 @@ initializeWith: aValue on: stack
 	lower := stack.! !
 
 
-!Element methodsFor: 'operations' stamp: 'DS 10/4/2020 15:48:01'!
+!Element methodsFor: 'accesing' stamp: 'DS 10/4/2020 15:48:01'!
 stackOn: anElement
 
 	lower := anElement.! !
 
-!Element methodsFor: 'operations' stamp: 'DS 10/4/2020 15:53:48'!
+!Element methodsFor: 'accesing' stamp: 'DS 10/4/2020 15:53:48'!
 unstack
 
 	^lower.! !
 
-
-!Element methodsFor: 'value' stamp: 'DS 10/3/2020 23:55:37'!
+!Element methodsFor: 'accesing' stamp: 'DS 10/3/2020 23:55:37'!
 value
 
 	^value.! !
@@ -391,6 +437,11 @@ Object subclass: #SentenceFinderByPrefix
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
+!SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'DS 10/7/2020 00:11:10'!
+add: aSentence
+
+	stack push: aSentence.! !
+
 !SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'Federico 10/5/2020 21:20:24'!
 find: prefix
 
@@ -413,10 +464,15 @@ find: prefix
 	^collection.! !
 
 
-!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'DS 10/5/2020 17:56:42'!
-initializeWIth: anStack 
+!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'DS 10/6/2020 23:36:32'!
+initialize
 
-	stack := anStack.! !
+	stack := OOStack new.! !
+
+!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'DS 10/6/2020 23:40:23'!
+initializeWIth: aSentence
+
+	stack push: aSentence.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -424,10 +480,10 @@ initializeWIth: anStack
 SentenceFinderByPrefix class
 	instanceVariableNames: ''!
 
-!SentenceFinderByPrefix class methodsFor: 'initialization' stamp: 'DS 10/5/2020 17:55:18'!
-with: anStack
+!SentenceFinderByPrefix class methodsFor: 'initialization' stamp: 'DS 10/6/2020 23:40:35'!
+with: aSentence
 
-	^self new initializeWIth: anStack.! !
+	^self new initializeWIth: aSentence.! !
 
 
 !SentenceFinderByPrefix class methodsFor: 'error description' stamp: 'DS 10/5/2020 18:35:57'!
