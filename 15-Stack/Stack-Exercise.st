@@ -139,20 +139,19 @@ test10CanNotTopWhenThereAreNoObjectsInTheStack
 
 !classDefinition: #SentenceFinderByPrefixTest category: #'Stack-Exercise'!
 TestCase subclass: #SentenceFinderByPrefixTest
-	instanceVariableNames: 'emptyPrefix spacePrefix winterPrefix'
+	instanceVariableNames: 'stack emptyPrefix spacePrefix winterPrefix sentence1 sentence2 sentenceCaseSentitive'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:05:24'!
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/7/2020 08:30:24'!
 test01AddNothingFindNothing
 
-	| sentenceFinder  prefix |
+	| sentenceFinder |
 
-	prefix := 'winter'.
 	sentenceFinder := SentenceFinderByPrefix new.
 	
-	self assert: (sentenceFinder find: prefix) isEmpty.! !
+	self assert: (sentenceFinder find: winterPrefix) isEmpty.! !
 
 !SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:57:33'!
 test02CannotFindWhenPrefixIsEmpty
@@ -189,65 +188,63 @@ test04FindWithPrefixAsSentenceContainsItself
 	
 	self assert: (sentenceFinder find: winterPrefix) = (OrderedCollection with: winterPrefix)! !
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:17:46'!
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/7/2020 08:26:06'!
 test05FindPrefixOfSentenceIsCorrect
 
-	| sentenceFinder sentence |
+	| sentenceFinder |
 	
-	sentence := 'winter is coming'.
-	sentenceFinder := SentenceFinderByPrefix with: sentence.
+	sentenceFinder := SentenceFinderByPrefix with: sentence1.
 	
-	self assert: (sentenceFinder find: winterPrefix) = (OrderedCollection with: sentence).! !
+	self assert: (sentenceFinder find: winterPrefix) = (OrderedCollection with: sentence1).! !
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:23:43'!
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/7/2020 08:26:28'!
 test06AddRepeatedSentenceFindItRepeated
 
-	| sentenceFinder sentence |
+	| sentenceFinder |
 	
-	sentence := 'winter is coming'.
 	sentenceFinder := SentenceFinderByPrefix new.
 	sentenceFinder
-		add: sentence;
-		add: sentence;
-		add: sentence.
+		add: sentence1;
+		add: sentence1;
+		add: sentence1.
 	
-	self assert: (sentenceFinder find: winterPrefix) = (OrderedCollection with: sentence with: sentence with: sentence).! !
+	self assert: (sentenceFinder find: winterPrefix) = (OrderedCollection with: sentence1 with: sentence1 with: sentence1).! !
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:39:15'!
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/7/2020 08:27:36'!
 test07FindIsCorrectWhenHasDifferentSentences
 
-	| sentenceFinder sentenceToFind1 sentenceToFind2 expectedCollection |
+	| sentenceFinder expectedCollection |
 	
-	sentenceToFind1 := 'winter is coming'.
-	sentenceToFind2 := 'winter is here'.
-	sentenceFinder := SentenceFinderByPrefix with: sentenceToFind1.
+	sentenceFinder := SentenceFinderByPrefix with: sentence1.
 	sentenceFinder
 		add: 'the north remember';
 		add: 'the king in the north';
-		add: sentenceToFind2.
+		add: sentence2.
 
-	expectedCollection  := OrderedCollection with: sentenceToFind1 with: sentenceToFind2.
+	expectedCollection  := OrderedCollection with: sentence1 with: sentence2.
 
 	self assert: (sentenceFinder find: winterPrefix) sort = expectedCollection sort.! !
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:41:44'!
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'Federico 10/7/2020 08:28:02'!
 test08FindIsKeySensitive
 
-	| sentenceFinder sentenceToFind |
+	| sentenceFinder |
 	
-	sentenceToFind := 'winter is coming'.
-	sentenceFinder := SentenceFinderByPrefix with: sentenceToFind.
-	sentenceFinder 		add: 'Winter is here'.
+	sentenceFinder := SentenceFinderByPrefix with: sentence1.
+	sentenceFinder 		add: sentenceCaseSentitive.
 
-	self assert: (sentenceFinder find: winterPrefix) sort = (OrderedCollection with: sentenceToFind).! !
+	self assert: (sentenceFinder find: winterPrefix) sort = (OrderedCollection with: sentence1).! !
 
 
-!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'DS 10/6/2020 23:36:50'!
+!SentenceFinderByPrefixTest methodsFor: 'setup' stamp: 'Federico 10/7/2020 08:29:42'!
 setUp
-
+	stack := OOStack new.
 	emptyPrefix := ''.
 	spacePrefix := ' '.
 	winterPrefix := 'winter'.
+	sentence1 := 'winter is coming'.
+	sentence2 := 'winter is here'.
+	sentenceCaseSentitive := 'Winter is here'.
 ! !
 
 
@@ -442,12 +439,10 @@ add: aSentence
 
 	stack push: aSentence.! !
 
-!SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'DS 10/7/2020 01:02:51'!
-find: aPrefix
+!SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'Federico 10/7/2020 06:51:25'!
+filterSentencesWithValidPrefix: aPrefix
 
 	| collection top |
-	
-	(self isInvalidPrefix: aPrefix) ifTrue: [^self invalidPrefixError].
 
 	collection := OrderedCollection new.
 	
@@ -456,12 +451,19 @@ find: aPrefix
 	top := stack pop.
 
 	(top 	includesSubString: aPrefix) ifTrue: [collection add: top].
+	collection addAllLast: (self filterSentencesWithValidPrefix: aPrefix).
 	
-	collection addAllLast: (self find: aPrefix).
 	stack push: top.
 	
-
 	^collection.! !
+
+!SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'Federico 10/7/2020 06:48:46'!
+find: aPrefix
+
+	(self isInvalidPrefix: aPrefix) ifTrue: [^self invalidPrefixError].
+	^self filterSentencesWithValidPrefix: aPrefix
+
+	! !
 
 
 !SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'DS 10/6/2020 23:36:32'!
