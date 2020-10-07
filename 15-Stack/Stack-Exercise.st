@@ -154,7 +154,7 @@ test01AddNothingFindNothing
 	
 	self assert: (sentenceFinder find: prefix) isEmpty.! !
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/6/2020 23:37:19'!
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:57:33'!
 test02CannotFindWhenPrefixIsEmpty
 
 	| sentenceFinder |
@@ -165,9 +165,9 @@ test02CannotFindWhenPrefixIsEmpty
 		should: [ sentenceFinder find: emptyPrefix ]
 		raise: Error - MessageNotUnderstood 
 		withExceptionDo: [ :anError |
-			self assert: anError messageText = SentenceFinderByPrefix prefixEmptyErrorDescription ].! !
+			self assert: anError messageText = SentenceFinderByPrefix invalidPrefixErrorDescription ].! !
 
-!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/6/2020 23:37:26'!
+!SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:57:38'!
 test03CannotFindWhenPrefixHasSpaces
 
 	| sentenceFinder |
@@ -178,7 +178,7 @@ test03CannotFindWhenPrefixHasSpaces
 		should: [ sentenceFinder find: spacePrefix ]
 		raise: Error - MessageNotUnderstood 
 		withExceptionDo: [ :anError |
-			self assert: anError messageText = SentenceFinderByPrefix prefixSpacesErrorDescription ].! !
+			self assert: anError messageText = SentenceFinderByPrefix invalidPrefixErrorDescription ].! !
 
 !SentenceFinderByPrefixTest methodsFor: 'test' stamp: 'DS 10/7/2020 00:16:42'!
 test04FindWithPrefixAsSentenceContainsItself
@@ -442,22 +442,22 @@ add: aSentence
 
 	stack push: aSentence.! !
 
-!SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'Federico 10/5/2020 21:20:24'!
-find: prefix
+!SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'DS 10/7/2020 01:02:51'!
+find: aPrefix
 
 	| collection top |
 	
-	prefix isEmpty ifTrue: [^self error: self class prefixEmptyErrorDescription].
-	(prefix includesSubString: ' ') ifTrue: [^self error: self class prefixSpacesErrorDescription].
+	(self isInvalidPrefix: aPrefix) ifTrue: [^self invalidPrefixError].
 
 	collection := OrderedCollection new.
 	
 	stack isEmpty ifTrue: [^collection].
 
 	top := stack pop.
-	(top 	includesSubString: prefix) ifTrue: [collection add: top].
+
+	(top 	includesSubString: aPrefix) ifTrue: [collection add: top].
 	
-	collection addAllLast: (self find: prefix).
+	collection addAllLast: (self find: aPrefix).
 	stack push: top.
 	
 
@@ -469,10 +469,22 @@ initialize
 
 	stack := OOStack new.! !
 
-!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'DS 10/6/2020 23:40:23'!
+!SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'DS 10/7/2020 00:45:16'!
 initializeWIth: aSentence
 
-	stack push: aSentence.! !
+	self add: aSentence.! !
+
+
+!SentenceFinderByPrefix methodsFor: 'comparing' stamp: 'DS 10/7/2020 00:58:56'!
+isInvalidPrefix: aPrefix
+
+	^(aPrefix isEmpty) or: (aPrefix includesSubString: ' ').! !
+
+
+!SentenceFinderByPrefix methodsFor: 'errors' stamp: 'DS 10/7/2020 00:56:58'!
+invalidPrefixError
+
+	^self error: self class invalidPrefixErrorDescription.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -486,12 +498,7 @@ with: aSentence
 	^self new initializeWIth: aSentence.! !
 
 
-!SentenceFinderByPrefix class methodsFor: 'error description' stamp: 'DS 10/5/2020 18:35:57'!
-prefixEmptyErrorDescription
+!SentenceFinderByPrefix class methodsFor: 'error description' stamp: 'DS 10/7/2020 00:54:31'!
+invalidPrefixErrorDescription
 
-	^'prefix cannot be empty'.! !
-
-!SentenceFinderByPrefix class methodsFor: 'error description' stamp: 'DS 10/5/2020 20:56:00'!
-prefixSpacesErrorDescription
-
-	^'prefix cannot has spaces'.! !
+	^'prefix is invalid!!'.! !
