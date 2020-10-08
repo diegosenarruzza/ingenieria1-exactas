@@ -262,16 +262,16 @@ initialize
 	hight := 0.! !
 
 
-!OOStack methodsFor: 'accesing' stamp: 'DS 10/4/2020 16:00:39'!
+!OOStack methodsFor: 'accesing' stamp: 'DS 10/7/2020 23:58:23'!
 pop
 
-	| oldTop |
+	| oldHead |
 	
-	oldTop := self top.
+	oldHead := self top.
 	head := head unstack.
 	hight := hight - 1.
 
-	^oldTop.! !
+	^oldHead.! !
 
 !OOStack methodsFor: 'accesing' stamp: 'DS 10/4/2020 16:00:23'!
 push: aValue
@@ -334,8 +334,8 @@ value
 	self subclassResponsibility.! !
 
 
-!OOStackElement methodsFor: 'testing' stamp: 'DS 10/4/2020 15:58:07'!
-isAnElement
+!OOStackElement methodsFor: 'testing' stamp: 'DS 10/7/2020 23:52:20'!
+isBase
 
 	self subclassResponsibility.! !
 
@@ -374,10 +374,10 @@ isBase
 BaseElement class
 	instanceVariableNames: ''!
 
-!BaseElement class methodsFor: 'error descriptions' stamp: 'DS 10/4/2020 15:24:45'!
+!BaseElement class methodsFor: 'error descriptions' stamp: 'DS 10/7/2020 23:54:13'!
 stackOnErrorDescription
 
-	^'a Non Element cannot stack on anyone element'! !
+	^'a Base Element cannot stack on anyone element'! !
 
 
 !classDefinition: #Element category: #'Stack-Exercise'!
@@ -387,11 +387,11 @@ OOStackElement subclass: #Element
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
-!Element methodsFor: 'initialization' stamp: 'DS 10/5/2020 17:26:44'!
-initializeWith: aValue on: stack
+!Element methodsFor: 'initialization' stamp: 'DS 10/7/2020 23:56:31'!
+initializeWith: aValue on: anElement
 
 	value := aValue.
-	lower := stack.! !
+	lower := anElement.! !
 
 
 !Element methodsFor: 'accesing' stamp: 'DS 10/4/2020 15:48:01'!
@@ -421,10 +421,10 @@ isBase
 Element class
 	instanceVariableNames: ''!
 
-!Element class methodsFor: 'initialization' stamp: 'DS 10/5/2020 17:26:35'!
-with: aValue on: stack
+!Element class methodsFor: 'initialization' stamp: 'DS 10/7/2020 23:56:44'!
+with: aValue on: anElement
 
-	^self new initializeWith: aValue on: stack.! !
+	^self new initializeWith: aValue on: anElement.! !
 
 
 !classDefinition: #SentenceFinderByPrefix category: #'Stack-Exercise'!
@@ -434,36 +434,41 @@ Object subclass: #SentenceFinderByPrefix
 	poolDictionaries: ''
 	category: 'Stack-Exercise'!
 
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'DS 10/7/2020 23:47:03'!
+saveSentencesIn: collection ifContains: aValidPrefix
+
+	| top |
+
+	top := stack pop.
+
+	(top 	includesSubString: aValidPrefix) ifTrue: [collection add: top].
+	collection addAllLast: (self selectSentencesWithValidPrefix: aValidPrefix).
+
+	stack push: top.! !
+
+!SentenceFinderByPrefix methodsFor: 'private' stamp: 'DS 10/7/2020 23:46:58'!
+selectSentencesWithValidPrefix: aValidPrefix
+
+	| collection |
+
+	collection := OrderedCollection new.
+
+	stack isEmpty ifFalse: [self saveSentencesIn: collection ifContains: aValidPrefix].
+
+	^collection.! !
+
+
 !SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'DS 10/7/2020 00:11:10'!
 add: aSentence
 
 	stack push: aSentence.! !
 
-!SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'Federico 10/7/2020 06:51:25'!
-filterSentencesWithValidPrefix: aPrefix
-
-	| collection top |
-
-	collection := OrderedCollection new.
-	
-	stack isEmpty ifTrue: [^collection].
-
-	top := stack pop.
-
-	(top 	includesSubString: aPrefix) ifTrue: [collection add: top].
-	collection addAllLast: (self filterSentencesWithValidPrefix: aPrefix).
-	
-	stack push: top.
-	
-	^collection.! !
-
-!SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'Federico 10/7/2020 06:48:46'!
+!SentenceFinderByPrefix methodsFor: 'accessing' stamp: 'DS 10/7/2020 23:37:33'!
 find: aPrefix
 
 	(self isInvalidPrefix: aPrefix) ifTrue: [^self invalidPrefixError].
-	^self filterSentencesWithValidPrefix: aPrefix
 
-	! !
+	^self selectSentencesWithValidPrefix: aPrefix.! !
 
 
 !SentenceFinderByPrefix methodsFor: 'initialization' stamp: 'DS 10/6/2020 23:36:32'!
