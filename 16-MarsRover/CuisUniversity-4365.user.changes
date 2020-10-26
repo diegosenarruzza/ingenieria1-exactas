@@ -5748,3 +5748,912 @@ test18UnkonwnCommandStopsExecution
 	self assert: north equals: aMarsRover whereAreYouLookingAt.! !
 
 ----QUIT----(24 October 2020 22:54:31) CuisUniversity-4365.image priorSource: 18782887!
+
+----STARTUP---- (25 October 2020 21:41:33) as D:\facultad\Smalltalk\windows64\CuisUniversity-4365.image!
+
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 21:44:40'!
+executeCommand: aCommand
+
+	(self isValidCommand: aCommand) ifFalse: [^self].
+	
+	aCommand = $f ifTrue: [self forward].
+	aCommand = $b ifTrue: [self backward].
+	aCommand = $l ifTrue: [self leftRotation].
+	aCommand = $r ifTrue: [self rightRotation].
+
+	
+	! !
+!MarsRover class methodsFor: 'as yet unclassified' stamp: 'Federico 10/25/2020 21:51:10'!
+unknownCommandErrorDescription
+	'El comando no es conocido por MarsRover'! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 21:52:15' prior: 50919183!
+execute: aCommandSequence
+
+	aCommandSequence do: [ :aCommand | 
+		self executeCommand: aCommand.
+		].
+	
+	! !
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 21:52:19'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 21:52:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 21:52:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 21:52:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 21:52:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 21:52:20'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 21:52:20'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 21:52:34'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 21:52:35'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 21:52:35'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 21:52:35'!
+FAILURE!
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 21:53:24' prior: 50919886!
+executeCommand: aCommand
+
+	(self isValidCommand: aCommand) ifFalse: [^nil].
+	
+	aCommand = $f ifTrue: [self forward].
+	aCommand = $b ifTrue: [self backward].
+	aCommand = $l ifTrue: [self leftRotation].
+	aCommand = $r ifTrue: [self rightRotation].
+
+	
+	! !
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 21:53:27'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 21:53:28'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 21:53:28'!
+FAILURE!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 21:53:28'!
+FAILURE!
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 21:54:37' prior: 50920048!
+executeCommand: aCommand
+	self break.
+	(self isValidCommand: aCommand) ifFalse: [^nil].
+	
+	aCommand = $f ifTrue: [self forward].
+	aCommand = $b ifTrue: [self backward].
+	aCommand = $l ifTrue: [self leftRotation].
+	aCommand = $r ifTrue: [self rightRotation].
+
+	
+	! !
+
+aCommand.!
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 21:57:07' prior: 50920128!
+executeCommand: aCommand
+	self break.
+	(self isValidCommand: aCommand) ifFalse: [self error: self unknownCommandErrorDescription.].
+	
+	aCommand = $f ifTrue: [self forward].
+	aCommand = $b ifTrue: [self backward].
+	aCommand = $l ifTrue: [self leftRotation].
+	aCommand = $r ifTrue: [self rightRotation].
+
+	
+	! !
+!MarsRover class methodsFor: 'as yet unclassified' stamp: 'Federico 10/25/2020 21:57:53' prior: 50919897!
+unknownCommandErrorDescription
+	^'El comando no es conocido por MarsRover'! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 21:58:17' prior: 50920140!
+executeCommand: aCommand
+
+	(self isValidCommand: aCommand) ifFalse: [self error: self unknownCommandErrorDescription.].
+	
+	aCommand = $f ifTrue: [self forward].
+	aCommand = $b ifTrue: [self backward].
+	aCommand = $l ifTrue: [self leftRotation].
+	aCommand = $r ifTrue: [self rightRotation].
+
+	
+	! !
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 21:58:20'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 21:58:20'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 21:58:20'!
+ERROR!
+!MarsRoverTest methodsFor: 'command sequences' stamp: 'Federico 10/25/2020 21:59:57' prior: 50919867!
+test18UnkonwnCommandStopsExecution
+	
+	| aMarsRover aCommandSequence |
+	
+	aCommandSequence := 'far'.
+	aMarsRover := MarsRover with: 0@0 lookingAt: north.
+	
+	aMarsRover execute: aCommandSequence.
+	
+
+	
+	self 
+		should: [ aMarsRover execute: aCommandSequence. ]
+		raise: Error
+		withMessageText: MarsRover unknownCommandErrorDescription.! !
+!MarsRoverTest methodsFor: 'command sequences' stamp: 'Federico 10/25/2020 21:59:59' prior: 50920241!
+test18UnkonwnCommandStopsExecution
+	
+	| aMarsRover aCommandSequence |
+	
+	aCommandSequence := 'far'.
+	aMarsRover := MarsRover with: 0@0 lookingAt: north.
+	
+	aMarsRover execute: aCommandSequence.
+	
+	self 
+		should: [ aMarsRover execute: aCommandSequence. ]
+		raise: Error
+		withMessageText: MarsRover unknownCommandErrorDescription.! !
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:00:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:00:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 22:00:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 22:00:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 22:00:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 22:00:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:00:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:00:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 22:00:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 22:00:03'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 22:00:03'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 22:00:03'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 22:00:03'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 22:00:03'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 22:00:03'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 22:00:03'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 22:00:03'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 22:00:03'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 22:00:03'!
+ERROR!
+!MarsRoverTest methodsFor: 'command sequences' stamp: 'Federico 10/25/2020 22:00:48' prior: 50920255!
+test18UnkonwnCommandStopsExecution
+	
+	| aMarsRover aCommandSequence |
+	
+	aCommandSequence := 'far'.
+	aMarsRover := MarsRover with: 0@0 lookingAt: north.
+	
+	aMarsRover execute: aCommandSequence.
+	
+	self 
+		should: [ aMarsRover execute: aCommandSequence. ]
+		raise: Error
+		withMessageText: MarsRover unknownCommandErrorDescription.
+		
+	self assert: 0@1 equals: aMarsRover whereAreYou.
+	self assert: north equals: aMarsRover whereAreYouLookingAt.! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 22:02:03' prior: 50920159!
+executeCommand: aCommand
+
+	(self isValidCommand: aCommand) ifFalse: [self error: self class unknownCommandErrorDescription.].
+	
+	aCommand = $f ifTrue: [self forward].
+	aCommand = $b ifTrue: [self backward].
+	aCommand = $l ifTrue: [self leftRotation].
+	aCommand = $r ifTrue: [self rightRotation].
+
+	
+	! !
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 22:02:08'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 22:02:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 22:02:09'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 22:02:09'!
+ERROR!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 22:02:09'!
+ERROR!
+!MarsRoverTest methodsFor: 'command sequences' stamp: 'Federico 10/25/2020 22:02:34' prior: 50920338!
+test18UnkonwnCommandStopsExecution
+	
+	| aMarsRover aCommandSequence |
+	
+	aCommandSequence := 'far'.
+	aMarsRover := MarsRover with: 0@0 lookingAt: north.
+	
+	self 
+		should: [ aMarsRover execute: aCommandSequence. ]
+		raise: Error
+		withMessageText: MarsRover unknownCommandErrorDescription.
+		
+	self assert: 0@1 equals: aMarsRover whereAreYou.
+	self assert: north equals: aMarsRover whereAreYouLookingAt.! !
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 22:02:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:02:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:02:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 22:02:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 22:02:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 22:02:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 22:02:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:02:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:02:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 22:02:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 22:02:37'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 22:02:37'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 22:02:37'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 22:02:37'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 22:02:37'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 22:02:37'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 22:02:37'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 22:02:37'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 22:02:37'!
+PASSED!
+!MarsRoverTest methodsFor: 'command sequences' stamp: 'Federico 10/25/2020 22:04:43'!
+test18UnkonwnCommandSendsMessageErrorAndStopsExecution
+	
+	| aMarsRover aCommandSequence |
+	
+	aCommandSequence := 'far'.
+	aMarsRover := MarsRover with: 0@0 lookingAt: north.
+	
+	self 
+		should: [ aMarsRover execute: aCommandSequence. ]
+		raise: Error
+		withMessageText: MarsRover unknownCommandErrorDescription.
+		
+	self assert: 0@1 equals: aMarsRover whereAreYou.
+	self assert: north equals: aMarsRover whereAreYouLookingAt.! !
+
+!methodRemoval: MarsRoverTest #test18UnkonwnCommandStopsExecution stamp: 'Federico 10/25/2020 22:05:03'!
+test18UnkonwnCommandStopsExecution
+	
+	| aMarsRover aCommandSequence |
+	
+	aCommandSequence := 'far'.
+	aMarsRover := MarsRover with: 0@0 lookingAt: north.
+	
+	self 
+		should: [ aMarsRover execute: aCommandSequence. ]
+		raise: Error
+		withMessageText: MarsRover unknownCommandErrorDescription.
+		
+	self assert: 0@1 equals: aMarsRover whereAreYou.
+	self assert: north equals: aMarsRover whereAreYouLookingAt.!
+!MarsRoverTest methodsFor: 'command sequences' stamp: 'Federico 10/25/2020 22:05:15'!
+test19UnkonwnCommandSendsMessageErrorAndStopsExecution
+	
+	| aMarsRover aCommandSequence |
+	
+	aCommandSequence := 'far'.
+	aMarsRover := MarsRover with: 0@0 lookingAt: north.
+	
+	self 
+		should: [ aMarsRover execute: aCommandSequence. ]
+		raise: Error
+		withMessageText: MarsRover unknownCommandErrorDescription.
+		
+	self assert: 0@1 equals: aMarsRover whereAreYou.
+	self assert: north equals: aMarsRover whereAreYouLookingAt.! !
+
+!methodRemoval: MarsRoverTest #test19UnkonwnCommandSendsMessageErrorAndStopsExecution stamp: 'Federico 10/25/2020 22:05:27'!
+test19UnkonwnCommandSendsMessageErrorAndStopsExecution
+	
+	| aMarsRover aCommandSequence |
+	
+	aCommandSequence := 'far'.
+	aMarsRover := MarsRover with: 0@0 lookingAt: north.
+	
+	self 
+		should: [ aMarsRover execute: aCommandSequence. ]
+		raise: Error
+		withMessageText: MarsRover unknownCommandErrorDescription.
+		
+	self assert: 0@1 equals: aMarsRover whereAreYou.
+	self assert: north equals: aMarsRover whereAreYouLookingAt.!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandSendsMessageErrorAndStopsExecution stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandSendsMessageErrorAndStopsExecution stamp: 'Federico 10/25/2020 22:05:36'!
+PASSED!
+!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'Federico 10/25/2020 22:05:54' prior: 50919071 overrides: 16881029!
+= aMarsRoverDirection
+	^self class = aMarsRoverDirection class.! !
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:06:02'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 22:06:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandSendsMessageErrorAndStopsExecution stamp: 'Federico 10/25/2020 22:06:06'!
+PASSED!
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 22:13:45'!
+isForwardCommand: aCommand
+
+	^ aCommand = $f! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 22:13:45' prior: 50920355!
+executeCommand: aCommand
+
+	(self isValidCommand: aCommand) ifFalse: [self error: self class unknownCommandErrorDescription.].
+	
+	(self isForwardCommand: aCommand) ifTrue: [self forward].
+	aCommand = $b ifTrue: [self backward].
+	aCommand = $l ifTrue: [self leftRotation].
+	aCommand = $r ifTrue: [self rightRotation].
+
+	
+	! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 22:14:01'!
+isBackwardCommand: aCommand
+
+	^ aCommand = $b! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 22:14:01' prior: 50920739!
+executeCommand: aCommand
+
+	(self isValidCommand: aCommand) ifFalse: [self error: self class unknownCommandErrorDescription.].
+	
+	(self isForwardCommand: aCommand) ifTrue: [self forward].
+	(self isBackwardCommand: aCommand) ifTrue: [self backward].
+	aCommand = $l ifTrue: [self leftRotation].
+	aCommand = $r ifTrue: [self rightRotation].
+
+	
+	! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 22:14:14'!
+isLeftRotationCommand: aCommand
+
+	^ aCommand = $l! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 22:14:14' prior: 50920757!
+executeCommand: aCommand
+
+	(self isValidCommand: aCommand) ifFalse: [self error: self class unknownCommandErrorDescription.].
+	
+	(self isForwardCommand: aCommand) ifTrue: [self forward].
+	(self isBackwardCommand: aCommand) ifTrue: [self backward].
+	(self isLeftRotationCommand: aCommand) ifTrue: [self leftRotation].
+	aCommand = $r ifTrue: [self rightRotation].
+
+	
+	! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 22:14:33'!
+isRightRotationCommand: aCommand
+
+	^ aCommand = $r! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 22:14:34' prior: 50920776!
+executeCommand: aCommand
+
+	(self isValidCommand: aCommand) ifFalse: [self error: self class unknownCommandErrorDescription.].
+	
+	(self isForwardCommand: aCommand) ifTrue: [self forward].
+	(self isBackwardCommand: aCommand) ifTrue: [self backward].
+	(self isLeftRotationCommand: aCommand) ifTrue: [self leftRotation].
+	(self isRightRotationCommand: aCommand) ifTrue: [self rightRotation].
+
+	
+	! !
+!MarsRover methodsFor: 'command testing' stamp: 'Federico 10/25/2020 22:14:53' prior: 50919165!
+isValidCommand: aCommand
+
+	^{$f. $b. $l. $r} includes: aCommand! !
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:21:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:21:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 22:21:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 22:21:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 22:21:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 22:21:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:21:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:21:05'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 22:21:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 22:21:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 22:21:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 22:21:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 22:21:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 22:21:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 22:21:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 22:21:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 22:21:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandSendsMessageErrorAndStopsExecution stamp: 'Federico 10/25/2020 22:21:06'!
+PASSED!
+
+!testRun: #MarsRoverTest #test01ForwardLookingAtNorthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test02ForwardLookingAtEastAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test03ForwardLookingAtWestBackOnXAxis stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test04ForwardLookingAtSouthBackOnYAxis stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test05BackwardLookingAtNorthBackOnYAxis stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test06BackwardLookingAtEastBackOnXAxis stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test07BackwardLookingAtWestAdvanceOnXAxis stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test08BackwardLookingAtSouthAdvanceOnYAxis stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test09LeftRotationLookingAtNorthRotateToWest stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test10LeftRotationLookingAtWestRotateToSouth stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test11LeftRotationLookingAtSouthRotateToEast stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test12LeftRotationLookingAtEastRotateToNorth stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test13RightRotationLookingAtNorthRotateToEast stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test14RightRotationLookingAtEastRotateToSouth stamp: 'Federico 10/25/2020 22:21:24'!
+PASSED!
+
+!testRun: #MarsRoverTest #test15RightRotationLookingAtSouthRotateToWest stamp: 'Federico 10/25/2020 22:21:25'!
+PASSED!
+
+!testRun: #MarsRoverTest #test16RightRotationLookingAtWestRotateToNorth stamp: 'Federico 10/25/2020 22:21:25'!
+PASSED!
+
+!testRun: #MarsRoverTest #test17TwoForwardAndOneBackwardWorkAsOneForward stamp: 'Federico 10/25/2020 22:21:25'!
+PASSED!
+
+!testRun: #MarsRoverTest #test18UnkonwnCommandSendsMessageErrorAndStopsExecution stamp: 'Federico 10/25/2020 22:21:25'!
+PASSED!
+
+----QUIT----(25 October 2020 22:21:39) CuisUniversity-4365.image priorSource: 18823317!

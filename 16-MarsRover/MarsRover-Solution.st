@@ -213,16 +213,19 @@ test17TwoForwardAndOneBackwardWorkAsOneForward
 	
 	self assert: 0@1 equals: aMarsRover whereAreYou.! !
 
-!MarsRoverTest methodsFor: 'command sequences' stamp: 'Federico 10/24/2020 22:48:34'!
-test18UnkonwnCommandStopsExecution
+!MarsRoverTest methodsFor: 'command sequences' stamp: 'Federico 10/25/2020 22:04:43'!
+test18UnkonwnCommandSendsMessageErrorAndStopsExecution
 	
 	| aMarsRover aCommandSequence |
 	
 	aCommandSequence := 'far'.
 	aMarsRover := MarsRover with: 0@0 lookingAt: north.
 	
-	aMarsRover execute: aCommandSequence.
-	
+	self 
+		should: [ aMarsRover execute: aCommandSequence. ]
+		raise: Error
+		withMessageText: MarsRover unknownCommandErrorDescription.
+		
 	self assert: 0@1 equals: aMarsRover whereAreYou.
 	self assert: north equals: aMarsRover whereAreYouLookingAt.! !
 
@@ -257,47 +260,80 @@ whereAreYouLookingAt
 	^direction ! !
 
 
-!MarsRover methodsFor: 'commands' stamp: 'Federico 10/24/2020 22:45:05'!
+!MarsRover methodsFor: 'command' stamp: 'Federico 10/24/2020 22:45:05'!
 backward
 	point := point + direction pointingBackwards.! !
 
-!MarsRover methodsFor: 'commands' stamp: 'Federico 10/24/2020 22:45:14'!
+!MarsRover methodsFor: 'command' stamp: 'Federico 10/24/2020 22:45:14'!
 forward
 	point := point + direction pointingForward.! !
 
-!MarsRover methodsFor: 'commands' stamp: 'Federico 10/24/2020 22:45:17'!
+!MarsRover methodsFor: 'command' stamp: 'Federico 10/24/2020 22:45:17'!
 leftRotation
 	direction := direction rotateLeft.! !
 
-!MarsRover methodsFor: 'commands' stamp: 'Federico 10/24/2020 22:45:20'!
+!MarsRover methodsFor: 'command' stamp: 'Federico 10/24/2020 22:45:20'!
 rightRotation
 	direction := direction rotateRight.! !
 
 
-!MarsRover methodsFor: 'executing' stamp: 'Federico 10/24/2020 22:36:06'!
+!MarsRover methodsFor: 'command testing' stamp: 'Federico 10/25/2020 22:14:01'!
+isBackwardCommand: aCommand
+
+	^ aCommand = $b! !
+
+!MarsRover methodsFor: 'command testing' stamp: 'Federico 10/25/2020 22:13:45'!
+isForwardCommand: aCommand
+
+	^ aCommand = $f! !
+
+!MarsRover methodsFor: 'command testing' stamp: 'Federico 10/25/2020 22:14:14'!
+isLeftRotationCommand: aCommand
+
+	^ aCommand = $l! !
+
+!MarsRover methodsFor: 'command testing' stamp: 'Federico 10/25/2020 22:14:33'!
+isRightRotationCommand: aCommand
+
+	^ aCommand = $r! !
+
+!MarsRover methodsFor: 'command testing' stamp: 'Federico 10/25/2020 22:14:53'!
+isValidCommand: aCommand
+
+	^{$f. $b. $l. $r} includes: aCommand! !
+
+
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 21:52:15'!
 execute: aCommandSequence
 
 	aCommandSequence do: [ :aCommand | 
-		(self isValidCommand: aCommand)  ifTrue: [
-			aCommand = $f ifTrue: [self forward].
-			aCommand = $b ifTrue: [self backward].
-			aCommand = $l ifTrue: [self leftRotation].
-			aCommand = $r ifTrue: [self rightRotation].
-		] ifFalse: [^self]
-		
-	].
+		self executeCommand: aCommand.
+		].
 	
 	! !
 
-!MarsRover methodsFor: 'executing' stamp: 'Federico 10/24/2020 22:33:01'!
-isValidCommand: aCommand
-	^{$f. $b. $l. $r} includes: aCommand! !
+!MarsRover methodsFor: 'executing' stamp: 'Federico 10/25/2020 22:14:34'!
+executeCommand: aCommand
+
+	(self isValidCommand: aCommand) ifFalse: [self error: self class unknownCommandErrorDescription.].
+	
+	(self isForwardCommand: aCommand) ifTrue: [self forward].
+	(self isBackwardCommand: aCommand) ifTrue: [self backward].
+	(self isLeftRotationCommand: aCommand) ifTrue: [self leftRotation].
+	(self isRightRotationCommand: aCommand) ifTrue: [self rightRotation].
+
+	
+	! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'MarsRover class' category: #'MarsRover-Solution'!
 MarsRover class
 	instanceVariableNames: ''!
+
+!MarsRover class methodsFor: 'as yet unclassified' stamp: 'Federico 10/25/2020 21:57:53'!
+unknownCommandErrorDescription
+	^'El comando no es conocido por MarsRover'! !
 
 !MarsRover class methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 20:58:40'!
 with: aPoint lookingAt: aMarsRoverDirection
@@ -312,25 +348,27 @@ Object subclass: #MarsRoverDirection
 	poolDictionaries: ''
 	category: 'MarsRover-Solution'!
 
-!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:31:13'!
-= aMarsRoverDirection.
-	^self class = aMarsRoverDirection class.! !
-
-!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:44:10'!
+!MarsRoverDirection methodsFor: 'mars rover moves' stamp: 'Federico 10/24/2020 22:44:10'!
 pointingBackwards
 	self subclassResponsibility.! !
 
-!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:44:43'!
+!MarsRoverDirection methodsFor: 'mars rover moves' stamp: 'Federico 10/24/2020 22:44:43'!
 pointingForward
 	self subclassResponsibility.! !
 
-!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 20:52:03'!
+
+!MarsRoverDirection methodsFor: 'mars rover rotations' stamp: 'Federico 10/24/2020 20:52:03'!
 rotateLeft
 	self subclassResponsibility.! !
 
-!MarsRoverDirection methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 20:52:07'!
+!MarsRoverDirection methodsFor: 'mars rover rotations' stamp: 'Federico 10/24/2020 20:52:07'!
 rotateRight
 	self subclassResponsibility.! !
+
+
+!MarsRoverDirection methodsFor: 'testing' stamp: 'Federico 10/25/2020 22:05:54'!
+= aMarsRoverDirection
+	^self class = aMarsRoverDirection class.! !
 
 
 !classDefinition: #East category: #'MarsRover-Solution'!
@@ -340,19 +378,20 @@ MarsRoverDirection subclass: #East
 	poolDictionaries: ''
 	category: 'MarsRover-Solution'!
 
-!East methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:44:11'!
+!East methodsFor: 'mars rover moves' stamp: 'Federico 10/24/2020 22:44:11'!
 pointingBackwards
 	^-1@0! !
 
-!East methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:44:44'!
+!East methodsFor: 'mars rover moves' stamp: 'Federico 10/24/2020 22:44:44'!
 pointingForward
 	^1@0! !
 
-!East methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 21:09:39'!
+
+!East methodsFor: 'mars rover rotations' stamp: 'Federico 10/24/2020 21:09:39'!
 rotateLeft
 	^North new.! !
 
-!East methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 21:09:43'!
+!East methodsFor: 'mars rover rotations' stamp: 'Federico 10/24/2020 21:09:43'!
 rotateRight
 	^South new.! !
 
@@ -364,19 +403,20 @@ MarsRoverDirection subclass: #North
 	poolDictionaries: ''
 	category: 'MarsRover-Solution'!
 
-!North methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:44:11'!
+!North methodsFor: 'mars rover moves' stamp: 'Federico 10/24/2020 22:44:11'!
 pointingBackwards
 	^0@-1! !
 
-!North methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:44:43'!
+!North methodsFor: 'mars rover moves' stamp: 'Federico 10/24/2020 22:44:43'!
 pointingForward
 	^0@1! !
 
-!North methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:05:08'!
+
+!North methodsFor: 'mars rover rotations' stamp: 'Federico 10/24/2020 22:05:08'!
 rotateLeft
 	^West new.! !
 
-!North methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:05:04'!
+!North methodsFor: 'mars rover rotations' stamp: 'Federico 10/24/2020 22:05:04'!
 rotateRight
 	^East new.! !
 
@@ -388,19 +428,20 @@ MarsRoverDirection subclass: #South
 	poolDictionaries: ''
 	category: 'MarsRover-Solution'!
 
-!South methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:44:11'!
+!South methodsFor: 'mars rover moves' stamp: 'Federico 10/24/2020 22:44:11'!
 pointingBackwards
 	^0@1! !
 
-!South methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:44:44'!
+!South methodsFor: 'mars rover moves' stamp: 'Federico 10/24/2020 22:44:44'!
 pointingForward
 	^0@-1! !
 
-!South methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:05:39'!
+
+!South methodsFor: 'mars rover rotations' stamp: 'Federico 10/24/2020 22:05:39'!
 rotateLeft
 	^East new.! !
 
-!South methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:05:35'!
+!South methodsFor: 'mars rover rotations' stamp: 'Federico 10/24/2020 22:05:35'!
 rotateRight
 	^West new.! !
 
@@ -412,18 +453,19 @@ MarsRoverDirection subclass: #West
 	poolDictionaries: ''
 	category: 'MarsRover-Solution'!
 
-!West methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:44:11'!
+!West methodsFor: 'mars rover moves' stamp: 'Federico 10/24/2020 22:44:11'!
 pointingBackwards
 	^1@0! !
 
-!West methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:44:43'!
+!West methodsFor: 'mars rover moves' stamp: 'Federico 10/24/2020 22:44:43'!
 pointingForward
 	^-1@0! !
 
-!West methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:05:44'!
+
+!West methodsFor: 'mars rover rotations' stamp: 'Federico 10/24/2020 22:05:44'!
 rotateLeft
 	^South new.! !
 
-!West methodsFor: 'as yet unclassified' stamp: 'Federico 10/24/2020 22:05:47'!
+!West methodsFor: 'mars rover rotations' stamp: 'Federico 10/24/2020 22:05:47'!
 rotateRight
 	^North new.! !
