@@ -5,571 +5,503 @@ TestCase subclass: #TerniLapilliTest
 	poolDictionaries: ''
 	category: 'TerniLapippiSolution'!
 
-!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 10/29/2020 19:46:46'!
-test06OPlayerCanNotPutOnOccupiedPosition
+!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 11/1/2020 13:57:55'!
+test06PlayerCanNotPutOnOccupiedPosition
 	
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@0.
+	aTerniLapilli putAt: 0@0.
 
 	self
-		should: [ aTerniLapilli putOAt: 0@0. ]
+		should: [ aTerniLapilli putAt: 0@0. ]
 		raise: Error
 		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
 
-!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 10/29/2020 19:46:52'!
-test07XPlayerCanNotPutOnOccupiedPosition
-	
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@0.
-	aTerniLapilli putOAt: 0@1.
-
-	self
-		should: [ aTerniLapilli putXAt: 0@1. ]
-		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
-
-!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 10/31/2020 17:30:43'!
-test13XPlayerCanNotMoveFromNotOwnPosition
+!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 11/1/2020 13:25:19'!
+test13PlayerCanNotMoveFromNotOwnPosition
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
 	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
 	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
 
 	self
-		should: [ aTerniLapilli moveXFrom: 0@0 to: -1@-1. ]
+		should: [ aTerniLapilli moveLeftDownFrom: 0@0. ]
 		raise: Error
 		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
 
-!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 10/31/2020 17:31:04'!
-test14OPlayerCanNotMoveFromNotOwnPosition
+!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 11/1/2020 13:25:22'!
+test14PlayerCanNotMoveWhenHasTokenRemained
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
-	
-	aTerniLapilli moveXFrom: -1@1 to: -1@0.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
 
 	self
-		should: [ aTerniLapilli moveOFrom: -1@0 to: -1@1. ]
+		should: [ aTerniLapilli moveLeftDownFrom: 0@-1. ]
 		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
+		withMessageText: TerniLapilli remainedTokensErrorDescription.! !
 
 
-!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 10/29/2020 21:06:21'!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:22:35'!
 test08PlayerWonWithHorizontalPlay
 	
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@0.
-	aTerniLapilli putOAt: 0@1.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
 	
-	aTerniLapilli putXAt: -1@0.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@1.
 	
-	aTerniLapilli putXAt: 1@0.
+	aTerniLapilli putAt: 1@0.
 
 	self assert: aTerniLapilli hasPlayerXWon.! !
 
-!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 10/29/2020 21:06:15'!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:22:45'!
 test09PlayerWonWithVerticalPlay
 	
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@0.
-	aTerniLapilli putOAt: -1@1.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: -1@1.
 	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
 	
-	aTerniLapilli putXAt: 0@-1.
+	aTerniLapilli putAt: 0@-1.
 
 	self assert: aTerniLapilli hasPlayerXWon.! !
 
-!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 10/29/2020 21:06:44'!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:25:38'!
 test10PlayerWonWithInvertedDiagonalPlay
 	
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@0.
-	aTerniLapilli putOAt: 0@1.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
 	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@1.
 	
-	aTerniLapilli putXAt: 1@-1.
+	aTerniLapilli putAt: 1@-1.
 
 	self assert: aTerniLapilli hasPlayerXWon.! !
 
-!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 10/29/2020 21:06:56'!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:25:47'!
 test11PlayerWonWithDiagonalPlay
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@0.
-	aTerniLapilli putOAt: 0@1.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
 	
-	aTerniLapilli putXAt: 1@1.
-	aTerniLapilli putOAt: -1@1.
+	aTerniLapilli putAt: 1@1.
+	aTerniLapilli putAt: -1@1.
 	
-	aTerniLapilli putXAt: -1@-1.
+	aTerniLapilli putAt: -1@-1.
 
 	self assert: aTerniLapilli hasPlayerXWon.! !
 
-!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 10/31/2020 17:58:31'!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:26:34'!
 test12GameIsOverWhenAPlayerWins
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
 	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
 	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: -1@-1.
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: -1@-1.
 
 	self
-		should: [ aTerniLapilli moveXFrom: -1@1 to: -1@1 ]
+		should: [ aTerniLapilli moveDownFrom: -1@1 ]
 		raise: Error
 		withMessageText: TerniLapilli gameOverErrorDescription.
 	! !
 
-!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 10/31/2020 17:33:05'!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:26:43'!
 test15DoAWinnerMovementOverTheGame
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
 	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
 	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
 	
-	aTerniLapilli moveXFrom: -1@1 to: -1@0.
-	aTerniLapilli moveOFrom: 0@0 to: 1@0.
+	aTerniLapilli moveDownFrom: -1@1.
+	aTerniLapilli moveRightFrom: 0@0.
 	
 	self assert: aTerniLapilli isOver.! !
 
 
-!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 10/31/2020 23:23:32'!
-test27XPlayerCanNotMoveLeftDownFromCenterUpPosition
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:04'!
+test27PlayerCanNotMoveLeftDownFromCenterUpPosition
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
 	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
 	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
 
 	self
-		should: [ aTerniLapilli moveLeftDownXFrom: 0@1. ]
+		should: [ aTerniLapilli moveLeftDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:23'!
+test28PlayerCanNotMoveLeftDownFromRightCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:32'!
+test29PlayerCanNotMoveRIghtDownFromCenterUpPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:42'!
+test30PlayerCanNotMoveRightDownFromLeftCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:54'!
+test31PlayerCanNotMoveLeftUpFromCenterDownPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:28:08'!
+test32PlayerCanNotMoveLeftUpFromRightCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:28:23'!
+test33PlayerCanNotMoveRightUpFromLeftCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:28:32'!
+test34PlayerCanNotMoveLeftDownFromDownCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:28:52'!
+test19PlayerCanNotMoveUpToNotEmptyPosition
+
+	| aTerniLapilli |
+
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveUpFrom: 0@-1. ]
 		raise: Error
 		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
 
-!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 10/31/2020 23:24:35'!
-test28XPlayerCanNotMoveLeftDownFromRightCenterPosition
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:12'!
+test20PlayerCanNotMoveRightToNotEmptyPosition
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: 1@0.
-	aTerniLapilli putOAt: 1@-1.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
 
 	self
-		should: [ aTerniLapilli moveLeftDownXFrom: 1@0. ]
+		should: [ aTerniLapilli moveRightFrom: 0@1. ]
 		raise: Error
 		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
 
-!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 10/31/2020 23:26:16'!
-test29XPlayerCanNotMoveRIghtDownFromCenterUpPosition
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:24'!
+test21PlayerCanNotMoveDownToNotEmptyPosition
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
 
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
 	self
-		should: [ aTerniLapilli moveRightDownXFrom: 0@1. ]
+		should: [ aTerniLapilli moveDownFrom: 0@1. ]
 		raise: Error
 		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
 
-!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 10/31/2020 23:28:03'!
-test30XPlayerCanNotMoveRightDownFromLeftCenterPosition
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:37'!
+test22PlayerCanNotMoveLeftToNotEmptyPosition
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@0.
-	aTerniLapilli putOAt: 1@-1.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
 
 	self
-		should: [ aTerniLapilli moveRightDownXFrom: -1@0. ]
+		should: [ aTerniLapilli moveLeftFrom: 0@1. ]
 		raise: Error
 		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
 
-!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 10/31/2020 23:32:47'!
-test31XPlayerCanNotMoveLeftUpFromCenterDownPosition
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:59'!
+test23PlayerCanNotMoveLeftDownToNotEmptyPosition
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
 	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: -1@-1.
 	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
+	aTerniLapilli putAt: 1@1.
+	aTerniLapilli putAt: 1@-1.
 
 	self
-		should: [ aTerniLapilli moveLeftUpXFrom: 0@-1. ]
+		should: [ aTerniLapilli moveLeftDownFrom: 1@1. ]
 		raise: Error
 		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
 
-!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 10/31/2020 23:33:11'!
-test32XPlayerCanNotMoveLeftUpFromRightCenterPosition
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:30:27'!
+test24PlayerCanNotMoveRightDownToNotEmptyPosition
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
 
 	self
-		should: [ aTerniLapilli moveLeftUpXFrom: 1@0. ]
+		should: [ aTerniLapilli moveRightDownFrom: -1@1. ]
 		raise: Error
 		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
 
-!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 10/31/2020 23:34:26'!
-test33XPlayerCanNotMoveRightUpFromLeftCenterPosition
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:30:47'!
+test25PlayerCanNotMoveLeftUpToNotEmptyPosition
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
 	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
 	
-	aTerniLapilli putXAt: -1@0.
-	aTerniLapilli putOAt: 1@-1.
+	aTerniLapilli putAt: 1@-1.
+	aTerniLapilli putAt: -1@0.
 
 	self
-		should: [ aTerniLapilli moveRightUpXFrom: -1@0. ]
+		should: [ aTerniLapilli moveLeftUpFrom: 1@-1. ]
 		raise: Error
 		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
 
-!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 10/31/2020 23:34:47'!
-test34XPlayerCanNotMoveLeftDownFromDownCenterPosition
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:30:58'!
+test26PlayerCanNotMoveRightUpToNotEmptyPosition
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
 	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
 	
-	aTerniLapilli putXAt: -1@0.
-	aTerniLapilli putOAt: 1@-1.
+	aTerniLapilli putAt: -1@-1.
+	aTerniLapilli putAt: 1@0.
 
 	self
-		should: [ aTerniLapilli moveRightUpXFrom: 0@-1. ]
-		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
-
-
-!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 10/31/2020 22:56:33'!
-test19XPlayerCanNotMoveUpToNotEmptyPosition
-
-	| aTerniLapilli |
-
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
-
-	self
-		should: [ aTerniLapilli moveUpXFrom: 0@-1. ]
-		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
-
-!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 10/31/2020 22:56:40'!
-test20XPlayerCanNotMoveRightToNotEmptyPosition
-
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
-
-	self
-		should: [ aTerniLapilli moveRightXFrom: 0@1. ]
-		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
-
-!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 10/31/2020 22:56:47'!
-test21XPlayerCanNotMoveDownToNotEmptyPosition
-
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
-
-	self
-		should: [ aTerniLapilli moveDownXFrom: 0@1. ]
-		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
-
-!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 10/31/2020 22:57:08'!
-test22XPlayerCanNotMoveLeftToNotEmptyPosition
-
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
-
-	self
-		should: [ aTerniLapilli moveLeftXFrom: 0@1. ]
-		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
-
-!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 10/31/2020 23:00:56'!
-test23XPlayerCanNotMoveLeftDownToNotEmptyPosition
-
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: -1@-1.
-	
-	aTerniLapilli putXAt: 1@1.
-	aTerniLapilli putOAt: 1@-1.
-
-	self
-		should: [ aTerniLapilli moveLeftDownXFrom: 1@1. ]
-		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
-
-!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 10/31/2020 23:02:29'!
-test24XPlayerCanNotMoveRightDownToNotEmptyPosition
-
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
-
-	self
-		should: [ aTerniLapilli moveRightDownXFrom: -1@1. ]
-		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
-
-!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 10/31/2020 23:04:31'!
-test25XPlayerCanNotMoveLeftUpToNotEmptyPosition
-
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: 1@-1.
-	aTerniLapilli putOAt: -1@0.
-
-	self
-		should: [ aTerniLapilli moveLeftUpXFrom: 1@-1. ]
-		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
-
-!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 10/31/2020 23:19:35'!
-test26XPlayerCanNotMoveRightUpToNotEmptyPosition
-
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@0.
-	aTerniLapilli putOAt: 1@0.
-
-	self
-		should: [ aTerniLapilli moveRightUpXFrom: 0@-1. ]
-		raise: Error
-		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
-
-!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 00:15:51'!
-test35OPlayerCanNotMoveUpToNotEmptyPosition
-
-	| aTerniLapilli |
-
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
-	
-	aTerniLapilli moveLeftXFrom: 0@-1.
-
-	self
-		should: [ aTerniLapilli moveUpOFrom: 0@0. ]
+		should: [ aTerniLapilli moveRightUpFrom: -1@-1. ]
 		raise: Error
 		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
 
 
-!TerniLapilliTest methodsFor: 'as yet unclassified' stamp: 'DS 10/31/2020 18:00:33'!
-test16XPlayerCanNotPutWhenHasNotTokenRemained
+!TerniLapilliTest methodsFor: 'as yet unclassified' stamp: 'DS 11/1/2020 13:58:43'!
+test16PlayerCanNotPutWhenHasNotTokenRemained
 
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
 	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
 	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: -1@-1.
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
 
 	self
-		should: [ aTerniLapilli putXAt: -1@0. ]
+		should: [ aTerniLapilli putAt: -1@0. ]
 		raise: Error
 		withMessageText: TerniLapilli noRemainedTokensErrorDescription.
 	! !
 
-!TerniLapilliTest methodsFor: 'as yet unclassified' stamp: 'DS 10/31/2020 18:03:19'!
-test17OPlayerCanNotPutWhenHasNotTokenRemained
-
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@-1.
-	aTerniLapilli putOAt: 0@0.
-	
-	aTerniLapilli putXAt: 0@1.
-	aTerniLapilli putOAt: 1@1.
-	
-	aTerniLapilli putXAt: -1@1.
-	aTerniLapilli putOAt: 1@-1.
-	
-	aTerniLapilli moveXFrom: -1@1 to: -1@0.
-
-	self
-		should: [ aTerniLapilli putOAt: -1@-1. ]
-		raise: Error
-		withMessageText: TerniLapilli noRemainedTokensErrorDescription.
-	! !
-
-!TerniLapilliTest methodsFor: 'as yet unclassified' stamp: 'DS 10/31/2020 18:17:44'!
+!TerniLapilliTest methodsFor: 'as yet unclassified' stamp: 'DS 11/1/2020 13:31:28'!
 test18PlayerCanNotPutOutOfBoard
 
 	| aTerniLapilli |
@@ -577,7 +509,7 @@ test18PlayerCanNotPutOutOfBoard
 	aTerniLapilli := TerniLapilli new.
 
 	self
-		should: [ aTerniLapilli putXAt: 0@2. ]
+		should: [ aTerniLapilli putAt: 0@2. ]
 		raise: Error
 		withMessageText: TerniLapilli positionOutOfBoardErrorDescription.
 	! !
@@ -592,67 +524,120 @@ test01GameStartWithXPlayerTurn
 	
 	self assert: aTerniLapilli isPlayingX.! !
 
-!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 10/29/2020 18:14:47'!
+!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 11/1/2020 13:24:08'!
 test02AfterFirstTurnIsOPlayerTurn
 	
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@0.
+	aTerniLapilli putAt: 0@0.
 	
 	self deny: aTerniLapilli isPlayingX.
 	self assert: aTerniLapilli isPlayingO.! !
 
-!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 10/29/2020 18:17:03'!
+!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 11/1/2020 13:22:06'!
 test03AfterOPlayerTurnIsXPlayerTurn
 	
 	| aTerniLapilli |
 	
 	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@0.
-	aTerniLapilli putOAt: 0@1.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
 	
 	self assert: aTerniLapilli isPlayingX.
 	self deny: aTerniLapilli isPlayingO.! !
 
-!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 10/29/2020 18:24:55'!
-test04XPlayerCanNotPlayOnOPlayerTurn
-	
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-	aTerniLapilli putXAt: 0@0.
-
-	self 
-		should: [ aTerniLapilli putXAt: 0@1. ]
-		raise: Error
-		withMessageText: TerniLapilli attemptToPlayTwiceInARowErrorDescription.! !
-
-!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 10/29/2020 18:41:54'!
-test05OPlayerCanNotPlayOnXPlayerTurn
-	
-	| aTerniLapilli |
-	
-	aTerniLapilli := TerniLapilli new.
-
-	self 
-		should: [ aTerniLapilli putOAt: 0@1. ]
-		raise: Error
-		withMessageText: TerniLapilli attemptToPlayTwiceInARowErrorDescription.! !
-
 
 !classDefinition: #TerniLapilli category: 'TerniLapippiSolution'!
 Object subclass: #TerniLapilli
-	instanceVariableNames: 'currentPlayer tokensXRemained positionsOccupied'
+	instanceVariableNames: 'currentPlayer board putTokensRules moveOnRules'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TerniLapippiSolution'!
 
-!TerniLapilli methodsFor: 'initialization' stamp: 'DS 10/29/2020 20:20:18'!
+!TerniLapilli methodsFor: 'initialization' stamp: 'DS 11/1/2020 16:06:54'!
 initialize
 
+	putTokensRules := self class putTokenRulesFor: self.
+	moveOnRules := self class moveOnRulesFor: self.
 	currentPlayer := #X.
-	positionsOccupied := OrderedCollection new.! !
+	board := OrderedCollection new.! !
+
+
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/1/2020 15:37:13'!
+boardIncludesCurrentPlayerWith: aPosition
+
+	^ board includes: {currentPlayer. aPosition }! !
+
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/1/2020 16:25:08'!
+currentPlayerHasTokensRemaind
+
+	^ ( board select: [ :aOccupiedPosition | aOccupiedPosition first = currentPlayer ] ) size = 3.! !
+
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/1/2020 16:27:45'!
+hasOccupiedPosition: aPosition
+
+	^ ( board collect: [ :aOccupiedPosition | aOccupiedPosition second ] ) includes: aPosition.! !
+
+
+!TerniLapilli methodsFor: 'private accesing' stamp: 'DS 11/1/2020 16:44:18'!
+occupiedPositionsBy: aPlayer
+
+	^board select: [ :aOccupiedPosition | aOccupiedPosition first = aPlayer ].! !
+
+
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:53:11'!
+hasDiagonalWonOn: anOccupiedPositionsByPlayer
+
+	^anOccupiedPositionsByPlayer includesAllOf: {-1@1. 0@0. 1@-1}.! !
+
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:51:41'!
+hasHorizontalWonOn: anOccupiedPositionsByPlayer
+
+	| i isWinner |
+	
+	i := 1.
+	isWinner := true.
+	[i < (anOccupiedPositionsByPlayer size) ]	 whileTrue: [
+		isWinner := isWinner and: [ ((anOccupiedPositionsByPlayer at: i)	 + (1@	0)) = (anOccupiedPositionsByPlayer at: i+1)	 ].
+		i := i+1.
+	].
+
+	^ isWinner.! !
+
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:53:40'!
+hasInvertedDiagonalWonOn: anOccupiedPositionsByPlayer
+
+	^anOccupiedPositionsByPlayer includesAllOf: {-1@-1. 0@0. 1@1}.! !
+
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:52:17'!
+hasVerticalWonOn: anOccupiedPositionsByPlayer
+
+	| i isWinner |
+	
+	i := 1.
+	isWinner := true.
+	[i < (anOccupiedPositionsByPlayer size) ]	 whileTrue: [
+		isWinner := isWinner and: [ ((anOccupiedPositionsByPlayer  at: i)	 + (0@	1)) = (anOccupiedPositionsByPlayer at: i+1)	 ].
+		i := i+1.
+	].
+
+	^ isWinner.! !
+
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:55:37'!
+hasWonPlayer: aPlayer
+
+	| occupiedPositionsBypPlayer |
+
+	occupiedPositionsBypPlayer := ( ( board select: [ :aOccupiedPosition | aOccupiedPosition first = aPlayer ] ) 
+							  	collect: [ :aOccupiedPositionByPlayer | aOccupiedPositionByPlayer second] ) sort.
+
+	^(occupiedPositionsBypPlayer size = 3) and: [
+		(self hasHorizontalWonOn: occupiedPositionsBypPlayer) or:
+		(self hasVerticalWonOn: occupiedPositionsBypPlayer) or:
+		(self hasDiagonalWonOn: occupiedPositionsBypPlayer) or:
+		(self hasInvertedDiagonalWonOn: occupiedPositionsBypPlayer)
+	].! !
 
 
 !TerniLapilli methodsFor: 'testing' stamp: 'DS 11/1/2020 00:06:42'!
@@ -665,33 +650,6 @@ hasPlayerXWon
 
 	^self hasWonPlayer: #X.! !
 
-!TerniLapilli methodsFor: 'testing' stamp: 'DS 11/1/2020 00:07:31'!
-hasWonPlayer: aPlayer
-
-	| positionsOccupiedByPlayer i isHorizontalWinner isVerticalWinner isInvertedDiagonalWinner isDiagonalWinner |
-
-	positionsOccupiedByPlayer := ( ( positionsOccupied select: [ :aOccupiedPosition | aOccupiedPosition first = aPlayer ] ) 
-							  	collect: [ :aOccupiedPositionByPlayer | aOccupiedPositionByPlayer second] ) sort.
-	
-	i := 1.
-	isHorizontalWinner := true.
-	[i < (positionsOccupiedByPlayer size) ]	 whileTrue: [
-		isHorizontalWinner := isHorizontalWinner and: [ ((positionsOccupiedByPlayer at: i)	 + (1@	0)) = (positionsOccupiedByPlayer at: i+1)	 ].
-		i := i+1.
-	].
-
-	i := 1.
-	isVerticalWinner := true.
-	[i < (positionsOccupiedByPlayer size) ]	 whileTrue: [
-		isVerticalWinner := isVerticalWinner and: [ ((positionsOccupiedByPlayer  at: i)	 + (0@	1)) = (positionsOccupiedByPlayer  at: i+1)	 ].
-		i := i+1.
-	].
-
-	isInvertedDiagonalWinner := positionsOccupiedByPlayer includesAllOf: {-1@1. 0@0. 1@-1}.
-	isDiagonalWinner := positionsOccupiedByPlayer includesAllOf: {-1@-1. 0@0. 1@1}.
-
-	^(positionsOccupiedByPlayer size = 3) and: [isHorizontalWinner or: isVerticalWinner or: isInvertedDiagonalWinner or: isDiagonalWinner].! !
-
 !TerniLapilli methodsFor: 'testing' stamp: 'DS 10/29/2020 21:16:07'!
 isOver
 
@@ -702,166 +660,119 @@ isPlayingO
 
 	^currentPlayer = #O.! !
 
-!TerniLapilli methodsFor: 'testing' stamp: 'DS 10/29/2020 17:44:47'!
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 11/1/2020 16:40:45'!
 isPlayingX
 
-	^currentPlayer  = #X.! !
+	^currentPlayer = #X.! !
 
 
-!TerniLapilli methodsFor: 'player actions' stamp: 'DS 10/31/2020 17:47:27'!
-move: aPlayer from: aFromPosition to: aToPosition
+!TerniLapilli methodsFor: 'board adding' stamp: 'DS 11/1/2020 16:40:16'!
+add: aPosition
 
-	(positionsOccupied includes: {aPlayer. aFromPosition} ) ifFalse: [ self error: self class ilegalMovementErrorDescription ].	
+	board add: {currentPlayer. aPosition}.
+	currentPlayer := self isPlayingX ifTrue: [#O] ifFalse: [#X].! !
 
-	self put: aPlayer at: aToPosition.
-	positionsOccupied remove: {aPlayer. aFromPosition}.! !
+!TerniLapilli methodsFor: 'board adding' stamp: 'DS 11/1/2020 14:09:05'!
+addMoveOn: aDirection from: aPosition
 
-!TerniLapilli methodsFor: 'player actions' stamp: 'DS 10/31/2020 17:27:02'!
-moveOFrom: aFromPosition to: aToPosition
+	| occupiedPosition |
 
-	self move: #O from: aFromPosition to: aToPosition.! !
-
-!TerniLapilli methodsFor: 'player actions' stamp: 'DS 10/31/2020 17:26:39'!
-moveXFrom: aFromPosition to: aToPosition
-
-	self move: #X from: aFromPosition to: aToPosition.! !
-
-!TerniLapilli methodsFor: 'player actions' stamp: 'DS 10/31/2020 18:17:20'!
-put: aPlayer at: aPosition
-
-	(aPosition between: (-1@-1) and: (1@1)) ifFalse: [ self error: self class positionOutOfBoardErrorDescription ].
-	(self isOver) ifTrue: [ self error: self class gameOverErrorDescription ].
-	(currentPlayer = aPlayer) ifFalse: [ self error: (self class attemptToPlayTwiceInARowErrorDescription) ].
-	((positionsOccupied collect: [ :aOccupiedPosition | aOccupiedPosition second] ) includes: aPosition) 		ifTrue: [ self error: self class ilegalMovementErrorDescription ].
-
-	positionsOccupied add: {aPlayer. aPosition}.
-	currentPlayer := (aPlayer = #X) ifTrue: [#O] ifFalse: [#X].! !
-
-!TerniLapilli methodsFor: 'player actions' stamp: 'DS 10/31/2020 18:03:39'!
-putOAt: aPosition
-
-	((positionsOccupied select: [ :aOccupiedPosition | aOccupiedPosition first = #O ] ) size = 3 ) 
-		ifTrue: [ self error: self class noRemainedTokensErrorDescription].
-
-	self put: #O at: aPosition.! !
-
-!TerniLapilli methodsFor: 'player actions' stamp: 'DS 10/31/2020 17:53:32'!
-putXAt: aPosition
-
-	((positionsOccupied select: [ :aOccupiedPosition | aOccupiedPosition first = #X ] ) size = 3 ) 
-		ifTrue: [ self error: self class noRemainedTokensErrorDescription].
-
-	self put: #X at: aPosition.! !
-
-
-!TerniLapilli methodsFor: 'movements' stamp: 'DS 10/31/2020 22:16:53'!
-moveDownXFrom: aPosition
-
-	| direction |
-	direction := 0@-1.
-
-	self put: #X at: aPosition + direction.
-	positionsOccupied remove: {#X. aPosition}.
+	occupiedPosition := {currentPlayer. aPosition}.
+	self add: aPosition + aDirection.
+	board remove: occupiedPosition.
 
 	! !
 
-!TerniLapilli methodsFor: 'movements' stamp: 'DS 10/31/2020 22:37:42'!
-moveLeftDownXFrom: aPosition
 
-	| direction |
+!TerniLapilli methodsFor: 'player actions' stamp: 'DS 11/1/2020 13:45:14'!
+putAt: aPosition
 
-	({0@1. 1@0} includes: aPosition) ifTrue: [ self error: self class ilegalMovementErrorDescription ].
+	putTokensRules putAt: aPosition.! !
 
-	direction := -1@-1.
 
-	self put: #X at: aPosition + direction.
-	positionsOccupied remove: {#X. aPosition}.
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:03:31'!
+moveDownFrom: aPosition
 
-	! !
+	self moveOn: (0@-1) from: aPosition.! !
 
-!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 00:08:55'!
-moveLeftUpXFrom: aPosition
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:57:21'!
+moveLeftDownFrom: aPosition
 
-	| direction |
+	({0@1. 1@0} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
 
-	(0@-1 = aPosition) ifTrue: [ self error: self class ilegalMovementErrorDescription ].
+	self moveOn: (-1@-1) from: aPosition.! !
 
-	direction := -1@1.
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:04:33'!
+moveLeftFrom: aPosition
 
-	self put: #X at: aPosition + direction.
-	positionsOccupied remove: {#X. aPosition}.
+	self moveOn: (-1@0) from: aPosition.! !
 
-	! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:57:12'!
+moveLeftUpFrom: aPosition
 
-!TerniLapilli methodsFor: 'movements' stamp: 'DS 10/31/2020 22:17:29'!
-moveLeftXFrom: aPosition
+	({0@-1. 1@0} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
 
-	| direction |
-	direction := -1@0.
+	self moveOn: (-1@1) from: aPosition.! !
 
-	self put: #X at: aPosition + direction.
-	positionsOccupied remove: {#X. aPosition}.
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:10:06'!
+moveOn: aDirection from: aPosition
 
-	! !
+	 moveOnRules moveOn: aDirection from: aPosition.! !
 
-!TerniLapilli methodsFor: 'movements' stamp: 'DS 10/31/2020 23:03:26'!
-moveRightDownXFrom: aPosition
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:58:26'!
+moveRightDownFrom: aPosition
 
-	| direction |
+	({0@1. -1@0} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
 
-	({0@1. -1@0} includes: aPosition) ifTrue: [ self error: self class ilegalMovementErrorDescription ].
+	self moveOn: (1@-1) from: aPosition.! !
 
-	direction := 1@-1.
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:05:51'!
+moveRightFrom: aPosition
 
-	self put: #X at: aPosition + direction.
-	positionsOccupied remove: {#X. aPosition}.
+	self moveOn: (1@0) from: aPosition.! !
 
-	! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:58:36'!
+moveRightUpFrom: aPosition
 
-!TerniLapilli methodsFor: 'movements' stamp: 'DS 10/31/2020 22:49:47'!
-moveRightUpXFrom: aPosition
+	({-1@0. 0@-1} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
 
-	| direction |
+	self moveOn: (1@1) from: aPosition.! !
 
-	({-1@0. 0@-1} includes: aPosition) ifTrue: [ self error: self class ilegalMovementErrorDescription ].
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:06:47'!
+moveUpFrom: aPosition
 
-	direction := -1@-1.
+	self moveOn: (0@1) from: aPosition.! !
 
-	self put: #X at: aPosition + direction.
-	positionsOccupied remove: {#X. aPosition}.
 
-	! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:27:11'!
+signalGameOver
 
-!TerniLapilli methodsFor: 'movements' stamp: 'DS 10/31/2020 22:16:14'!
-moveRightXFrom: aPosition
+	^ self error: self class gameOverErrorDescription! !
 
-	| direction |
-	direction := 1@0.
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 16:57:12'!
+signalIlegalDiagonalMovement
 
-	self put: #X at: aPosition + direction.
-	positionsOccupied remove: {#X. aPosition}.
+	^ self error: self class ilegalDiagonalMovementErrorDescription! !
 
-	! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:27:22'!
+signalIlegalMovement
 
-!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 00:17:51'!
-moveUpOFrom: aPosition
-	
-	| direction |
-	direction := 0@1.
+	^ self error: self class ilegalMovementErrorDescription! !
 
-	self put: #O at: aPosition + direction.
-	positionsOccupied remove: {#O. aPosition}.! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:25:05'!
+signalNoRemainedTokens
 
-!TerniLapilli methodsFor: 'movements' stamp: 'DS 10/31/2020 22:13:03'!
-moveUpXFrom: aPosition
+	^ self error: self class noRemainedTokensErrorDescription! !
 
-	| direction |
-	direction := 0@1.
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:25:37'!
+signalPositionOutOfBoard
 
-	self put: #X at: aPosition + direction.
-	positionsOccupied remove: {#X. aPosition}.
+	^ self error: self class positionOutOfBoardErrorDescription! !
 
-	! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 15:39:09'!
+signalRemainedTokens
+
+	^ self error: self class remainedTokensErrorDescription! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -874,10 +785,20 @@ attemptToPlayTwiceInARowErrorDescription
 
 	^'Can not play twice in a row'.! !
 
-!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/29/2020 19:01:36'!
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/29/2020 21:11:33'!
+gameOverErrorDescription
+
+	^'Game Over'.! !
+
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 11/1/2020 01:19:03'!
+ilegalDiagonalMovementErrorDescription
+
+	^'Can not move on this diagonal'.! !
+
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 11/1/2020 01:19:34'!
 ilegalMovementErrorDescription
 
-	^'Ilegal Movement'.! !
+	^'Can not do this movement'.! !
 
 !TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/29/2020 18:54:32'!
 noRemainedTokensErrorDescription
@@ -889,8 +810,204 @@ positionOutOfBoardErrorDescription
 
 	^'Position out of board'.! !
 
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 11/1/2020 02:04:54'!
+remainedTokensErrorDescription
 
-!TerniLapilli class methodsFor: 'as yet unclassified' stamp: 'DS 10/29/2020 21:11:33'!
-gameOverErrorDescription
+	^'Can not move when has Remained Tokens'.! !
 
-	^'Game Over'.! !
+
+!TerniLapilli class methodsFor: 'rules' stamp: 'DS 11/1/2020 16:59:38'!
+buildRules: aKindOfRule for: aTerniLapilliGame
+
+	^RemainedTokensRuleDecorator for: aTerniLapilliGame decorating: (
+		GameOverRuleDecorator for: aTerniLapilliGame decorating: (
+			PlayingInBoardRuleDecorator for: aTerniLapilliGame decorating: (
+				OccupiedPositionRuleDecorator for: aTerniLapilliGame decorating: (			aKindOfRule for: aTerniLapilliGame 	)
+			)
+		)
+	).! !
+
+!TerniLapilli class methodsFor: 'rules' stamp: 'DS 11/1/2020 17:00:07'!
+moveOnRulesFor: aTerniLapilliGame
+
+	^self buildRules: MoveOnRule for: aTerniLapilliGame.! !
+
+!TerniLapilli class methodsFor: 'rules' stamp: 'DS 11/1/2020 16:59:57'!
+putTokenRulesFor: aTerniLapilliGame
+
+	^self buildRules: PutTokensRule for: aTerniLapilliGame.! !
+
+
+!classDefinition: #TerniLapilliRules category: 'TerniLapippiSolution'!
+Object subclass: #TerniLapilliRules
+	instanceVariableNames: 'game'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!TerniLapilliRules methodsFor: 'initialization' stamp: 'DS 11/1/2020 12:21:43'!
+initializateFor: aGame
+
+	game := aGame.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'TerniLapilliRules class' category: 'TerniLapippiSolution'!
+TerniLapilliRules class
+	instanceVariableNames: ''!
+
+!TerniLapilliRules class methodsFor: 'class initialization' stamp: 'DS 11/1/2020 12:21:59'!
+for: aGame
+
+	^self new initializateFor: aGame.! !
+
+
+!classDefinition: #MoveOnRule category: 'TerniLapippiSolution'!
+TerniLapilliRules subclass: #MoveOnRule
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!MoveOnRule methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:07:48'!
+moveOn: aDirection from: aPosition
+
+	game addMoveOn: aDirection from: aPosition.! !
+
+
+!classDefinition: #PutTokensRule category: 'TerniLapippiSolution'!
+TerniLapilliRules subclass: #PutTokensRule
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!PutTokensRule methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:23:12'!
+putAt: aPosition
+
+	game add: aPosition.! !
+
+
+!classDefinition: #TerniLapilliRulesDecorator category: 'TerniLapippiSolution'!
+TerniLapilliRules subclass: #TerniLapilliRulesDecorator
+	instanceVariableNames: 'decoratee'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!TerniLapilliRulesDecorator methodsFor: 'initialization' stamp: 'DS 11/1/2020 12:31:42'!
+initializateFor: aGame decorating: aTerniLapilliRule
+
+	game := aGame.
+	decoratee := aTerniLapilliRule.! !
+
+
+!TerniLapilliRulesDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:16:53'!
+moveOn: aDirection from: aPosition
+
+	self subclassResponsibility.! !
+
+!TerniLapilliRulesDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:29:07'!
+putAt: aPosition
+
+	self subclassResponsibility.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'TerniLapilliRulesDecorator class' category: 'TerniLapippiSolution'!
+TerniLapilliRulesDecorator class
+	instanceVariableNames: ''!
+
+!TerniLapilliRulesDecorator class methodsFor: 'instance creation' stamp: 'DS 11/1/2020 12:30:18'!
+for: aGame decorating: aTerniLapilliRule
+
+	^self new initializateFor: aGame decorating: aTerniLapilliRule.! !
+
+
+!classDefinition: #GameOverRuleDecorator category: 'TerniLapippiSolution'!
+TerniLapilliRulesDecorator subclass: #GameOverRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!GameOverRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 15:45:30'!
+moveOn: aDirection from: aPosition
+
+	(game isOver) ifTrue: [ game signalGameOver ].
+
+	decoratee moveOn: aDirection from: aPosition.! !
+
+!GameOverRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:47:50'!
+putAt: aPosition
+
+	(game isOver) ifTrue: [ game signalGameOver ].
+
+	decoratee putAt: aPosition.! !
+
+
+!classDefinition: #OccupiedPositionRuleDecorator category: 'TerniLapippiSolution'!
+TerniLapilliRulesDecorator subclass: #OccupiedPositionRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:28:04'!
+moveOn: aDirection from: aPosition
+
+	(game hasOccupiedPosition: aPosition + aDirection) 				ifTrue: [ game signalIlegalMovement ].
+	(game boardIncludesCurrentPlayerWith: aPosition ) ifFalse: [ game signalIlegalMovement ].	
+
+	decoratee moveOn: aDirection from: aPosition.! !
+
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:28:16'!
+putAt: aPosition
+
+	(game hasOccupiedPosition: aPosition) 		ifTrue: [ game signalIlegalMovement ].
+
+	decoratee putAt: aPosition.! !
+
+
+!classDefinition: #PlayingInBoardRuleDecorator category: 'TerniLapippiSolution'!
+TerniLapilliRulesDecorator subclass: #PlayingInBoardRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!PlayingInBoardRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 15:48:04'!
+moveOn: aDirection from: aPosition
+
+	(aPosition between: (-1@-1) and: (1@1)) ifFalse: [ game signalPositionOutOfBoard ].
+
+	decoratee moveOn: aDirection from: aPosition.! !
+
+!PlayingInBoardRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:46:35'!
+putAt: aPosition
+
+	(aPosition between: (-1@-1) and: (1@1)) ifFalse: [ game signalPositionOutOfBoard ].
+
+	decoratee putAt: aPosition.! !
+
+
+!classDefinition: #RemainedTokensRuleDecorator category: 'TerniLapippiSolution'!
+TerniLapilliRulesDecorator subclass: #RemainedTokensRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!RemainedTokensRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:23:18'!
+moveOn: aDirection from: aPosition
+
+	( game currentPlayerHasTokensRemaind ) 	ifFalse: [ game signalRemainedTokens ].
+
+	^decoratee moveOn: aDirection from: aPosition.! !
+
+!RemainedTokensRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:23:12'!
+putAt: aPosition
+
+	( game currentPlayerHasTokensRemaind ) 	ifTrue: [ game signalNoRemainedTokens ].
+
+	^decoratee putAt: aPosition.! !
