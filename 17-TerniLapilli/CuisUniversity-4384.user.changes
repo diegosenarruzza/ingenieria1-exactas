@@ -29236,3 +29236,1928 @@ PASSED!
 PASSED!
 
 ----QUIT----(1 November 2020 17:05:49) CuisUniversity-4384.image priorSource: 18819682!
+
+----STARTUP---- (2 November 2020 00:49:48) as /mnt/sdb5/Ingenieria1/CuisUniversity/CuisUniversity-4384.image!
+
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/2/2020 00:50:31'!
+hasCurrentPlayerTokensRemaining
+
+	^ ( board select: [ :aOccupiedPosition | aOccupiedPosition first = currentPlayer ] ) size = 3.! !
+
+!methodRemoval: TerniLapilli #currentPlayerHasTokensRemaind stamp: 'DS 11/2/2020 00:50:31'!
+currentPlayerHasTokensRemaind
+
+	^ ( board select: [ :aOccupiedPosition | aOccupiedPosition first = currentPlayer ] ) size = 3.!
+
+!testRun: #TerniLapilliTest #test01GameStartWithXPlayerTurn stamp: 'DS 11/2/2020 00:50:37'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test02AfterFirstTurnIsOPlayerTurn stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test03AfterOPlayerTurnIsXPlayerTurn stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test06PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test08PlayerWonWithHorizontalPlay stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test09PlayerWonWithVerticalPlay stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test10PlayerWonWithInvertedDiagonalPlay stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test11PlayerWonWithDiagonalPlay stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test12GameIsOverWhenAPlayerWins stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test13PlayerCanNotMoveFromNotOwnPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test14PlayerCanNotMoveWhenHasTokenRemained stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test15DoAWinnerMovementOverTheGame stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test16PlayerCanNotPutWhenHasNotTokenRemained stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test18PlayerCanNotPutOutOfBoard stamp: 'DS 11/2/2020 00:50:37'!
+FAILURE!
+
+!testRun: #TerniLapilliTest #test19PlayerCanNotMoveUpToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test20PlayerCanNotMoveRightToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test21PlayerCanNotMoveDownToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test22PlayerCanNotMoveLeftToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test23PlayerCanNotMoveLeftDownToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test24PlayerCanNotMoveRightDownToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test25PlayerCanNotMoveLeftUpToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test26PlayerCanNotMoveRightUpToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test27PlayerCanNotMoveLeftDownFromCenterUpPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test28PlayerCanNotMoveLeftDownFromRightCenterPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test29PlayerCanNotMoveRIghtDownFromCenterUpPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test30PlayerCanNotMoveRightDownFromLeftCenterPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test31PlayerCanNotMoveLeftUpFromCenterDownPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test32PlayerCanNotMoveLeftUpFromRightCenterPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test33PlayerCanNotMoveRightUpFromLeftCenterPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+
+!testRun: #TerniLapilliTest #test34PlayerCanNotMoveLeftDownFromDownCenterPosition stamp: 'DS 11/2/2020 00:50:37'!
+ERROR!
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/2/2020 00:50:58'!
+currentPlayerHasTokensRemaind
+
+	^ ( board select: [ :aOccupiedPosition | aOccupiedPosition first = currentPlayer ] ) size = 3.! !
+
+!methodRemoval: TerniLapilli #hasCurrentPlayerTokensRemaining stamp: 'DS 11/2/2020 00:50:58'!
+hasCurrentPlayerTokensRemaining
+
+	^ ( board select: [ :aOccupiedPosition | aOccupiedPosition first = currentPlayer ] ) size = 3.!
+
+!testRun: #TerniLapilliTest #test01GameStartWithXPlayerTurn stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test02AfterFirstTurnIsOPlayerTurn stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test03AfterOPlayerTurnIsXPlayerTurn stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test06PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test08PlayerWonWithHorizontalPlay stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test09PlayerWonWithVerticalPlay stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test10PlayerWonWithInvertedDiagonalPlay stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test11PlayerWonWithDiagonalPlay stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test12GameIsOverWhenAPlayerWins stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test13PlayerCanNotMoveFromNotOwnPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test14PlayerCanNotMoveWhenHasTokenRemained stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test15DoAWinnerMovementOverTheGame stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test16PlayerCanNotPutWhenHasNotTokenRemained stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test18PlayerCanNotPutOutOfBoard stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test19PlayerCanNotMoveUpToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test20PlayerCanNotMoveRightToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test21PlayerCanNotMoveDownToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test22PlayerCanNotMoveLeftToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test23PlayerCanNotMoveLeftDownToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test24PlayerCanNotMoveRightDownToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test25PlayerCanNotMoveLeftUpToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test26PlayerCanNotMoveRightUpToNotEmptyPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test27PlayerCanNotMoveLeftDownFromCenterUpPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test28PlayerCanNotMoveLeftDownFromRightCenterPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test29PlayerCanNotMoveRIghtDownFromCenterUpPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test30PlayerCanNotMoveRightDownFromLeftCenterPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test31PlayerCanNotMoveLeftUpFromCenterDownPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test32PlayerCanNotMoveLeftUpFromRightCenterPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test33PlayerCanNotMoveRightUpFromLeftCenterPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test34PlayerCanNotMoveLeftDownFromDownCenterPosition stamp: 'DS 11/2/2020 00:50:59'!
+PASSED!
+!RemainedTokensRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/2/2020 00:51:16' prior: 50918251 overrides: 50917997!
+moveOn: aDirection from: aPosition
+
+	( game hasCurrentPlayerTokensRemaining ) 	ifFalse: [ game signalRemainedTokens ].
+
+	^decoratee moveOn: aDirection from: aPosition.! !
+!RemainedTokensRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/2/2020 00:51:21' prior: 50918243 overrides: 50912818!
+putAt: aPosition
+
+	( game hasCurrentPlayerTokensRemaining ) 	ifTrue: [ game signalNoRemainedTokens ].
+
+	^decoratee putAt: aPosition.! !
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/2/2020 00:51:27'!
+hasCurrentPlayerTokensRemaining
+
+	^ ( board select: [ :aOccupiedPosition | aOccupiedPosition first = currentPlayer ] ) size = 3.! !
+
+!methodRemoval: TerniLapilli #currentPlayerHasTokensRemaind stamp: 'DS 11/2/2020 00:51:27'!
+currentPlayerHasTokensRemaind
+
+	^ ( board select: [ :aOccupiedPosition | aOccupiedPosition first = currentPlayer ] ) size = 3.!
+
+!testRun: #TerniLapilliTest #test01GameStartWithXPlayerTurn stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test02AfterFirstTurnIsOPlayerTurn stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test03AfterOPlayerTurnIsXPlayerTurn stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test06PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test08PlayerWonWithHorizontalPlay stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test09PlayerWonWithVerticalPlay stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test10PlayerWonWithInvertedDiagonalPlay stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test11PlayerWonWithDiagonalPlay stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test12GameIsOverWhenAPlayerWins stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test13PlayerCanNotMoveFromNotOwnPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test14PlayerCanNotMoveWhenHasTokenRemained stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test15DoAWinnerMovementOverTheGame stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test16PlayerCanNotPutWhenHasNotTokenRemained stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test18PlayerCanNotPutOutOfBoard stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test19PlayerCanNotMoveUpToNotEmptyPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test20PlayerCanNotMoveRightToNotEmptyPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test21PlayerCanNotMoveDownToNotEmptyPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test22PlayerCanNotMoveLeftToNotEmptyPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test23PlayerCanNotMoveLeftDownToNotEmptyPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test24PlayerCanNotMoveRightDownToNotEmptyPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test25PlayerCanNotMoveLeftUpToNotEmptyPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test26PlayerCanNotMoveRightUpToNotEmptyPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test27PlayerCanNotMoveLeftDownFromCenterUpPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test28PlayerCanNotMoveLeftDownFromRightCenterPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test29PlayerCanNotMoveRIghtDownFromCenterUpPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test30PlayerCanNotMoveRightDownFromLeftCenterPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test31PlayerCanNotMoveLeftUpFromCenterDownPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test32PlayerCanNotMoveLeftUpFromRightCenterPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test33PlayerCanNotMoveRightUpFromLeftCenterPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test34PlayerCanNotMoveLeftDownFromDownCenterPosition stamp: 'DS 11/2/2020 00:51:29'!
+PASSED!
+
+----SNAPSHOT----(2 November 2020 00:51:32) CuisUniversity-4384.image priorSource: 18823174!
+
+collection := OrderedCollection new.!
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/2/2020 01:01:52'!
+hasAxisLateralWon: anAxis on: anOccupiedPositionsByPlayer
+
+	| i isWinner |
+	
+	i := 1.
+	isWinner := true.
+	[i < (anOccupiedPositionsByPlayer size) ]	 whileTrue: [
+		isWinner := isWinner and: [ ((anOccupiedPositionsByPlayer at: i)	 + anAxis) = (anOccupiedPositionsByPlayer at: i+1)	 ].
+		i := i+1.
+	].
+
+	^ isWinner.! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/2/2020 01:02:16' prior: 50919184!
+hasHorizontalWonOn: anOccupiedPositionsByPlayer
+
+	^self hasAxisLateralWon: 1@0 on: anOccupiedPositionsByPlayer.! !
+
+!testRun: #TerniLapilliTest #test01GameStartWithXPlayerTurn stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test02AfterFirstTurnIsOPlayerTurn stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test03AfterOPlayerTurnIsXPlayerTurn stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test06PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test08PlayerWonWithHorizontalPlay stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test09PlayerWonWithVerticalPlay stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test10PlayerWonWithInvertedDiagonalPlay stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test11PlayerWonWithDiagonalPlay stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test12GameIsOverWhenAPlayerWins stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test13PlayerCanNotMoveFromNotOwnPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test14PlayerCanNotMoveWhenHasTokenRemained stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test15DoAWinnerMovementOverTheGame stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test16PlayerCanNotPutWhenHasNotTokenRemained stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test18PlayerCanNotPutOutOfBoard stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test19PlayerCanNotMoveUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test20PlayerCanNotMoveRightToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test21PlayerCanNotMoveDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test22PlayerCanNotMoveLeftToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test23PlayerCanNotMoveLeftDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test24PlayerCanNotMoveRightDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test25PlayerCanNotMoveLeftUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test26PlayerCanNotMoveRightUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test27PlayerCanNotMoveLeftDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test28PlayerCanNotMoveLeftDownFromRightCenterPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test29PlayerCanNotMoveRIghtDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test30PlayerCanNotMoveRightDownFromLeftCenterPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test31PlayerCanNotMoveLeftUpFromCenterDownPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test32PlayerCanNotMoveLeftUpFromRightCenterPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test33PlayerCanNotMoveRightUpFromLeftCenterPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test34PlayerCanNotMoveLeftDownFromDownCenterPosition stamp: 'DS 11/2/2020 01:02:17'!
+PASSED!
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/2/2020 01:02:46' prior: 50919209!
+hasVerticalWonOn: anOccupiedPositionsByPlayer
+
+	^self hasAxisLateralWon: 0@1 on: anOccupiedPositionsByPlayer.! !
+
+!testRun: #TerniLapilliTest #test01GameStartWithXPlayerTurn stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test02AfterFirstTurnIsOPlayerTurn stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test03AfterOPlayerTurnIsXPlayerTurn stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test06PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test08PlayerWonWithHorizontalPlay stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test09PlayerWonWithVerticalPlay stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test10PlayerWonWithInvertedDiagonalPlay stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test11PlayerWonWithDiagonalPlay stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test12GameIsOverWhenAPlayerWins stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test13PlayerCanNotMoveFromNotOwnPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test14PlayerCanNotMoveWhenHasTokenRemained stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test15DoAWinnerMovementOverTheGame stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test16PlayerCanNotPutWhenHasNotTokenRemained stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test18PlayerCanNotPutOutOfBoard stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test19PlayerCanNotMoveUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test20PlayerCanNotMoveRightToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test21PlayerCanNotMoveDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test22PlayerCanNotMoveLeftToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test23PlayerCanNotMoveLeftDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test24PlayerCanNotMoveRightDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test25PlayerCanNotMoveLeftUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test26PlayerCanNotMoveRightUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test27PlayerCanNotMoveLeftDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test28PlayerCanNotMoveLeftDownFromRightCenterPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test29PlayerCanNotMoveRIghtDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test30PlayerCanNotMoveRightDownFromLeftCenterPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test31PlayerCanNotMoveLeftUpFromCenterDownPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test32PlayerCanNotMoveLeftUpFromRightCenterPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test33PlayerCanNotMoveRightUpFromLeftCenterPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test34PlayerCanNotMoveLeftDownFromDownCenterPosition stamp: 'DS 11/2/2020 01:02:47'!
+PASSED!
+
+----SNAPSHOT----(2 November 2020 01:02:50) CuisUniversity-4384.image priorSource: 18835463!
+!PlayingInBoardRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/2/2020 01:07:22'!
+assertPlayingInBoardFrom: aPosition
+
+	^ (aPosition between: (-1@-1) and: (1@1)) ifFalse: [ game signalPositionOutOfBoard ]! !
+!PlayingInBoardRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/2/2020 01:07:22' prior: 50916886 overrides: 50917997!
+moveOn: aDirection from: aPosition
+
+	self assertPlayingInBoardFrom: aPosition.
+
+	decoratee moveOn: aDirection from: aPosition.! !
+!PlayingInBoardRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/2/2020 01:07:43' prior: 50912911 overrides: 50912818!
+putAt: aPosition
+
+	self assertPlayingInBoardFrom: aPosition.
+
+	decoratee putAt: aPosition.! !
+
+!testRun: #TerniLapilliTest #test01GameStartWithXPlayerTurn stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test02AfterFirstTurnIsOPlayerTurn stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test03AfterOPlayerTurnIsXPlayerTurn stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test06PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test08PlayerWonWithHorizontalPlay stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test09PlayerWonWithVerticalPlay stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test10PlayerWonWithInvertedDiagonalPlay stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test11PlayerWonWithDiagonalPlay stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test12GameIsOverWhenAPlayerWins stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test13PlayerCanNotMoveFromNotOwnPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test14PlayerCanNotMoveWhenHasTokenRemained stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test15DoAWinnerMovementOverTheGame stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test16PlayerCanNotPutWhenHasNotTokenRemained stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test18PlayerCanNotPutOutOfBoard stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test19PlayerCanNotMoveUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test20PlayerCanNotMoveRightToNotEmptyPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test21PlayerCanNotMoveDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test22PlayerCanNotMoveLeftToNotEmptyPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test23PlayerCanNotMoveLeftDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test24PlayerCanNotMoveRightDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test25PlayerCanNotMoveLeftUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test26PlayerCanNotMoveRightUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test27PlayerCanNotMoveLeftDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test28PlayerCanNotMoveLeftDownFromRightCenterPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test29PlayerCanNotMoveRIghtDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test30PlayerCanNotMoveRightDownFromLeftCenterPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test31PlayerCanNotMoveLeftUpFromCenterDownPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test32PlayerCanNotMoveLeftUpFromRightCenterPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test33PlayerCanNotMoveRightUpFromLeftCenterPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test34PlayerCanNotMoveLeftDownFromDownCenterPosition stamp: 'DS 11/2/2020 01:07:48'!
+PASSED!
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/2/2020 01:08:26'!
+assertGameHasOccupied: aPosition
+
+	^ (game hasOccupiedPosition: aPosition) 		ifTrue: [ game signalIlegalMovement ]! !
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/2/2020 01:08:26' prior: 50918640 overrides: 50912818!
+putAt: aPosition
+
+	self assertGameHasOccupied: aPosition.
+
+	decoratee putAt: aPosition.! !
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/2/2020 01:09:15' prior: 50918627 overrides: 50917997!
+moveOn: aDirection from: aPosition
+
+	self assertGameHasOccupied: aPosition + aDirection.
+	(game boardIncludesCurrentPlayerWith: aPosition ) ifFalse: [ game signalIlegalMovement ].	
+
+	decoratee moveOn: aDirection from: aPosition.! !
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/2/2020 01:09:58'!
+assertBoardIncludeCurrentPlayerWith: aPosition
+
+	(game boardIncludesCurrentPlayerWith: aPosition ) ifFalse: [ game signalIlegalMovement ].	! !
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/2/2020 01:10:08' prior: 50920648 overrides: 50917997!
+moveOn: aDirection from: aPosition
+
+	self assertGameHasOccupied: aPosition + aDirection.
+	self assertBoardIncludeCurrentPlayerWith: aPosition.
+
+	decoratee moveOn: aDirection from: aPosition.! !
+
+!testRun: #TerniLapilliTest #test01GameStartWithXPlayerTurn stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test02AfterFirstTurnIsOPlayerTurn stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test03AfterOPlayerTurnIsXPlayerTurn stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test06PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test08PlayerWonWithHorizontalPlay stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test09PlayerWonWithVerticalPlay stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test10PlayerWonWithInvertedDiagonalPlay stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test11PlayerWonWithDiagonalPlay stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test12GameIsOverWhenAPlayerWins stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test13PlayerCanNotMoveFromNotOwnPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test14PlayerCanNotMoveWhenHasTokenRemained stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test15DoAWinnerMovementOverTheGame stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test16PlayerCanNotPutWhenHasNotTokenRemained stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test18PlayerCanNotPutOutOfBoard stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test19PlayerCanNotMoveUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test20PlayerCanNotMoveRightToNotEmptyPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test21PlayerCanNotMoveDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test22PlayerCanNotMoveLeftToNotEmptyPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test23PlayerCanNotMoveLeftDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test24PlayerCanNotMoveRightDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test25PlayerCanNotMoveLeftUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test26PlayerCanNotMoveRightUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test27PlayerCanNotMoveLeftDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test28PlayerCanNotMoveLeftDownFromRightCenterPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test29PlayerCanNotMoveRIghtDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test30PlayerCanNotMoveRightDownFromLeftCenterPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test31PlayerCanNotMoveLeftUpFromCenterDownPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test32PlayerCanNotMoveLeftUpFromRightCenterPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test33PlayerCanNotMoveRightUpFromLeftCenterPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test34PlayerCanNotMoveLeftDownFromDownCenterPosition stamp: 'DS 11/2/2020 01:10:09'!
+PASSED!
+
+----SNAPSHOT----(2 November 2020 01:10:14) CuisUniversity-4384.image priorSource: 18843223!
+
+!testRun: #TerniLapilliTest #test01GameStartWithXPlayerTurn stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test02AfterFirstTurnIsOPlayerTurn stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test03AfterOPlayerTurnIsXPlayerTurn stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test06PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test08PlayerWonWithHorizontalPlay stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test09PlayerWonWithVerticalPlay stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test10PlayerWonWithInvertedDiagonalPlay stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test11PlayerWonWithDiagonalPlay stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test12GameIsOverWhenAPlayerWins stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test13PlayerCanNotMoveFromNotOwnPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test14PlayerCanNotMoveWhenHasTokenRemained stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test15DoAWinnerMovementOverTheGame stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test16PlayerCanNotPutWhenHasNotTokenRemained stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test18PlayerCanNotPutOutOfBoard stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test19PlayerCanNotMoveUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test20PlayerCanNotMoveRightToNotEmptyPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test21PlayerCanNotMoveDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test22PlayerCanNotMoveLeftToNotEmptyPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test23PlayerCanNotMoveLeftDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test24PlayerCanNotMoveRightDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test25PlayerCanNotMoveLeftUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test26PlayerCanNotMoveRightUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test27PlayerCanNotMoveLeftDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test28PlayerCanNotMoveLeftDownFromRightCenterPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test29PlayerCanNotMoveRIghtDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test30PlayerCanNotMoveRightDownFromLeftCenterPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test31PlayerCanNotMoveLeftUpFromCenterDownPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test32PlayerCanNotMoveLeftUpFromRightCenterPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test33PlayerCanNotMoveRightUpFromLeftCenterPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test34PlayerCanNotMoveLeftDownFromDownCenterPosition stamp: 'DS 11/2/2020 01:14:18'!
+PASSED!
+
+----SNAPSHOT----(2 November 2020 01:14:22) CuisUniversity-4384.image priorSource: 18852200!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:14:35'!
+test04PlayerCanNotPutOnOccupiedPosition
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli putAt: 0@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
+
+!methodRemoval: TerniLapilliTest #test06PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 01:14:35'!
+test06PlayerCanNotPutOnOccupiedPosition
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli putAt: 0@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/2/2020 01:14:44'!
+test04PlayerWonWithHorizontalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@0.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+
+!methodRemoval: TerniLapilliTest #test08PlayerWonWithHorizontalPlay stamp: 'DS 11/2/2020 01:14:44'!
+test08PlayerWonWithHorizontalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@0.
+
+	self assert: aTerniLapilli hasPlayerXWon.!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/2/2020 01:14:51'!
+test05PlayerWonWithVerticalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: -1@1.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 0@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+
+!methodRemoval: TerniLapilliTest #test09PlayerWonWithVerticalPlay stamp: 'DS 11/2/2020 01:14:51'!
+test09PlayerWonWithVerticalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: -1@1.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 0@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/2/2020 01:15:02'!
+test06PlayerWonWithInvertedDiagonalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+
+!methodRemoval: TerniLapilliTest #test10PlayerWonWithInvertedDiagonalPlay stamp: 'DS 11/2/2020 01:15:02'!
+test10PlayerWonWithInvertedDiagonalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/2/2020 01:15:12'!
+test07PlayerWonWithDiagonalPlay
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: 1@1.
+	aTerniLapilli putAt: -1@1.
+	
+	aTerniLapilli putAt: -1@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+
+!methodRemoval: TerniLapilliTest #test11PlayerWonWithDiagonalPlay stamp: 'DS 11/2/2020 01:15:12'!
+test11PlayerWonWithDiagonalPlay
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: 1@1.
+	aTerniLapilli putAt: -1@1.
+	
+	aTerniLapilli putAt: -1@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/2/2020 01:15:18'!
+test08GameIsOverWhenAPlayerWins
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: -1@-1.
+
+	self
+		should: [ aTerniLapilli moveDownFrom: -1@1 ]
+		raise: Error
+		withMessageText: TerniLapilli gameOverErrorDescription.
+	! !
+
+!methodRemoval: TerniLapilliTest #test12GameIsOverWhenAPlayerWins stamp: 'DS 11/2/2020 01:15:18'!
+test12GameIsOverWhenAPlayerWins
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: -1@-1.
+
+	self
+		should: [ aTerniLapilli moveDownFrom: -1@1 ]
+		raise: Error
+		withMessageText: TerniLapilli gameOverErrorDescription.
+	!
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/2/2020 01:15:25'!
+test09DoAWinnerMovementOverTheGame
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+	
+	aTerniLapilli moveDownFrom: -1@1.
+	aTerniLapilli moveRightFrom: 0@0.
+	
+	self assert: aTerniLapilli isOver.! !
+
+!methodRemoval: TerniLapilliTest #test15DoAWinnerMovementOverTheGame stamp: 'DS 11/2/2020 01:15:25'!
+test15DoAWinnerMovementOverTheGame
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+	
+	aTerniLapilli moveDownFrom: -1@1.
+	aTerniLapilli moveRightFrom: 0@0.
+	
+	self assert: aTerniLapilli isOver.!
+!TerniLapilliTest methodsFor: 'ilegal board plays' stamp: 'DS 11/2/2020 01:15:34'!
+test10PlayerCanNotMoveWhenHasTokenRemained
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli remainedTokensErrorDescription.! !
+
+!methodRemoval: TerniLapilliTest #test14PlayerCanNotMoveWhenHasTokenRemained stamp: 'DS 11/2/2020 01:15:34'!
+test14PlayerCanNotMoveWhenHasTokenRemained
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli remainedTokensErrorDescription.!
+!TerniLapilliTest methodsFor: 'ilegal board plays' stamp: 'DS 11/2/2020 01:15:40'!
+test11PlayerCanNotPutWhenHasNotTokenRemained
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli putAt: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli noRemainedTokensErrorDescription.
+	! !
+
+!methodRemoval: TerniLapilliTest #test16PlayerCanNotPutWhenHasNotTokenRemained stamp: 'DS 11/2/2020 01:15:40'!
+test16PlayerCanNotPutWhenHasNotTokenRemained
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli putAt: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli noRemainedTokensErrorDescription.
+	!
+!TerniLapilliTest methodsFor: 'ilegal board plays' stamp: 'DS 11/2/2020 01:15:43'!
+test12PlayerCanNotPutOutOfBoard
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+
+	self
+		should: [ aTerniLapilli putAt: 0@2. ]
+		raise: Error
+		withMessageText: TerniLapilli positionOutOfBoardErrorDescription.
+	! !
+
+!methodRemoval: TerniLapilliTest #test18PlayerCanNotPutOutOfBoard stamp: 'DS 11/2/2020 01:15:43'!
+test18PlayerCanNotPutOutOfBoard
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+
+	self
+		should: [ aTerniLapilli putAt: 0@2. ]
+		raise: Error
+		withMessageText: TerniLapilli positionOutOfBoardErrorDescription.
+	!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:15:49'!
+test13PlayerCanNotPutOnOccupiedPosition
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli putAt: 0@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
+
+!methodRemoval: TerniLapilliTest #test04PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 01:15:49'!
+test04PlayerCanNotPutOnOccupiedPosition
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli putAt: 0@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:15:54'!
+test14PlayerCanNotPutOnOccupiedPosition
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli putAt: 0@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
+
+!methodRemoval: TerniLapilliTest #test13PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 01:15:54'!
+test13PlayerCanNotPutOnOccupiedPosition
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli putAt: 0@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:15:59'!
+test15PlayerCanNotMoveUpToNotEmptyPosition
+
+	| aTerniLapilli |
+
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test19PlayerCanNotMoveUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:15:59'!
+test19PlayerCanNotMoveUpToNotEmptyPosition
+
+	| aTerniLapilli |
+
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:16:04'!
+test16PlayerCanNotMoveRightToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test20PlayerCanNotMoveRightToNotEmptyPosition stamp: 'DS 11/2/2020 01:16:04'!
+test20PlayerCanNotMoveRightToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:16:08'!
+test17PlayerCanNotMoveDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+	self
+		should: [ aTerniLapilli moveDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test21PlayerCanNotMoveDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:16:08'!
+test21PlayerCanNotMoveDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+	self
+		should: [ aTerniLapilli moveDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:16:13'!
+test18PlayerCanNotMoveLeftToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test22PlayerCanNotMoveLeftToNotEmptyPosition stamp: 'DS 11/2/2020 01:16:13'!
+test22PlayerCanNotMoveLeftToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:16:17'!
+test19PlayerCanNotMoveLeftDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: -1@-1.
+	
+	aTerniLapilli putAt: 1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 1@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test23PlayerCanNotMoveLeftDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:16:17'!
+test23PlayerCanNotMoveLeftDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: -1@-1.
+	
+	aTerniLapilli putAt: 1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 1@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:16:26'!
+test20PlayerCanNotMoveRightDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: -1@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test24PlayerCanNotMoveRightDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:16:26'!
+test24PlayerCanNotMoveRightDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: -1@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:16:30'!
+test21PlayerCanNotMoveLeftUpToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@-1.
+	aTerniLapilli putAt: -1@0.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 1@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test25PlayerCanNotMoveLeftUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:16:30'!
+test25PlayerCanNotMoveLeftUpToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@-1.
+	aTerniLapilli putAt: -1@0.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 1@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal movements' stamp: 'DS 11/2/2020 01:16:33'!
+test22PlayerCanNotMoveRightUpToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@-1.
+	aTerniLapilli putAt: 1@0.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: -1@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test26PlayerCanNotMoveRightUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:16:33'!
+test26PlayerCanNotMoveRightUpToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@-1.
+	aTerniLapilli putAt: 1@0.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: -1@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/2/2020 01:16:44'!
+test23PlayerCanNotMoveLeftDownFromCenterUpPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test27PlayerCanNotMoveLeftDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:16:44'!
+test27PlayerCanNotMoveLeftDownFromCenterUpPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/2/2020 01:16:48'!
+test24PlayerCanNotMoveLeftDownFromRightCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test28PlayerCanNotMoveLeftDownFromRightCenterPosition stamp: 'DS 11/2/2020 01:16:48'!
+test28PlayerCanNotMoveLeftDownFromRightCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/2/2020 01:16:52'!
+test25PlayerCanNotMoveRIghtDownFromCenterUpPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test29PlayerCanNotMoveRIghtDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:16:52'!
+test29PlayerCanNotMoveRIghtDownFromCenterUpPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/2/2020 01:16:57'!
+test26PlayerCanNotMoveRightDownFromLeftCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test30PlayerCanNotMoveRightDownFromLeftCenterPosition stamp: 'DS 11/2/2020 01:16:57'!
+test30PlayerCanNotMoveRightDownFromLeftCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/2/2020 01:17:09'!
+test27PlayerCanNotMoveLeftUpFromCenterDownPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test31PlayerCanNotMoveLeftUpFromCenterDownPosition stamp: 'DS 11/2/2020 01:17:09'!
+test31PlayerCanNotMoveLeftUpFromCenterDownPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/2/2020 01:17:13'!
+test28PlayerCanNotMoveLeftUpFromRightCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test32PlayerCanNotMoveLeftUpFromRightCenterPosition stamp: 'DS 11/2/2020 01:17:13'!
+test32PlayerCanNotMoveLeftUpFromRightCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/2/2020 01:17:16'!
+test29PlayerCanNotMoveRightUpFromLeftCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test33PlayerCanNotMoveRightUpFromLeftCenterPosition stamp: 'DS 11/2/2020 01:17:16'!
+test33PlayerCanNotMoveRightUpFromLeftCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	!
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/2/2020 01:17:19'!
+test30PlayerCanNotMoveLeftDownFromDownCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+
+!methodRemoval: TerniLapilliTest #test34PlayerCanNotMoveLeftDownFromDownCenterPosition stamp: 'DS 11/2/2020 01:17:19'!
+test34PlayerCanNotMoveLeftDownFromDownCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	!
+
+!testRun: #TerniLapilliTest #test01GameStartWithXPlayerTurn stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test02AfterFirstTurnIsOPlayerTurn stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test03AfterOPlayerTurnIsXPlayerTurn stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test04PlayerWonWithHorizontalPlay stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test05PlayerWonWithVerticalPlay stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test06PlayerWonWithInvertedDiagonalPlay stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test07PlayerWonWithDiagonalPlay stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test08GameIsOverWhenAPlayerWins stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test09DoAWinnerMovementOverTheGame stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test10PlayerCanNotMoveWhenHasTokenRemained stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test11PlayerCanNotPutWhenHasNotTokenRemained stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test12PlayerCanNotPutOutOfBoard stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test13PlayerCanNotMoveFromNotOwnPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test14PlayerCanNotPutOnOccupiedPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test15PlayerCanNotMoveUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test16PlayerCanNotMoveRightToNotEmptyPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test17PlayerCanNotMoveDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test18PlayerCanNotMoveLeftToNotEmptyPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test19PlayerCanNotMoveLeftDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test20PlayerCanNotMoveRightDownToNotEmptyPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test21PlayerCanNotMoveLeftUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test22PlayerCanNotMoveRightUpToNotEmptyPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test23PlayerCanNotMoveLeftDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test24PlayerCanNotMoveLeftDownFromRightCenterPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test25PlayerCanNotMoveRIghtDownFromCenterUpPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test26PlayerCanNotMoveRightDownFromLeftCenterPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test27PlayerCanNotMoveLeftUpFromCenterDownPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test28PlayerCanNotMoveLeftUpFromRightCenterPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test29PlayerCanNotMoveRightUpFromLeftCenterPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+!testRun: #TerniLapilliTest #test30PlayerCanNotMoveLeftDownFromDownCenterPosition stamp: 'DS 11/2/2020 01:17:22'!
+PASSED!
+
+----SNAPSHOT----(2 November 2020 01:17:25) CuisUniversity-4384.image priorSource: 18855692!
+
+----QUIT----(2 November 2020 01:17:57) CuisUniversity-4384.image priorSource: 18885622!
