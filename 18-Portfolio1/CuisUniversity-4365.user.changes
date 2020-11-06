@@ -1,0 +1,4631 @@
+
+
+----STARTUP---- (2 November 2020 19:13:15) as D:\facultad\Smalltalk\windows64\CuisUniversity-4365.image!
+
+
+!classRemoval: #TerniLapilli stamp: 'Federico 11/2/2020 19:13:18'!
+Object subclass: #TerniLapilli
+	instanceVariableNames: 'currentPlayer tokensXRemained positionsOccupied'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classRemoval: #TerniLapilliTest stamp: 'Federico 11/2/2020 19:13:18'!
+TestCase subclass: #TerniLapilliTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #TerniLapilliTest category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:19'!
+TestCase subclass: #TerniLapilliTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #TerniLapilliTest category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:19'!
+TestCase subclass: #TerniLapilliTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 11/1/2020 13:57:55'!
+test06PlayerCanNotPutOnOccupiedPosition
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli putAt: 0@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
+!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 11/1/2020 13:25:19'!
+test13PlayerCanNotMoveFromNotOwnPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 0@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
+!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 11/1/2020 13:25:22'!
+test14PlayerCanNotMoveWhenHasTokenRemained
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli remainedTokensErrorDescription.! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:22:35'!
+test08PlayerWonWithHorizontalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@0.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:22:45'!
+test09PlayerWonWithVerticalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: -1@1.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 0@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:25:38'!
+test10PlayerWonWithInvertedDiagonalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:25:47'!
+test11PlayerWonWithDiagonalPlay
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: 1@1.
+	aTerniLapilli putAt: -1@1.
+	
+	aTerniLapilli putAt: -1@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:26:34'!
+test12GameIsOverWhenAPlayerWins
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: -1@-1.
+
+	self
+		should: [ aTerniLapilli moveDownFrom: -1@1 ]
+		raise: Error
+		withMessageText: TerniLapilli gameOverErrorDescription.
+	! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:26:43'!
+test15DoAWinnerMovementOverTheGame
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+	
+	aTerniLapilli moveDownFrom: -1@1.
+	aTerniLapilli moveRightFrom: 0@0.
+	
+	self assert: aTerniLapilli isOver.! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:04'!
+test27PlayerCanNotMoveLeftDownFromCenterUpPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:23'!
+test28PlayerCanNotMoveLeftDownFromRightCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:32'!
+test29PlayerCanNotMoveRIghtDownFromCenterUpPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:42'!
+test30PlayerCanNotMoveRightDownFromLeftCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:54'!
+test31PlayerCanNotMoveLeftUpFromCenterDownPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:28:08'!
+test32PlayerCanNotMoveLeftUpFromRightCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:28:23'!
+test33PlayerCanNotMoveRightUpFromLeftCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:28:32'!
+test34PlayerCanNotMoveLeftDownFromDownCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:28:52'!
+test19PlayerCanNotMoveUpToNotEmptyPosition
+
+	| aTerniLapilli |
+
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:12'!
+test20PlayerCanNotMoveRightToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:24'!
+test21PlayerCanNotMoveDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+	self
+		should: [ aTerniLapilli moveDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:37'!
+test22PlayerCanNotMoveLeftToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:59'!
+test23PlayerCanNotMoveLeftDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: -1@-1.
+	
+	aTerniLapilli putAt: 1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 1@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:30:27'!
+test24PlayerCanNotMoveRightDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: -1@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:30:47'!
+test25PlayerCanNotMoveLeftUpToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@-1.
+	aTerniLapilli putAt: -1@0.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 1@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:30:58'!
+test26PlayerCanNotMoveRightUpToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@-1.
+	aTerniLapilli putAt: 1@0.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: -1@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'as yet unclassified' stamp: 'DS 11/1/2020 13:58:43'!
+test16PlayerCanNotPutWhenHasNotTokenRemained
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli putAt: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli noRemainedTokensErrorDescription.
+	! !
+!TerniLapilliTest methodsFor: 'as yet unclassified' stamp: 'DS 11/1/2020 13:31:28'!
+test18PlayerCanNotPutOutOfBoard
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+
+	self
+		should: [ aTerniLapilli putAt: 0@2. ]
+		raise: Error
+		withMessageText: TerniLapilli positionOutOfBoardErrorDescription.
+	! !
+!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 10/29/2020 18:14:20'!
+test01GameStartWithXPlayerTurn
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	
+	self assert: aTerniLapilli isPlayingX.! !
+!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 11/1/2020 13:24:08'!
+test02AfterFirstTurnIsOPlayerTurn
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	
+	self deny: aTerniLapilli isPlayingX.
+	self assert: aTerniLapilli isPlayingO.! !
+!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 11/1/2020 13:22:06'!
+test03AfterOPlayerTurnIsXPlayerTurn
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	self assert: aTerniLapilli isPlayingX.
+	self deny: aTerniLapilli isPlayingO.! !
+
+!classDefinition: #TerniLapilli category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:22'!
+Object subclass: #TerniLapilli
+	instanceVariableNames: 'currentPlayer board putTokensRules moveOnRules'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #TerniLapilli category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:22'!
+Object subclass: #TerniLapilli
+	instanceVariableNames: 'currentPlayer board putTokensRules moveOnRules'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!TerniLapilli methodsFor: 'initialization' stamp: 'DS 11/1/2020 16:06:54' overrides: 16896425!
+initialize
+
+	putTokensRules := self class putTokenRulesFor: self.
+	moveOnRules := self class moveOnRulesFor: self.
+	currentPlayer := #X.
+	board := OrderedCollection new.! !
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/1/2020 15:37:13'!
+boardIncludesCurrentPlayerWith: aPosition
+
+	^ board includes: {currentPlayer. aPosition }! !
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/1/2020 16:25:08'!
+currentPlayerHasTokensRemaind
+
+	^ ( board select: [ :aOccupiedPosition | aOccupiedPosition first = currentPlayer ] ) size = 3.! !
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/1/2020 16:27:45'!
+hasOccupiedPosition: aPosition
+
+	^ ( board collect: [ :aOccupiedPosition | aOccupiedPosition second ] ) includes: aPosition.! !
+!TerniLapilli methodsFor: 'private accesing' stamp: 'DS 11/1/2020 16:44:18'!
+occupiedPositionsBy: aPlayer
+
+	^board select: [ :aOccupiedPosition | aOccupiedPosition first = aPlayer ].! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:53:11'!
+hasDiagonalWonOn: anOccupiedPositionsByPlayer
+
+	^anOccupiedPositionsByPlayer includesAllOf: {-1@1. 0@0. 1@-1}.! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:51:41'!
+hasHorizontalWonOn: anOccupiedPositionsByPlayer
+
+	| i isWinner |
+	
+	i := 1.
+	isWinner := true.
+	[i < (anOccupiedPositionsByPlayer size) ]	 whileTrue: [
+		isWinner := isWinner and: [ ((anOccupiedPositionsByPlayer at: i)	 + (1@	0)) = (anOccupiedPositionsByPlayer at: i+1)	 ].
+		i := i+1.
+	].
+
+	^ isWinner.! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:53:40'!
+hasInvertedDiagonalWonOn: anOccupiedPositionsByPlayer
+
+	^anOccupiedPositionsByPlayer includesAllOf: {-1@-1. 0@0. 1@1}.! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:52:17'!
+hasVerticalWonOn: anOccupiedPositionsByPlayer
+
+	| i isWinner |
+	
+	i := 1.
+	isWinner := true.
+	[i < (anOccupiedPositionsByPlayer size) ]	 whileTrue: [
+		isWinner := isWinner and: [ ((anOccupiedPositionsByPlayer  at: i)	 + (0@	1)) = (anOccupiedPositionsByPlayer at: i+1)	 ].
+		i := i+1.
+	].
+
+	^ isWinner.! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:55:37'!
+hasWonPlayer: aPlayer
+
+	| occupiedPositionsBypPlayer |
+
+	occupiedPositionsBypPlayer := ( ( board select: [ :aOccupiedPosition | aOccupiedPosition first = aPlayer ] ) 
+							  	collect: [ :aOccupiedPositionByPlayer | aOccupiedPositionByPlayer second] ) sort.
+
+	^(occupiedPositionsBypPlayer size = 3) and: [
+		(self hasHorizontalWonOn: occupiedPositionsBypPlayer) or:
+		(self hasVerticalWonOn: occupiedPositionsBypPlayer) or:
+		(self hasDiagonalWonOn: occupiedPositionsBypPlayer) or:
+		(self hasInvertedDiagonalWonOn: occupiedPositionsBypPlayer)
+	].! !
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 11/1/2020 00:06:42'!
+hasPlayerOWon
+
+	^self hasWonPlayer: #O.! !
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 11/1/2020 00:06:54'!
+hasPlayerXWon
+
+	^self hasWonPlayer: #X.! !
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 10/29/2020 21:16:07'!
+isOver
+
+	^(self hasPlayerXWon) or: (self hasPlayerOWon).! !
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 10/29/2020 17:43:02'!
+isPlayingO
+
+	^currentPlayer = #O.! !
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 11/1/2020 16:40:45'!
+isPlayingX
+
+	^currentPlayer = #X.! !
+!TerniLapilli methodsFor: 'board adding' stamp: 'DS 11/1/2020 16:40:16'!
+add: aPosition
+
+	board add: {currentPlayer. aPosition}.
+	currentPlayer := self isPlayingX ifTrue: [#O] ifFalse: [#X].! !
+!TerniLapilli methodsFor: 'board adding' stamp: 'DS 11/1/2020 14:09:05'!
+addMoveOn: aDirection from: aPosition
+
+	| occupiedPosition |
+
+	occupiedPosition := {currentPlayer. aPosition}.
+	self add: aPosition + aDirection.
+	board remove: occupiedPosition.
+
+	! !
+!TerniLapilli methodsFor: 'player actions' stamp: 'DS 11/1/2020 13:45:14'!
+putAt: aPosition
+
+	putTokensRules putAt: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:03:31'!
+moveDownFrom: aPosition
+
+	self moveOn: (0@-1) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:57:21'!
+moveLeftDownFrom: aPosition
+
+	({0@1. 1@0} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
+
+	self moveOn: (-1@-1) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:04:33'!
+moveLeftFrom: aPosition
+
+	self moveOn: (-1@0) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:57:12'!
+moveLeftUpFrom: aPosition
+
+	({0@-1. 1@0} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
+
+	self moveOn: (-1@1) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:10:06'!
+moveOn: aDirection from: aPosition
+
+	 moveOnRules moveOn: aDirection from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:58:26'!
+moveRightDownFrom: aPosition
+
+	({0@1. -1@0} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
+
+	self moveOn: (1@-1) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:05:51'!
+moveRightFrom: aPosition
+
+	self moveOn: (1@0) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:58:36'!
+moveRightUpFrom: aPosition
+
+	({-1@0. 0@-1} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
+
+	self moveOn: (1@1) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:06:47'!
+moveUpFrom: aPosition
+
+	self moveOn: (0@1) from: aPosition.! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:27:11'!
+signalGameOver
+
+	^ self error: self class gameOverErrorDescription! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 16:57:12'!
+signalIlegalDiagonalMovement
+
+	^ self error: self class ilegalDiagonalMovementErrorDescription! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:27:22'!
+signalIlegalMovement
+
+	^ self error: self class ilegalMovementErrorDescription! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:25:05'!
+signalNoRemainedTokens
+
+	^ self error: self class noRemainedTokensErrorDescription! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:25:37'!
+signalPositionOutOfBoard
+
+	^ self error: self class positionOutOfBoardErrorDescription! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 15:39:09'!
+signalRemainedTokens
+
+	^ self error: self class remainedTokensErrorDescription! !
+
+!classDefinition: 'TerniLapilli class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:24'!
+TerniLapilli class
+	instanceVariableNames: ''!
+
+!classDefinition: 'TerniLapilli class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:24'!
+TerniLapilli class
+	instanceVariableNames: ''!
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/29/2020 18:26:56'!
+attemptToPlayTwiceInARowErrorDescription
+
+	^'Can not play twice in a row'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/29/2020 21:11:33'!
+gameOverErrorDescription
+
+	^'Game Over'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 11/1/2020 01:19:03'!
+ilegalDiagonalMovementErrorDescription
+
+	^'Can not move on this diagonal'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 11/1/2020 01:19:34'!
+ilegalMovementErrorDescription
+
+	^'Can not do this movement'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/29/2020 18:54:32'!
+noRemainedTokensErrorDescription
+
+	^'No Remained Tokens'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/31/2020 18:13:13'!
+positionOutOfBoardErrorDescription
+
+	^'Position out of board'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 11/1/2020 02:04:54'!
+remainedTokensErrorDescription
+
+	^'Can not move when has Remained Tokens'.! !
+!TerniLapilli class methodsFor: 'rules' stamp: 'DS 11/1/2020 16:59:38'!
+buildRules: aKindOfRule for: aTerniLapilliGame
+
+	^RemainedTokensRuleDecorator for: aTerniLapilliGame decorating: (
+		GameOverRuleDecorator for: aTerniLapilliGame decorating: (
+			PlayingInBoardRuleDecorator for: aTerniLapilliGame decorating: (
+				OccupiedPositionRuleDecorator for: aTerniLapilliGame decorating: (			aKindOfRule for: aTerniLapilliGame 	)
+			)
+		)
+	).! !
+!TerniLapilli class methodsFor: 'rules' stamp: 'DS 11/1/2020 17:00:07'!
+moveOnRulesFor: aTerniLapilliGame
+
+	^self buildRules: MoveOnRule for: aTerniLapilliGame.! !
+!TerniLapilli class methodsFor: 'rules' stamp: 'DS 11/1/2020 16:59:57'!
+putTokenRulesFor: aTerniLapilliGame
+
+	^self buildRules: PutTokensRule for: aTerniLapilliGame.! !
+
+!classDefinition: #TerniLapilliRules category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:25'!
+Object subclass: #TerniLapilliRules
+	instanceVariableNames: 'game'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #TerniLapilliRules category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:25'!
+Object subclass: #TerniLapilliRules
+	instanceVariableNames: 'game'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!TerniLapilliRules methodsFor: 'initialization' stamp: 'DS 11/1/2020 12:21:43'!
+initializateFor: aGame
+
+	game := aGame.! !
+
+!classDefinition: 'TerniLapilliRules class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:25'!
+TerniLapilliRules class
+	instanceVariableNames: ''!
+
+!classDefinition: 'TerniLapilliRules class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:25'!
+TerniLapilliRules class
+	instanceVariableNames: ''!
+!TerniLapilliRules class methodsFor: 'class initialization' stamp: 'DS 11/1/2020 12:21:59'!
+for: aGame
+
+	^self new initializateFor: aGame.! !
+
+!classDefinition: #MoveOnRule category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:25'!
+TerniLapilliRules subclass: #MoveOnRule
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #MoveOnRule category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:25'!
+TerniLapilliRules subclass: #MoveOnRule
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!MoveOnRule methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:07:48'!
+moveOn: aDirection from: aPosition
+
+	game addMoveOn: aDirection from: aPosition.! !
+
+!classDefinition: #PutTokensRule category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:25'!
+TerniLapilliRules subclass: #PutTokensRule
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #PutTokensRule category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:25'!
+TerniLapilliRules subclass: #PutTokensRule
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!PutTokensRule methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:23:12'!
+putAt: aPosition
+
+	game add: aPosition.! !
+
+!classDefinition: #TerniLapilliRulesDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:25'!
+TerniLapilliRules subclass: #TerniLapilliRulesDecorator
+	instanceVariableNames: 'decoratee'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #TerniLapilliRulesDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:25'!
+TerniLapilliRules subclass: #TerniLapilliRulesDecorator
+	instanceVariableNames: 'decoratee'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!TerniLapilliRulesDecorator methodsFor: 'initialization' stamp: 'DS 11/1/2020 12:31:42'!
+initializateFor: aGame decorating: aTerniLapilliRule
+
+	game := aGame.
+	decoratee := aTerniLapilliRule.! !
+!TerniLapilliRulesDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:16:53'!
+moveOn: aDirection from: aPosition
+
+	self subclassResponsibility.! !
+!TerniLapilliRulesDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:29:07'!
+putAt: aPosition
+
+	self subclassResponsibility.! !
+
+!classDefinition: 'TerniLapilliRulesDecorator class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:26'!
+TerniLapilliRulesDecorator class
+	instanceVariableNames: ''!
+
+!classDefinition: 'TerniLapilliRulesDecorator class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:26'!
+TerniLapilliRulesDecorator class
+	instanceVariableNames: ''!
+!TerniLapilliRulesDecorator class methodsFor: 'instance creation' stamp: 'DS 11/1/2020 12:30:18'!
+for: aGame decorating: aTerniLapilliRule
+
+	^self new initializateFor: aGame decorating: aTerniLapilliRule.! !
+
+!classDefinition: #GameOverRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:26'!
+TerniLapilliRulesDecorator subclass: #GameOverRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #GameOverRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:26'!
+TerniLapilliRulesDecorator subclass: #GameOverRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!GameOverRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 15:45:30' overrides: 50930086!
+moveOn: aDirection from: aPosition
+
+	(game isOver) ifTrue: [ game signalGameOver ].
+
+	decoratee moveOn: aDirection from: aPosition.! !
+!GameOverRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:47:50' overrides: 50930091!
+putAt: aPosition
+
+	(game isOver) ifTrue: [ game signalGameOver ].
+
+	decoratee putAt: aPosition.! !
+
+!classDefinition: #OccupiedPositionRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:26'!
+TerniLapilliRulesDecorator subclass: #OccupiedPositionRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #OccupiedPositionRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:26'!
+TerniLapilliRulesDecorator subclass: #OccupiedPositionRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:28:04' overrides: 50930086!
+moveOn: aDirection from: aPosition
+
+	(game hasOccupiedPosition: aPosition + aDirection) 				ifTrue: [ game signalIlegalMovement ].
+	(game boardIncludesCurrentPlayerWith: aPosition ) ifFalse: [ game signalIlegalMovement ].	
+
+	decoratee moveOn: aDirection from: aPosition.! !
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:28:16' overrides: 50930091!
+putAt: aPosition
+
+	(game hasOccupiedPosition: aPosition) 		ifTrue: [ game signalIlegalMovement ].
+
+	decoratee putAt: aPosition.! !
+
+!classDefinition: #PlayingInBoardRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:26'!
+TerniLapilliRulesDecorator subclass: #PlayingInBoardRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #PlayingInBoardRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:26'!
+TerniLapilliRulesDecorator subclass: #PlayingInBoardRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!PlayingInBoardRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 15:48:04' overrides: 50930086!
+moveOn: aDirection from: aPosition
+
+	(aPosition between: (-1@-1) and: (1@1)) ifFalse: [ game signalPositionOutOfBoard ].
+
+	decoratee moveOn: aDirection from: aPosition.! !
+!PlayingInBoardRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:46:35' overrides: 50930091!
+putAt: aPosition
+
+	(aPosition between: (-1@-1) and: (1@1)) ifFalse: [ game signalPositionOutOfBoard ].
+
+	decoratee putAt: aPosition.! !
+
+!classDefinition: #RemainedTokensRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:26'!
+TerniLapilliRulesDecorator subclass: #RemainedTokensRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #RemainedTokensRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:26'!
+TerniLapilliRulesDecorator subclass: #RemainedTokensRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!RemainedTokensRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:23:18' overrides: 50930086!
+moveOn: aDirection from: aPosition
+
+	( game currentPlayerHasTokensRemaind ) 	ifFalse: [ game signalRemainedTokens ].
+
+	^decoratee moveOn: aDirection from: aPosition.! !
+!RemainedTokensRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:23:12' overrides: 50930091!
+putAt: aPosition
+
+	( game currentPlayerHasTokensRemaind ) 	ifTrue: [ game signalNoRemainedTokens ].
+
+	^decoratee putAt: aPosition.! !
+
+!classRemoval: #TerniLapilli stamp: 'Federico 11/2/2020 19:13:27'!
+Object subclass: #TerniLapilli
+	instanceVariableNames: 'currentPlayer board putTokensRules moveOnRules'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classRemoval: #TerniLapilliTest stamp: 'Federico 11/2/2020 19:13:28'!
+TestCase subclass: #TerniLapilliTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #TerniLapilliTest category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:28'!
+TestCase subclass: #TerniLapilliTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #TerniLapilliTest category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:28'!
+TestCase subclass: #TerniLapilliTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 11/1/2020 13:57:55'!
+test06PlayerCanNotPutOnOccupiedPosition
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli putAt: 0@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
+!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 11/1/2020 13:25:19'!
+test13PlayerCanNotMoveFromNotOwnPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 0@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.! !
+!TerniLapilliTest methodsFor: 'ilegal movement' stamp: 'DS 11/1/2020 13:25:22'!
+test14PlayerCanNotMoveWhenHasTokenRemained
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli remainedTokensErrorDescription.! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:22:35'!
+test08PlayerWonWithHorizontalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@0.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:22:45'!
+test09PlayerWonWithVerticalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: -1@1.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 0@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:25:38'!
+test10PlayerWonWithInvertedDiagonalPlay
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:25:47'!
+test11PlayerWonWithDiagonalPlay
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	aTerniLapilli putAt: 1@1.
+	aTerniLapilli putAt: -1@1.
+	
+	aTerniLapilli putAt: -1@-1.
+
+	self assert: aTerniLapilli hasPlayerXWon.! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:26:34'!
+test12GameIsOverWhenAPlayerWins
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: -1@-1.
+
+	self
+		should: [ aTerniLapilli moveDownFrom: -1@1 ]
+		raise: Error
+		withMessageText: TerniLapilli gameOverErrorDescription.
+	! !
+!TerniLapilliTest methodsFor: 'kinds of win' stamp: 'DS 11/1/2020 13:26:43'!
+test15DoAWinnerMovementOverTheGame
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+	
+	aTerniLapilli moveDownFrom: -1@1.
+	aTerniLapilli moveRightFrom: 0@0.
+	
+	self assert: aTerniLapilli isOver.! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:04'!
+test27PlayerCanNotMoveLeftDownFromCenterUpPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:23'!
+test28PlayerCanNotMoveLeftDownFromRightCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:32'!
+test29PlayerCanNotMoveRIghtDownFromCenterUpPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:42'!
+test30PlayerCanNotMoveRightDownFromLeftCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:27:54'!
+test31PlayerCanNotMoveLeftUpFromCenterDownPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:28:08'!
+test32PlayerCanNotMoveLeftUpFromRightCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:28:23'!
+test33PlayerCanNotMoveRightUpFromLeftCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'ilegal diagonal movements' stamp: 'DS 11/1/2020 13:28:32'!
+test34PlayerCanNotMoveLeftDownFromDownCenterPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@0.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalDiagonalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:28:52'!
+test19PlayerCanNotMoveUpToNotEmptyPosition
+
+	| aTerniLapilli |
+
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveUpFrom: 0@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:12'!
+test20PlayerCanNotMoveRightToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:24'!
+test21PlayerCanNotMoveDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+	self
+		should: [ aTerniLapilli moveDownFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:37'!
+test22PlayerCanNotMoveLeftToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftFrom: 0@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:29:59'!
+test23PlayerCanNotMoveLeftDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: -1@-1.
+	
+	aTerniLapilli putAt: 1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveLeftDownFrom: 1@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:30:27'!
+test24PlayerCanNotMoveRightDownToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli moveRightDownFrom: -1@1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:30:47'!
+test25PlayerCanNotMoveLeftUpToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: 1@-1.
+	aTerniLapilli putAt: -1@0.
+
+	self
+		should: [ aTerniLapilli moveLeftUpFrom: 1@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'movements' stamp: 'DS 11/1/2020 13:30:58'!
+test26PlayerCanNotMoveRightUpToNotEmptyPosition
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@-1.
+	aTerniLapilli putAt: 1@0.
+
+	self
+		should: [ aTerniLapilli moveRightUpFrom: -1@-1. ]
+		raise: Error
+		withMessageText: TerniLapilli ilegalMovementErrorDescription.	! !
+!TerniLapilliTest methodsFor: 'as yet unclassified' stamp: 'DS 11/1/2020 13:58:43'!
+test16PlayerCanNotPutWhenHasNotTokenRemained
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@-1.
+	aTerniLapilli putAt: 0@0.
+	
+	aTerniLapilli putAt: 0@1.
+	aTerniLapilli putAt: 1@1.
+	
+	aTerniLapilli putAt: -1@1.
+	aTerniLapilli putAt: 1@-1.
+
+	self
+		should: [ aTerniLapilli putAt: -1@0. ]
+		raise: Error
+		withMessageText: TerniLapilli noRemainedTokensErrorDescription.
+	! !
+!TerniLapilliTest methodsFor: 'as yet unclassified' stamp: 'DS 11/1/2020 13:31:28'!
+test18PlayerCanNotPutOutOfBoard
+
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+
+	self
+		should: [ aTerniLapilli putAt: 0@2. ]
+		raise: Error
+		withMessageText: TerniLapilli positionOutOfBoardErrorDescription.
+	! !
+!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 10/29/2020 18:14:20'!
+test01GameStartWithXPlayerTurn
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	
+	self assert: aTerniLapilli isPlayingX.! !
+!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 11/1/2020 13:24:08'!
+test02AfterFirstTurnIsOPlayerTurn
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	
+	self deny: aTerniLapilli isPlayingX.
+	self assert: aTerniLapilli isPlayingO.! !
+!TerniLapilliTest methodsFor: 'turns' stamp: 'DS 11/1/2020 13:22:06'!
+test03AfterOPlayerTurnIsXPlayerTurn
+	
+	| aTerniLapilli |
+	
+	aTerniLapilli := TerniLapilli new.
+	aTerniLapilli putAt: 0@0.
+	aTerniLapilli putAt: 0@1.
+	
+	self assert: aTerniLapilli isPlayingX.
+	self deny: aTerniLapilli isPlayingO.! !
+
+!classDefinition: #TerniLapilli category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:30'!
+Object subclass: #TerniLapilli
+	instanceVariableNames: 'currentPlayer board putTokensRules moveOnRules'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #TerniLapilli category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:30'!
+Object subclass: #TerniLapilli
+	instanceVariableNames: 'currentPlayer board putTokensRules moveOnRules'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!TerniLapilli methodsFor: 'initialization' stamp: 'DS 11/1/2020 16:06:54' overrides: 16896425!
+initialize
+
+	putTokensRules := self class putTokenRulesFor: self.
+	moveOnRules := self class moveOnRulesFor: self.
+	currentPlayer := #X.
+	board := OrderedCollection new.! !
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/1/2020 15:37:13'!
+boardIncludesCurrentPlayerWith: aPosition
+
+	^ board includes: {currentPlayer. aPosition }! !
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/1/2020 16:25:08'!
+currentPlayerHasTokensRemaind
+
+	^ ( board select: [ :aOccupiedPosition | aOccupiedPosition first = currentPlayer ] ) size = 3.! !
+!TerniLapilli methodsFor: 'board testing' stamp: 'DS 11/1/2020 16:27:45'!
+hasOccupiedPosition: aPosition
+
+	^ ( board collect: [ :aOccupiedPosition | aOccupiedPosition second ] ) includes: aPosition.! !
+!TerniLapilli methodsFor: 'private accesing' stamp: 'DS 11/1/2020 16:44:18'!
+occupiedPositionsBy: aPlayer
+
+	^board select: [ :aOccupiedPosition | aOccupiedPosition first = aPlayer ].! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:53:11'!
+hasDiagonalWonOn: anOccupiedPositionsByPlayer
+
+	^anOccupiedPositionsByPlayer includesAllOf: {-1@1. 0@0. 1@-1}.! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:51:41'!
+hasHorizontalWonOn: anOccupiedPositionsByPlayer
+
+	| i isWinner |
+	
+	i := 1.
+	isWinner := true.
+	[i < (anOccupiedPositionsByPlayer size) ]	 whileTrue: [
+		isWinner := isWinner and: [ ((anOccupiedPositionsByPlayer at: i)	 + (1@	0)) = (anOccupiedPositionsByPlayer at: i+1)	 ].
+		i := i+1.
+	].
+
+	^ isWinner.! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:53:40'!
+hasInvertedDiagonalWonOn: anOccupiedPositionsByPlayer
+
+	^anOccupiedPositionsByPlayer includesAllOf: {-1@-1. 0@0. 1@1}.! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:52:17'!
+hasVerticalWonOn: anOccupiedPositionsByPlayer
+
+	| i isWinner |
+	
+	i := 1.
+	isWinner := true.
+	[i < (anOccupiedPositionsByPlayer size) ]	 whileTrue: [
+		isWinner := isWinner and: [ ((anOccupiedPositionsByPlayer  at: i)	 + (0@	1)) = (anOccupiedPositionsByPlayer at: i+1)	 ].
+		i := i+1.
+	].
+
+	^ isWinner.! !
+!TerniLapilli methodsFor: 'winner testing' stamp: 'DS 11/1/2020 16:55:37'!
+hasWonPlayer: aPlayer
+
+	| occupiedPositionsBypPlayer |
+
+	occupiedPositionsBypPlayer := ( ( board select: [ :aOccupiedPosition | aOccupiedPosition first = aPlayer ] ) 
+							  	collect: [ :aOccupiedPositionByPlayer | aOccupiedPositionByPlayer second] ) sort.
+
+	^(occupiedPositionsBypPlayer size = 3) and: [
+		(self hasHorizontalWonOn: occupiedPositionsBypPlayer) or:
+		(self hasVerticalWonOn: occupiedPositionsBypPlayer) or:
+		(self hasDiagonalWonOn: occupiedPositionsBypPlayer) or:
+		(self hasInvertedDiagonalWonOn: occupiedPositionsBypPlayer)
+	].! !
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 11/1/2020 00:06:42'!
+hasPlayerOWon
+
+	^self hasWonPlayer: #O.! !
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 11/1/2020 00:06:54'!
+hasPlayerXWon
+
+	^self hasWonPlayer: #X.! !
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 10/29/2020 21:16:07'!
+isOver
+
+	^(self hasPlayerXWon) or: (self hasPlayerOWon).! !
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 10/29/2020 17:43:02'!
+isPlayingO
+
+	^currentPlayer = #O.! !
+!TerniLapilli methodsFor: 'testing' stamp: 'DS 11/1/2020 16:40:45'!
+isPlayingX
+
+	^currentPlayer = #X.! !
+!TerniLapilli methodsFor: 'board adding' stamp: 'DS 11/1/2020 16:40:16'!
+add: aPosition
+
+	board add: {currentPlayer. aPosition}.
+	currentPlayer := self isPlayingX ifTrue: [#O] ifFalse: [#X].! !
+!TerniLapilli methodsFor: 'board adding' stamp: 'DS 11/1/2020 14:09:05'!
+addMoveOn: aDirection from: aPosition
+
+	| occupiedPosition |
+
+	occupiedPosition := {currentPlayer. aPosition}.
+	self add: aPosition + aDirection.
+	board remove: occupiedPosition.
+
+	! !
+!TerniLapilli methodsFor: 'player actions' stamp: 'DS 11/1/2020 13:45:14'!
+putAt: aPosition
+
+	putTokensRules putAt: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:03:31'!
+moveDownFrom: aPosition
+
+	self moveOn: (0@-1) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:57:21'!
+moveLeftDownFrom: aPosition
+
+	({0@1. 1@0} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
+
+	self moveOn: (-1@-1) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:04:33'!
+moveLeftFrom: aPosition
+
+	self moveOn: (-1@0) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:57:12'!
+moveLeftUpFrom: aPosition
+
+	({0@-1. 1@0} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
+
+	self moveOn: (-1@1) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:10:06'!
+moveOn: aDirection from: aPosition
+
+	 moveOnRules moveOn: aDirection from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:58:26'!
+moveRightDownFrom: aPosition
+
+	({0@1. -1@0} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
+
+	self moveOn: (1@-1) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:05:51'!
+moveRightFrom: aPosition
+
+	self moveOn: (1@0) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 16:58:36'!
+moveRightUpFrom: aPosition
+
+	({-1@0. 0@-1} includes: aPosition) ifTrue: [ self signalIlegalDiagonalMovement ].
+
+	self moveOn: (1@1) from: aPosition.! !
+!TerniLapilli methodsFor: 'movements' stamp: 'DS 11/1/2020 01:06:47'!
+moveUpFrom: aPosition
+
+	self moveOn: (0@1) from: aPosition.! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:27:11'!
+signalGameOver
+
+	^ self error: self class gameOverErrorDescription! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 16:57:12'!
+signalIlegalDiagonalMovement
+
+	^ self error: self class ilegalDiagonalMovementErrorDescription! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:27:22'!
+signalIlegalMovement
+
+	^ self error: self class ilegalMovementErrorDescription! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:25:05'!
+signalNoRemainedTokens
+
+	^ self error: self class noRemainedTokensErrorDescription! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 12:25:37'!
+signalPositionOutOfBoard
+
+	^ self error: self class positionOutOfBoardErrorDescription! !
+!TerniLapilli methodsFor: 'exceptions' stamp: 'DS 11/1/2020 15:39:09'!
+signalRemainedTokens
+
+	^ self error: self class remainedTokensErrorDescription! !
+
+!classDefinition: 'TerniLapilli class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:33'!
+TerniLapilli class
+	instanceVariableNames: ''!
+
+!classDefinition: 'TerniLapilli class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:33'!
+TerniLapilli class
+	instanceVariableNames: ''!
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/29/2020 18:26:56'!
+attemptToPlayTwiceInARowErrorDescription
+
+	^'Can not play twice in a row'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/29/2020 21:11:33'!
+gameOverErrorDescription
+
+	^'Game Over'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 11/1/2020 01:19:03'!
+ilegalDiagonalMovementErrorDescription
+
+	^'Can not move on this diagonal'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 11/1/2020 01:19:34'!
+ilegalMovementErrorDescription
+
+	^'Can not do this movement'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/29/2020 18:54:32'!
+noRemainedTokensErrorDescription
+
+	^'No Remained Tokens'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 10/31/2020 18:13:13'!
+positionOutOfBoardErrorDescription
+
+	^'Position out of board'.! !
+!TerniLapilli class methodsFor: 'error descriptions' stamp: 'DS 11/1/2020 02:04:54'!
+remainedTokensErrorDescription
+
+	^'Can not move when has Remained Tokens'.! !
+!TerniLapilli class methodsFor: 'rules' stamp: 'DS 11/1/2020 16:59:38'!
+buildRules: aKindOfRule for: aTerniLapilliGame
+
+	^RemainedTokensRuleDecorator for: aTerniLapilliGame decorating: (
+		GameOverRuleDecorator for: aTerniLapilliGame decorating: (
+			PlayingInBoardRuleDecorator for: aTerniLapilliGame decorating: (
+				OccupiedPositionRuleDecorator for: aTerniLapilliGame decorating: (			aKindOfRule for: aTerniLapilliGame 	)
+			)
+		)
+	).! !
+!TerniLapilli class methodsFor: 'rules' stamp: 'DS 11/1/2020 17:00:07'!
+moveOnRulesFor: aTerniLapilliGame
+
+	^self buildRules: MoveOnRule for: aTerniLapilliGame.! !
+!TerniLapilli class methodsFor: 'rules' stamp: 'DS 11/1/2020 16:59:57'!
+putTokenRulesFor: aTerniLapilliGame
+
+	^self buildRules: PutTokensRule for: aTerniLapilliGame.! !
+
+!classDefinition: #TerniLapilliRules category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:33'!
+Object subclass: #TerniLapilliRules
+	instanceVariableNames: 'game'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #TerniLapilliRules category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:33'!
+Object subclass: #TerniLapilliRules
+	instanceVariableNames: 'game'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!TerniLapilliRules methodsFor: 'initialization' stamp: 'DS 11/1/2020 12:21:43' prior: 50930001!
+initializateFor: aGame
+
+	game := aGame.! !
+
+!classDefinition: 'TerniLapilliRules class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:33'!
+TerniLapilliRules class
+	instanceVariableNames: ''!
+
+!classDefinition: 'TerniLapilliRules class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRules class
+	instanceVariableNames: ''!
+!TerniLapilliRules class methodsFor: 'class initialization' stamp: 'DS 11/1/2020 12:21:59' prior: 50930016!
+for: aGame
+
+	^self new initializateFor: aGame.! !
+
+!classDefinition: #MoveOnRule category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRules subclass: #MoveOnRule
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #MoveOnRule category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRules subclass: #MoveOnRule
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!MoveOnRule methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:07:48' prior: 50930036!
+moveOn: aDirection from: aPosition
+
+	game addMoveOn: aDirection from: aPosition.! !
+
+!classDefinition: #PutTokensRule category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRules subclass: #PutTokensRule
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #PutTokensRule category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRules subclass: #PutTokensRule
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!PutTokensRule methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:23:12' prior: 50930057!
+putAt: aPosition
+
+	game add: aPosition.! !
+
+!classDefinition: #TerniLapilliRulesDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRules subclass: #TerniLapilliRulesDecorator
+	instanceVariableNames: 'decoratee'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #TerniLapilliRulesDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRules subclass: #TerniLapilliRulesDecorator
+	instanceVariableNames: 'decoratee'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!TerniLapilliRulesDecorator methodsFor: 'initialization' stamp: 'DS 11/1/2020 12:31:42' prior: 50930080!
+initializateFor: aGame decorating: aTerniLapilliRule
+
+	game := aGame.
+	decoratee := aTerniLapilliRule.! !
+!TerniLapilliRulesDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:16:53' prior: 50930086!
+moveOn: aDirection from: aPosition
+
+	self subclassResponsibility.! !
+!TerniLapilliRulesDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:29:07' prior: 50930091!
+putAt: aPosition
+
+	self subclassResponsibility.! !
+
+!classDefinition: 'TerniLapilliRulesDecorator class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRulesDecorator class
+	instanceVariableNames: ''!
+
+!classDefinition: 'TerniLapilliRulesDecorator class' category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRulesDecorator class
+	instanceVariableNames: ''!
+!TerniLapilliRulesDecorator class methodsFor: 'instance creation' stamp: 'DS 11/1/2020 12:30:18' prior: 50930108!
+for: aGame decorating: aTerniLapilliRule
+
+	^self new initializateFor: aGame decorating: aTerniLapilliRule.! !
+
+!classDefinition: #GameOverRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRulesDecorator subclass: #GameOverRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #GameOverRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRulesDecorator subclass: #GameOverRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!GameOverRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 15:45:30' prior: 50930133 overrides: 50931131!
+moveOn: aDirection from: aPosition
+
+	(game isOver) ifTrue: [ game signalGameOver ].
+
+	decoratee moveOn: aDirection from: aPosition.! !
+!GameOverRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:47:50' prior: 50930141 overrides: 50931137!
+putAt: aPosition
+
+	(game isOver) ifTrue: [ game signalGameOver ].
+
+	decoratee putAt: aPosition.! !
+
+!classDefinition: #OccupiedPositionRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRulesDecorator subclass: #OccupiedPositionRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #OccupiedPositionRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:34'!
+TerniLapilliRulesDecorator subclass: #OccupiedPositionRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:28:04' prior: 50930166 overrides: 50931131!
+moveOn: aDirection from: aPosition
+
+	(game hasOccupiedPosition: aPosition + aDirection) 				ifTrue: [ game signalIlegalMovement ].
+	(game boardIncludesCurrentPlayerWith: aPosition ) ifFalse: [ game signalIlegalMovement ].	
+
+	decoratee moveOn: aDirection from: aPosition.! !
+!OccupiedPositionRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:28:16' prior: 50930178 overrides: 50931137!
+putAt: aPosition
+
+	(game hasOccupiedPosition: aPosition) 		ifTrue: [ game signalIlegalMovement ].
+
+	decoratee putAt: aPosition.! !
+
+!classDefinition: #PlayingInBoardRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:35'!
+TerniLapilliRulesDecorator subclass: #PlayingInBoardRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #PlayingInBoardRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:35'!
+TerniLapilliRulesDecorator subclass: #PlayingInBoardRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!PlayingInBoardRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 15:48:04' prior: 50930204 overrides: 50931131!
+moveOn: aDirection from: aPosition
+
+	(aPosition between: (-1@-1) and: (1@1)) ifFalse: [ game signalPositionOutOfBoard ].
+
+	decoratee moveOn: aDirection from: aPosition.! !
+!PlayingInBoardRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 12:46:35' prior: 50930213 overrides: 50931137!
+putAt: aPosition
+
+	(aPosition between: (-1@-1) and: (1@1)) ifFalse: [ game signalPositionOutOfBoard ].
+
+	decoratee putAt: aPosition.! !
+
+!classDefinition: #RemainedTokensRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:35'!
+TerniLapilliRulesDecorator subclass: #RemainedTokensRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+
+!classDefinition: #RemainedTokensRuleDecorator category: #TerniLapippiSolution stamp: 'Federico 11/2/2020 19:13:35'!
+TerniLapilliRulesDecorator subclass: #RemainedTokensRuleDecorator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TerniLapippiSolution'!
+!RemainedTokensRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:23:18' prior: 50930239 overrides: 50931131!
+moveOn: aDirection from: aPosition
+
+	( game currentPlayerHasTokensRemaind ) 	ifFalse: [ game signalRemainedTokens ].
+
+	^decoratee moveOn: aDirection from: aPosition.! !
+!RemainedTokensRuleDecorator methodsFor: 'game plays' stamp: 'DS 11/1/2020 16:23:12' prior: 50930248 overrides: 50931137!
+putAt: aPosition
+
+	( game currentPlayerHasTokensRemaind ) 	ifTrue: [ game signalNoRemainedTokens ].
+
+	^decoratee putAt: aPosition.! !
+
+----End fileIn of D:\facultad\Ing1 Ejercicios\2020-2c-master\18-Portfolio1\Portfolio-Ejercicio.st----!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'Federico 11/2/2020 19:16:06'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 19:16:06'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 19:16:06'!
+FAILURE!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'Federico 11/2/2020 19:16:06'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'Federico 11/2/2020 19:16:06'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'Federico 11/2/2020 19:16:06'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'Federico 11/2/2020 19:16:06'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 19:16:07'!
+FAILURE!
+
+account balance.!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'Federico 11/2/2020 19:19:39' prior: 50931521!
+balance
+
+	^transactions sum: [ :aTransaction | (aTransaction isKindOf: Deposit) ifTrue: [aTransaction value] ifFalse: [0 - aTransaction value]] ifEmpty: [ 0 ]! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'Federico 11/2/2020 19:19:43'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 19:19:43'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 19:19:43'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'Federico 11/2/2020 19:19:43'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'Federico 11/2/2020 19:19:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'Federico 11/2/2020 19:19:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'Federico 11/2/2020 19:19:44'!
+PASSED!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'Federico 11/2/2020 19:20:06' prior: 50931567!
+balance
+
+	^transactions sum: [ :aTransaction | (aTransaction isKindOf: Deposit) 
+		ifTrue: [aTransaction value] 
+		ifFalse: [0 - aTransaction value]]
+		ifEmpty: [ 0 ]! !
+!Withdraw methodsFor: 'value' stamp: 'Federico 11/2/2020 19:20:48' prior: 50931477 overrides: 50931405!
+value
+
+	^ value! !
+
+TestCase subclass: #PortafolioTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #PortafolioTest category: #'Portfolio-Ejercicio' stamp: 'Federico 11/2/2020 19:33:03'!
+TestCase subclass: #PortafolioTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+Object subclass: #Portafolio
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #Portafolio category: #'Portfolio-Ejercicio' stamp: 'Federico 11/2/2020 19:33:45'!
+Object subclass: #Portafolio
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!PortafolioTest methodsFor: 'no messages' stamp: 'Federico 11/2/2020 19:35:45'!
+test01
+	| aPortafolio |
+	aPortafolio := Portafolio new.
+	
+	self assert: 0 equals: aPortafolio balance.! !
+
+!testRun: #PortafolioTest #test01 stamp: 'Federico 11/2/2020 19:36:04'!
+ERROR!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:36:17'!
+balance
+	self shouldBeImplemented.! !
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:36:36' prior: 50931649!
+balance
+	^0.! !
+
+!testRun: #PortafolioTest #test01 stamp: 'Federico 11/2/2020 19:36:42'!
+PASSED!
+
+!testRun: #PortafolioTest #test01 stamp: 'Federico 11/2/2020 19:36:42'!
+PASSED!
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:37:54'!
+test02
+	| aPortafolio anAccount |
+	aPortafolio := Portafolio new.
+	
+	anAccount := ReceptiveAccount new.
+	
+	
+	self assert: 0 equals: aPortafolio balance.! !
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:39:07' prior: 50931663!
+test02
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio add: anAccount.
+	
+	self assert: 0 equals: aPortafolio balance.! !
+
+!testRun: #PortafolioTest #test02 stamp: 'Federico 11/2/2020 19:39:08'!
+ERROR!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:39:18'!
+add: aReceptiveAccount 
+	self shouldBeImplemented.! !
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:41:29' prior: 50931672!
+test02
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio addAccount: anAccount.
+	
+	self assert: 0 equals: aPortafolio balance.! !
+
+!testRun: #PortafolioTest #test02 stamp: 'Federico 11/2/2020 19:41:30'!
+ERROR!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:41:40'!
+addAccount: aReceptiveAccount 
+	self shouldBeImplemented.! !
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:41:52' prior: 50931700!
+addAccount: anAccount 
+	! !
+
+!testRun: #PortafolioTest #test02 stamp: 'Federico 11/2/2020 19:41:55'!
+PASSED!
+
+!testRun: #PortafolioTest #test01 stamp: 'Federico 11/2/2020 19:41:55'!
+PASSED!
+
+!testRun: #PortafolioTest #test02 stamp: 'Federico 11/2/2020 19:41:55'!
+PASSED!
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:42:39'!
+test03
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: anAccount.
+	
+	aPortafolio addAccount: anAccount.
+	
+	self assert: 0 equals: aPortafolio balance.! !
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:42:55' prior: 50931718!
+test03
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: anAccount.
+	
+	aPortafolio addAccount: anAccount.
+	
+	self assert: 0 equals: aPortafolio balance.! !
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:43:00' prior: 50931729!
+test03
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	Deposit register: 100 on: anAccount.
+	
+	aPortafolio addAccount: anAccount.
+	
+	self assert: 100 equals: aPortafolio balance.! !
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:43:26' prior: 50931740!
+test03
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio addAccount: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortafolio balance.! !
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:43:29'!
+FAILURE!
+
+!classDefinition: #Portafolio category: #'Portfolio-Ejercicio' stamp: 'Federico 11/2/2020 19:44:16'!
+Object subclass: #Portafolio
+	instanceVariableNames: 'transactions accounts'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:44:11' prior: 50931706!
+addAccount: anAccount 
+	accounts add anAccount.
+	! !
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:44:23' prior: 50931773!
+addAccount: anAccount 
+	accounts add anAccount.
+	! !
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:44:27'!
+ERROR!
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:44:49'!
+ERROR!
+
+!methodRemoval: Portafolio #add: stamp: 'Federico 11/2/2020 19:45:14'!
+add: aReceptiveAccount 
+	self shouldBeImplemented.!
+
+Object subclass: #Portafolio
+	instanceVariableNames: 'accounts'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #Portafolio category: #'Portfolio-Ejercicio' stamp: 'Federico 11/2/2020 19:45:52'!
+Object subclass: #Portafolio
+	instanceVariableNames: 'accounts'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:46:42' overrides: 16896425!
+initialize
+	accounts := OrderedCollection new.! !
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:46:52'!
+ERROR!
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:47:02'!
+ERROR!
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:47:08'!
+ERROR!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:47:19' prior: 50931778!
+addAccount: anAccount 
+	accounts add: anAccount.
+	! !
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:47:22'!
+FAILURE!
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:48:15'!
+FAILURE!
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:48:27'!
+FAILURE!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:49:25' prior: 50931654!
+balance
+	^accounts first balance.! !
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:49:28'!
+PASSED!
+
+!testRun: #PortafolioTest #test01 stamp: 'Federico 11/2/2020 19:49:28'!
+ERROR!
+
+!testRun: #PortafolioTest #test02 stamp: 'Federico 11/2/2020 19:49:28'!
+PASSED!
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:49:29'!
+PASSED!
+
+!testRun: #PortafolioTest #test01 stamp: 'Federico 11/2/2020 19:49:29'!
+ERROR!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:50:54' prior: 50931830!
+balance
+	^accounts sum: [ :anAccount | anAccount balance ] ifEmpty: [ 0 ]! !
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:51:06'!
+PASSED!
+
+!testRun: #PortafolioTest #test01 stamp: 'Federico 11/2/2020 19:51:06'!
+PASSED!
+
+!testRun: #PortafolioTest #test02 stamp: 'Federico 11/2/2020 19:51:06'!
+PASSED!
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:51:06'!
+PASSED!
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:55:37'!
+test04
+	| aPortafolio anAccount aDepositTransaction aWithdrawTransaction |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio addAccount: anAccount.
+	aDepositTransaction := Deposit register: 100 on: anAccount.
+	aWithdrawTransaction := Withdraw register: 100 on: anAccount.
+	
+		
+	self assert: (aPortafolio hasRegistered: aDepositTransaction) a.! !
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:55:56' prior: 50931863!
+test04
+	| aPortafolio anAccount aDepositTransaction aWithdrawTransaction |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio addAccount: anAccount.
+	aDepositTransaction := Deposit register: 100 on: anAccount.
+	aWithdrawTransaction := Withdraw register: 100 on: anAccount.
+	
+	self assert: (aPortafolio hasRegistered: aDepositTransaction).
+	self assert: (aPortafolio hasRegistered: aWithdrawTransaction).! !
+
+!testRun: #PortafolioTest #test04 stamp: 'Federico 11/2/2020 19:56:17'!
+ERROR!
+
+!testRun: #PortafolioTest #test04 stamp: 'Federico 11/2/2020 19:56:22'!
+ERROR!
+
+!testRun: #PortafolioTest #test04 stamp: 'Federico 11/2/2020 19:56:27'!
+ERROR!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:56:48'!
+hasRegistered: aDeposit 
+	self shouldBeImplemented.! !
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:56:58' prior: 50931903!
+hasRegistered: aDeposit 
+	true.! !
+
+!testRun: #PortafolioTest #test04 stamp: 'Federico 11/2/2020 19:57:01'!
+ERROR!
+
+!testRun: #PortafolioTest #test04 stamp: 'Federico 11/2/2020 19:57:10'!
+ERROR!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:57:21' prior: 50931908!
+hasRegistered: aDeposit 
+	^true.! !
+
+!testRun: #PortafolioTest #test04 stamp: 'Federico 11/2/2020 19:57:26'!
+PASSED!
+
+!testRun: #PortafolioTest #test01 stamp: 'Federico 11/2/2020 19:57:26'!
+PASSED!
+
+!testRun: #PortafolioTest #test02 stamp: 'Federico 11/2/2020 19:57:26'!
+PASSED!
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 19:57:26'!
+PASSED!
+
+!testRun: #PortafolioTest #test04 stamp: 'Federico 11/2/2020 19:57:27'!
+PASSED!
+
+----SNAPSHOT----(2 November 2020 19:57:39) CuisUniversity-4365.image priorSource: 19056203!
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 19:59:13'!
+test05
+	| aPortafolio anAccount aTransaction |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aTransaction := Deposit register: 100 on: anAccount.
+	
+	self deny: (aPortafolio hasRegistered: aTransaction).! !
+
+!testRun: #PortafolioTest #test05 stamp: 'Federico 11/2/2020 19:59:19'!
+FAILURE!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:00:43' prior: 50931918!
+hasRegistered: aDeposit 
+	^accounts collect: [ :anAccount | anAccount hasRegistered: aDeposit ].! !
+
+!testRun: #PortafolioTest #test05 stamp: 'Federico 11/2/2020 20:00:47'!
+ERROR!
+
+!testRun: #PortafolioTest #test05 stamp: 'Federico 11/2/2020 20:00:58'!
+ERROR!
+
+!testRun: #PortafolioTest #test05 stamp: 'Federico 11/2/2020 20:01:03'!
+ERROR!
+
+accounts collect: [ :anAccount | anAccount hasRegistered: aDeposit ].!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:02:13' prior: 50931951!
+hasRegistered: aDeposit 
+	^accounts collect: [ :anAccount | anAccount hasRegistered: aDeposit ] isEmpty.! !
+
+!testRun: #PortafolioTest #test05 stamp: 'Federico 11/2/2020 20:03:46'!
+ERROR!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:04:07' prior: 50931967!
+hasRegistered: aDeposit 
+	^(accounts collect: [ :anAccount | anAccount hasRegistered: aDeposit ] isEmpty) not.! !
+
+!testRun: #PortafolioTest #test05 stamp: 'Federico 11/2/2020 20:04:12'!
+ERROR!
+
+!testRun: #PortafolioTest #test05 stamp: 'Federico 11/2/2020 20:04:17'!
+ERROR!
+
+!testRun: #PortafolioTest #test05 stamp: 'Federico 11/2/2020 20:04:22'!
+ERROR!
+
+accounts collect: [ :anAccount | anAccount hasRegistered: aDeposit ] isEmpty!
+
+accounts collect: [ :anAccount | anAccount hasRegistered: aDeposit ]!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:05:05' prior: 50931976!
+hasRegistered: aDeposit 
+	^((accounts collect: [ :anAccount | anAccount hasRegistered: aDeposit ]) isEmpty) not.! !
+
+!testRun: #PortafolioTest #test05 stamp: 'Federico 11/2/2020 20:05:07'!
+PASSED!
+
+!testRun: #PortafolioTest #test01 stamp: 'Federico 11/2/2020 20:05:07'!
+PASSED!
+
+!testRun: #PortafolioTest #test02 stamp: 'Federico 11/2/2020 20:05:07'!
+PASSED!
+
+!testRun: #PortafolioTest #test03 stamp: 'Federico 11/2/2020 20:05:07'!
+PASSED!
+
+!testRun: #PortafolioTest #test04 stamp: 'Federico 11/2/2020 20:05:07'!
+PASSED!
+
+!testRun: #PortafolioTest #test05 stamp: 'Federico 11/2/2020 20:05:07'!
+PASSED!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'Federico 11/2/2020 20:40:46' prior: 50931603!
+balance
+
+    | balance |
+    balance := 0.
+
+    transactions do: [ :aTransaction | balance := aTransaction yyy: balance ].
+
+    ^balance.! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'Federico 11/2/2020 20:40:50'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:40:50'!
+ERROR!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:40:50'!
+ERROR!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'Federico 11/2/2020 20:40:50'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'Federico 11/2/2020 20:40:50'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'Federico 11/2/2020 20:40:50'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'Federico 11/2/2020 20:40:50'!
+PASSED!
+!ReceptiveAccount methodsFor: 'balance' stamp: 'Federico 11/2/2020 20:46:39' prior: 50932017!
+balance
+
+    | balance |
+    balance := 0.
+
+    transactions do: [ :aTransaction | balance := aTransaction countFor: balance ].
+
+    ^balance.! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'Federico 11/2/2020 20:46:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:46:41'!
+ERROR!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:46:41'!
+ERROR!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'Federico 11/2/2020 20:46:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'Federico 11/2/2020 20:46:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'Federico 11/2/2020 20:46:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'Federico 11/2/2020 20:46:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:46:41'!
+ERROR!
+!AccountTransaction methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:47:02'!
+countFor: aSmallInteger 
+	self shouldBeImplemented.! !
+!AccountTransaction methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:47:30' prior: 50932091!
+countFor: aSmallInteger 
+	self subclassResponsibility.! !
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:47:35'!
+ERROR!
+!Deposit methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:47:47' overrides: 50932097!
+countFor: aSmallInteger 
+	self shouldBeImplemented.! !
+!Deposit methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:48:17' prior: 50932106 overrides: 50932097!
+countFor: aBalance
+	^aBalance + value ! !
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:48:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'Federico 11/2/2020 20:48:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:48:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:48:19'!
+ERROR!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'Federico 11/2/2020 20:48:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'Federico 11/2/2020 20:48:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'Federico 11/2/2020 20:48:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'Federico 11/2/2020 20:48:19'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:48:19'!
+ERROR!
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:48:25' overrides: 50932097!
+countFor: aSmallInteger 
+	self shouldBeImplemented.! !
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:48:37' prior: 50932153 overrides: 50932097!
+countFor: aBalance
+	^aBalance - value.! !
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'Federico 11/2/2020 20:48:45'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'Federico 11/2/2020 20:48:45'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:48:45'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'Federico 11/2/2020 20:48:45'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'Federico 11/2/2020 20:48:45'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'Federico 11/2/2020 20:48:45'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'Federico 11/2/2020 20:48:45'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'Federico 11/2/2020 20:48:45'!
+PASSED!
+!AccountTransaction methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:48:56' prior: 50932097!
+countFor: aBalance
+	self subclassResponsibility.! !
+
+!methodRemoval: PortafolioTest #test05 stamp: 'Federico 11/2/2020 20:49:29'!
+test05
+	| aPortafolio anAccount aTransaction |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aTransaction := Deposit register: 100 on: anAccount.
+	
+	self deny: (aPortafolio hasRegistered: aTransaction).!
+
+!methodRemoval: Portafolio #hasRegistered: stamp: 'Federico 11/2/2020 20:49:41'!
+hasRegistered: aDeposit 
+	^((accounts collect: [ :anAccount | anAccount hasRegistered: aDeposit ]) isEmpty) not.!
+
+!methodRemoval: PortafolioTest #test02 stamp: 'Federico 11/2/2020 20:50:03'!
+test02
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio addAccount: anAccount.
+	
+	self assert: 0 equals: aPortafolio balance.!
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:50:09'!
+test02
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio addAccount: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortafolio balance.! !
+
+!methodRemoval: PortafolioTest #test03 stamp: 'Federico 11/2/2020 20:50:13'!
+test03
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio addAccount: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortafolio balance.!
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:50:16'!
+test03
+	| aPortafolio anAccount aDepositTransaction aWithdrawTransaction |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio addAccount: anAccount.
+	aDepositTransaction := Deposit register: 100 on: anAccount.
+	aWithdrawTransaction := Withdraw register: 100 on: anAccount.
+	
+	self assert: (aPortafolio hasRegistered: aDepositTransaction).
+	self assert: (aPortafolio hasRegistered: aWithdrawTransaction).! !
+
+!methodRemoval: PortafolioTest #test04 stamp: 'Federico 11/2/2020 20:50:32'!
+test04
+	| aPortafolio anAccount aDepositTransaction aWithdrawTransaction |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio addAccount: anAccount.
+	aDepositTransaction := Deposit register: 100 on: anAccount.
+	aWithdrawTransaction := Withdraw register: 100 on: anAccount.
+	
+	self assert: (aPortafolio hasRegistered: aDepositTransaction).
+	self assert: (aPortafolio hasRegistered: aWithdrawTransaction).!
+
+!methodRemoval: PortafolioTest #test03 stamp: 'Federico 11/2/2020 20:51:03'!
+test03
+	| aPortafolio anAccount aDepositTransaction aWithdrawTransaction |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio addAccount: anAccount.
+	aDepositTransaction := Deposit register: 100 on: anAccount.
+	aWithdrawTransaction := Withdraw register: 100 on: anAccount.
+	
+	self assert: (aPortafolio hasRegistered: aDepositTransaction).
+	self assert: (aPortafolio hasRegistered: aWithdrawTransaction).!
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:53:32' prior: 50932225!
+test02
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portafolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio add: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortafolio balance.
+
+! !
+
+!testRun: #PortafolioTest #test02 stamp: 'Federico 11/2/2020 20:53:34'!
+ERROR!
+
+!methodRemoval: Portafolio #addAccount: stamp: 'Federico 11/2/2020 20:53:55'!
+addAccount: anAccount 
+	accounts add: anAccount.
+	!
+
+!methodRemoval: Portafolio #balance stamp: 'Federico 11/2/2020 20:54:03'!
+balance
+	^accounts sum: [ :anAccount | anAccount balance ] ifEmpty: [ 0 ]!
+!Portafolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:56:08' prior: 50931804 overrides: 16896425!
+initialize
+	accounts := OrderedCollection new.! !
+
+!classRenamed: #Portafolio as: #Portfolio stamp: 'Federico 11/2/2020 20:56:17'!
+Smalltalk renameClassNamed: #Portafolio as: #Portfolio!
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:56:18' prior: 50931640!
+test01
+	| aPortafolio |
+	aPortafolio := Portfolio new.
+	
+	self assert: 0 equals: aPortafolio balance.! !
+!PortafolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:56:18' prior: 50932295!
+test02
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio add: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortafolio balance.
+
+! !
+
+!classRenamed: #PortafolioTest as: #PortfolioTest stamp: 'Federico 11/2/2020 20:56:32'!
+Smalltalk renameClassNamed: #PortafolioTest as: #PortfolioTest!
+
+Object subclass: #Portfolio
+	instanceVariableNames: 'xxx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #Portfolio category: #'Portfolio-Ejercicio' stamp: 'Federico 11/2/2020 20:59:11'!
+Object subclass: #Portfolio
+	instanceVariableNames: 'xxx'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+Object subclass: #Portfolio
+	instanceVariableNames: 'nodes'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #Portfolio category: #'Portfolio-Ejercicio' stamp: 'Federico 11/2/2020 20:59:22'!
+Object subclass: #Portfolio
+	instanceVariableNames: 'nodes'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:59:25' prior: 50932318 overrides: 16896425!
+initialize
+	nodes := OrderedCollection new.! !
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/2/2020 20:59:31'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 20:59:39'!
+add: aReceptiveAccount 
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 21:01:25' prior: 50932382!
+add: aPortfolio
+	nodes add: aPortfolio.! !
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/2/2020 21:01:30'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 21:01:38'!
+balance
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 21:02:00' prior: 50932394!
+balance
+	^100! !
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/2/2020 21:02:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/2/2020 21:02:02'!
+FAILURE!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/2/2020 21:02:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/2/2020 21:02:02'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 21:03:39' prior: 50932399!
+balance
+	^nodes sum: [ :aNode | aNode balance.].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 21:03:57' prior: 50932413!
+balance
+	^nodes sum: [ :aNode | aNode balance.] ifEmpty: [0].! !
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/2/2020 21:04:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/2/2020 21:04:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/2/2020 21:04:10'!
+PASSED!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 21:06:44' prior: 50932418!
+balance
+	
+	^(nodes size = 0) ifTrue: [0] ifFalse: [nodes first balance.].
+	
+	! !
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/2/2020 21:06:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/2/2020 21:06:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/2/2020 21:06:50'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 21:09:27'!
+test03
+	| aMainPortafolio anotherPortafolio aPortafolioAccount aMainAccount |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortafolioAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	aMainPortafolio add: aMainAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	Deposit register: 100 on: aMainAccount.
+	Deposit register: 100 on: aPortafolioAccount.
+		
+	self assert: 200 equals: aMainPortafolio balance.
+
+! !
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/2/2020 21:09:36'!
+FAILURE!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/2/2020 21:09:54'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 21:10:16' prior: 50932431!
+balance
+	
+	^nodes sum: [ :aNode | aNode balance.] ifEmpty: [0].
+	
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/2/2020 21:10:18' prior: 50932469!
+balance
+	^nodes sum: [ :aNode | aNode balance.] ifEmpty: [0].
+	
+	! !
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/2/2020 21:10:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/2/2020 21:10:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/2/2020 21:10:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/2/2020 21:10:20'!
+PASSED!
+
+----QUIT----(3 November 2020 22:31:54) CuisUniversity-4365.image priorSource: 19209080!
+
+----STARTUP---- (5 November 2020 17:13:47) as D:\facultad\Smalltalk\windows64\CuisUniversity-4365.image!
+
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 17:14:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 17:14:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 17:14:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 17:14:14'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:48:38'!
+test04
+	| aPortafolio anAccount aTransaction |
+	
+	aPortafolio := Portfolio new.
+	
+	aPortafolio add: anAccount.
+	aTransaction := Deposit register: 100 on: anAccount.
+		
+	self deny: (aPortafolio hasRegistered: aTransaction).
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:49:00' prior: 50932506!
+test04
+	| aPortafolio anAccount aTransaction |
+	
+	aPortafolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aTransaction := Deposit register: 100 on: anAccount.
+		
+	self deny: (aPortafolio hasRegistered: aTransaction).
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:49:36' prior: 50932517!
+test04
+	| aPortafolio aTransaction |
+	
+	aPortafolio := Portfolio new.
+	
+	aTransaction :=  Deposit for: 100.
+		
+	self deny: (aPortafolio hasRegistered: aTransaction).
+
+! !
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 17:49:38'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:49:50'!
+hasRegistered: aDeposit 
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:50:21' prior: 50932539!
+hasRegistered: aTransaction
+	^false.! !
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 17:50:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 17:50:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 17:50:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 17:50:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 17:50:23'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:51:20'!
+test05
+	| aPortafolio anAccount aTransaction |
+	
+	aPortafolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio add: anAccount.
+	Deposit register: 100 on: anAccount.
+	aTransaction :=  Deposit for: 100.
+		
+	self deny: (aPortafolio hasRegistered: aTransaction).
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:52:25' prior: 50932561!
+test05
+	| aPortafolio anAccount aTransaction |
+	
+	aPortafolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aTransaction := Deposit register: 100 on: anAccount.
+	aPortafolio add: anAccount.
+		
+	self assert: (aPortafolio hasRegistered: aTransaction).
+
+! !
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 17:52:26'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:53:13' prior: 50932544!
+hasRegistered: aTransaction
+	^nodes includes: aTransaction .! !
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 17:53:16'!
+FAILURE!
+
+nodes!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 17:54:36'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:54:53' prior: 50932588!
+hasRegistered: aTransaction
+	^nodes first hasRegistered: aTransaction .! !
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 17:54:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 17:54:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 17:54:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 17:54:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 17:54:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 17:54:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 17:54:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 17:55:04'!
+ERROR!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 17:55:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 17:55:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 17:55:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 17:55:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 17:55:10'!
+ERROR!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 17:55:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 17:55:10'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:57:09' prior: 50932599!
+hasRegistered: aTransaction
+	nodes isEmpty ifTrue: [^false] ifFalse: [nodes first hasRegistered: aTransaction.]! !
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 17:57:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 17:57:16'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 17:57:28' prior: 50932642!
+hasRegistered: aTransaction
+	nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]! !
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 17:57:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 17:57:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 17:57:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 17:57:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 17:57:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 17:57:30'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:01:06'!
+test06
+
+	| aMainPortafolio anotherPortafolio aPortafolioAccount aMainAccount aTransaction secondTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortafolioAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	aMainPortafolio add: aMainAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 100 on: aMainAccount.
+
+		
+	self assert: (aPortafolioAccount hasRegistered: aTransaction).
+	self assert: (aMainAccount hasRegistered: aTransaction).
+	self assert: (aMainAccount hasRegistered: secondTransaction).
+
+! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:01:10'!
+FAILURE!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:01:43'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:03:04' prior: 50932654!
+hasRegistered: aTransaction
+	"nodes findFirst: [ :aNode | aNode hasRegistered: aTransaction.] ifAbsent"
+	nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]! !
+
+nodes := OrderedCollection new.!
+
+nodes first!
+
+nodes isEmpty !
+
+nodes add: 'sarasa'!
+
+nodes find: 'sarasa'!
+
+nodes find: 'sarasa'!
+
+nodes findFirst: 'sarasa'!
+
+nodes select: 'sarasa'!
+
+nodes findFirst: 'sarasa'!
+
+nodes find: 'sarasa'!
+
+nodes find: 'sarasaa'!
+
+nodes find: 'sarasaa' ifAbsent: ['hola']!
+
+nodes select: [ :aNode | aNode = 'sarasa' ]!
+
+nodes select: [ :aNode | aNode = 'sarasaa' ]!
+
+nodes select: [ :aNode | aNode = 'sarasa' ] first.!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:08:42' prior: 50932707!
+hasRegistered: aTransaction
+	^nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ] first.
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:08:46'!
+FAILURE!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:09:36' prior: 50932676!
+test06
+
+	| aMainPortafolio anotherPortafolio aPortafolioAccount aMainAccount aTransaction secondTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortafolioAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	aMainPortafolio add: aMainAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 100 on: aMainAccount.
+
+	self assert: (aPortafolioAccount hasRegistered: aTransaction).
+	self assert: (aMainAccount hasRegistered: aTransaction).
+	self assert: (aMainAccount hasRegistered: secondTransaction).
+
+! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:09:38'!
+FAILURE!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:09:59' prior: 50932743!
+test06
+
+	| aMainPortafolio anotherPortafolio aPortafolioAccount aMainAccount aTransaction secondTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortafolioAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	aMainPortafolio add: aMainAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 100 on: aMainAccount.
+
+	self assert: (aPortafolioAccount hasRegistered: aTransaction).
+	self assert: (aMainPortafolio hasRegistered: aTransaction).
+	self assert: (aMainPortafolio hasRegistered: secondTransaction).
+
+! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:10:00'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:10:07'!
+ERROR!
+
+nodes!
+
+	^nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ] first.!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:11:34' prior: 50932731!
+hasRegistered: aTransaction
+	^(nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first.
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:11:35'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:12:28'!
+ERROR!
+
+nodes first.!
+
+	nodes first hasRegistered: aTransaction.!
+
+	(nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first.!
+
+	nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]!
+
+	nodes first.!
+
+	nodes first hasRegistered: aTransaction. !
+
+	(nodes indexOf: 1) hasRegistered: aTransaction. !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:16:01' prior: 50932771!
+test06
+
+	| aMainPortafolio anotherPortafolio aPortafolioAccount aMainAccount aTransaction secondTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortafolioAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	aMainPortafolio add: aMainAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 100 on: aMainAccount.
+
+	self assert: (aPortafolioAccount hasRegistered: aTransaction).
+	self assert: (aMainPortafolio hasRegistered: secondTransaction).
+	self assert: (aMainPortafolio hasRegistered: aTransaction).
+
+
+! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:16:03'!
+ERROR!
+
+	^(nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first.!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:17:11' prior: 50932805!
+hasRegistered: aTransaction
+	^(nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first.
+	
+	
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:17:58' prior: 50932829!
+test06
+
+	| aMainPortafolio anotherPortafolio aPortafolioAccount aMainAccount aTransaction secondTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortafolioAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	aMainPortafolio add: aMainAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 100 on: aMainAccount.
+
+	self assert: (anotherPortafolio hasRegistered: aTransaction).
+	self assert: (aMainPortafolio hasRegistered: secondTransaction).
+	self assert: (aMainPortafolio hasRegistered: aTransaction).
+
+
+! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:18:03'!
+ERROR!
+
+anotherPortafolio!
+
+nodes!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:19:05' prior: 50932860!
+hasRegistered: aTransaction
+	^((nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first).
+	
+	
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:19:07'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:19:59' prior: 50932899!
+hasRegistered: aTransaction
+	^(nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first = aTransaction.
+	
+	
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:20:06'!
+FAILURE!
+
+	(nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first!
+
+	nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]!
+
+	nodes collect: [ :aNode | aNode  hasRegistered: aTransaction. ]!
+
+nodes!
+
+nodes collect: [ :aNode | aNode ]!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:22:00' prior: 50932911!
+hasRegistered: aTransaction
+	^((nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first) hasRegistered: aTransaction.
+	
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:22:01'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:22:07'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:22:18'!
+ERROR!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:44:25' prior: 50932870!
+test06
+
+	| aMainPortafolio anotherPortafolio aPortafolioAccount aMainAccount aTransaction secondTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortafolioAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	
+	aMainPortafolio add: aMainAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 100 on: aMainAccount.
+
+	self assert: (anotherPortafolio hasRegistered: aTransaction).
+	self assert: (aMainPortafolio hasRegistered: secondTransaction).
+	self assert: (aMainPortafolio hasRegistered: aTransaction).
+
+
+! !
+
+nodes select: [ :aNode | aNode = 'sarasa' ] first.!
+
+nodes := OrderedCollection new.!
+
+nodes isEmpty!
+
+nodes add: 'sarasa'!
+
+nodes select: [ :aNode | aNode = 'sarasa' ] first.!
+
+(nodes select: [ :aNode | aNode = 'sarasa' ]) first.!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:45:55' prior: 50932932!
+hasRegistered: aTransaction
+	^(nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first
+	
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:45:59'!
+ERROR!
+
+self!
+
+self at: 1!
+
+self at: 1 first.!
+
+anotherPortafolio hasRegistered: aTransaction!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:48:07' prior: 50932983!
+hasRegistered: aTransaction
+	^((nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first) hasRegistered: aTransaction.	
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"! !
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 18:48:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 18:48:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 18:48:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 18:48:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 18:48:12'!
+ERROR!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 18:48:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:48:12'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 18:49:22' prior: 50932998!
+hasRegistered: aTransaction
+	nodes ifEmpty: [^false].
+	^((nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) first) hasRegistered: aTransaction.	
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"! !
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 18:49:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 18:49:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 18:49:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 18:49:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 18:49:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 18:49:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:49:31'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:49:31'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:49:38'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:49:45'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:50:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:50:18'!
+ERROR!
+
+nodes!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 18:51:06'!
+ERROR!
+
+sarasa := OrderedCollection new.!
+
+sarasa add: 'hola'.!
+
+sarasa add: 'hola2'.!
+
+sarasa add: 'amo'.!
+
+sarasa add: 'amo'. !
+
+sarasa!
+
+sarasa findFirst: 'amo'!
+
+sarasa findFirst: 'amo'!
+
+OrderedCollection!
+
+OrderedCollection!
+
+----SNAPSHOT----(5 November 2020 18:56:48) CuisUniversity-4365.image priorSource: 19226852!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:00:04' prior: 50933026!
+hasRegistered: aTransaction
+	nodes ifEmpty: [^false].
+	^((nodes findFirst: [ :aNode | aNode  hasRegistered: aTransaction. ]) first) > 0.
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"
+! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:00:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:00:27'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:00:32'!
+ERROR!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:00:38'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:01:29' prior: 50933080!
+hasRegistered: aTransaction
+	nodes ifEmpty: [^false].
+	^(nodes findFirst: [ :aNode | aNode  hasRegistered: aTransaction. ]) > 0.
+	"nodes isEmpty ifTrue: [^false] ifFalse: [^nodes first hasRegistered: aTransaction.]"
+! !
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:01:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:01:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:01:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:01:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:01:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:01:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:01:31'!
+PASSED!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:01:39' prior: 50933101!
+hasRegistered: aTransaction
+	nodes ifEmpty: [^false].
+	^(nodes findFirst: [ :aNode | aNode  hasRegistered: aTransaction. ]) > 0.
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:13:43'!
+test07
+	| aPortafolio aTransaction |
+	
+	aPortafolio := Portfolio new.
+	
+	aTransaction :=  Deposit for: 100.
+		
+	self assert: (aPortafolio transactions isEmpty).
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:13:57' prior: 50933136!
+test07
+	| aPortafolio |
+	
+	aPortafolio := Portfolio new.
+		
+	self assert: (aPortafolio transactions isEmpty).
+
+! !
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:14:12'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:14:23'!
+transactions
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:14:50' prior: 50933154!
+transactions
+	^true.! !
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:14:53'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:15:05' prior: 50933159!
+transactions
+	! !
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:15:09'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:16:07' prior: 50933166!
+transactions
+	| transactions |
+	transactions = OrderedCollection new.
+	^transactions.! !
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:16:15'!
+ERROR!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:16:23' prior: 50933145!
+test07
+	| aPortafolio |
+	
+	aPortafolio := Portfolio new.
+		
+	self assert: ((aPortafolio transactions) isEmpty).
+
+! !
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:16:24'!
+ERROR!
+
+aPortafolio transactions!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:18:28' prior: 50933173!
+transactions
+
+	^OrderedCollection new.! !
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:18:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:18:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:18:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:18:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:18:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:18:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:18:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:18:31'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:18:48' prior: 50933182!
+test07
+	| aPortafolio |
+	
+	aPortafolio := Portfolio new.
+		
+		
+	self assert: ((aPortafolio transactions) isEmpty).
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:25:05'!
+test08
+	| aPortafolio |
+	
+	aPortafolio := Portfolio new.
+		
+		
+	self assert: ((aPortafolio transactions) isEmpty).
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:27:47' prior: 50933225!
+test08
+	| aPortafolio anAccount aTransaction |
+	
+	aPortafolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio add: anAccount.
+	aTransaction := Deposit register: 50 on: anAccount.
+		
+	self assert: 1 equals: anAccount transactions size.
+	self assert: (aPortafolio transactions includes: aTransaction).
+		
+
+! !
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:30:54'!
+FAILURE!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:31:22' prior: 50933232!
+test08
+	| aPortafolio anAccount aTransaction |
+	
+	aPortafolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio add: anAccount.
+	aTransaction := Deposit register: 50 on: anAccount.
+		
+	self assert: 1 equals: aPortafolio transactions size.
+	self assert: (aPortafolio transactions includes: aTransaction).
+		
+
+! !
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:31:26'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:35:21' prior: 50933193!
+transactions
+	| transactions |
+	
+	transactions := OrderedCollection new.
+	nodes do: [ :node | transactions addAll: node transactions].
+	
+	^transactions.! !
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:35:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:35:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:35:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:35:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:35:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:35:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:35:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:35:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:35:22'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:36:38' prior: 50933249!
+test08
+	| aMainPortafolio anotherPortafolio aPortafolioAccount aMainAccount aTransaction secondTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortafolioAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	
+	aMainPortafolio add: aMainAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 100 on: aMainAccount.
+		
+	self assert: 2 equals: aMainPortafolio transactions size.
+	self assert: (aMainPortafolio transactions includes: aTransaction).
+	self assert: (aMainPortafolio transactions includes: secondTransaction).
+		
+
+! !
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:36:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:36:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:36:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:36:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:36:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:36:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:36:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:36:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:36:58'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:37:49' prior: 50933296!
+test08
+	| aMainPortafolio anotherPortafolio aPortafolioAccount aTransaction secondTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aPortafolioAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 300 on: aPortafolioAccount.	
+		
+	self assert: 2 equals: aMainPortafolio transactions size.
+	self assert: (aMainPortafolio transactions includes: aTransaction).
+	self assert: (aMainPortafolio transactions includes: secondTransaction).
+		
+
+! !
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:37:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:37:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:37:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:37:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:37:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:37:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:37:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:37:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:37:53'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:38:07'!
+test09
+	| aMainPortafolio anotherPortafolio aPortafolioAccount aTransaction secondTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aPortafolioAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 300 on: aPortafolioAccount.	
+		
+	self assert: 2 equals: aMainPortafolio transactions size.
+	self assert: (aMainPortafolio transactions includes: aTransaction).
+	self assert: (aMainPortafolio transactions includes: secondTransaction).
+		
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:27:47' prior: 50933345!
+test08
+	| aPortafolio anAccount aTransaction |
+	
+	aPortafolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio add: anAccount.
+	aTransaction := Deposit register: 50 on: anAccount.
+		
+	self assert: 1 equals: anAccount transactions size.
+	self assert: (aPortafolio transactions includes: aTransaction).
+		
+
+! !
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:38:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:38:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:38:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:38:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:38:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:38:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:38:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:38:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:38:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/5/2020 19:38:36'!
+PASSED!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:41:25' prior: 50933265!
+transactions
+	| transactions |
+	
+	transactions := OrderedCollection new.
+	transactions addAll: nodes first transactions.
+	
+	^transactions.
+	! !
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:41:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:41:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:41:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:41:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:41:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:41:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:41:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:41:29'!
+ERROR!
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:41:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/5/2020 19:41:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:41:29'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:42:10' prior: 50933454!
+transactions
+	| transactions |
+	nodes ifEmpty: [^false].
+	
+	transactions := OrderedCollection new.
+	transactions addAll: nodes first transactions.
+	
+	^transactions.
+	! !
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:42:14'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:42:38' prior: 50933490!
+transactions
+	| transactions |
+	
+	transactions := OrderedCollection new.
+	
+	nodes ifEmpty: [^transactions].
+	transactions addAll: nodes first transactions.
+	
+	^transactions.
+	! !
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:42:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:42:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:42:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:42:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:42:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:42:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:42:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:42:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:42:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/5/2020 19:42:42'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:43:28' prior: 50933391!
+test09
+	| aMainPortafolio anotherPortafolio aMainAccount aPortafolioAccount aTransaction secondTransaction thirdTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aPortafolioAccount  := ReceptiveAccount new.
+	aMainAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	aMainPortafolio add: anotherPortafolio.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 200 on: aPortafolioAccount.	
+	thirdTransaction := Deposit register: 300 on: aPortafolioAccount.	
+		
+	self assert: 2 equals: aMainPortafolio transactions size.
+	self assert: (aMainPortafolio transactions includes: aTransaction).
+	self assert: (aMainPortafolio transactions includes: secondTransaction).
+		
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:44:13' prior: 50933535!
+test09
+	| aMainPortafolio anotherPortafolio aMainAccount aPortafolioAccount aTransaction secondTransaction thirdTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aPortafolioAccount  := ReceptiveAccount new.
+	aMainAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	
+	aMainPortafolio add: anotherPortafolio.
+	aMainPortafolio add: aMainAccount.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 200 on: aPortafolioAccount.	
+	thirdTransaction := Deposit register: 300 on: aMainAccount.	
+		
+	self assert: 2 equals: aMainPortafolio transactions size.
+	self assert: (aMainPortafolio transactions includes: aTransaction).
+	self assert: (aMainPortafolio transactions includes: secondTransaction).
+		
+
+! !
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/5/2020 19:44:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:44:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:44:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:44:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:44:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:44:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:44:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:44:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:44:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/5/2020 19:44:22'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:44:51' prior: 50933563!
+test09
+	| aMainPortafolio anotherPortafolio aMainAccount aPortafolioAccount aTransaction secondTransaction thirdTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aPortafolioAccount  := ReceptiveAccount new.
+	aMainAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	
+	aMainPortafolio add: anotherPortafolio.
+	aMainPortafolio add: aMainAccount.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 200 on: aPortafolioAccount.	
+	thirdTransaction := Deposit register: 300 on: aMainAccount.	
+		
+	self assert: 3 equals: aMainPortafolio transactions size.
+	self assert: (aMainPortafolio transactions includes: aTransaction).
+	self assert: (aMainPortafolio transactions includes: secondTransaction).
+		
+
+! !
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/5/2020 19:45:07'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:45:29' prior: 50933501!
+transactions
+	| transactions |
+	
+	transactions := OrderedCollection new.
+	nodes do: [ :node | transactions addAll: node transactions].
+	
+	^transactions.
+	! !
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/5/2020 19:45:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:45:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:45:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:45:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:45:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:45:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:45:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:45:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:45:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/5/2020 19:45:34'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/5/2020 19:45:50' prior: 50933617!
+test09
+	| aMainPortafolio anotherPortafolio aMainAccount aPortafolioAccount aTransaction secondTransaction |
+	
+	aMainPortafolio := Portfolio new.
+	anotherPortafolio := Portfolio new.
+	
+	aPortafolioAccount  := ReceptiveAccount new.
+	aMainAccount  := ReceptiveAccount new.
+	
+	anotherPortafolio add: aPortafolioAccount.
+	
+	aMainPortafolio add: anotherPortafolio.
+	aMainPortafolio add: aMainAccount.
+
+	aTransaction := Deposit register: 100 on: aPortafolioAccount.	
+	secondTransaction := Deposit register: 200 on: aMainAccount.	
+		
+	self assert: 2 equals: aMainPortafolio transactions size.
+	self assert: (aMainPortafolio transactions includes: aTransaction).
+	self assert: (aMainPortafolio transactions includes: secondTransaction).
+		
+
+! !
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/5/2020 19:45:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test01 stamp: 'Federico 11/5/2020 19:45:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test02 stamp: 'Federico 11/5/2020 19:45:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test03 stamp: 'Federico 11/5/2020 19:45:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/5/2020 19:45:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/5/2020 19:45:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/5/2020 19:45:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/5/2020 19:45:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/5/2020 19:45:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/5/2020 19:45:52'!
+PASSED!
+
+----SNAPSHOT----(5 November 2020 20:17:11) CuisUniversity-4365.image priorSource: 19245609!
+
+----QUIT----(5 November 2020 21:49:51) CuisUniversity-4365.image priorSource: 19266656!
+
+----STARTUP---- (6 November 2020 11:44:29) as D:\facultad\Smalltalk\windows64\CuisUniversity-4365.image!
+
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:46:47'!
+test01PortfolioStartsWithNoIncome
+	| aPortafolio |
+	aPortafolio := Portfolio new.
+	
+	self assert: 0 equals: aPortafolio balance.! !
+
+!methodRemoval: PortfolioTest #test01 stamp: 'Federico 11/6/2020 11:46:52'!
+test01
+	| aPortafolio |
+	aPortafolio := Portfolio new.
+	
+	self assert: 0 equals: aPortafolio balance.!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:48:18'!
+test02PortfolioBalanceCountAccountTransactions
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio add: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortafolio balance.
+
+! !
+
+!methodRemoval: PortfolioTest #test02 stamp: 'Federico 11/6/2020 11:48:26'!
+test02
+	| aPortafolio anAccount |
+	
+	aPortafolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortafolio add: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortafolio balance.
+
+!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:49:07' prior: 50932444!
+test03
+	| aMainPortfolio anotherPortfolio aPortfolioAccount aMainAccount |
+	
+	aMainPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortfolioAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	aMainPortfolio add: aMainAccount.
+	aMainPortfolio add: anotherPortfolio.
+
+	Deposit register: 100 on: aMainAccount.
+	Deposit register: 100 on: aPortfolioAccount.
+		
+	self assert: 200 equals: aMainPortfolio balance.
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:49:15' prior: 50933756!
+test02PortfolioBalanceCountAccountTransactions
+	| aPortfolio anAccount |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortfolio add: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortfolio balance.
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:49:24' prior: 50933743!
+test01PortfolioStartsWithNoIncome
+	| aPortfolio |
+	aPortfolio := Portfolio new.
+	
+	self assert: 0 equals: aPortfolio balance.! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:49:31' prior: 50932528!
+test04
+	| aPortfolio aTransaction |
+	
+	aPortfolio := Portfolio new.
+	
+	aTransaction :=  Deposit for: 100.
+		
+	self deny: (aPortfolio hasRegistered: aTransaction).
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:49:39' prior: 50932574!
+test05
+	| aPortfolio anAccount aTransaction |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aTransaction := Deposit register: 100 on: anAccount.
+	aPortfolio add: anAccount.
+		
+	self assert: (aPortfolio hasRegistered: aTransaction).
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:50:01' prior: 50932950!
+test06
+
+	| aMainPortfolio anotherPortfolio aPortfolioAccount aMainAccount aTransaction secondTransaction |
+	
+	aMainPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortfolioAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	
+	aMainPortfolio add: aMainAccount.
+	aMainPortfolio add: anotherPortfolio.
+
+	aTransaction := Deposit register: 100 on: aPortfolioAccount.	
+	secondTransaction := Deposit register: 100 on: aMainAccount.
+
+	self assert: (anotherPortfolio hasRegistered: aTransaction).
+	self assert: (aMainPortfolio hasRegistered: secondTransaction).
+	self assert: (aMainPortfolio hasRegistered: aTransaction).
+
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:50:08' prior: 50933218!
+test07
+	| aPortfolio |
+	
+	aPortfolio := Portfolio new.
+		
+		
+	self assert: ((aPortfolio transactions) isEmpty).
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:50:14' prior: 50933415!
+test08
+	| aPortfolio anAccount aTransaction |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortfolio add: anAccount.
+	aTransaction := Deposit register: 50 on: anAccount.
+		
+	self assert: 1 equals: anAccount transactions size.
+	self assert: (aPortfolio transactions includes: aTransaction).
+		
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:50:37' prior: 50933683!
+test09
+	| aMainPortfolio anotherPortfolio aMainAccount aPortfolioAccount aTransaction secondTransaction |
+	
+	aMainPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aPortfolioAccount  := ReceptiveAccount new.
+	aMainAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	
+	aMainPortfolio add: anotherPortfolio.
+	aMainPortfolio add: aMainAccount.
+
+	aTransaction := Deposit register: 100 on: aPortfolioAccount.	
+	secondTransaction := Deposit register: 200 on: aMainAccount.	
+		
+	self assert: 2 equals: aMainPortfolio transactions size.
+	self assert: (aMainPortfolio transactions includes: aTransaction).
+	self assert: (aMainPortfolio transactions includes: secondTransaction).
+		
+
+! !
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:51:08'!
+test02BalanceCountAccountTransactions
+	| aPortfolio anAccount |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortfolio add: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortfolio balance.
+
+! !
+
+!methodRemoval: PortfolioTest #test02PortfolioBalanceCountAccountTransactions stamp: 'Federico 11/6/2020 11:51:12'!
+test02PortfolioBalanceCountAccountTransactions
+	| aPortfolio anAccount |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortfolio add: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortfolio balance.
+
+!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:51:48'!
+test03BalanceCountPortafolioAndAccountTransactions
+	| aMainPortfolio anotherPortfolio aPortfolioAccount aMainAccount |
+	
+	aMainPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortfolioAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	aMainPortfolio add: aMainAccount.
+	aMainPortfolio add: anotherPortfolio.
+
+	Deposit register: 100 on: aMainAccount.
+	Deposit register: 100 on: aPortfolioAccount.
+		
+	self assert: 200 equals: aMainPortfolio balance.
+
+! !
+
+!methodRemoval: PortfolioTest #test03 stamp: 'Federico 11/6/2020 11:51:59'!
+test03
+	| aMainPortfolio anotherPortfolio aPortfolioAccount aMainAccount |
+	
+	aMainPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortfolioAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	aMainPortfolio add: aMainAccount.
+	aMainPortfolio add: anotherPortfolio.
+
+	Deposit register: 100 on: aMainAccount.
+	Deposit register: 100 on: aPortfolioAccount.
+		
+	self assert: 200 equals: aMainPortfolio balance.
+
+!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 11:52:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 11:52:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 11:52:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 11:52:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test04 stamp: 'Federico 11/6/2020 11:52:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test05 stamp: 'Federico 11/6/2020 11:52:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test06 stamp: 'Federico 11/6/2020 11:52:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test07 stamp: 'Federico 11/6/2020 11:52:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test08 stamp: 'Federico 11/6/2020 11:52:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test09 stamp: 'Federico 11/6/2020 11:52:02'!
+PASSED!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:55:34'!
+test04PortfolioDoesNotRegisterUnknownTransaction
+
+	| aPortfolio aTransaction |
+	
+	aPortfolio := Portfolio new.
+	
+	aTransaction :=  Deposit for: 100.
+		
+	self deny: (aPortfolio hasRegistered: aTransaction).
+
+! !
+
+!methodRemoval: PortfolioTest #test04 stamp: 'Federico 11/6/2020 11:55:38'!
+test04
+	| aPortfolio aTransaction |
+	
+	aPortfolio := Portfolio new.
+	
+	aTransaction :=  Deposit for: 100.
+		
+	self deny: (aPortfolio hasRegistered: aTransaction).
+
+!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:56:07'!
+test05PortfolioHasRegisteredAccountTransactions
+	| aPortfolio anAccount aTransaction |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aTransaction := Deposit register: 100 on: anAccount.
+	aPortfolio add: anAccount.
+		
+	self assert: (aPortfolio hasRegistered: aTransaction).
+
+! !
+
+!methodRemoval: PortfolioTest #test05 stamp: 'Federico 11/6/2020 11:56:14'!
+test05
+	| aPortfolio anAccount aTransaction |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aTransaction := Deposit register: 100 on: anAccount.
+	aPortfolio add: anAccount.
+		
+	self assert: (aPortfolio hasRegistered: aTransaction).
+
+!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:56:43'!
+test06PortfolioHasRegisteredAnotherPortfolioTransactions
+
+	| aMainPortfolio anotherPortfolio aPortfolioAccount aMainAccount aTransaction secondTransaction |
+	
+	aMainPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortfolioAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	
+	aMainPortfolio add: aMainAccount.
+	aMainPortfolio add: anotherPortfolio.
+
+	aTransaction := Deposit register: 100 on: aPortfolioAccount.	
+	secondTransaction := Deposit register: 100 on: aMainAccount.
+
+	self assert: (anotherPortfolio hasRegistered: aTransaction).
+	self assert: (aMainPortfolio hasRegistered: secondTransaction).
+	self assert: (aMainPortfolio hasRegistered: aTransaction).
+
+
+! !
+
+!methodRemoval: PortfolioTest #test06 stamp: 'Federico 11/6/2020 11:56:47'!
+test06
+
+	| aMainPortfolio anotherPortfolio aPortfolioAccount aMainAccount aTransaction secondTransaction |
+	
+	aMainPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortfolioAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	
+	aMainPortfolio add: aMainAccount.
+	aMainPortfolio add: anotherPortfolio.
+
+	aTransaction := Deposit register: 100 on: aPortfolioAccount.	
+	secondTransaction := Deposit register: 100 on: aMainAccount.
+
+	self assert: (anotherPortfolio hasRegistered: aTransaction).
+	self assert: (aMainPortfolio hasRegistered: secondTransaction).
+	self assert: (aMainPortfolio hasRegistered: aTransaction).
+
+
+!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:57:48'!
+test07PortfolioStartsWithNoTransactions
+	| aPortfolio |
+	
+	aPortfolio := Portfolio new.
+		
+		
+	self assert: ((aPortfolio transactions) isEmpty).
+
+! !
+
+!methodRemoval: PortfolioTest #test07 stamp: 'Federico 11/6/2020 11:57:54'!
+test07
+	| aPortfolio |
+	
+	aPortfolio := Portfolio new.
+		
+		
+	self assert: ((aPortfolio transactions) isEmpty).
+
+!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:58:13'!
+test08PortfolioIncludesAccountTransactions
+	| aPortfolio anAccount aTransaction |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortfolio add: anAccount.
+	aTransaction := Deposit register: 50 on: anAccount.
+		
+	self assert: 1 equals: anAccount transactions size.
+	self assert: (aPortfolio transactions includes: aTransaction).
+		
+
+! !
+
+!methodRemoval: PortfolioTest #test08 stamp: 'Federico 11/6/2020 11:58:17'!
+test08
+	| aPortfolio anAccount aTransaction |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortfolio add: anAccount.
+	aTransaction := Deposit register: 50 on: anAccount.
+		
+	self assert: 1 equals: anAccount transactions size.
+	self assert: (aPortfolio transactions includes: aTransaction).
+		
+
+!
+!PortfolioTest methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 11:58:28'!
+test09PortfolioIncludesAnotherPortfolioTransactions
+	| aMainPortfolio anotherPortfolio aMainAccount aPortfolioAccount aTransaction secondTransaction |
+	
+	aMainPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aPortfolioAccount  := ReceptiveAccount new.
+	aMainAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	
+	aMainPortfolio add: anotherPortfolio.
+	aMainPortfolio add: aMainAccount.
+
+	aTransaction := Deposit register: 100 on: aPortfolioAccount.	
+	secondTransaction := Deposit register: 200 on: aMainAccount.	
+		
+	self assert: 2 equals: aMainPortfolio transactions size.
+	self assert: (aMainPortfolio transactions includes: aTransaction).
+	self assert: (aMainPortfolio transactions includes: secondTransaction).
+		
+
+! !
+
+!methodRemoval: PortfolioTest #test09 stamp: 'Federico 11/6/2020 11:58:31'!
+test09
+	| aMainPortfolio anotherPortfolio aMainAccount aPortfolioAccount aTransaction secondTransaction |
+	
+	aMainPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aPortfolioAccount  := ReceptiveAccount new.
+	aMainAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	
+	aMainPortfolio add: anotherPortfolio.
+	aMainPortfolio add: aMainAccount.
+
+	aTransaction := Deposit register: 100 on: aPortfolioAccount.	
+	secondTransaction := Deposit register: 200 on: aMainAccount.	
+		
+	self assert: 2 equals: aMainPortfolio transactions size.
+	self assert: (aMainPortfolio transactions includes: aTransaction).
+	self assert: (aMainPortfolio transactions includes: secondTransaction).
+		
+
+!
+
+----SNAPSHOT----(6 November 2020 12:02:18) CuisUniversity-4365.image priorSource: 19266749!
