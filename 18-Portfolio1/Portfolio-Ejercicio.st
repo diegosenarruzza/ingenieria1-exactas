@@ -154,8 +154,9 @@ test09PortfolioIncludesAnotherPortfolioTransactions
 
 ! !
 
-!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:31:22'!
-test10
+
+!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 21:42:40'!
+test10PortafolioShouldNotBeAddedToHimself
 	| aPortfolio |
 	
 	aPortfolio := Portfolio new.
@@ -166,40 +167,75 @@ test10
 		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
 ! !
 
-!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:39:55'!
-test11
-	| aPortfolio aRepeatedPortfolioRegister |
+!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 22:18:32'!
+test11AddedPortfolioShouldNotContainRepeatedChilds
+	| mainPortfolio secondPortfolio |
 	
-	aPortfolio := Portfolio new.
-	aRepeatedPortfolioRegister  := Portfolio new.
+	mainPortfolio := Portfolio new.
+	secondPortfolio := Portfolio new.
 	
-	aPortfolio add: aRepeatedPortfolioRegister.
-	
+	mainPortfolio add: secondPortfolio.
 	self 
-		should: [ aPortfolio add: aRepeatedPortfolioRegister. ]
+		should: [ secondPortfolio add: mainPortfolio. ]
 		raise: Error
 		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
 ! !
 
-!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 22:05:19'!
-test12
-
-	| aPortfolio secondPortfolio |
+!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 22:18:16'!
+test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds
+	| mainPortfolio secondPortfolio thirdPortfolio |
 	
-	aPortfolio := Portfolio new.
-	secondPortfolio  := Portfolio new.
+	mainPortfolio := Portfolio new.
+	secondPortfolio := Portfolio new.
+	thirdPortfolio := Portfolio new.
 	
-	secondPortfolio add: aPortfolio.
-	
+	mainPortfolio add: secondPortfolio.
+	secondPortfolio add: thirdPortfolio.
 	self 
-		should: [aPortfolio add: secondPortfolio. 	]
+		should: [ thirdPortfolio add: mainPortfolio. ]
 		raise: Error
 		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
 ! !
 
-!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:10:02'!
-test13
+!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 22:06:52'!
+test13AddedPortafolioShouldNotBeInHisChilds
 
+	| aPortfolio aRepeatedPortfolio |
+	
+	aPortfolio := Portfolio new.
+	aRepeatedPortfolio  := Portfolio new.
+	
+	aPortfolio add: aRepeatedPortfolio.
+	
+	self 
+		should: [ aPortfolio add: aRepeatedPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		
+! !
+
+!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 22:12:24'!
+test14AddedPortafolioShouldNotBeInHisSuccesiveChilds
+
+	| mainPortfolio secondPortfolio aRepeatedPortfolio |
+	
+	mainPortfolio := Portfolio new.
+	secondPortfolio := Portfolio new.
+	aRepeatedPortfolio  := Portfolio new.
+	
+	mainPortfolio add: secondPortfolio. 
+	secondPortfolio add: aRepeatedPortfolio.
+	
+	self 
+		should: [ mainPortfolio add: aRepeatedPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		
+! !
+
+!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 22:26:43'!
+test15AddedPortfolioChildsShouldNotBeInPortfolioChilds
+	
 	| aPortfolio secondPortfolio aRepeatedPortfolioRegister |
 	
 	aPortfolio := Portfolio new.
@@ -214,50 +250,30 @@ test13
 		should: [ aPortfolio add: secondPortfolio. ]
 		raise: Error
 		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		
 ! !
 
-!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:39:49'!
-test14
-
+!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 23:31:31'!
+test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy
+	
 	| aPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
 	
 	aPortfolio := Portfolio new.
 	secondPortfolio  := Portfolio new.
-	thirdPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
 	
 	aRepeatedPortfolioRegister := ReceptiveAccount new.
-		
-	aPortfolio add: aRepeatedPortfolioRegister.
+	
 	thirdPortfolio add: aRepeatedPortfolioRegister.
-	
-	secondPortfolio add: thirdPortfolio. 
-
-	self 
-		should: [aPortfolio add: secondPortfolio.]
-		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
-! !
-
-!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:42:01'!
-test15
-
-	| mainPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
-	
-	mainPortfolio := Portfolio new.
-	secondPortfolio  := Portfolio new.
-	thirdPortfolio  := Portfolio new.
-	
-	aRepeatedPortfolioRegister := ReceptiveAccount new.
-		
 	secondPortfolio add: aRepeatedPortfolioRegister.
-	thirdPortfolio add: aRepeatedPortfolioRegister.
 	
-	mainPortfolio add: secondPortfolio. 
-
+	aPortfolio add: secondPortfolio.
+	
 	self 
-		should: [mainPortfolio add: thirdPortfolio.]
+		should: [ aPortfolio add: thirdPortfolio. ]
 		raise: Error
 		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		
 ! !
 
 
@@ -485,13 +501,12 @@ PortfolioRegister subclass: #Portfolio
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 17:12:21'!
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 22:55:27'!
 hasPortfolioRegister: aPortfolioRegister
-	^(self = aPortfolioRegister)
-	or: [portfolioRegisters includes: aPortfolioRegister]
-	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not] "SELF"
-	
-	or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not] "aPortfolioRegister"
+
+	^(portfolioRegisters includes: aPortfolioRegister)
+	or: [(portfolioRegisters select: [ :childRegisters | aPortfolioRegister  hasPortfolioRegister: childRegisters ]) isEmpty not]
+	or: [(portfolioRegisters select: [ :childRegisters | childRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not].
 	! !
 
 !Portfolio methodsFor: 'testing' stamp: 'Federico 11/6/2020 21:01:52'!
@@ -518,15 +533,14 @@ balance
 	! !
 
 
-!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:13:57'!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 22:55:13'!
 add: aPortfolioRegister
 
-
-	(
-		(self hasPortfolioRegister: aPortfolioRegister)
-		or: [aPortfolioRegister hasPortfolioRegister: self] 
-	)
-		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	((self = aPortfolioRegister)
+	or: [aPortfolioRegister hasPortfolioRegister: self]
+	or:[self hasPortfolioRegister: aPortfolioRegister])
+	
+	ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
 	
 	
 	portfolioRegisters add: aPortfolioRegister.! !
