@@ -154,6 +154,112 @@ test09PortfolioIncludesAnotherPortfolioTransactions
 
 ! !
 
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:31:22'!
+test10
+	| aPortfolio |
+	
+	aPortfolio := Portfolio new.
+	
+	self 
+		should: [ aPortfolio add: aPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:39:55'!
+test11
+	| aPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	aRepeatedPortfolioRegister  := Portfolio new.
+	
+	aPortfolio add: aRepeatedPortfolioRegister.
+	
+	self 
+		should: [ aPortfolio add: aRepeatedPortfolioRegister. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 22:05:19'!
+test12
+
+	| aPortfolio secondPortfolio |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	secondPortfolio add: aPortfolio.
+	
+	self 
+		should: [aPortfolio add: secondPortfolio. 	]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:10:02'!
+test13
+
+	| aPortfolio secondPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	aPortfolio add: aRepeatedPortfolioRegister.
+	
+	self 
+		should: [ aPortfolio add: secondPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:39:49'!
+test14
+
+	| aPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+		
+	aPortfolio add: aRepeatedPortfolioRegister.
+	thirdPortfolio add: aRepeatedPortfolioRegister.
+	
+	secondPortfolio add: thirdPortfolio. 
+
+	self 
+		should: [aPortfolio add: secondPortfolio.]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:42:01'!
+test15
+
+	| mainPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
+	
+	mainPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+		
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	thirdPortfolio add: aRepeatedPortfolioRegister.
+	
+	mainPortfolio add: secondPortfolio. 
+
+	self 
+		should: [mainPortfolio add: thirdPortfolio.]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
 
 !classDefinition: #ReceptiveAccountTest category: #'Portfolio-Ejercicio'!
 TestCase subclass: #ReceptiveAccountTest
@@ -350,50 +456,94 @@ for: aValue
 	^ self new initializeFor: aValue ! !
 
 
-!classDefinition: #Portfolio category: #'Portfolio-Ejercicio'!
-Object subclass: #Portfolio
-	instanceVariableNames: 'nodes'
+!classDefinition: #PortfolioRegister category: #'Portfolio-Ejercicio'!
+Object subclass: #PortfolioRegister
+	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!Portfolio methodsFor: 'testing' stamp: 'Federico 11/5/2020 19:01:39'!
+!PortfolioRegister methodsFor: 'transactions' stamp: 'Federico 11/6/2020 20:58:26'!
+transactions 
+	self subclassResponsibility ! !
+
+
+!PortfolioRegister methodsFor: 'balance' stamp: 'Federico 11/6/2020 20:58:54'!
+balance
+	self subclassResponsibility ! !
+
+
+!PortfolioRegister methodsFor: 'testing' stamp: 'Federico 11/6/2020 21:00:28'!
 hasRegistered: aTransaction
-	nodes ifEmpty: [^false].
-	^(nodes findFirst: [ :aNode | aNode  hasRegistered: aTransaction. ]) > 0.
+	self subclassResponsibility ! !
+
+
+!classDefinition: #Portfolio category: #'Portfolio-Ejercicio'!
+PortfolioRegister subclass: #Portfolio
+	instanceVariableNames: 'portfolioRegisters'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 17:12:21'!
+hasPortfolioRegister: aPortfolioRegister
+	^(self = aPortfolioRegister)
+	or: [portfolioRegisters includes: aPortfolioRegister]
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not] "SELF"
+	
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not] "aPortfolioRegister"
+	! !
+
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/6/2020 21:01:52'!
+hasRegistered: aTransaction
+	^(portfolioRegisters select: [ :aNode | aNode  hasRegistered: aTransaction. ]) isEmpty not.
 ! !
 
 
-!Portfolio methodsFor: 'initialization' stamp: 'Federico 11/2/2020 20:59:25'!
+!Portfolio methodsFor: 'initialization' stamp: 'Federico 11/6/2020 21:01:52'!
 initialize
-	nodes := OrderedCollection new.! !
+	portfolioRegisters := OrderedCollection new.! !
 
 
-!Portfolio methodsFor: 'transactions' stamp: 'Federico 11/5/2020 19:45:29'!
+!Portfolio methodsFor: 'transactions' stamp: 'Federico 11/6/2020 21:01:52'!
 transactions
-	| transactions |
-	
-	transactions := OrderedCollection new.
-	nodes do: [ :node | transactions addAll: node transactions].
-	
-	^transactions.
+	^(portfolioRegisters collect: [ :node | node transactions ]) flatten.
 	! !
 
 
-!Portfolio methodsFor: 'balance' stamp: 'Federico 11/2/2020 21:10:18'!
+!Portfolio methodsFor: 'balance' stamp: 'Federico 11/6/2020 21:01:52'!
 balance
-	^nodes sum: [ :aNode | aNode balance.] ifEmpty: [0].
+	^portfolioRegisters sum: [ :aNode | aNode balance.] ifEmpty: [0].
 	
 	! !
 
 
-!Portfolio methodsFor: 'adding' stamp: 'Federico 11/2/2020 21:01:25'!
-add: aPortfolio
-	nodes add: aPortfolio.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:13:57'!
+add: aPortfolioRegister
+
+
+	(
+		(self hasPortfolioRegister: aPortfolioRegister)
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Portfolio class' category: #'Portfolio-Ejercicio'!
+Portfolio class
+	instanceVariableNames: ''!
+
+!Portfolio class methodsFor: 'error descriptions' stamp: 'Federico 11/6/2020 21:33:19'!
+shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+	^'A portfolio should not have repeated portfolio registers'! !
 
 
 !classDefinition: #ReceptiveAccount category: #'Portfolio-Ejercicio'!
-Object subclass: #ReceptiveAccount
+PortfolioRegister subclass: #ReceptiveAccount
 	instanceVariableNames: 'transactions'
 	classVariableNames: ''
 	poolDictionaries: ''
@@ -428,7 +578,12 @@ balance
     ^balance.! !
 
 
-!ReceptiveAccount methodsFor: 'testing' stamp: 'NR 10/17/2019 03:28:43'!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:18:24'!
+hasPortfolioRegister: aPortfolioRegister
+	^self = aPortfolioRegister.
+! !
+
+!ReceptiveAccount methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:15:43'!
 hasRegistered: aTransaction
 
 	^ transactions includes: aTransaction 

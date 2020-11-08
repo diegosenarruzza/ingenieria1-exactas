@@ -4629,3 +4629,2457 @@ test09
 !
 
 ----SNAPSHOT----(6 November 2020 12:02:18) CuisUniversity-4365.image priorSource: 19266749!
+
+----QUIT----(6 November 2020 12:03:18) CuisUniversity-4365.image priorSource: 19281083!
+
+----STARTUP---- (6 November 2020 20:23:14) as D:\facultad\Smalltalk\windows64\CuisUniversity-4365.image!
+
+!Portfolio methodsFor: 'transactions' stamp: 'Federico 11/6/2020 20:31:39' prior: 50933649!
+transactions
+	^(nodes collect: [ :node | node transactions ]) flatten.
+	! !
+
+sarasa := OrderedCollection new.
+
+sarasa add: 'hola'.
+sarasa add: 'hola2'.
+sarasa add: 'amo'. 
+sarasa add: 'amo'. 
+sarasa "an OrderedCollection('hola' 'hola2' 'amo' 'amo') "
+
+sarasa findFirst: 'amo'
+!
+
+sarasa := OrderedCollection new.!
+
+sarasa!
+
+sarasa addAll: #(7 8 9)!
+
+sarasa!
+
+sarasa addAll: #(#(#(7 8 9)7 8 9)#(7 8 9)7 8 9)!
+
+sarasa!
+
+sarasa flatten!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 20:37:25'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 20:37:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 20:37:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 20:37:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 20:37:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/6/2020 20:37:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 20:37:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 20:37:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 20:37:30'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 20:37:30'!
+PASSED!
+
+sarasa := OrderedCollection new.!
+
+sarasa addAll: #(1,2,3)!
+
+sarasa!
+
+sarasa!
+
+sarasa add: 5!
+
+sarasa !
+
+sarasa detect: [:a | a > 3] ifNone: [false]!
+
+sarasa add: 5!
+
+sarasa := OrderedCollection new. !
+
+sarasa add: 5!
+
+sarasa add: 4!
+
+sarasa add: 3!
+
+sarasa add: 2!
+
+sarasa add: 1!
+
+sarasa detect: [:a | a > 3] ifNone: [false]!
+
+sarasa detect: [:a | a > 7] ifNone: [false]!
+
+sarasa detect: [:a | a > 7] ifNone: [false]!
+
+sarasa!
+
+sarasa detect: [:a | a > 7] ifNone: [false]!
+
+sarasa detect: [:a | a > 4] ifNone: [false]!
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/6/2020 20:41:39' prior: 50933129!
+hasRegistered: aTransaction
+	^(nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) isEmpty.
+! !
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 20:41:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 20:41:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 20:41:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 20:41:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 20:41:45'!
+FAILURE!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/6/2020 20:41:45'!
+FAILURE!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 20:41:45'!
+FAILURE!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 20:41:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 20:41:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 20:41:46'!
+PASSED!
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/6/2020 20:42:34' prior: 50934264!
+hasRegistered: aTransaction
+	^(nodes select: [ :aNode | aNode  hasRegistered: aTransaction. ]) isEmpty not.
+! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 20:42:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 20:42:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 20:42:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 20:42:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/6/2020 20:42:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 20:42:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 20:42:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 20:42:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 20:42:40'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 20:43:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 20:43:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 20:43:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 20:43:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/6/2020 20:43:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 20:43:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 20:43:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 20:43:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 20:43:29'!
+PASSED!
+
+----SNAPSHOT----(6 November 2020 20:44:07) CuisUniversity-4365.image priorSource: 19281176!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/6/2020 20:51:43' prior: 50932387!
+add: aPortfolio
+	nodes add: aPortfolio.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/6/2020 20:53:34' prior: 50934384!
+add: aPortfolio
+	nodes add: aPortfolio.! !
+
+Object subclass: #PortfolioRegister
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #PortfolioRegister category: #'Portfolio-Ejercicio' stamp: 'Federico 11/6/2020 20:56:50'!
+Object subclass: #PortfolioRegister
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+PortfolioRegister subclass: #Portfolio
+	instanceVariableNames: 'nodes'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #Portfolio category: #'Portfolio-Ejercicio' stamp: 'Federico 11/6/2020 20:57:06'!
+PortfolioRegister subclass: #Portfolio
+	instanceVariableNames: 'nodes'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+PortfolioRegister subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #ReceptiveAccount category: #'Portfolio-Ejercicio' stamp: 'Federico 11/6/2020 20:57:16'!
+PortfolioRegister subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!PortfolioRegister methodsFor: 'no messages' stamp: 'Federico 11/6/2020 20:58:26'!
+transactions 
+	self subclassResponsibility ! !
+!PortfolioRegister methodsFor: 'transactions' stamp: 'Federico 11/6/2020 20:58:54'!
+balance
+	self subclassResponsibility ! !
+
+	self subclassResponsibility !
+!PortfolioRegister methodsFor: 'balance' stamp: 'Federico 11/6/2020 20:59:26'!
+hasRegistered: aRegister
+	self subclassResponsibility ! !
+!PortfolioRegister methodsFor: 'testing' stamp: 'Federico 11/6/2020 21:00:28' prior: 50934442!
+hasRegistered: aTransaction
+	self subclassResponsibility ! !
+
+!classDefinition: #Portfolio category: #'Portfolio-Ejercicio' stamp: 'Federico 11/6/2020 21:01:51'!
+PortfolioRegister subclass: #Portfolio
+	instanceVariableNames: 'portfolioRegisters'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 21:01:52' prior: 50934194 overrides: 50934432!
+transactions
+	^(portfolioRegisters collect: [ :node | node transactions ]) flatten.
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 21:01:52' prior: 50932375 overrides: 16896425!
+initialize
+	portfolioRegisters := OrderedCollection new.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 21:01:52' prior: 50934308 overrides: 50934447!
+hasRegistered: aTransaction
+	^(portfolioRegisters select: [ :aNode | aNode  hasRegistered: aTransaction. ]) isEmpty not.
+! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 21:01:52' prior: 50932475 overrides: 50934437!
+balance
+	^portfolioRegisters sum: [ :aNode | aNode balance.] ifEmpty: [0].
+	
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/6/2020 21:01:52' prior: 50934389!
+add: aPortfolio
+	portfolioRegisters add: aPortfolio.! !
+
+----SNAPSHOT----(6 November 2020 21:02:10) CuisUniversity-4365.image priorSource: 19287369!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 21:02:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 21:02:33'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 21:02:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 21:02:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 21:02:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/6/2020 21:02:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 21:02:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 21:02:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 21:02:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 21:02:34'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 21:02:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 21:02:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 21:02:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 21:02:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 21:02:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/6/2020 21:02:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 21:02:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 21:02:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 21:02:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 21:02:45'!
+PASSED!
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:27:44'!
+test10
+	| aPortfolio |
+	
+	aPortfolio := Portfolio new.
+	
+	aPortfolio add: aPortfolio 
+
+! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:31:22' prior: 50934570!
+test10
+	| aPortfolio |
+	
+	aPortfolio := Portfolio new.
+	
+	self 
+		should: [ aPortfolio add: aPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/6/2020 21:31:28'!
+ERROR!
+!Portfolio class methodsFor: 'error descriptions' stamp: 'Federico 11/6/2020 21:32:02'!
+shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+	self shouldBeImplemented.! !
+!Portfolio class methodsFor: 'error descriptions' stamp: 'Federico 11/6/2020 21:33:19' prior: 50934589!
+shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+	^'A portfolio should not have repeated portfolio registers'! !
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/6/2020 21:33:21'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/6/2020 21:35:20' prior: 50934488!
+add: aPortfolio
+	self = aPortfolio ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	portfolioRegisters add: aPortfolio.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/6/2020 21:35:24' prior: 50934604!
+add: aPortfolio
+	self = aPortfolio ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	portfolioRegisters add: aPortfolio.! !
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/6/2020 21:35:27'!
+PASSED!
+
+----SNAPSHOT----(6 November 2020 21:35:39) CuisUniversity-4365.image priorSource: 19290935!
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:37:22'!
+test11
+	| aPortfolio sec|
+	
+	aPortfolio := Portfolio new.
+	
+	self 
+		should: [ aPortfolio add: aPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:38:05' prior: 50934662!
+test11
+	| aPortfolio portfolioRepetido |
+	
+	aPortfolio := Portfolio new.
+	portfolioRepetido  := Portfolio new.
+	
+	aPortfolio add: portfolioRepetido.
+	
+	self 
+		should: [ aPortfolio add: portfolioRepetido. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:38:59' prior: 50934672!
+test11
+	| aPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	aRepeatedPortfolioRegister  := Portfolio new.
+	
+	aPortfolio add: aRepeatedPortfolioRegister.
+	
+	self 
+		should: [ aPortfolio add: aRepeatedPortfolioRegister. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:39:55' prior: 50934685!
+test11
+	| aPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	aRepeatedPortfolioRegister  := Portfolio new.
+	
+	aPortfolio add: aRepeatedPortfolioRegister.
+	
+	self 
+		should: [ aPortfolio add: aRepeatedPortfolioRegister. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/6/2020 21:40:06' prior: 50934612!
+add: aPortfolioRegister
+	self = aPortfolioRegister ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/6/2020 21:40:23'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/6/2020 21:43:33' prior: 50934714!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister or: [portfolioRegisters includes: aPortfolioRegister])
+	ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/6/2020 21:43:39' prior: 50934726!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister or: [portfolioRegisters includes: aPortfolioRegister])
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/6/2020 21:43:52'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/6/2020 21:43:53'!
+PASSED!
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:49:10'!
+test12
+
+	| aPortfolio secondPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	aPortfolio add: aRepeatedPortfolioRegister.
+	
+	
+	self 
+		should: [ aPortfolio add: aRepeatedPortfolioRegister. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 21:49:19' prior: 50934789!
+test12
+
+	| aPortfolio secondPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	aPortfolio add: aRepeatedPortfolioRegister.
+	
+	self 
+		should: [ aPortfolio add: secondPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/6/2020 21:53:07'!
+FAILURE!
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 22:04:05'!
+test13
+
+	| aPortfolio secondPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	aPortfolio add: aRepeatedPortfolioRegister.
+	
+	self 
+		should: [ aPortfolio add: secondPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 22:05:19' prior: 50934807!
+test12
+
+	| aPortfolio secondPortfolio |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	secondPortfolio add: aPortfolio.
+	
+	self 
+		should: [aPortfolio add: secondPortfolio. 	]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/6/2020 22:05:29'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/6/2020 22:07:49' prior: 50934737!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister]
+		or: [aPortfolioRegister includes: self]
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/6/2020 22:07:50'!
+FAILURE!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/6/2020 22:08:05'!
+FAILURE!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/6/2020 22:08:30'!
+ERROR!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/6/2020 22:08:54'!
+ERROR!
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/6/2020 22:09:05'!
+includes: aPortfolio 
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/6/2020 22:09:18' prior: 50934882!
+includes: aPortfolio 
+	^true.! !
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/6/2020 22:09:20'!
+ERROR!
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/6/2020 22:10:42' prior: 50934887!
+includes: aPortfolioRegister
+	^portfolioRegisters includes: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/6/2020 22:10:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 22:10:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 22:10:44'!
+ERROR!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 22:10:44'!
+ERROR!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 22:10:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/6/2020 22:10:44'!
+ERROR!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 22:10:44'!
+ERROR!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 22:10:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 22:10:44'!
+ERROR!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 22:10:44'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/6/2020 22:10:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/6/2020 22:10:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/6/2020 22:10:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/6/2020 22:10:45'!
+ERROR!
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/6/2020 22:13:12' prior: 50934894!
+includes: aPortfolioRegister
+	^portfolioRegisters includes: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 22:13:16'!
+ERROR!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'Federico 11/6/2020 22:14:36'!
+includes: aPortfolioRegister
+	^self = aPortfolioRegister.
+! !
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 22:14:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 22:14:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 22:14:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/6/2020 22:15:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/6/2020 22:15:00'!
+FAILURE!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/6/2020 22:15:00'!
+FAILURE!
+
+----SNAPSHOT----(6 November 2020 22:15:46) CuisUniversity-4365.image priorSource: 19296244!
+
+----STARTUP---- (7 November 2020 15:55:35) as D:\facultad\Smalltalk\windows64\CuisUniversity-4365.image!
+
+
+----SNAPSHOT----(7 November 2020 15:55:43) CuisUniversity-4365.image priorSource: 19307684!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:03:47'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:08:10' prior: 50934860!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister]
+		or: [aPortfolioRegister includes: self]
+		or: [portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters includes: aPortfolioRegister ]]
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:08:16'!
+FAILURE!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:08:36'!
+ERROR!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:08:42'!
+ERROR!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:08:46'!
+ERROR!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:09:20' prior: 50935028!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister]
+		or: [aPortfolioRegister includes: self]
+		or: [portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister includes: selfportfolioRegisters ]]
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:09:34' prior: 50935054!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister]
+		or: [aPortfolioRegister includes: self]
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister includes: selfportfolioRegisters ]) isEmpty not]
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:10:02' prior: 50934827!
+test13
+
+	| aPortfolio secondPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	aPortfolio add: aRepeatedPortfolioRegister.
+	
+	self 
+		should: [ aPortfolio add: secondPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:10:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:10:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:10:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:10:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:10:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:10:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:10:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:10:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:10:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:10:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:10:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:10:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:10:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:10:03'!
+PASSED!
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:13:43'!
+hasPortfolioRegister: aPortfolioRegister
+	^portfolioRegisters includes: aPortfolioRegister.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/7/2020 16:13:43' prior: 50934945!
+includes: aPortfolioRegister
+	^portfolioRegisters hasPortfolioRegister: aPortfolioRegister.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/7/2020 16:13:43' prior: 50935070!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters hasPortfolioRegister: aPortfolioRegister]
+		or: [aPortfolioRegister hasPortfolioRegister: self]
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/7/2020 16:13:43' prior: 50935150!
+hasPortfolioRegister: aPortfolioRegister
+	^portfolioRegisters hasPortfolioRegister: aPortfolioRegister.! !
+
+!methodRemoval: Portfolio #includes: stamp: 'Federico 11/7/2020 16:13:43'!
+includes: aPortfolioRegister
+	^portfolioRegisters hasPortfolioRegister: aPortfolioRegister.!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:14:41' prior: 50935164!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister]
+		or: [aPortfolioRegister hasPortfolioRegister: self]
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:14:54' prior: 50935182!
+hasPortfolioRegister: aPortfolioRegister
+	^portfolioRegisters includes: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:15:06'!
+ERROR!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:15:32'!
+hasPortfolioRegisters: aPortfolioRegister
+	^self = aPortfolioRegister.
+! !
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'Federico 11/7/2020 16:15:33' prior: 50931526 overrides: 50934447!
+hasRegistered: aTransaction
+
+	^ transactions hasPortfolioRegisters: aTransaction 
+! !
+
+!methodRemoval: ReceptiveAccount #includes: stamp: 'Federico 11/7/2020 16:15:33'!
+includes: aPortfolioRegister
+	^self = aPortfolioRegister.
+!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:15:43' prior: 50935228 overrides: 50934447!
+hasRegistered: aTransaction
+
+	^ transactions includes: aTransaction 
+! !
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:15:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:15:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:15:54'!
+ERROR!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:15:54'!
+ERROR!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:15:54'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:15:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:15:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:15:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:15:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:15:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:15:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:15:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:15:55'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:15:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:16:09'!
+ERROR!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:16:09'!
+ERROR!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:16:35'!
+ERROR!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:16:50'!
+ERROR!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:18:24'!
+hasPortfolioRegister: aPortfolioRegister
+	^self = aPortfolioRegister.
+! !
+
+!methodRemoval: ReceptiveAccount #hasPortfolioRegisters: stamp: 'Federico 11/7/2020 16:18:28'!
+hasPortfolioRegisters: aPortfolioRegister
+	^self = aPortfolioRegister.
+!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:18:36'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:18:37'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:18:37'!
+PASSED!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:27:24' prior: 50935194!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		
+		or: [aPortfolioRegister hasPortfolioRegister: self] "Hijos de aPortfolioRegister"
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not] "Hijos de hijos de aPortfolioRegister"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:27:28' prior: 50935363!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		
+		or: [aPortfolioRegister hasPortfolioRegister: self] "Hijos de aPortfolioRegister"
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not] "Hijos de hijos de aPortfolioRegister"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:30:15' prior: 50935087!
+test13
+
+	| aPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+		
+	aPortfolio add: aRepeatedPortfolioRegister.
+	thirdPortfolio add: aRepeatedPortfolioRegister.
+	
+	secondPortfolio add: thirdPortfolio. 
+
+	self 
+		should: [aPortfolio add: secondPortfolio.]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:30:59' prior: 50935403!
+test13
+
+	| aPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+		
+	aPortfolio add: aRepeatedPortfolioRegister.
+	thirdPortfolio add: aRepeatedPortfolioRegister.
+	
+	secondPortfolio add: thirdPortfolio. 
+
+	self 
+		should: [aPortfolio add: secondPortfolio.]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:31:04'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:32:52' prior: 50935383!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		
+		or: [aPortfolioRegister hasPortfolioRegister: self] "Hijos de aPortfolioRegister"
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not] "Hijos de hijos de aPortfolioRegister"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:35:32' prior: 50935211!
+hasPortfolioRegister: aPortfolioRegister
+	"portfolioRegisters includes: aPortfolioRegister."
+	^(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not
+	! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:36:34' prior: 50935465!
+hasPortfolioRegister: aPortfolioRegister
+	^(portfolioRegisters includes: aPortfolioRegister) or: 
+	[(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not]
+	! !
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:36:57'!
+PASSED!
+
+----SNAPSHOT----(7 November 2020 16:37:06) CuisUniversity-4365.image priorSource: 19307884!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:37:32' prior: 50935445!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		or: [self hasPortfolioRegister: aPortfolioRegister]
+		or: [aPortfolioRegister hasPortfolioRegister: self] "Hijos de aPortfolioRegister"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:37:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:37:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:37:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:37:39'!
+FAILURE!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:37:39'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:38:07' prior: 50935536!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		
+		or: [self hasPortfolioRegister: aPortfolioRegister] "Hijos de self"
+		or: [aPortfolioRegister hasPortfolioRegister: self] "Hijos de aPortfolioRegister"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:38:42' prior: 50935476!
+hasPortfolioRegister: aPortfolioRegister
+	^(portfolioRegisters includes: aPortfolioRegister)
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not]
+	! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:38:48' prior: 50935601!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		
+		or: [aPortfolioRegister hasPortfolioRegister: self] "Hijos de aPortfolioRegister"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:39:00' prior: 50935617!
+hasPortfolioRegister: aPortfolioRegister
+	^(portfolioRegisters includes: aPortfolioRegister)
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not]
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]
+	! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:39:10' prior: 50935642!
+hasPortfolioRegister: aPortfolioRegister
+	^(portfolioRegisters includes: aPortfolioRegister)
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not]
+	! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:39:16' prior: 50935628!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		
+		or: [aPortfolioRegister hasPortfolioRegister: self] "Hijos de aPortfolioRegister"
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:39:22'!
+PASSED!
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:39:49'!
+test14
+
+	| aPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+		
+	aPortfolio add: aRepeatedPortfolioRegister.
+	thirdPortfolio add: aRepeatedPortfolioRegister.
+	
+	secondPortfolio add: thirdPortfolio. 
+
+	self 
+		should: [aPortfolio add: secondPortfolio.]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:10:02' prior: 50935423!
+test13
+
+	| aPortfolio secondPortfolio aRepeatedPortfolioRegister |
+	
+	aPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	aPortfolio add: aRepeatedPortfolioRegister.
+	
+	self 
+		should: [ aPortfolio add: secondPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:40:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:40:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:40:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:40:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:40:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:40:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:40:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:40:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:40:22'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:40:23'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 16:40:23'!
+PASSED!
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/7/2020 16:42:01'!
+test15
+
+	| mainPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
+	
+	mainPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+		
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	thirdPortfolio add: aRepeatedPortfolioRegister.
+	
+	mainPortfolio add: secondPortfolio. 
+
+	self 
+		should: [mainPortfolio add: thirdPortfolio.]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+! !
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:42:05'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:42:27' prior: 50935668!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		or: [self hasPortfolioRegister: aPortfolioRegister]
+		or: [aPortfolioRegister hasPortfolioRegister: self] "Hijos de aPortfolioRegister"
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:42:29'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:42:43' prior: 50935843!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+
+		or: [aPortfolioRegister hasPortfolioRegister: self] "Hijos de aPortfolioRegister"
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:48:24' prior: 50935866!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+		
+		"Compara Hijos de aPortfolioRegister CONTRA self"
+		
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not] 
+		
+		"Compara Hijos de aPortfolioRegister CONTRA hijos de self en portfolioRegisters"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:48:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:48:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:48:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:48:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:48:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:48:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:48:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:48:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:48:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:48:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:48:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:48:29'!
+FAILURE!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:48:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:48:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 16:48:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:48:29'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:42:43' prior: 50935884!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+
+		or: [aPortfolioRegister hasPortfolioRegister: self] "Hijos de aPortfolioRegister"
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:49:42' prior: 50935957!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		"Compara "
+
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+		"Compara hijos de aPortfolioRegister CONTRA self"
+		
+		or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:51:47' prior: 50935657!
+hasPortfolioRegister: aPortfolioRegister
+	^(portfolioRegisters includes: aPortfolioRegister)
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not]
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]
+	! !
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:52:18'!
+PASSED!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:52:57' prior: 50935975!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		"Compara "
+
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+		"Compara hijos de aPortfolioRegister CONTRA self"
+		
+		"or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]"
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:53:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:53:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:53:01'!
+PASSED!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:54:03' prior: 50936063!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+	"Compara que no sean el mismo"
+
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+		"Compara aPortfolioRegister y sus hijos CONTRA self y sus hijos"
+		
+		"or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]"
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:54:08'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:54:08'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:54:08'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:54:09'!
+FAILURE!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:54:09'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:54:09'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:54:03' prior: 50936136!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+	"Compara que no sean el mismo"
+
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+		"Compara aPortfolioRegister y sus hijos CONTRA self y sus hijos"
+		
+		"or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]"
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:52:57' prior: 50936211!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+		or: [portfolioRegisters includes: aPortfolioRegister] 
+		"Compara "
+
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+		"Compara hijos de aPortfolioRegister CONTRA self"
+		
+		"or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]"
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:58:29' prior: 50936232!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+	"Compara SELF CONTRA aPortfolioRegister"
+	
+		or: [self includes: aPortfolioRegister] 
+		"Compara hijos de self conta AportfolioRegister"
+
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+		"or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:58:35' prior: 50936254!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+	"Compara SELF CONTRA aPortfolioRegister"
+	
+		or: [self hasPortfolioRegister: aPortfolioRegister] 
+		"Compara hijos de self conta AportfolioRegister"
+
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+		"or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:58:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:58:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:58:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:58:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:58:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:58:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:58:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:58:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:58:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:58:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:58:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:58:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:58:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:58:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:58:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 16:58:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:58:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:58:51'!
+PASSED!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:59:00' prior: 50936276!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+	"Compara SELF CONTRA aPortfolioRegister"
+	
+		or: [self hasPortfolioRegister: aPortfolioRegister] 
+		"Compara hijos de self conta AportfolioRegister"
+
+		"or: [aPortfolioRegister hasPortfolioRegister: self] "
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+		"or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:59:05'!
+FAILURE!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 16:59:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 16:59:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 16:59:06'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 16:59:49' prior: 50936403!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+	"Compara SELF CONTRA aPortfolioRegister"
+	
+		or: [self hasPortfolioRegister: aPortfolioRegister] 
+		"Compara hijos de self conta AportfolioRegister"
+
+		or: [aPortfolioRegister hasPortfolioRegister: self]
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+		"or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:00:41' prior: 50936480!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+	"Compara SELF CONTRA aPortfolioRegister"
+	
+		or: [self hasPortfolioRegister: aPortfolioRegister] 
+		"Compara hijos de self conta AportfolioRegister"
+
+		or: [aPortfolioRegister hasPortfolioRegister: self]
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:01:21' prior: 50936503!
+add: aPortfolioRegister
+
+	(
+	"Compara SELF CONTRA aPortfolioRegister"
+	
+		(self hasPortfolioRegister: aPortfolioRegister)
+		"Compara hijos de self conta AportfolioRegister"
+
+		"or: [aPortfolioRegister hasPortfolioRegister: self]"
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:01:33' prior: 50936521!
+add: aPortfolioRegister
+
+	(
+	"Compara SELF CONTRA aPortfolioRegister"
+	
+		(self hasPortfolioRegister: aPortfolioRegister)
+		"Compara hijos de self conta AportfolioRegister"
+
+		or: [aPortfolioRegister hasPortfolioRegister: self]
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:01:49' prior: 50936538!
+add: aPortfolioRegister
+
+	(self = aPortfolioRegister 
+	"Compara SELF CONTRA aPortfolioRegister"
+	
+		or: [self hasPortfolioRegister: aPortfolioRegister] 
+		"Compara hijos de self conta AportfolioRegister"
+
+		or: [aPortfolioRegister hasPortfolioRegister: self]
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 17:02:28' prior: 50935997!
+hasPortfolioRegister: aPortfolioRegister
+	^(self = aPortfolioRegister)
+	or: [portfolioRegisters includes: aPortfolioRegister]
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not]
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]
+	! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:02:56' prior: 50936555!
+add: aPortfolioRegister
+
+
+	(
+		(self hasPortfolioRegister: aPortfolioRegister)
+		"Compara hijos de self conta AportfolioRegister"
+
+		or: [aPortfolioRegister hasPortfolioRegister: self]
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 17:02:59'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 17:03:01'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 17:03:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 17:03:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 17:03:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 17:03:02'!
+PASSED!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:03:36' prior: 50936589!
+add: aPortfolioRegister
+
+
+	(
+		(self hasPortfolioRegister: aPortfolioRegister)
+		"Compara hijos de self conta AportfolioRegister"
+
+		"or: [aPortfolioRegister hasPortfolioRegister: self]"
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 17:03:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 17:03:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 17:03:41'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 17:03:42'!
+FAILURE!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 17:03:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 17:03:42'!
+FAILURE!
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 17:07:58' prior: 50936573!
+hasPortfolioRegister: aPortfolioRegister
+	^(self = aPortfolioRegister)
+	or: [portfolioRegisters includes: aPortfolioRegister]
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not] "SELF"
+	
+	
+	
+	"or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not]" "aPortfolioRegister"
+	! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:08:24' prior: 50936660!
+add: aPortfolioRegister
+
+
+	(
+		(self hasPortfolioRegister: aPortfolioRegister)
+		"Compara hijos de self conta AportfolioRegister"
+
+		or: [aPortfolioRegister hasPortfolioRegister: self]
+		"Compara hijos de aPortfolioRegister CONTRA hijos de self"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 17:09:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 17:09:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 17:09:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 17:09:17'!
+FAILURE!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 17:09:17'!
+FAILURE!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 17:09:17'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:10:10' prior: 50936751!
+add: aPortfolioRegister
+
+
+	(
+		(self hasPortfolioRegister: aPortfolioRegister)
+		or: [aPortfolioRegister hasPortfolioRegister: self]
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 17:10:30' prior: 50936734!
+hasPortfolioRegister: aPortfolioRegister
+	^(self = aPortfolioRegister)
+	or: [portfolioRegisters includes: aPortfolioRegister]
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not] "SELF"
+	
+	
+	
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not] "aPortfolioRegister"
+	! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 17:11:09' prior: 50936831!
+hasPortfolioRegister: aPortfolioRegister
+	^(self = aPortfolioRegister)
+	or: [portfolioRegisters includes: aPortfolioRegister]
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not] "SELF"
+	
+	or: [aPortfolioRegister hasPortfolioRegister: self] "aPortfolioRegister"
+	! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:11:15' prior: 50936819!
+add: aPortfolioRegister
+
+
+	(
+		(self hasPortfolioRegister: aPortfolioRegister)
+		"or: [aPortfolioRegister hasPortfolioRegister: self]"
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 17:11:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 17:11:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 17:11:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 17:11:20'!
+PASSED!
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 17:12:16' prior: 50936848!
+hasPortfolioRegister: aPortfolioRegister
+	^(self = aPortfolioRegister)
+	or: [portfolioRegisters includes: aPortfolioRegister]
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not] "SELF"
+	
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not] "SELF"
+	! !
+!Portfolio methodsFor: 'testing' stamp: 'Federico 11/7/2020 17:12:21' prior: 50936888!
+hasPortfolioRegister: aPortfolioRegister
+	^(self = aPortfolioRegister)
+	or: [portfolioRegisters includes: aPortfolioRegister]
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | selfportfolioRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not] "SELF"
+	
+	or: [(portfolioRegisters select: [ :selfportfolioRegisters | aPortfolioRegister  hasPortfolioRegister: selfportfolioRegisters ]) isEmpty not] "aPortfolioRegister"
+	! !
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test10 stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test11 stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 17:12:27'!
+FAILURE!
+
+!testRun: #PortfolioTest #test13 stamp: 'Federico 11/7/2020 17:12:27'!
+PASSED!
+
+!testRun: #PortfolioTest #test14 stamp: 'Federico 11/7/2020 17:12:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test15 stamp: 'Federico 11/7/2020 17:12:28'!
+PASSED!
+
+!testRun: #PortfolioTest #test12 stamp: 'Federico 11/7/2020 17:12:28'!
+FAILURE!
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:12:37' prior: 50936862!
+add: aPortfolioRegister
+
+
+	(
+		(self hasPortfolioRegister: aPortfolioRegister)
+		or: [aPortfolioRegister hasPortfolioRegister: self]
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:13:51' prior: 50936976!
+add: aPortfolioRegister
+
+
+	(
+		(self hasPortfolioRegister: aPortfolioRegister)
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+		
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+!Portfolio methodsFor: 'adding' stamp: 'Federico 11/7/2020 17:13:57' prior: 50936988!
+add: aPortfolioRegister
+
+
+	(
+		(self hasPortfolioRegister: aPortfolioRegister)
+		or: [aPortfolioRegister hasPortfolioRegister: self] 
+	)
+		ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
+	
+	
+	portfolioRegisters add: aPortfolioRegister.! !
+
+----SNAPSHOT----(7 November 2020 17:14:28) CuisUniversity-4365.image priorSource: 19324206!
+
+----SNAPSHOT----(7 November 2020 17:15:01) CuisUniversity-4365.image priorSource: 19371545!
+
+----QUIT----(7 November 2020 20:33:45) CuisUniversity-4365.image priorSource: 19371638!
