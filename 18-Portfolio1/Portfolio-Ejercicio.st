@@ -1,4 +1,4 @@
-!classDefinition: #PortfolioTest category: #'Portfolio-Ejercicio'!
+!classDefinition: #PortfolioTest category: 'Portfolio-Ejercicio'!
 TestCase subclass: #PortfolioTest
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -155,7 +155,7 @@ test09PortfolioIncludesAnotherPortfolioTransactions
 ! !
 
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 21:42:40'!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
 test10PortafolioShouldNotBeAddedToHimself
 	| aPortfolio |
 	
@@ -164,10 +164,10 @@ test10PortafolioShouldNotBeAddedToHimself
 	self 
 		should: [ aPortfolio add: aPortfolio. ]
 		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
 ! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 22:18:32'!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
 test11AddedPortfolioShouldNotContainRepeatedChilds
 	| mainPortfolio secondPortfolio |
 	
@@ -178,10 +178,10 @@ test11AddedPortfolioShouldNotContainRepeatedChilds
 	self 
 		should: [ secondPortfolio add: mainPortfolio. ]
 		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
 ! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 22:18:16'!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
 test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds
 	| mainPortfolio secondPortfolio thirdPortfolio |
 	
@@ -194,10 +194,10 @@ test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds
 	self 
 		should: [ thirdPortfolio add: mainPortfolio. ]
 		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
 ! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 22:06:52'!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
 test13AddedPortafolioShouldNotBeInHisChilds
 
 	| aPortfolio aRepeatedPortfolio |
@@ -210,11 +210,11 @@ test13AddedPortafolioShouldNotBeInHisChilds
 	self 
 		should: [ aPortfolio add: aRepeatedPortfolio. ]
 		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
 		
 ! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 22:12:24'!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
 test14AddedPortafolioShouldNotBeInHisSuccesiveChilds
 
 	| mainPortfolio secondPortfolio aRepeatedPortfolio |
@@ -229,11 +229,11 @@ test14AddedPortafolioShouldNotBeInHisSuccesiveChilds
 	self 
 		should: [ mainPortfolio add: aRepeatedPortfolio. ]
 		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
 		
 ! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 22:26:43'!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
 test15AddedPortfolioChildsShouldNotBeInPortfolioChilds
 	
 	| aPortfolio secondPortfolio aRepeatedPortfolioRegister |
@@ -249,11 +249,11 @@ test15AddedPortfolioChildsShouldNotBeInPortfolioChilds
 	self 
 		should: [ aPortfolio add: secondPortfolio. ]
 		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
 		
 ! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/7/2020 23:31:31'!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
 test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy
 	
 	| aPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
@@ -272,11 +272,11 @@ test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy
 	self 
 		should: [ aPortfolio add: thirdPortfolio. ]
 		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
 		
 ! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/8/2020 16:59:40'!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
 test17
 	
 	| rootPortfolio secondPortfolio thirdPortfolio  |
@@ -291,11 +291,11 @@ test17
 	self 
 		should: [ secondPortfolio add: thirdPortfolio ]
 		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
 		
 ! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'Federico 11/8/2020 17:20:48'!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
 test18
 	
 	| rootPortfolio secondPortfolio thirdPortfolio FourthPortfolio Account |
@@ -316,12 +316,34 @@ test18
 	self 
 		should: [ FourthPortfolio add: Account ]
 		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedPortfolioRegistersErrorDescription
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
+test19
+	
+	| rootPortfolio1 rootPortfolio2 aPortfolio anAccount |
+	
+	rootPortfolio1 := Portfolio new.
+	rootPortfolio2 := Portfolio new.
+
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+
+	rootPortfolio1 add: aPortfolio.
+	rootPortfolio1 add: anAccount.	
+	rootPortfolio2 add: aPortfolio.
+
+	self 
+		should: [ aPortfolio add: anAccount ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
 		
 ! !
 
 
-!classDefinition: #ReceptiveAccountTest category: #'Portfolio-Ejercicio'!
+!classDefinition: #ReceptiveAccountTest category: 'Portfolio-Ejercicio'!
 TestCase subclass: #ReceptiveAccountTest
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -412,7 +434,7 @@ test07AccountKnowsItsTransactions
 ! !
 
 
-!classDefinition: #AccountTransaction category: #'Portfolio-Ejercicio'!
+!classDefinition: #AccountTransaction category: 'Portfolio-Ejercicio'!
 Object subclass: #AccountTransaction
 	instanceVariableNames: ''
 	classVariableNames: ''
@@ -431,7 +453,7 @@ countFor: aBalance
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'AccountTransaction class' category: #'Portfolio-Ejercicio'!
+!classDefinition: 'AccountTransaction class' category: 'Portfolio-Ejercicio'!
 AccountTransaction class
 	instanceVariableNames: ''!
 
@@ -446,7 +468,7 @@ register: aValue on: account
 	^ transaction! !
 
 
-!classDefinition: #Deposit category: #'Portfolio-Ejercicio'!
+!classDefinition: #Deposit category: 'Portfolio-Ejercicio'!
 AccountTransaction subclass: #Deposit
 	instanceVariableNames: 'value'
 	classVariableNames: ''
@@ -471,7 +493,7 @@ countFor: aBalance
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Deposit class' category: #'Portfolio-Ejercicio'!
+!classDefinition: 'Deposit class' category: 'Portfolio-Ejercicio'!
 Deposit class
 	instanceVariableNames: ''!
 
@@ -481,7 +503,7 @@ for: aValue
 	^ self new initializeFor: aValue ! !
 
 
-!classDefinition: #Withdraw category: #'Portfolio-Ejercicio'!
+!classDefinition: #Withdraw category: 'Portfolio-Ejercicio'!
 AccountTransaction subclass: #Withdraw
 	instanceVariableNames: 'value'
 	classVariableNames: ''
@@ -506,7 +528,7 @@ countFor: aBalance
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Withdraw class' category: #'Portfolio-Ejercicio'!
+!classDefinition: 'Withdraw class' category: 'Portfolio-Ejercicio'!
 Withdraw class
 	instanceVariableNames: ''!
 
@@ -516,111 +538,133 @@ for: aValue
 	^ self new initializeFor: aValue ! !
 
 
-!classDefinition: #PortfolioRegister category: #'Portfolio-Ejercicio'!
-Object subclass: #PortfolioRegister
+!classDefinition: #BankRecord category: 'Portfolio-Ejercicio'!
+Object subclass: #BankRecord
 	instanceVariableNames: ''
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!PortfolioRegister methodsFor: 'transactions' stamp: 'Federico 11/6/2020 20:58:26'!
+!BankRecord methodsFor: 'transactions' stamp: 'Federico 11/6/2020 20:58:26'!
 transactions 
 	self subclassResponsibility ! !
 
 
-!PortfolioRegister methodsFor: 'balance' stamp: 'Federico 11/6/2020 20:58:54'!
+!BankRecord methodsFor: 'balance' stamp: 'Federico 11/6/2020 20:58:54'!
 balance
 	self subclassResponsibility ! !
 
 
-!PortfolioRegister methodsFor: 'testing' stamp: 'Federico 11/6/2020 21:00:28'!
+!BankRecord methodsFor: 'testing' stamp: 'Federico 11/6/2020 21:00:28'!
 hasRegistered: aTransaction
 	self subclassResponsibility ! !
 
 
-!classDefinition: #Portfolio category: #'Portfolio-Ejercicio'!
-PortfolioRegister subclass: #Portfolio
-	instanceVariableNames: 'portfolioRegisters parentRegister'
+!classDefinition: #Portfolio category: 'Portfolio-Ejercicio'!
+BankRecord subclass: #Portfolio
+	instanceVariableNames: 'bankRecords parentPortfolios'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!Portfolio methodsFor: 'testing' stamp: 'Federico 11/8/2020 17:35:16'!
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 20:00:29'!
 hasPortfolioRegister: aPortfolioRegister
 
 	^(self = aPortfolioRegister)
-	or: [(portfolioRegisters select: [ :childRegisters | aPortfolioRegister  hasPortfolioRegister: childRegisters ]) isEmpty not]
-	or: [(portfolioRegisters select: [ :childRegisters | childRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not].
+	or: [(bankRecords select: [ :childRegisters | aPortfolioRegister  hasPortfolioRegister: childRegisters ]) isEmpty not]
+	or: [(bankRecords select: [ :childRegisters | childRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not].
 	! !
 
-!Portfolio methodsFor: 'testing' stamp: 'Federico 11/6/2020 21:01:52'!
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 20:00:29'!
 hasRegistered: aTransaction
-	^(portfolioRegisters select: [ :aNode | aNode  hasRegistered: aTransaction. ]) isEmpty not.
+	^(bankRecords select: [ :aNode | aNode  hasRegistered: aTransaction. ]) isEmpty not.
 ! !
 
 
-!Portfolio methodsFor: 'initialization' stamp: 'Federico 11/6/2020 21:01:52'!
+!Portfolio methodsFor: 'initialization' stamp: 'DS 11/8/2020 20:00:29'!
 initialize
-	portfolioRegisters := OrderedCollection new.! !
+
+	bankRecords := OrderedCollection new.
+	parentPortfolios := RootParentPortfolio for: self.! !
 
 
-!Portfolio methodsFor: 'transactions' stamp: 'Federico 11/6/2020 21:01:52'!
+!Portfolio methodsFor: 'transactions' stamp: 'DS 11/8/2020 20:00:29'!
 transactions
-	^(portfolioRegisters collect: [ :node | node transactions ]) flatten.
+	^(bankRecords collect: [ :node | node transactions ]) flatten.
 	! !
 
 
-!Portfolio methodsFor: 'balance' stamp: 'Federico 11/6/2020 21:01:52'!
+!Portfolio methodsFor: 'balance' stamp: 'DS 11/8/2020 20:00:29'!
 balance
-	^portfolioRegisters sum: [ :aNode | aNode balance.] ifEmpty: [0].
+	^bankRecords sum: [ :aNode | aNode balance.] ifEmpty: [0].
 	
 	! !
 
 
-!Portfolio methodsFor: 'adding' stamp: 'Federico 11/8/2020 17:49:09'!
-add: aPortfolioRegister
-	| rootPortfolio |
+!Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 20:01:56'!
+assertRepeatedBankRecord: aBankRecord
+
+	| rootPortfolios |
 	
-	rootPortfolio := self rootPortfolio.		
+	rootPortfolios := self rootPortfolios.		
 	
-	(rootPortfolio hasPortfolioRegister: aPortfolioRegister)
-	ifTrue: [self error: self class shouldNotHaveRepeatedPortfolioRegistersErrorDescription ].
-	
-	portfolioRegisters add: aPortfolioRegister.
-	aPortfolioRegister setParentRegister: self.
-	! !
+	((rootPortfolios select: [:rootPorfolio | rootPorfolio hasPortfolioRegister: aBankRecord]) isEmpty not)
+	ifTrue: [self signalShouldNotHaveRepeatedBankRecords ]! !
+
+!Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 20:02:22'!
+signalShouldNotHaveRepeatedBankRecords
+
+	^ self error: self class shouldNotHaveRepeatedBankRecordsErrorDescription! !
 
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/8/2020 17:29:18'!
-rootPortfolio
-	^parentRegister ifNotNil: [parentRegister rootPortfolio] ifNil: [self].! !
+!Portfolio methodsFor: 'adding' stamp: 'DS 11/8/2020 20:01:05'!
+add: aBankRecord
 
-!Portfolio methodsFor: 'as yet unclassified' stamp: 'Federico 11/8/2020 17:09:19'!
-setParentRegister: aPortfolio
-	parentRegister := aPortfolio.! !
+	self assertRepeatedBankRecord: aBankRecord.
+
+	aBankRecord addTo: self.	! !
+
+!Portfolio methodsFor: 'adding' stamp: 'DS 11/8/2020 20:00:47'!
+addSecure: aBankRecord
+
+	bankRecords add: aBankRecord.! !
+
+!Portfolio methodsFor: 'adding' stamp: 'DS 11/8/2020 19:41:10'!
+addTo: aPortfolio
+
+	parentPortfolios := 	parentPortfolios addParent: aPortfolio.
+
+	aPortfolio addSecure: self.! !
+
+
+!Portfolio methodsFor: 'roots' stamp: 'DS 11/8/2020 19:45:47'!
+rootPortfolios
+
+	^parentPortfolios roots.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'Portfolio class' category: #'Portfolio-Ejercicio'!
+!classDefinition: 'Portfolio class' category: 'Portfolio-Ejercicio'!
 Portfolio class
 	instanceVariableNames: ''!
 
-!Portfolio class methodsFor: 'error descriptions' stamp: 'Federico 11/6/2020 21:33:19'!
-shouldNotHaveRepeatedPortfolioRegistersErrorDescription
-	^'A portfolio should not have repeated portfolio registers'! !
+!Portfolio class methodsFor: 'error descriptions' stamp: 'DS 11/8/2020 20:02:32'!
+shouldNotHaveRepeatedBankRecordsErrorDescription
+	^'A portfolio should not have repeated bank records'! !
 
 
-!classDefinition: #ReceptiveAccount category: #'Portfolio-Ejercicio'!
-PortfolioRegister subclass: #ReceptiveAccount
-	instanceVariableNames: 'transactions parentRegister'
+!classDefinition: #ReceptiveAccount category: 'Portfolio-Ejercicio'!
+BankRecord subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions parentRegisters'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!ReceptiveAccount methodsFor: 'initialization' stamp: 'NR 10/17/2019 15:06:56'!
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'DS 11/8/2020 18:14:01'!
 initialize
 
-	transactions := OrderedCollection new.! !
+	transactions := OrderedCollection new.
+	parentRegisters  := OrderedCollection new.! !
 
 
 !ReceptiveAccount methodsFor: 'transactions' stamp: 'HernanWilkinson 7/13/2011 18:37'!
@@ -658,6 +702,87 @@ hasRegistered: aTransaction
 ! !
 
 
-!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'Federico 11/8/2020 17:12:03'!
-setParentRegister: aPortfolio
-	parentRegister := aPortfolio.! !
+!ReceptiveAccount methodsFor: 'adding' stamp: 'DS 11/8/2020 19:09:51'!
+addTo: aPortfolio
+
+	aPortfolio addSecure: self.! !
+
+
+!classDefinition: #ParentPortfolio category: 'Portfolio-Ejercicio'!
+Object subclass: #ParentPortfolio
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+
+!classDefinition: #CollectionParentPortfolio category: 'Portfolio-Ejercicio'!
+ParentPortfolio subclass: #CollectionParentPortfolio
+	instanceVariableNames: 'parents portfolio'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!CollectionParentPortfolio methodsFor: 'initialization' stamp: 'DS 11/8/2020 19:44:08'!
+initializeFor: aPortfolio with: aParentPortfolio
+
+	portfolio := aPortfolio.
+	parents := OrderedCollection with: aParentPortfolio.! !
+
+
+!CollectionParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 19:38:50'!
+addParent: aParentPortfolio
+
+	parents add: aParentPortfolio.
+	^self.! !
+
+!CollectionParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 19:39:31'!
+roots
+
+	^(parents collect: [ :parentPortfolio | parentPortfolio rootPortfolios ]) flatten.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'CollectionParentPortfolio class' category: 'Portfolio-Ejercicio'!
+CollectionParentPortfolio class
+	instanceVariableNames: ''!
+
+!CollectionParentPortfolio class methodsFor: 'instance creation' stamp: 'DS 11/8/2020 19:43:11'!
+for: aPortfolio with: aParentPortfolio
+
+	^self new initializeFor: aPortfolio with: aParentPortfolio.! !
+
+
+!classDefinition: #RootParentPortfolio category: 'Portfolio-Ejercicio'!
+ParentPortfolio subclass: #RootParentPortfolio
+	instanceVariableNames: 'portfolio'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!RootParentPortfolio methodsFor: 'initialization' stamp: 'DS 11/8/2020 19:44:53'!
+initializateFor: aPortfolio
+
+	portfolio := aPortfolio.! !
+
+
+!RootParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 19:37:53'!
+addParent: aParentPortfolio
+
+	^CollectionParentPortfolio for: portfolio with: aParentPortfolio.! !
+
+!RootParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 19:38:13'!
+roots
+
+	^OrderedCollection with: portfolio.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'RootParentPortfolio class' category: 'Portfolio-Ejercicio'!
+RootParentPortfolio class
+	instanceVariableNames: ''!
+
+!RootParentPortfolio class methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 19:44:38'!
+for: aPortfolio
+
+	^self new initializateFor: aPortfolio.! !
