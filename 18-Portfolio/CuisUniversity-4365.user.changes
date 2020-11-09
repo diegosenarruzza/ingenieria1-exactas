@@ -13121,3 +13121,2180 @@ PASSED!
 PASSED!
 
 ----QUIT----(8 November 2020 20:25:05) CuisUniversity-4384.image priorSource: 19133754!
+
+----STARTUP---- (8 November 2020 20:43:54) as /home/diego/Documents/Ingenieria 1/CuisUniversity/CuisUniversity-4384.image!
+
+
+----SNAPSHOT----(8 November 2020 20:44:04) CuisUniversity-4384.image priorSource: 17308736!
+
+----End fileIn of /home/diego/Documents/Ingenieria 1/CuisUniversity/Portfolio-Ejercicio.st----!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 20:45:21'!
+PASSED!
+
+----SNAPSHOT----(8 November 2020 20:45:24) CuisUniversity-4384.image priorSource: 17308950!
+!Portfolio methodsFor: 'balance' stamp: 'DS 11/8/2020 20:48:06' prior: 50873141 overrides: 50873086!
+balance
+	^bankRecords sum: [ :aBankRecord | aBankRecord balance.] ifEmpty: [0].
+	
+	! !
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 20:49:06' prior: 50873108!
+hasPortfolioRegister: aBankRecord
+
+	^(self = aBankRecord)
+	or: [(bankRecords select: [ :childRegisters | aBankRecord  hasPortfolioRegister: childRegisters ]) isEmpty not]
+	or: [(bankRecords select: [ :childRegisters | childRegisters  hasPortfolioRegister: aBankRecord ]) isEmpty not].
+	! !
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 20:49:15' prior: 50873121 overrides: 50873090!
+hasRegistered: aTransaction
+	^(bankRecords select: [ :aBankRecord | aBankRecord  hasRegistered: aTransaction. ]) isEmpty not.
+! !
+!Portfolio methodsFor: 'transactions' stamp: 'DS 11/8/2020 20:49:37' prior: 50873135 overrides: 50873082!
+transactions
+	^(bankRecords collect: [ :aBankRecord | aBankRecord transactions ]) flatten.
+	! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 20:49:51'!
+PASSED!
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 20:55:12'!
+hasBankRecord: aBankRecord
+
+	^(self = aBankRecord)
+	or: [(bankRecords select: [ :childRegisters | aBankRecord  hasPortfolioRegister: childRegisters ]) isEmpty not]
+	or: [(bankRecords select: [ :childRegisters | childRegisters  hasPortfolioRegister: aBankRecord ]) isEmpty not].
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 20:55:12' prior: 50873434!
+hasPortfolioRegister: aBankRecord
+
+	^(self = aBankRecord)
+	or: [(bankRecords select: [ :childRegisters | aBankRecord  hasBankRecord: childRegisters ]) isEmpty not]
+	or: [(bankRecords select: [ :childRegisters | childRegisters  hasBankRecord: aBankRecord ]) isEmpty not].
+	! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 20:55:12' prior: 50873146!
+assertRepeatedBankRecord: aBankRecord
+
+	| rootPortfolios |
+	
+	rootPortfolios := self rootPortfolios.		
+	
+	((rootPortfolios select: [:rootPorfolio | rootPorfolio hasBankRecord: aBankRecord]) isEmpty not)
+	ifTrue: [self signalShouldNotHaveRepeatedBankRecords ]! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 20:55:12' prior: 50873525!
+hasBankRecord: aBankRecord
+
+	^(self = aBankRecord)
+	or: [(bankRecords select: [ :childRegisters | aBankRecord  hasBankRecord: childRegisters ]) isEmpty not]
+	or: [(bankRecords select: [ :childRegisters | childRegisters  hasBankRecord: aBankRecord ]) isEmpty not].
+	! !
+
+!methodRemoval: Portfolio #hasPortfolioRegister: stamp: 'DS 11/8/2020 20:55:12'!
+hasPortfolioRegister: aBankRecord
+
+	^(self = aBankRecord)
+	or: [(bankRecords select: [ :childRegisters | aBankRecord  hasBankRecord: childRegisters ]) isEmpty not]
+	or: [(bankRecords select: [ :childRegisters | childRegisters  hasBankRecord: aBankRecord ]) isEmpty not].
+	!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'DS 11/8/2020 20:55:34'!
+hasBankRecord: aPortfolioRegister
+	^self = aPortfolioRegister.
+! !
+
+!methodRemoval: ReceptiveAccount #hasPortfolioRegister: stamp: 'DS 11/8/2020 20:55:34'!
+hasPortfolioRegister: aPortfolioRegister
+	^self = aPortfolioRegister.
+!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'DS 11/8/2020 20:55:39' prior: 50873583!
+hasBankRecord: aPortfolioRegister
+
+	^self = aPortfolioRegister.
+! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 20:55:46'!
+PASSED!
+
+----SNAPSHOT----(8 November 2020 20:55:55) CuisUniversity-4384.image priorSource: 17336749!
+!ReceptiveAccount methodsFor: 'testing' stamp: 'DS 11/8/2020 20:56:19' prior: 50873593!
+hasBankRecord: aBankRecord
+
+	^self = aBankRecord.! !
+!BankRecord methodsFor: 'adding' stamp: 'DS 11/8/2020 20:59:10'!
+addTo: aPortfolio
+
+	self subclassResponsibility.! !
+!RootParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 21:03:35' prior: 50873332!
+addParent: aParentPortfolio
+
+	^CollectionParentPortfolio adding: aParentPortfolio.! !
+!CollectionParentPortfolio class methodsFor: 'instance creation' stamp: 'DS 11/8/2020 21:03:53'!
+adding: aParentPortfolio
+
+	^self new initializeAdding: aParentPortfolio.! !
+
+!methodRemoval: CollectionParentPortfolio class #for:with: stamp: 'DS 11/8/2020 21:03:58'!
+for: aPortfolio with: aParentPortfolio
+
+	^self new initializeFor: aPortfolio with: aParentPortfolio.!
+!CollectionParentPortfolio methodsFor: 'initialization' stamp: 'DS 11/8/2020 21:04:13'!
+initializeAdding: aParentPortfolio
+
+	parents := OrderedCollection with: aParentPortfolio.! !
+
+!methodRemoval: CollectionParentPortfolio #initializeFor:with: stamp: 'DS 11/8/2020 21:04:15'!
+initializeFor: aPortfolio with: aParentPortfolio
+
+	portfolio := aPortfolio.
+	parents := OrderedCollection with: aParentPortfolio.!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:04:17'!
+PASSED!
+
+ParentPortfolio subclass: #CollectionParentPortfolio
+	instanceVariableNames: 'parents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #CollectionParentPortfolio category: 'Portfolio-Ejercicio' stamp: 'DS 11/8/2020 21:04:24'!
+ParentPortfolio subclass: #CollectionParentPortfolio
+	instanceVariableNames: 'parents'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+ParentPortfolio subclass: #RootParentPortfolio
+	instanceVariableNames: 'root'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+
+!classDefinition: #RootParentPortfolio category: 'Portfolio-Ejercicio' stamp: 'DS 11/8/2020 21:04:31'!
+ParentPortfolio subclass: #RootParentPortfolio
+	instanceVariableNames: 'root'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Ejercicio'!
+!RootParentPortfolio methodsFor: 'initialization' stamp: 'DS 11/8/2020 21:04:45' prior: 50873327!
+initializateFor: aPortfolio
+
+	root := aPortfolio.! !
+!RootParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 21:04:54' prior: 50873338!
+roots
+
+	^OrderedCollection with: root.! !
+!RootParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 21:04:58' prior: 50873803!
+roots
+
+	^OrderedCollection with: root.! !
+!ParentPortfolio methodsFor: 'adding' stamp: 'DS 11/8/2020 21:05:37'!
+addParent: aParentPortfolio
+
+	self subclassResponsibility.! !
+!ParentPortfolio methodsFor: 'roots' stamp: 'DS 11/8/2020 21:06:19'!
+roots
+
+	self subclassResponsibility.! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:07:00'!
+PASSED!
+
+----SNAPSHOT----(8 November 2020 21:07:10) CuisUniversity-4384.image priorSource: 17344372!
+!Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 21:11:32' prior: 50873549!
+assertRepeatedBankRecord: aBankRecord
+
+	((self rootPortfolios select: [:rootPorfolio | rootPorfolio hasBankRecord: aBankRecord]) isEmpty not)
+		ifTrue: [self signalShouldNotHaveRepeatedBankRecords ]! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:11:35'!
+PASSED!
+!Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 21:24:06' prior: 50873889!
+assertRepeatedBankRecord: aBankRecord
+
+	"((self rootPortfolios select: [:rootPorfolio | rootPorfolio hasBankRecord: aBankRecord]) isEmpty not)"
+	( (self rootPortfolios findFirst: [:rootPorfolio | rootPorfolio hasBankRecord: aBankRecord] ) = 0 )
+		ifTrue: [self signalShouldNotHaveRepeatedBankRecords ]! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:24:08'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:24:08'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:24:08'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:24:08'!
+FAILURE!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:24:08'!
+ERROR!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:24:10'!
+ERROR!
+
+(self rootPortfolios findFirst: [:rootPorfolio | rootPorfolio hasBankRecord: aBankRecord] )!
+
+self rootPortfolios!
+
+aBankRecord!
+
+rootPorfolio hasBankRecord: aBankRecord!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:26:11'!
+ERROR!
+!Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 21:26:49' prior: 50873963!
+assertRepeatedBankRecord: aBankRecord
+
+	((self rootPortfolios select: [:rootPorfolio | rootPorfolio hasBankRecord: aBankRecord]) isEmpty not)
+		ifTrue: [self signalShouldNotHaveRepeatedBankRecords ]! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:26:51'!
+PASSED!
+!Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 21:30:17'!
+collection: aCollection isNotEmptyWhenSelect: aSelectBlock
+
+	^(aCollection select: aSelectBlock) isEmpty not.! !
+!Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 21:33:16' prior: 50874052!
+assertRepeatedBankRecord: aBankRecord
+
+	(self 
+		collection: (self rootPortfolios) 
+		isNotEmptyWhenSelect: [:rootPorfolio | rootPorfolio hasBankRecord: aBankRecord]
+	) ifTrue: [self signalShouldNotHaveRepeatedBankRecords].! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:33:19'!
+PASSED!
+!Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 21:33:55' prior: 50874133!
+assertRepeatedBankRecord: aBankRecord
+
+	(self 	collection: self rootPortfolios
+		isNotEmptyWhenSelect: [:rootPorfolio | rootPorfolio hasBankRecord: aBankRecord]
+	) ifTrue: [self signalShouldNotHaveRepeatedBankRecords].! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:33:58'!
+PASSED!
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 21:36:29' prior: 50873447 overrides: 50873090!
+hasRegistered: aTransaction
+	^ self	collection: bankRecords
+		 isNotEmptyWhenSelect: [ :aBankRecord | aBankRecord  hasRegistered: aTransaction ].
+! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:36:43'!
+PASSED!
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 21:37:09' prior: 50874283 overrides: 50873090!
+hasRegistered: aTransaction
+
+	^ self	collection: bankRecords
+		 isNotEmptyWhenSelect: [ :aBankRecord | aBankRecord  hasRegistered: aTransaction ].
+! !
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 21:38:07' prior: 50873561!
+hasBankRecord: aBankRecord
+
+	^(self = aBankRecord)
+	or: [(bankRecords select: [ :childRegisters | 
+			(aBankRecord  hasBankRecord: childRegisters) or: [ childRegisters  hasBankRecord: aBankRecord ]
+		]) isEmpty not].
+	! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:38:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/8/2020 21:38:14'!
+PASSED!
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 21:40:39' prior: 50874364!
+hasBankRecord: aBankRecord
+
+	^self = aBankRecord
+	or: [ self collection: bankRecords
+		isNotEmptyWhenSelect: [ :childRegisters | 
+			(aBankRecord  hasBankRecord: childRegisters) or: [ childRegisters  hasBankRecord: aBankRecord ]]
+	].
+	! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/8/2020 21:40:45'!
+PASSED!
+
+----SNAPSHOT----(8 November 2020 21:41:31) CuisUniversity-4384.image priorSource: 17351512!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:44:52'!
+test17AddedPortfolioShouldNotHasSameParent
+	
+	| rootPortfolio secondPortfolio thirdPortfolio  |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+
+	rootPortfolio add: secondPortfolio.
+	rootPortfolio add: thirdPortfolio.
+	
+	self 
+		should: [ secondPortfolio add: thirdPortfolio ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+
+!methodRemoval: PortfolioTest #test17 stamp: 'DS 11/8/2020 21:44:52'!
+test17
+	
+	| rootPortfolio secondPortfolio thirdPortfolio  |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+
+	rootPortfolio add: secondPortfolio.
+	rootPortfolio add: thirdPortfolio.
+	
+	self 
+		should: [ secondPortfolio add: thirdPortfolio ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:47:33'!
+test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch
+	
+	| rootPortfolio secondPortfolio thirdPortfolio FourthPortfolio Account |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+	
+	FourthPortfolio := Portfolio new.
+	Account := ReceptiveAccount new.
+	
+	rootPortfolio add: secondPortfolio.
+	rootPortfolio add: thirdPortfolio.
+	
+	secondPortfolio add: Account.
+	thirdPortfolio add: FourthPortfolio.
+	
+	self 
+		should: [ FourthPortfolio add: Account ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+
+!methodRemoval: PortfolioTest #test18 stamp: 'DS 11/8/2020 21:47:33'!
+test18
+	
+	| rootPortfolio secondPortfolio thirdPortfolio FourthPortfolio Account |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+	
+	FourthPortfolio := Portfolio new.
+	Account := ReceptiveAccount new.
+	
+	rootPortfolio add: secondPortfolio.
+	rootPortfolio add: thirdPortfolio.
+	
+	secondPortfolio add: Account.
+	thirdPortfolio add: FourthPortfolio.
+	
+	self 
+		should: [ FourthPortfolio add: Account ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:50:16'!
+test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt
+	
+	| rootPortfolio1 rootPortfolio2 aPortfolio anAccount |
+	
+	rootPortfolio1 := Portfolio new.
+	rootPortfolio2 := Portfolio new.
+
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+
+	rootPortfolio1 add: aPortfolio.
+	rootPortfolio1 add: anAccount.	
+	rootPortfolio2 add: aPortfolio.
+
+	self 
+		should: [ aPortfolio add: anAccount ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+
+!methodRemoval: PortfolioTest #test19 stamp: 'DS 11/8/2020 21:50:16'!
+test19
+	
+	| rootPortfolio1 rootPortfolio2 aPortfolio anAccount |
+	
+	rootPortfolio1 := Portfolio new.
+	rootPortfolio2 := Portfolio new.
+
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+
+	rootPortfolio1 add: aPortfolio.
+	rootPortfolio1 add: anAccount.	
+	rootPortfolio2 add: aPortfolio.
+
+	self 
+		should: [ aPortfolio add: anAccount ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:51:34'!
+shouldNotHaveRepeatedBankRecordWhen: aPortfolio add: aBankRecord
+	self 
+		should: [ aPortfolio add: aBankRecord. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:51:57' prior: 50872708!
+test10PortafolioShouldNotBeAddedToHimself
+	| aPortfolio |
+	
+	aPortfolio := Portfolio new.
+
+	self shouldNotHaveRepeatedBankRecordWhen: aPortfolio add: aPortfolio.! !
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test17AddedPortfolioShouldNotHasSameParent stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+
+!testRun: #PortfolioTest #test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt stamp: 'DS 11/8/2020 21:51:57'!
+PASSED!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:52:17' prior: 50872718!
+test11AddedPortfolioShouldNotContainRepeatedChilds
+	| mainPortfolio secondPortfolio |
+	
+	mainPortfolio := Portfolio new.
+	secondPortfolio := Portfolio new.
+	
+	mainPortfolio add: secondPortfolio.
+	self shouldNotHaveRepeatedBankRecordWhen: secondPortfolio add: mainPortfolio.! !
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test17AddedPortfolioShouldNotHasSameParent stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+
+!testRun: #PortfolioTest #test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt stamp: 'DS 11/8/2020 21:52:17'!
+PASSED!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:52:39' prior: 50874804!
+test11AddedPortfolioShouldNotContainRepeatedChilds
+
+	| rootPortfolio secondPortfolio |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio := Portfolio new.
+	
+	rootPortfolio add: secondPortfolio.
+	self shouldNotHaveRepeatedBankRecordWhen: secondPortfolio add: rootPortfolio.! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:52:55' prior: 50874723!
+test10PortafolioShouldNotBeAddedToHimself
+
+	| rootPortfolio |
+	
+	rootPortfolio := Portfolio new.
+
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: rootPortfolio.! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:53:18' prior: 50872732!
+test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds
+
+	| rootPortfolio secondPortfolio thirdPortfolio |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio := Portfolio new.
+	thirdPortfolio := Portfolio new.
+	
+	rootPortfolio add: secondPortfolio.
+	secondPortfolio add: thirdPortfolio.
+	self shouldNotHaveRepeatedBankRecordWhen: thirdPortfolio add: rootPortfolio.! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:53:32' prior: 50872749!
+test13AddedPortafolioShouldNotBeInHisChilds
+
+	| rootPortfolio aRepeatedPortfolio |
+	
+	rootPortfolio := Portfolio new.
+	aRepeatedPortfolio  := Portfolio new.
+	
+	rootPortfolio add: aRepeatedPortfolio.
+	
+	self 
+		should: [ rootPortfolio add: aRepeatedPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:53:49' prior: 50874924!
+test13AddedPortafolioShouldNotBeInHisChilds
+
+	| rootPortfolio aRepeatedPortfolio |
+	
+	rootPortfolio := Portfolio new.
+	aRepeatedPortfolio  := Portfolio new.
+	
+	rootPortfolio add: aRepeatedPortfolio.
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: aRepeatedPortfolio.! !
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test17AddedPortfolioShouldNotHasSameParent stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt stamp: 'DS 11/8/2020 21:53:51'!
+PASSED!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:54:01' prior: 50872763!
+test14AddedPortafolioShouldNotBeInHisSuccesiveChilds
+
+	| rootPortfolio secondPortfolio aRepeatedPortfolio |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio := Portfolio new.
+	aRepeatedPortfolio  := Portfolio new.
+	
+	rootPortfolio add: secondPortfolio. 
+	secondPortfolio add: aRepeatedPortfolio.
+	
+	self 
+		should: [ rootPortfolio add: aRepeatedPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:54:16' prior: 50875022!
+test14AddedPortafolioShouldNotBeInHisSuccesiveChilds
+
+	| rootPortfolio secondPortfolio aRepeatedPortfolio |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio := Portfolio new.
+	aRepeatedPortfolio  := Portfolio new.
+	
+	rootPortfolio add: secondPortfolio. 
+	secondPortfolio add: aRepeatedPortfolio.
+
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: aRepeatedPortfolio.! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:54:30' prior: 50872780!
+test15AddedPortfolioChildsShouldNotBeInPortfolioChilds
+	
+	| rootPortfolio secondPortfolio aRepeatedPortfolioRegister |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	rootPortfolio add: aRepeatedPortfolioRegister.
+	
+	self 
+		should: [ rootPortfolio add: secondPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:54:42' prior: 50875055!
+test15AddedPortfolioChildsShouldNotBeInPortfolioChilds
+	
+	| rootPortfolio secondPortfolio aRepeatedPortfolioRegister |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	rootPortfolio add: aRepeatedPortfolioRegister.
+	
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: secondPortfolio.! !
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test17AddedPortfolioShouldNotHasSameParent stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt stamp: 'DS 11/8/2020 21:54:43'!
+PASSED!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:55:03' prior: 50875074!
+test15AddedPortfolioChildsShouldNotBeInPortfolioChilds
+	
+	| rootPortfolio secondPortfolio aRepeatedBankRecord |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	
+	aRepeatedBankRecord := ReceptiveAccount new.
+	
+	secondPortfolio add: aRepeatedBankRecord.
+	rootPortfolio add: aRepeatedBankRecord.
+	
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: secondPortfolio.! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:55:21' prior: 50872798!
+test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy
+	
+	| rootPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+	
+	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	
+	thirdPortfolio add: aRepeatedPortfolioRegister.
+	secondPortfolio add: aRepeatedPortfolioRegister.
+	
+	rootPortfolio add: secondPortfolio.
+	
+	self 
+		should: [ rootPortfolio add: thirdPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:55:31' prior: 50875179!
+test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy
+	
+	| rootPortfolio secondPortfolio thirdPortfolio aRepeatedBankRecord |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+	
+	aRepeatedBankRecord := ReceptiveAccount new.
+	
+	thirdPortfolio add: aRepeatedBankRecord.
+	secondPortfolio add: aRepeatedBankRecord.
+	
+	rootPortfolio add: secondPortfolio.
+	
+	self 
+		should: [ rootPortfolio add: thirdPortfolio. ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:55:50' prior: 50875201!
+test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy
+	
+	| rootPortfolio secondPortfolio thirdPortfolio aRepeatedBankRecord |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+	
+	aRepeatedBankRecord := ReceptiveAccount new.
+	
+	thirdPortfolio add: aRepeatedBankRecord.
+	secondPortfolio add: aRepeatedBankRecord.
+	
+	rootPortfolio add: secondPortfolio.
+	
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: thirdPortfolio.! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:56:05' prior: 50874607!
+test17AddedPortfolioShouldNotHasSameParent
+	
+	| rootPortfolio secondPortfolio thirdPortfolio  |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+
+	rootPortfolio add: secondPortfolio.
+	rootPortfolio add: thirdPortfolio.
+	
+	self shouldNotHaveRepeatedBankRecordWhen: secondPortfolio add: thirdPortfolio.! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:56:17' prior: 50874638!
+test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch
+	
+	| rootPortfolio secondPortfolio thirdPortfolio fourthPortfolio Account |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+	
+	fourthPortfolio := Portfolio new.
+	Account := ReceptiveAccount new.
+	
+	rootPortfolio add: secondPortfolio.
+	rootPortfolio add: thirdPortfolio.
+	
+	secondPortfolio add: Account.
+	thirdPortfolio add: fourthPortfolio.
+	
+	self 
+		should: [ fourthPortfolio add: Account ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:56:58' prior: 50875254!
+test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch
+	
+	| rootPortfolio secondPortfolio thirdPortfolio fourthPortfolio aRepeatedBankRecord |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+	
+	fourthPortfolio := Portfolio new.
+	aRepeatedBankRecord := ReceptiveAccount new.
+	
+	rootPortfolio add: secondPortfolio.
+	rootPortfolio add: thirdPortfolio.
+	
+	secondPortfolio add: aRepeatedBankRecord.
+	thirdPortfolio add: fourthPortfolio.
+	
+	self 
+		should: [ fourthPortfolio add: aRepeatedBankRecord ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:57:14' prior: 50875276!
+test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch
+	
+	| rootPortfolio secondPortfolio thirdPortfolio fourthPortfolio aRepeatedBankRecord |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio  := Portfolio new.
+	thirdPortfolio := Portfolio new.
+	
+	fourthPortfolio := Portfolio new.
+	aRepeatedBankRecord := ReceptiveAccount new.
+	
+	rootPortfolio add: secondPortfolio.
+	rootPortfolio add: thirdPortfolio.
+	
+	secondPortfolio add: aRepeatedBankRecord.
+	thirdPortfolio add: fourthPortfolio.
+	
+	self shouldNotHaveRepeatedBankRecordWhen: fourthPortfolio add: aRepeatedBankRecord.! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:57:26' prior: 50874679!
+test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt
+	
+	| rootPortfolio1 rootPortfolio2 aPortfolio aRepeatedAccount |
+	
+	rootPortfolio1 := Portfolio new.
+	rootPortfolio2 := Portfolio new.
+
+	aPortfolio := Portfolio new.
+	aRepeatedAccount := ReceptiveAccount new.
+
+	rootPortfolio1 add: aPortfolio.
+	rootPortfolio1 add: aRepeatedAccount.	
+	rootPortfolio2 add: aPortfolio.
+
+	self 
+		should: [ aPortfolio add: aRepeatedAccount ]
+		raise: Error
+		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
+		
+! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:57:50' prior: 50875321!
+test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt
+	
+	| rootPortfolio1 rootPortfolio2 aPortfolio aRepeatedAccount |
+	
+	rootPortfolio1 := Portfolio new.
+	rootPortfolio2 := Portfolio new.
+
+	aPortfolio := Portfolio new.
+	aRepeatedAccount := ReceptiveAccount new.
+
+	rootPortfolio1 add: aPortfolio.
+	rootPortfolio1 add: aRepeatedAccount.	
+	rootPortfolio2 add: aPortfolio.
+
+	self shouldNotHaveRepeatedBankRecordWhen: aPortfolio add: aRepeatedAccount.! !
+
+!testRun: #PortfolioTest #test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test17AddedPortfolioShouldNotHasSameParent stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt stamp: 'DS 11/8/2020 21:57:51'!
+PASSED!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:58:32' prior: 50874938!
+test13AddedPortafolioShouldNotBeInHisChilds
+
+	| rootPortfolio aRepeatedPortfolio |
+	
+	rootPortfolio := Portfolio new.
+	aRepeatedPortfolio  := Portfolio new.
+	
+	rootPortfolio add: aRepeatedPortfolio.
+
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: aRepeatedPortfolio.! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:58:38' prior: 50874909!
+test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds
+
+	| rootPortfolio secondPortfolio thirdPortfolio |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio := Portfolio new.
+	thirdPortfolio := Portfolio new.
+	
+	rootPortfolio add: secondPortfolio.
+	secondPortfolio add: thirdPortfolio.
+
+	self shouldNotHaveRepeatedBankRecordWhen: thirdPortfolio add: rootPortfolio.! !
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:58:45' prior: 50874888!
+test11AddedPortfolioShouldNotContainRepeatedChilds
+
+	| rootPortfolio secondPortfolio |
+	
+	rootPortfolio := Portfolio new.
+	secondPortfolio := Portfolio new.
+	
+	rootPortfolio add: secondPortfolio.
+
+	self shouldNotHaveRepeatedBankRecordWhen: secondPortfolio add: rootPortfolio.! !
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'DS 11/8/2020 21:59:10' prior: 50872659!
+test07PortfolioStartsWithNoTransactions
+	| aPortfolio |
+	
+	aPortfolio := Portfolio new.
+
+	self assert: (aPortfolio transactions) isEmpty.
+
+! !
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test17AddedPortfolioShouldNotHasSameParent stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+
+!testRun: #PortfolioTest #test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt stamp: 'DS 11/8/2020 21:59:10'!
+PASSED!
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'DS 11/8/2020 21:59:24' prior: 50872681!
+test09PortfolioIncludesAnotherPortfolioTransactions
+	| aRootPortfolio anotherPortfolio aMainAccount aPortfolioAccount aTransaction secondTransaction |
+	
+	aRootPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aPortfolioAccount  := ReceptiveAccount new.
+	aMainAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	
+	aRootPortfolio add: anotherPortfolio.
+	aRootPortfolio add: aMainAccount.
+
+	aTransaction := Deposit register: 100 on: aPortfolioAccount.	
+	secondTransaction := Deposit register: 200 on: aMainAccount.	
+		
+	self assert: 2 equals: aRootPortfolio transactions size.
+	self assert: (aRootPortfolio transactions includes: aTransaction).
+	self assert: (aRootPortfolio transactions includes: secondTransaction).
+		
+
+! !
+!PortfolioTest methodsFor: 'balance tests' stamp: 'DS 11/8/2020 21:59:55' prior: 50872589!
+test03BalanceCountPortafolioAndAccountTransactions
+	| aRootPortfolio anotherPortfolio aPortfolioAccount aMainAccount |
+	
+	aRootPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortfolioAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	aRootPortfolio add: aMainAccount.
+	aRootPortfolio add: anotherPortfolio.
+
+	Deposit register: 100 on: aMainAccount.
+	Deposit register: 100 on: aPortfolioAccount.
+		
+	self assert: 200 equals: aRootPortfolio balance.
+
+! !
+!PortfolioTest methodsFor: 'balance tests' stamp: 'DS 11/8/2020 21:59:58' prior: 50875577!
+test03BalanceCountPortafolioAndAccountTransactions
+
+	| aRootPortfolio anotherPortfolio aPortfolioAccount aMainAccount |
+	
+	aRootPortfolio := Portfolio new.
+	anotherPortfolio := Portfolio new.
+	
+	aMainAccount := ReceptiveAccount new.
+	aPortfolioAccount  := ReceptiveAccount new.
+	
+	anotherPortfolio add: aPortfolioAccount.
+	aRootPortfolio add: aMainAccount.
+	aRootPortfolio add: anotherPortfolio.
+
+	Deposit register: 100 on: aMainAccount.
+	Deposit register: 100 on: aPortfolioAccount.
+		
+	self assert: 200 equals: aRootPortfolio balance.
+
+! !
+!PortfolioTest methodsFor: 'balance tests' stamp: 'DS 11/8/2020 22:00:03' prior: 50872578!
+test02BalanceCountAccountTransactions
+
+	| aPortfolio anAccount |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aPortfolio add: anAccount.
+	Deposit register: 100 on: anAccount.
+		
+	self assert: 100 equals: aPortfolio balance.
+
+! !
+!PortfolioTest methodsFor: 'balance tests' stamp: 'DS 11/8/2020 22:00:06' prior: 50872571!
+test01PortfolioStartsWithNoIncome
+
+	| aPortfolio |
+	aPortfolio := Portfolio new.
+	
+	self assert: 0 equals: aPortfolio balance.! !
+!PortfolioTest methodsFor: 'hasRegistered tests' stamp: 'DS 11/8/2020 22:00:11' prior: 50872619!
+test05PortfolioHasRegisteredAccountTransactions
+
+	| aPortfolio anAccount aTransaction |
+	
+	aPortfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	
+	aTransaction := Deposit register: 100 on: anAccount.
+	aPortfolio add: anAccount.
+		
+	self assert: (aPortfolio hasRegistered: aTransaction).
+
+! !
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test17AddedPortfolioShouldNotHasSameParent stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+
+!testRun: #PortfolioTest #test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt stamp: 'DS 11/8/2020 22:00:14'!
+PASSED!
+!BankRecord methodsFor: 'balance' stamp: 'DS 11/8/2020 22:01:04' prior: 50873086!
+balance
+
+	self subclassResponsibility ! !
+!BankRecord methodsFor: 'testing' stamp: 'DS 11/8/2020 22:01:07' prior: 50873090!
+hasRegistered: aTransaction
+
+	self subclassResponsibility ! !
+!BankRecord methodsFor: 'transactions' stamp: 'DS 11/8/2020 22:01:19' prior: 50873082!
+transactions
+
+	self subclassResponsibility ! !
+
+----SNAPSHOT----(8 November 2020 22:02:14) CuisUniversity-4384.image priorSource: 17374495!
+
+!testRun: #PortfolioTest #test01PortfolioStartsWithNoIncome stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceCountAccountTransactions stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceCountPortafolioAndAccountTransactions stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioDoesNotRegisterUnknownTransaction stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredAccountTransactions stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioHasRegisteredAnotherPortfolioTransactions stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioStartsWithNoTransactions stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioIncludesAccountTransactions stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioIncludesAnotherPortfolioTransactions stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortafolioShouldNotBeAddedToHimself stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test11AddedPortfolioShouldNotContainRepeatedChilds stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test13AddedPortafolioShouldNotBeInHisChilds stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test14AddedPortafolioShouldNotBeInHisSuccesiveChilds stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test15AddedPortfolioChildsShouldNotBeInPortfolioChilds stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test17AddedPortfolioShouldNotHasSameParent stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/8/2020 22:02:20'!
+PASSED!
+
+----QUIT----(8 November 2020 22:02:23) CuisUniversity-4384.image priorSource: 17410542!
