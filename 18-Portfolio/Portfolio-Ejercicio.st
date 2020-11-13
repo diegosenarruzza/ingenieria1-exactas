@@ -5,15 +5,17 @@ TestCase subclass: #PortfolioTest
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!PortfolioTest methodsFor: 'balance tests' stamp: 'Federico 11/6/2020 11:49:24'!
+!PortfolioTest methodsFor: 'balance tests' stamp: 'DS 11/8/2020 22:00:06'!
 test01PortfolioStartsWithNoIncome
+
 	| aPortfolio |
 	aPortfolio := Portfolio new.
 	
 	self assert: 0 equals: aPortfolio balance.! !
 
-!PortfolioTest methodsFor: 'balance tests' stamp: 'Federico 11/6/2020 11:51:08'!
+!PortfolioTest methodsFor: 'balance tests' stamp: 'DS 11/8/2020 22:00:03'!
 test02BalanceCountAccountTransactions
+
 	| aPortfolio anAccount |
 	
 	aPortfolio := Portfolio new.
@@ -26,24 +28,25 @@ test02BalanceCountAccountTransactions
 
 ! !
 
-!PortfolioTest methodsFor: 'balance tests' stamp: 'Federico 11/6/2020 11:51:48'!
+!PortfolioTest methodsFor: 'balance tests' stamp: 'DS 11/8/2020 21:59:58'!
 test03BalanceCountPortafolioAndAccountTransactions
-	| aMainPortfolio anotherPortfolio aPortfolioAccount aMainAccount |
+
+	| aRootPortfolio anotherPortfolio aPortfolioAccount aMainAccount |
 	
-	aMainPortfolio := Portfolio new.
+	aRootPortfolio := Portfolio new.
 	anotherPortfolio := Portfolio new.
 	
 	aMainAccount := ReceptiveAccount new.
 	aPortfolioAccount  := ReceptiveAccount new.
 	
 	anotherPortfolio add: aPortfolioAccount.
-	aMainPortfolio add: aMainAccount.
-	aMainPortfolio add: anotherPortfolio.
+	aRootPortfolio add: aMainAccount.
+	aRootPortfolio add: anotherPortfolio.
 
 	Deposit register: 100 on: aMainAccount.
 	Deposit register: 100 on: aPortfolioAccount.
 		
-	self assert: 200 equals: aMainPortfolio balance.
+	self assert: 200 equals: aRootPortfolio balance.
 
 ! !
 
@@ -61,8 +64,9 @@ test04PortfolioDoesNotRegisterUnknownTransaction
 
 ! !
 
-!PortfolioTest methodsFor: 'hasRegistered tests' stamp: 'Federico 11/6/2020 11:56:07'!
+!PortfolioTest methodsFor: 'hasRegistered tests' stamp: 'DS 11/8/2020 22:00:11'!
 test05PortfolioHasRegisteredAccountTransactions
+
 	| aPortfolio anAccount aTransaction |
 	
 	aPortfolio := Portfolio new.
@@ -102,14 +106,13 @@ test06PortfolioHasRegisteredAnotherPortfolioTransactions
 ! !
 
 
-!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 11:57:48'!
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'DS 11/8/2020 21:59:10'!
 test07PortfolioStartsWithNoTransactions
 	| aPortfolio |
 	
 	aPortfolio := Portfolio new.
-		
-		
-	self assert: ((aPortfolio transactions) isEmpty).
+
+	self assert: (aPortfolio transactions) isEmpty.
 
 ! !
 
@@ -129,11 +132,11 @@ test08PortfolioIncludesAccountTransactions
 
 ! !
 
-!PortfolioTest methodsFor: 'transactions tests' stamp: 'Federico 11/6/2020 11:58:28'!
+!PortfolioTest methodsFor: 'transactions tests' stamp: 'DS 11/8/2020 21:59:24'!
 test09PortfolioIncludesAnotherPortfolioTransactions
-	| aMainPortfolio anotherPortfolio aMainAccount aPortfolioAccount aTransaction secondTransaction |
+	| aRootPortfolio anotherPortfolio aMainAccount aPortfolioAccount aTransaction secondTransaction |
 	
-	aMainPortfolio := Portfolio new.
+	aRootPortfolio := Portfolio new.
 	anotherPortfolio := Portfolio new.
 	
 	aPortfolioAccount  := ReceptiveAccount new.
@@ -141,143 +144,124 @@ test09PortfolioIncludesAnotherPortfolioTransactions
 	
 	anotherPortfolio add: aPortfolioAccount.
 	
-	aMainPortfolio add: anotherPortfolio.
-	aMainPortfolio add: aMainAccount.
+	aRootPortfolio add: anotherPortfolio.
+	aRootPortfolio add: aMainAccount.
 
 	aTransaction := Deposit register: 100 on: aPortfolioAccount.	
 	secondTransaction := Deposit register: 200 on: aMainAccount.	
 		
-	self assert: 2 equals: aMainPortfolio transactions size.
-	self assert: (aMainPortfolio transactions includes: aTransaction).
-	self assert: (aMainPortfolio transactions includes: secondTransaction).
+	self assert: 2 equals: aRootPortfolio transactions size.
+	self assert: (aRootPortfolio transactions includes: aTransaction).
+	self assert: (aRootPortfolio transactions includes: secondTransaction).
 		
 
 ! !
 
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
-test10PortafolioShouldNotBeAddedToHimself
-	| aPortfolio |
-	
-	aPortfolio := Portfolio new.
-	
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:51:34'!
+shouldNotHaveRepeatedBankRecordWhen: aPortfolio add: aBankRecord
 	self 
-		should: [ aPortfolio add: aPortfolio. ]
+		should: [ aPortfolio add: aBankRecord. ]
 		raise: Error
 		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
 ! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
-test11AddedPortfolioShouldNotContainRepeatedChilds
-	| mainPortfolio secondPortfolio |
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:52:55'!
+test10PortafolioShouldNotBeAddedToHimself
+
+	| rootPortfolio |
 	
-	mainPortfolio := Portfolio new.
+	rootPortfolio := Portfolio new.
+
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: rootPortfolio.! !
+
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:58:45'!
+test11AddedPortfolioShouldNotContainRepeatedChilds
+
+	| rootPortfolio secondPortfolio |
+	
+	rootPortfolio := Portfolio new.
 	secondPortfolio := Portfolio new.
 	
-	mainPortfolio add: secondPortfolio.
-	self 
-		should: [ secondPortfolio add: mainPortfolio. ]
-		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
-! !
+	rootPortfolio add: secondPortfolio.
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
+	self shouldNotHaveRepeatedBankRecordWhen: secondPortfolio add: rootPortfolio.! !
+
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:58:38'!
 test12AddedPortafolioShouldNotContainSuccesiveRepeatedChilds
-	| mainPortfolio secondPortfolio thirdPortfolio |
+
+	| rootPortfolio secondPortfolio thirdPortfolio |
 	
-	mainPortfolio := Portfolio new.
+	rootPortfolio := Portfolio new.
 	secondPortfolio := Portfolio new.
 	thirdPortfolio := Portfolio new.
 	
-	mainPortfolio add: secondPortfolio.
+	rootPortfolio add: secondPortfolio.
 	secondPortfolio add: thirdPortfolio.
-	self 
-		should: [ thirdPortfolio add: mainPortfolio. ]
-		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
-! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
+	self shouldNotHaveRepeatedBankRecordWhen: thirdPortfolio add: rootPortfolio.! !
+
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:58:32'!
 test13AddedPortafolioShouldNotBeInHisChilds
 
-	| aPortfolio aRepeatedPortfolio |
+	| rootPortfolio aRepeatedPortfolio |
 	
-	aPortfolio := Portfolio new.
+	rootPortfolio := Portfolio new.
 	aRepeatedPortfolio  := Portfolio new.
 	
-	aPortfolio add: aRepeatedPortfolio.
-	
-	self 
-		should: [ aPortfolio add: aRepeatedPortfolio. ]
-		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
-		
-! !
+	rootPortfolio add: aRepeatedPortfolio.
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: aRepeatedPortfolio.! !
+
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:54:16'!
 test14AddedPortafolioShouldNotBeInHisSuccesiveChilds
 
-	| mainPortfolio secondPortfolio aRepeatedPortfolio |
+	| rootPortfolio secondPortfolio aRepeatedPortfolio |
 	
-	mainPortfolio := Portfolio new.
+	rootPortfolio := Portfolio new.
 	secondPortfolio := Portfolio new.
 	aRepeatedPortfolio  := Portfolio new.
 	
-	mainPortfolio add: secondPortfolio. 
+	rootPortfolio add: secondPortfolio. 
 	secondPortfolio add: aRepeatedPortfolio.
-	
-	self 
-		should: [ mainPortfolio add: aRepeatedPortfolio. ]
-		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
-		
-! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: aRepeatedPortfolio.! !
+
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:55:03'!
 test15AddedPortfolioChildsShouldNotBeInPortfolioChilds
 	
-	| aPortfolio secondPortfolio aRepeatedPortfolioRegister |
+	| rootPortfolio secondPortfolio aRepeatedBankRecord |
 	
-	aPortfolio := Portfolio new.
+	rootPortfolio := Portfolio new.
 	secondPortfolio  := Portfolio new.
 	
-	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	aRepeatedBankRecord := ReceptiveAccount new.
 	
-	secondPortfolio add: aRepeatedPortfolioRegister.
-	aPortfolio add: aRepeatedPortfolioRegister.
+	secondPortfolio add: aRepeatedBankRecord.
+	rootPortfolio add: aRepeatedBankRecord.
 	
-	self 
-		should: [ aPortfolio add: secondPortfolio. ]
-		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
-		
-! !
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: secondPortfolio.! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:55:50'!
 test16AddedPortfolioHerarchyShouldNotBeInHisHerarchy
 	
-	| aPortfolio secondPortfolio thirdPortfolio aRepeatedPortfolioRegister |
+	| rootPortfolio secondPortfolio thirdPortfolio aRepeatedBankRecord |
 	
-	aPortfolio := Portfolio new.
+	rootPortfolio := Portfolio new.
 	secondPortfolio  := Portfolio new.
 	thirdPortfolio := Portfolio new.
 	
-	aRepeatedPortfolioRegister := ReceptiveAccount new.
+	aRepeatedBankRecord := ReceptiveAccount new.
 	
-	thirdPortfolio add: aRepeatedPortfolioRegister.
-	secondPortfolio add: aRepeatedPortfolioRegister.
+	thirdPortfolio add: aRepeatedBankRecord.
+	secondPortfolio add: aRepeatedBankRecord.
 	
-	aPortfolio add: secondPortfolio.
+	rootPortfolio add: secondPortfolio.
 	
-	self 
-		should: [ aPortfolio add: thirdPortfolio. ]
-		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
-		
-! !
+	self shouldNotHaveRepeatedBankRecordWhen: rootPortfolio add: thirdPortfolio.! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
-test17
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:56:05'!
+test17AddedPortfolioShouldNotHasSameParent
 	
 	| rootPortfolio secondPortfolio thirdPortfolio  |
 	
@@ -288,59 +272,44 @@ test17
 	rootPortfolio add: secondPortfolio.
 	rootPortfolio add: thirdPortfolio.
 	
-	self 
-		should: [ secondPortfolio add: thirdPortfolio ]
-		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
-		
-! !
+	self shouldNotHaveRepeatedBankRecordWhen: secondPortfolio add: thirdPortfolio.! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
-test18
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:57:14'!
+test18AddedBankRecordShouldNotBeInLastHerachyOfBrotherBranch
 	
-	| rootPortfolio secondPortfolio thirdPortfolio FourthPortfolio Account |
+	| rootPortfolio secondPortfolio thirdPortfolio fourthPortfolio aRepeatedBankRecord |
 	
 	rootPortfolio := Portfolio new.
 	secondPortfolio  := Portfolio new.
 	thirdPortfolio := Portfolio new.
 	
-	FourthPortfolio := Portfolio new.
-	Account := ReceptiveAccount new.
+	fourthPortfolio := Portfolio new.
+	aRepeatedBankRecord := ReceptiveAccount new.
 	
 	rootPortfolio add: secondPortfolio.
 	rootPortfolio add: thirdPortfolio.
 	
-	secondPortfolio add: Account.
-	thirdPortfolio add: FourthPortfolio.
+	secondPortfolio add: aRepeatedBankRecord.
+	thirdPortfolio add: fourthPortfolio.
 	
-	self 
-		should: [ FourthPortfolio add: Account ]
-		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
-		
-! !
+	self shouldNotHaveRepeatedBankRecordWhen: fourthPortfolio add: aRepeatedBankRecord.! !
 
-!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 20:03:17'!
-test19
+!PortfolioTest methodsFor: 'add tests' stamp: 'DS 11/8/2020 21:57:50'!
+test19ShouldNotAddABankRecordWhenAnyOfParentsHaveIt
 	
-	| rootPortfolio1 rootPortfolio2 aPortfolio anAccount |
+	| rootPortfolio1 rootPortfolio2 aPortfolio aRepeatedAccount |
 	
 	rootPortfolio1 := Portfolio new.
 	rootPortfolio2 := Portfolio new.
 
 	aPortfolio := Portfolio new.
-	anAccount := ReceptiveAccount new.
+	aRepeatedAccount := ReceptiveAccount new.
 
 	rootPortfolio1 add: aPortfolio.
-	rootPortfolio1 add: anAccount.	
+	rootPortfolio1 add: aRepeatedAccount.	
 	rootPortfolio2 add: aPortfolio.
 
-	self 
-		should: [ aPortfolio add: anAccount ]
-		raise: Error
-		withMessageText: Portfolio shouldNotHaveRepeatedBankRecordsErrorDescription
-		
-! !
+	self shouldNotHaveRepeatedBankRecordWhen: aPortfolio add: aRepeatedAccount.! !
 
 
 !classDefinition: #ReceptiveAccountTest category: 'Portfolio-Ejercicio'!
@@ -545,19 +514,28 @@ Object subclass: #BankRecord
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!BankRecord methodsFor: 'transactions' stamp: 'Federico 11/6/2020 20:58:26'!
-transactions 
+!BankRecord methodsFor: 'transactions' stamp: 'DS 11/8/2020 22:01:19'!
+transactions
+
 	self subclassResponsibility ! !
 
 
-!BankRecord methodsFor: 'balance' stamp: 'Federico 11/6/2020 20:58:54'!
+!BankRecord methodsFor: 'balance' stamp: 'DS 11/8/2020 22:01:04'!
 balance
+
 	self subclassResponsibility ! !
 
 
-!BankRecord methodsFor: 'testing' stamp: 'Federico 11/6/2020 21:00:28'!
+!BankRecord methodsFor: 'testing' stamp: 'DS 11/8/2020 22:01:07'!
 hasRegistered: aTransaction
+
 	self subclassResponsibility ! !
+
+
+!BankRecord methodsFor: 'adding' stamp: 'DS 11/8/2020 20:59:10'!
+addTo: aPortfolio
+
+	self subclassResponsibility.! !
 
 
 !classDefinition: #Portfolio category: 'Portfolio-Ejercicio'!
@@ -567,17 +545,21 @@ BankRecord subclass: #Portfolio
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 20:00:29'!
-hasPortfolioRegister: aPortfolioRegister
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 21:40:39'!
+hasBankRecord: aBankRecord
 
-	^(self = aPortfolioRegister)
-	or: [(bankRecords select: [ :childRegisters | aPortfolioRegister  hasPortfolioRegister: childRegisters ]) isEmpty not]
-	or: [(bankRecords select: [ :childRegisters | childRegisters  hasPortfolioRegister: aPortfolioRegister ]) isEmpty not].
+	^self = aBankRecord
+	or: [ self collection: bankRecords
+		isNotEmptyWhenSelect: [ :childRegisters | 
+			(aBankRecord  hasBankRecord: childRegisters) or: [ childRegisters  hasBankRecord: aBankRecord ]]
+	].
 	! !
 
-!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 20:00:29'!
+!Portfolio methodsFor: 'testing' stamp: 'DS 11/8/2020 21:37:09'!
 hasRegistered: aTransaction
-	^(bankRecords select: [ :aNode | aNode  hasRegistered: aTransaction. ]) isEmpty not.
+
+	^ self	collection: bankRecords
+		 isNotEmptyWhenSelect: [ :aBankRecord | aBankRecord  hasRegistered: aTransaction ].
 ! !
 
 
@@ -588,28 +570,31 @@ initialize
 	parentPortfolios := RootParentPortfolio for: self.! !
 
 
-!Portfolio methodsFor: 'transactions' stamp: 'DS 11/8/2020 20:00:29'!
+!Portfolio methodsFor: 'transactions' stamp: 'DS 11/8/2020 20:49:37'!
 transactions
-	^(bankRecords collect: [ :node | node transactions ]) flatten.
+	^(bankRecords collect: [ :aBankRecord | aBankRecord transactions ]) flatten.
 	! !
 
 
-!Portfolio methodsFor: 'balance' stamp: 'DS 11/8/2020 20:00:29'!
+!Portfolio methodsFor: 'balance' stamp: 'DS 11/8/2020 20:48:06'!
 balance
-	^bankRecords sum: [ :aNode | aNode balance.] ifEmpty: [0].
+	^bankRecords sum: [ :aBankRecord | aBankRecord balance.] ifEmpty: [0].
 	
 	! !
 
 
-!Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 20:01:56'!
+!Portfolio methodsFor: 'private testing' stamp: 'DS 11/8/2020 21:30:17'!
+collection: aCollection isNotEmptyWhenSelect: aSelectBlock
+
+	^(aCollection select: aSelectBlock) isEmpty not.! !
+
+
+!Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 21:33:55'!
 assertRepeatedBankRecord: aBankRecord
 
-	| rootPortfolios |
-	
-	rootPortfolios := self rootPortfolios.		
-	
-	((rootPortfolios select: [:rootPorfolio | rootPorfolio hasPortfolioRegister: aBankRecord]) isEmpty not)
-	ifTrue: [self signalShouldNotHaveRepeatedBankRecords ]! !
+	(self 	collection: self rootPortfolios
+		isNotEmptyWhenSelect: [:rootPorfolio | rootPorfolio hasBankRecord: aBankRecord]
+	) ifTrue: [self signalShouldNotHaveRepeatedBankRecords].! !
 
 !Portfolio methodsFor: 'assert / errors' stamp: 'DS 11/8/2020 20:02:22'!
 signalShouldNotHaveRepeatedBankRecords
@@ -690,10 +675,10 @@ balance
     ^balance.! !
 
 
-!ReceptiveAccount methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:18:24'!
-hasPortfolioRegister: aPortfolioRegister
-	^self = aPortfolioRegister.
-! !
+!ReceptiveAccount methodsFor: 'testing' stamp: 'DS 11/8/2020 20:56:19'!
+hasBankRecord: aBankRecord
+
+	^self = aBankRecord.! !
 
 !ReceptiveAccount methodsFor: 'testing' stamp: 'Federico 11/7/2020 16:15:43'!
 hasRegistered: aTransaction
@@ -715,31 +700,42 @@ Object subclass: #ParentPortfolio
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
+!ParentPortfolio methodsFor: 'roots' stamp: 'DS 11/8/2020 21:06:19'!
+roots
+
+	self subclassResponsibility.! !
+
+
+!ParentPortfolio methodsFor: 'adding' stamp: 'DS 11/8/2020 21:05:37'!
+addParent: aParentPortfolio
+
+	self subclassResponsibility.! !
+
 
 !classDefinition: #CollectionParentPortfolio category: 'Portfolio-Ejercicio'!
 ParentPortfolio subclass: #CollectionParentPortfolio
-	instanceVariableNames: 'parents portfolio'
+	instanceVariableNames: 'parents'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!CollectionParentPortfolio methodsFor: 'initialization' stamp: 'DS 11/8/2020 19:44:08'!
-initializeFor: aPortfolio with: aParentPortfolio
+!CollectionParentPortfolio methodsFor: 'initialization' stamp: 'DS 11/8/2020 21:04:13'!
+initializeAdding: aParentPortfolio
 
-	portfolio := aPortfolio.
 	parents := OrderedCollection with: aParentPortfolio.! !
 
 
-!CollectionParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 19:38:50'!
+!CollectionParentPortfolio methodsFor: 'roots' stamp: 'DS 11/8/2020 19:39:31'!
+roots
+
+	^(parents collect: [ :parentPortfolio | parentPortfolio rootPortfolios ]) flatten.! !
+
+
+!CollectionParentPortfolio methodsFor: 'adding' stamp: 'DS 11/8/2020 19:38:50'!
 addParent: aParentPortfolio
 
 	parents add: aParentPortfolio.
 	^self.! !
-
-!CollectionParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 19:39:31'!
-roots
-
-	^(parents collect: [ :parentPortfolio | parentPortfolio rootPortfolios ]) flatten.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -747,34 +743,35 @@ roots
 CollectionParentPortfolio class
 	instanceVariableNames: ''!
 
-!CollectionParentPortfolio class methodsFor: 'instance creation' stamp: 'DS 11/8/2020 19:43:11'!
-for: aPortfolio with: aParentPortfolio
+!CollectionParentPortfolio class methodsFor: 'instance creation' stamp: 'DS 11/8/2020 21:03:53'!
+adding: aParentPortfolio
 
-	^self new initializeFor: aPortfolio with: aParentPortfolio.! !
+	^self new initializeAdding: aParentPortfolio.! !
 
 
 !classDefinition: #RootParentPortfolio category: 'Portfolio-Ejercicio'!
 ParentPortfolio subclass: #RootParentPortfolio
-	instanceVariableNames: 'portfolio'
+	instanceVariableNames: 'root'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Ejercicio'!
 
-!RootParentPortfolio methodsFor: 'initialization' stamp: 'DS 11/8/2020 19:44:53'!
+!RootParentPortfolio methodsFor: 'initialization' stamp: 'DS 11/8/2020 21:04:45'!
 initializateFor: aPortfolio
 
-	portfolio := aPortfolio.! !
+	root := aPortfolio.! !
 
 
-!RootParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 19:37:53'!
+!RootParentPortfolio methodsFor: 'adding' stamp: 'DS 11/8/2020 21:03:35'!
 addParent: aParentPortfolio
 
-	^CollectionParentPortfolio for: portfolio with: aParentPortfolio.! !
+	^CollectionParentPortfolio adding: aParentPortfolio.! !
 
-!RootParentPortfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 19:38:13'!
+
+!RootParentPortfolio methodsFor: 'roots' stamp: 'DS 11/8/2020 21:04:58'!
 roots
 
-	^OrderedCollection with: portfolio.! !
+	^OrderedCollection with: root.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -782,7 +779,7 @@ roots
 RootParentPortfolio class
 	instanceVariableNames: ''!
 
-!RootParentPortfolio class methodsFor: 'as yet unclassified' stamp: 'DS 11/8/2020 19:44:38'!
+!RootParentPortfolio class methodsFor: 'instance creation' stamp: 'DS 11/8/2020 19:44:38'!
 for: aPortfolio
 
 	^self new initializateFor: aPortfolio.! !
