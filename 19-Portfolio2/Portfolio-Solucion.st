@@ -133,6 +133,34 @@ test05TransactionsInPortfolioShouldAffectHisAccountSummary
 
 	self assert: expectedAccountSummary equals: accountSummary summary.! !
 
+!AccountReportTest methodsFor: 'account summary' stamp: 'FedericoSabatini 11/15/2020 19:01:29'!
+test06
+
+	| namedPortfolio portfolioTree expectedPortfolioTree |
+	
+	namedPortfolio := Portfolio named: 'Portfolio Diego'. 
+	
+	portfolioTree := AccountsTree for: namedPortfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Diego'.
+
+	self assert: expectedPortfolioTree equals: portfolioTree tree.! !
+
+!AccountReportTest methodsFor: 'account summary' stamp: 'FedericoSabatini 11/15/2020 20:31:05'!
+test07
+
+	| namedPortfolio namedAccount portfolioTree expectedPortfolioTree tab |
+	
+	tab := '    '.
+	
+	namedAccount := ReceptiveAccount named: 'Cuenta Fede'.
+	namedPortfolio := Portfolio named: 'Portfolio Diego' with: namedAccount. 
+	
+	portfolioTree := AccountsTree for: namedPortfolio.
+	
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Diego' with: (tab, 'Cuenta Fede').
+
+	self assert: expectedPortfolioTree equals: portfolioTree tree.! !
+
 
 !classDefinition: #PortfolioTest category: 'Portfolio-Solucion'!
 TestCase subclass: #PortfolioTest
@@ -567,7 +595,7 @@ addedTo: aPortfolio
 
 !classDefinition: #Portfolio category: 'Portfolio-Solucion'!
 Account subclass: #Portfolio
-	instanceVariableNames: 'accounts parents'
+	instanceVariableNames: 'accounts parents name'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Solucion'!
@@ -612,6 +640,20 @@ initialize
 
 	accounts := OrderedCollection new.
 	parents := OrderedCollection new.! !
+
+!Portfolio methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:19:20'!
+initializeNamed: aName 
+
+	accounts := OrderedCollection new.
+	parents := OrderedCollection new.
+	name := aName.! !
+
+!Portfolio methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:19:49'!
+initializeNamed: aName with: anAccount
+
+	accounts := OrderedCollection with: anAccount.
+	parents := OrderedCollection new.
+	name := aName.! !
 
 
 !Portfolio methodsFor: 'balance' stamp: 'HAW 5/25/2019 11:19:36'!
@@ -676,25 +718,44 @@ signalCanNotAddAccount
 	
 	self error: self class canNotAddAccountErrorMessage! !
 
+
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:22:50'!
+affectReportUsingAccounts: anAccountsReport
+	^accounts collect: [ :anAccount | anAccountsReport affectUsing: anAccount ].! !
+
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:17:11'!
+affectReportUsingTransactions: anAccountReport
+
+    ^self transactions collect: [ :aTransaction | aTransaction affectReport: anAccountReport ].! !
+
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:26:55'!
+yourName
+	^name.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'Portfolio class' category: 'Portfolio-Solucion'!
 Portfolio class
 	instanceVariableNames: ''!
 
-!Portfolio class methodsFor: 'as yet unclassified' stamp: 'NR 11/9/2020 06:01:26'!
-canNotAddAccountErrorMessage
-	
-	^'Can not add repeated account to a portfolio!!'! !
+!Portfolio class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:20:23'!
+named: aName 
 
-!Portfolio class methodsFor: 'as yet unclassified' stamp: 'HAW 5/25/2019 11:18:21'!
+	^self new initializeNamed: aName ! !
+
+!Portfolio class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:20:50'!
+named: aName with: anAccount 
+
+	^self new initializeNamed: aName with: anAccount ! !
+
+!Portfolio class methodsFor: 'instance creation' stamp: 'HAW 5/25/2019 11:18:21'!
 with: anAccount
 
 	^self new 
 		add: anAccount;
 		yourself! !
 
-!Portfolio class methodsFor: 'as yet unclassified' stamp: 'HAW 5/25/2019 11:23:59'!
+!Portfolio class methodsFor: 'instance creation' stamp: 'HAW 5/25/2019 11:23:59'!
 with: anAccount with: anotherAccount
 
 	^self new 
@@ -702,10 +763,16 @@ with: anAccount with: anotherAccount
 		add: anotherAccount;
 		yourself! !
 
+
+!Portfolio class methodsFor: 'error description' stamp: 'NR 11/9/2020 06:01:26'!
+canNotAddAccountErrorMessage
+	
+	^'Can not add repeated account to a portfolio!!'! !
+
 
 !classDefinition: #ReceptiveAccount category: 'Portfolio-Solucion'!
 Account subclass: #ReceptiveAccount
-	instanceVariableNames: 'transactions'
+	instanceVariableNames: 'transactions name'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'Portfolio-Solucion'!
@@ -715,6 +782,13 @@ initialize
 
 	super initialize.
 	transactions := OrderedCollection new.! !
+
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:15:58'!
+initializeNamed: aName 
+
+	super initialize.
+	transactions := OrderedCollection new.
+	name := aName.! !
 
 
 !ReceptiveAccount methodsFor: 'transactions' stamp: 'NR 11/9/2020 05:56:36'!
@@ -758,6 +832,26 @@ isComposedBy: anAccount
 addedTo: aPortfolio 
 	
 	! !
+
+
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:17:18'!
+affectReportUsingTransactions: anAccountReport
+
+    ^transactions collect: [ :aTransaction | anAccountReport affectUsing: aTransaction ].! !
+
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:29:29'!
+yourName
+	^name.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'ReceptiveAccount class' category: 'Portfolio-Solucion'!
+ReceptiveAccount class
+	instanceVariableNames: ''!
+
+!ReceptiveAccount class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:15:26'!
+named: aName 
+	^self new initializeNamed: aName ! !
 
 
 !classDefinition: #AccountReport category: 'Portfolio-Solucion'!
@@ -812,15 +906,15 @@ AccountReport subclass: #AccountSummary
 	poolDictionaries: ''
 	category: 'Portfolio-Solucion'!
 
-!AccountSummary methodsFor: 'summaring' stamp: 'DS 11/15/2020 17:37:16'!
+!AccountSummary methodsFor: 'summaring' stamp: 'FedericoSabatini 11/15/2020 20:16:31'!
 summary
 
-	| summary |
+    | summary |
 
-	summary := OrderedCollection new.
-	account transactions do: [ :aTransaction |  summary addLast: (	aTransaction affectReport: self) ].
-	summary addLast: ('Balance = ', (account balance asString)).
-	^summary! !
+    summary := account affectReportUsingTransactions: self.
+    summary addLast: 'Balance = ', (account balance asString).
+
+    ^summary.! !
 
 
 !AccountSummary methodsFor: 'affect' stamp: 'DS 11/15/2020 17:37:51'!
@@ -843,6 +937,33 @@ affectReportForWithdraw: aWithdraw
 
 	^'Extraccion por ', (aWithdraw value asString).! !
 
+
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:17:44'!
+affectUsing: aTransaction
+
+    ^aTransaction affectReport: self.! !
+
+
+!classDefinition: #AccountsTree category: 'Portfolio-Solucion'!
+AccountReport subclass: #AccountsTree
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!AccountsTree methodsFor: 'a' stamp: 'FedericoSabatini 11/15/2020 20:26:28'!
+tree
+ 	| tree |
+	tree := account affectReportUsingAccounts: self.
+	
+	tree addFirst: account yourName.
+	^tree! !
+
+
+!AccountsTree methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:31:24'!
+affectUsing: anAccount
+	^('    ', anAccount yourName).! !
+
 
 !classDefinition: #NetOfTrasnferences category: 'Portfolio-Solucion'!
 AccountReport subclass: #NetOfTrasnferences
@@ -851,10 +972,10 @@ AccountReport subclass: #NetOfTrasnferences
 	poolDictionaries: ''
 	category: 'Portfolio-Solucion'!
 
-!NetOfTrasnferences methodsFor: 'netting' stamp: 'DS 11/15/2020 17:37:31'!
+!NetOfTrasnferences methodsFor: 'netting' stamp: 'FedericoSabatini 11/15/2020 20:16:15'!
 net
 
-	^account transactions sum: [ :aTransaction | aTransaction affectReport: self ] ifEmpty: [ 0 ].! !
+    ^(account affectReportUsingTransactions: self) sum: [ :aValueTransaction | aValueTransaction ] ifEmpty: [ 0 ].! !
 
 
 !NetOfTrasnferences methodsFor: 'affect' stamp: 'DS 11/15/2020 17:38:46'!
@@ -876,6 +997,12 @@ affectReportForTransferWithdraw: aTransferWithdraw
 affectReportForWithdraw: aWithdraw
 
 	^0.! !
+
+
+!NetOfTrasnferences methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:18:29'!
+affectUsing: aTransaction
+
+    ^aTransaction affectReport: self.! !
 
 
 !classDefinition: #AccountTransaction category: 'Portfolio-Solucion'!

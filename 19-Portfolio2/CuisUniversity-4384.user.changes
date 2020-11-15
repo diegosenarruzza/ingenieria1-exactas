@@ -7603,3 +7603,1125 @@ initializeRegister: aValue from: aFromReceptiveAccount to: aToReceptiveAccount
 ----SNAPSHOT----(15 November 2020 18:01:08) CuisUniversity-4384.image priorSource: 19445405!
 
 ----SNAPSHOT----(15 November 2020 18:05:10) CuisUniversity-4384.image priorSource: 19453684!
+
+----STARTUP---- (15 November 2020 18:40:40) as D:\facultad\Smalltalk\windows64\CuisUniversity-4384.image!
+
+
+----End fileIn of D:\facultad\Smalltalk\ingenieria1-exactas-master\19-Portfolio2\Portfolio-Solucion.st----!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'FedericoSabatini 11/15/2020 18:41:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'FedericoSabatini 11/15/2020 18:41:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'FedericoSabatini 11/15/2020 18:41:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'FedericoSabatini 11/15/2020 18:41:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'FedericoSabatini 11/15/2020 18:41:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'FedericoSabatini 11/15/2020 18:41:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'FedericoSabatini 11/15/2020 18:41:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'FedericoSabatini 11/15/2020 18:41:33'!
+PASSED!
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'FedericoSabatini 11/15/2020 18:41:35'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferShouldHaveAffectedBalanceOfParticipants stamp: 'FedericoSabatini 11/15/2020 18:41:35'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'FedericoSabatini 11/15/2020 18:41:35'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferShouldNotHaveTheSameOriginAndDestinyAccount stamp: 'FedericoSabatini 11/15/2020 18:41:35'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferShouldNotRegisterANegativeAmmount stamp: 'FedericoSabatini 11/15/2020 18:41:35'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 18:41:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 18:41:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 18:41:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 18:41:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 18:41:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 18:41:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 18:41:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 18:41:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 18:41:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'FedericoSabatini 11/15/2020 18:41:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferShouldHaveAffectedBalanceOfParticipants stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'FedericoSabatini 11/15/2020 18:41:47'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferShouldNotHaveTheSameOriginAndDestinyAccount stamp: 'FedericoSabatini 11/15/2020 18:41:48'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferShouldNotRegisterANegativeAmmount stamp: 'FedericoSabatini 11/15/2020 18:41:48'!
+PASSED!
+!AccountReportTest methodsFor: 'account summary' stamp: 'FedericoSabatini 11/15/2020 18:52:46'!
+test06
+
+	| accountSummaryTree expectedAccountSummaryTree namedPortfolio |
+	
+	namedPortfolio := Portfolio named: 'Portfolio Diego'. 
+	
+	accountSummaryTree := AccountSummary for: namedPortfolio.
+	expectedAccountSummaryTree := OrderedCollection with: 'Portfolio Diego'.
+
+	self assert: expectedAccountSummaryTree equals: accountSummaryTree summary.! !
+!AccountReportTest methodsFor: 'account summary' stamp: 'FedericoSabatini 11/15/2020 18:53:40' prior: 50869405!
+test06
+
+	| namedPortfolio portfolioTree expectedPortfolioTree |
+	
+	namedPortfolio := Portfolio named: 'Portfolio Diego'. 
+	
+	portfolioTree := AccountSummary for: namedPortfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Diego'.
+
+	self assert: expectedPortfolioTree equals: portfolioTree summary.! !
+
+!classDefinition: #AccountsTree category: 'Portfolio-Solucion' stamp: 'FedericoSabatini 11/15/2020 18:56:49'!
+AccountReport subclass: #AccountsTree
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!AccountReportTest methodsFor: 'account summary' stamp: 'FedericoSabatini 11/15/2020 18:56:27' prior: 50869420!
+test06
+
+	| namedPortfolio portfolioTree expectedPortfolioTree |
+	
+	namedPortfolio := Portfolio named: 'Portfolio Diego'. 
+	
+	portfolioTree := AccountsTree for: namedPortfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Diego'.
+
+	self assert: expectedPortfolioTree equals: portfolioTree summary.! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 18:57:09'!
+ERROR!
+!Portfolio class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 18:57:42'!
+named: aString 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeNamed: aString ! !
+!Portfolio class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 18:58:48' prior: 50869458!
+named: aName 
+	^self new initializeNamed: aName ! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 18:58:50'!
+ERROR!
+
+!classDefinition: #Portfolio category: 'Portfolio-Solucion' stamp: 'FedericoSabatini 11/15/2020 18:59:19'!
+Account subclass: #Portfolio
+	instanceVariableNames: 'accounts parents name'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!Portfolio methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 18:59:20'!
+initializeNamed: aName 
+	self shouldBeImplemented.
+	name := aName.! !
+!Portfolio methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 18:59:25' prior: 50869483!
+initializeNamed: aName 
+	name := aName.! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 18:59:34'!
+ERROR!
+!Portfolio methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:00:15' prior: 50869489!
+initializeNamed: aName 
+	accounts := OrderedCollection new.
+	parents := OrderedCollection new.
+	name := aName.! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 19:01:10'!
+ERROR!
+!AccountReportTest methodsFor: 'account summary' stamp: 'FedericoSabatini 11/15/2020 19:01:29' prior: 50869442!
+test06
+
+	| namedPortfolio portfolioTree expectedPortfolioTree |
+	
+	namedPortfolio := Portfolio named: 'Portfolio Diego'. 
+	
+	portfolioTree := AccountsTree for: namedPortfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Diego'.
+
+	self assert: expectedPortfolioTree equals: portfolioTree tree.! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 19:01:37'!
+ERROR!
+!AccountsTree methodsFor: 'a' stamp: 'FedericoSabatini 11/15/2020 19:01:48'!
+tree
+	self shouldBeImplemented.! !
+!AccountsTree methodsFor: 'a' stamp: 'FedericoSabatini 11/15/2020 19:02:12' prior: 50869523!
+tree
+	^OrderedCollection with: 'Portfolio Diego'.! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 19:02:13'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 19:02:13'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 19:02:13'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 19:02:13'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 19:02:13'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 19:02:13'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 19:02:13'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 19:02:13'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 19:02:14'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 19:02:14'!
+PASSED!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 19:02:14'!
+PASSED!
+
+(String tab, 'Cuenta Fede')!
+
+(' aja', Character tab asString, 'Cuenta Fede') !
+
+(' aja', String tab,  'Cuenta Fede')  !
+
+(String tab, 'Cuenta Fede')!
+!AccountReportTest methodsFor: 'account summary' stamp: 'FedericoSabatini 11/15/2020 19:12:11'!
+test07
+
+	| namedPortfolio namedAccount portfolioTree expectedPortfolioTree tab |
+	
+	tab := '    '.
+	
+	namedAccount := Account named: 'Cuenta Fede'.
+	namedPortfolio := Portfolio named: 'Portfolio Diego' with: namedAccount. 
+	
+	portfolioTree := AccountsTree for: namedPortfolio.
+	
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Diego' with: (tab, 'Cuenta Fede').
+
+	self assert: expectedPortfolioTree equals: portfolioTree tree.! !
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 19:12:17'!
+ERROR!
+!Account class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:12:32'!
+named: aString 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeNamed: aString ! !
+!Account class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:12:42' prior: 50869603!
+named: aName 
+	^self new initializeNamed: aName. ! !
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 19:12:43'!
+ERROR!
+!AccountReportTest methodsFor: 'account summary' stamp: 'FedericoSabatini 11/15/2020 19:13:33' prior: 50869583!
+test07
+
+	| namedPortfolio namedAccount portfolioTree expectedPortfolioTree tab |
+	
+	tab := '    '.
+	
+	namedAccount := ReceptiveAccount named: 'Cuenta Fede'.
+	namedPortfolio := Portfolio named: 'Portfolio Diego' with: namedAccount. 
+	
+	portfolioTree := AccountsTree for: namedPortfolio.
+	
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Diego' with: (tab, 'Cuenta Fede').
+
+	self assert: expectedPortfolioTree equals: portfolioTree tree.! !
+
+!methodRemoval: Account class #named: stamp: 'FedericoSabatini 11/15/2020 19:14:14'!
+named: aName 
+	^self new initializeNamed: aName. !
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 19:15:10'!
+ERROR!
+!ReceptiveAccount class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:15:17'!
+named: aString 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeNamed: aString ! !
+!ReceptiveAccount class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:15:26' prior: 50869646!
+named: aName 
+	^self new initializeNamed: aName ! !
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 19:15:29'!
+ERROR!
+
+!classDefinition: #ReceptiveAccount category: 'Portfolio-Solucion' stamp: 'FedericoSabatini 11/15/2020 19:15:39'!
+Account subclass: #ReceptiveAccount
+	instanceVariableNames: 'transactions name'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:15:39'!
+initializeNamed: aName 
+	self shouldBeImplemented.
+	name := aName.! !
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:15:44' prior: 50869671!
+initializeNamed: aName 
+
+	name := aName.! !
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 19:15:44'!
+ERROR!
+!ReceptiveAccount methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:15:58' prior: 50869677!
+initializeNamed: aName 
+
+	super initialize.
+	transactions := OrderedCollection new.
+	name := aName.! !
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 19:18:06'!
+ERROR!
+!Portfolio class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:18:20'!
+named: aString with: aReceptiveAccount 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeNamed: aString with: aReceptiveAccount ! !
+!Portfolio class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:18:44' prior: 50869695!
+named: aName with: aReceptiveAccount 
+
+	^self new initializeNamed: aName with: aReceptiveAccount ! !
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 19:18:45'!
+ERROR!
+
+!classDefinition: #Portfolio category: 'Portfolio-Solucion' stamp: 'FedericoSabatini 11/15/2020 19:18:51'!
+Account subclass: #Portfolio
+	instanceVariableNames: 'accounts parents name receptiveAccount'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!Portfolio methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:18:51'!
+initializeNamed: aName with: aReceptiveAccount 
+	self shouldBeImplemented.
+	name := aName.
+	receptiveAccount := aReceptiveAccount.! !
+!Portfolio methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:19:07' prior: 50869723!
+initializeNamed: aName with: aReceptiveAccount 
+
+	name := aName.
+	receptiveAccount := aReceptiveAccount.! !
+!Portfolio methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:19:20' prior: 50869497!
+initializeNamed: aName 
+
+	accounts := OrderedCollection new.
+	parents := OrderedCollection new.
+	name := aName.! !
+!Portfolio methodsFor: 'initialization' stamp: 'FedericoSabatini 11/15/2020 19:19:49' prior: 50869731!
+initializeNamed: aName with: anAccount
+
+	accounts := OrderedCollection with: anAccount.
+	parents := OrderedCollection new.
+	name := aName.! !
+!Portfolio class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:20:23' prior: 50869467!
+named: aName 
+
+	^self new initializeNamed: aName ! !
+!Portfolio class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/15/2020 19:20:50' prior: 50869705!
+named: aName with: anAccount 
+
+	^self new initializeNamed: aName with: anAccount ! !
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 19:21:12'!
+FAILURE!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 19:21:31'!
+FAILURE!
+
+Account subclass: #Portfolio
+	instanceVariableNames: 'accounts parents name'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #Portfolio category: 'Portfolio-Solucion' stamp: 'FedericoSabatini 11/15/2020 19:23:50'!
+Account subclass: #Portfolio
+	instanceVariableNames: 'accounts parents name'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:00:18'!
+FAILURE!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:00:25'!
+FAILURE!
+!AccountsTree methodsFor: 'a' stamp: 'FedericoSabatini 11/15/2020 20:06:33' prior: 50869527!
+tree
+ 	| tree |
+	tree := OrderedCollection with: (String tab, account name).
+	tree := account accounts collect: [:childAccount | childAccount tree].
+	
+	
+	^OrderedCollection with: 'Portfolio Diego'.! !
+!Portfolio methodsFor: 'nil' stamp: 'FedericoSabatini 11/15/2020 20:09:23'!
+affectedName: aPrefix
+	^(aPrefix, name).! !
+!NetOfTrasnferences methodsFor: 'netting' stamp: 'FedericoSabatini 11/15/2020 20:16:15' prior: 50868742!
+net
+
+    ^(account affectReportUsingTransactions: self) sum: [ :aValueTransaction | aValueTransaction ] ifEmpty: [ 0 ].! !
+!AccountSummary methodsFor: 'summaring' stamp: 'FedericoSabatini 11/15/2020 20:16:31' prior: 50868692!
+summary
+
+    | summary |
+
+    summary := account affectReportUsingTransactions: self.
+    summary addLast: 'Balance = ', (account balance asString).
+
+    ^summary.! !
+!Portfolio methodsFor: 'nil' stamp: 'FedericoSabatini 11/15/2020 20:17:11'!
+affectReportUsingTransactions: anAccountReport
+
+    ^self transactions collect: [ :aTransaction | aTransaction affectReport: anAccountReport ].! !
+!ReceptiveAccount methodsFor: 'nil' stamp: 'FedericoSabatini 11/15/2020 20:17:18'!
+affectReportUsingTransactions: anAccountReport
+
+    ^transactions collect: [ :aTransaction | anAccountReport affectUsing: aTransaction ].! !
+
+!methodRemoval: Portfolio #affectedName: stamp: 'FedericoSabatini 11/15/2020 20:17:31'!
+affectedName: aPrefix
+	^(aPrefix, name).!
+!AccountSummary methodsFor: 'nil' stamp: 'FedericoSabatini 11/15/2020 20:17:44'!
+affectUsing: aTransaction
+
+    ^aTransaction affectReport: self.! !
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+ERROR!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+PASSED!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+ERROR!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+ERROR!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'FedericoSabatini 11/15/2020 20:18:02'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'FedericoSabatini 11/15/2020 20:18:03'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'FedericoSabatini 11/15/2020 20:18:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'FedericoSabatini 11/15/2020 20:18:04'!
+PASSED!
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'FedericoSabatini 11/15/2020 20:18:04'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferShouldHaveAffectedBalanceOfParticipants stamp: 'FedericoSabatini 11/15/2020 20:18:04'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'FedericoSabatini 11/15/2020 20:18:04'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferShouldNotHaveTheSameOriginAndDestinyAccount stamp: 'FedericoSabatini 11/15/2020 20:18:04'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferShouldNotRegisterANegativeAmmount stamp: 'FedericoSabatini 11/15/2020 20:18:04'!
+PASSED!
+!NetOfTrasnferences methodsFor: 'nil' stamp: 'FedericoSabatini 11/15/2020 20:18:29'!
+affectUsing: aTransaction
+
+    ^aTransaction affectReport: self.! !
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:18:37'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 20:18:37'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:18:37'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:18:37'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 20:18:37'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:18:37'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+ERROR!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+ERROR!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'FedericoSabatini 11/15/2020 20:18:38'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferShouldHaveAffectedBalanceOfParticipants stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferShouldNotHaveTheSameOriginAndDestinyAccount stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferShouldNotRegisterANegativeAmmount stamp: 'FedericoSabatini 11/15/2020 20:18:39'!
+PASSED!
+!AccountsTree methodsFor: 'a' stamp: 'FedericoSabatini 11/15/2020 20:19:57' prior: 50869790!
+tree
+ 	| tree |
+	tree := account affectReportUsingAccounts: self.
+	
+	
+	^OrderedCollection with: 'Portfolio Diego'.! !
+!AccountsTree methodsFor: 'a' stamp: 'FedericoSabatini 11/15/2020 20:20:08' prior: 50870174!
+tree
+ 	| tree |
+	tree := account affectReportUsingAccounts: self.
+	
+	
+	^tree.! !
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:20:14'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 20:20:14'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:20:15'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:20:15'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 20:20:15'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:20:15'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:20:15'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 20:20:15'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:20:15'!
+PASSED!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:20:15'!
+ERROR!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:20:15'!
+ERROR!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+ERROR!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:20:22'!
+ERROR!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:20:27'!
+ERROR!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:20:27'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:20:51'!
+affectReportUsingAccounts: anAccountsTree 
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:22:37' prior: 50870286!
+affectReportUsingAccounts: anAccountsReport
+	accounts collect: [ :anAccount | anAccountsReport affectUsing: anAccount ].! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:22:50' prior: 50870292!
+affectReportUsingAccounts: anAccountsReport
+	^accounts collect: [ :anAccount | anAccountsReport affectUsing: anAccount ].! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:22:55'!
+FAILURE!
+!AccountsTree methodsFor: 'a' stamp: 'FedericoSabatini 11/15/2020 20:24:56' prior: 50870181!
+tree
+ 	| tree |
+	tree := account affectReportUsingAccounts: self.
+	
+	tree addFirst: account name.
+	^tree! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:25:01'!
+FAILURE!
+!AccountsTree methodsFor: 'a' stamp: 'FedericoSabatini 11/15/2020 20:26:28' prior: 50870310!
+tree
+ 	| tree |
+	tree := account affectReportUsingAccounts: self.
+	
+	tree addFirst: account yourName.
+	^tree! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:26:39'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:26:47'!
+yourName
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:26:55' prior: 50870330!
+yourName
+	^name.! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:26:59'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:26:59'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 20:26:59'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:27:00'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:27:00'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 20:27:00'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:27:00'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:27:00'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 20:27:00'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:27:00'!
+PASSED!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:27:00'!
+PASSED!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:27:00'!
+ERROR!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:27:00'!
+ERROR!
+!AccountsTree methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:27:09'!
+affectUsing: aReceptiveAccount 
+	self shouldBeImplemented.! !
+!AccountsTree methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:28:21' prior: 50870391!
+affectUsing: anAccount
+	anAccount yourName.! !
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:28:23'!
+ERROR!
+!AccountsTree methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:28:36' prior: 50870397!
+affectUsing: anAccount
+	^anAccount yourName.! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:28:39'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+ERROR!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:28:40'!
+ERROR!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:29:06'!
+ERROR!
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:29:11'!
+yourName
+	self shouldBeImplemented.! !
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:29:29' prior: 50870465!
+yourName
+	^name.! !
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:29:33'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:29:33'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 20:29:33'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:29:33'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:29:33'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 20:29:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:29:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:29:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 20:29:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:29:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:29:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:29:34'!
+FAILURE!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:29:34'!
+FAILURE!
+
+portfolioTree tree!
+!AccountReportTest methodsFor: 'account summary' stamp: 'FedericoSabatini 11/15/2020 20:31:05' prior: 50869621!
+test07
+
+	| namedPortfolio namedAccount portfolioTree expectedPortfolioTree tab |
+	
+	tab := '    '.
+	
+	namedAccount := ReceptiveAccount named: 'Cuenta Fede'.
+	namedPortfolio := Portfolio named: 'Portfolio Diego' with: namedAccount. 
+	
+	portfolioTree := AccountsTree for: namedPortfolio.
+	
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Diego' with: (tab, 'Cuenta Fede').
+
+	self assert: expectedPortfolioTree equals: portfolioTree tree.! !
+!AccountsTree methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/15/2020 20:31:24' prior: 50870405!
+affectUsing: anAccount
+	^('    ', anAccount yourName).! !
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 20:31:30'!
+PASSED!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:31:32'!
+PASSED!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:31:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:31:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'FedericoSabatini 11/15/2020 20:31:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:31:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:31:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'FedericoSabatini 11/15/2020 20:31:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'FedericoSabatini 11/15/2020 20:31:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'FedericoSabatini 11/15/2020 20:31:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'FedericoSabatini 11/15/2020 20:31:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'FedericoSabatini 11/15/2020 20:31:34'!
+PASSED!
+
+!testRun: #AccountReportTest #test06 stamp: 'FedericoSabatini 11/15/2020 20:31:35'!
+PASSED!
+
+!testRun: #AccountReportTest #test07 stamp: 'FedericoSabatini 11/15/2020 20:31:35'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 20:31:40) CuisUniversity-4384.image priorSource: 17155564!
