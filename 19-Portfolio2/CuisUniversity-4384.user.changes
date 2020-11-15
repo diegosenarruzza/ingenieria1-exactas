@@ -2896,3 +2896,4710 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(12 November 2020 22:00:46) CuisUniversity-4384.image priorSource: 19267672!
+
+----QUIT----(12 November 2020 22:03:59) CuisUniversity-4384.image priorSource: 19271704!
+
+----STARTUP---- (15 November 2020 14:32:43) as /mnt/sdb5/Ingenieria1/CuisUniversity/CuisUniversity-4384.image!
+
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:35:09'!
+test09
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.! !
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:35:19'!
+test16
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.! !
+
+!methodRemoval: PortfolioTest #test09 stamp: 'DS 11/15/2020 14:35:19'!
+test09
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:35:34' prior: 50933911!
+test16
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.! !
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:35:40' prior: 50933930!
+test16
+
+	| portfolio expectedAccountSummary |
+	
+	portfolio := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:35:54' prior: 50933940!
+test16
+
+	| portfolio expectedAccountSummary |
+	
+	portfolio := Portfolio new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:35:56'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 14:36:04'!
+accountSummary
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 14:36:16' prior: 50933962!
+accountSummary
+
+	^'Balance = 0'.! !
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:36:17'!
+FAILURE!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:36:27'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 14:36:41' prior: 50933967!
+accountSummary
+
+	^OrderedCollection with: 'Balance = 0'.! !
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:36:42'!
+PASSED!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:37:39'!
+test17
+
+	| portfolio anAccount expectedAccountSummary |
+	
+	portfolio := Portfolio new.
+	anAccount = ReceptiveAccount new.
+	Deposit register: 100 on: anAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:37:46'!
+ERROR!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:37:55'!
+ERROR!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:38:13'!
+ERROR!
+
+account!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:38:50' prior: 50934043!
+test17
+
+	| portfolio anAccount expectedAccountSummary |
+	
+	portfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	Deposit register: 100 on: anAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:38:50'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 14:40:44' prior: 50933976!
+accountSummary
+
+	^accounts first accountSummary.! !
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:40:45'!
+ERROR!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:41:10' prior: 50934064!
+test17
+
+	| portfolio anAccount expectedAccountSummary |
+	
+	portfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	Deposit register: 100 on: anAccount.
+	
+	portfolio add: anAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:41:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 14:41:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 14:41:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 14:41:11'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:41:12'!
+ERROR!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:41:12'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:41:12'!
+ERROR!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:41:51'!
+ERROR!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:41:51'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:41:51'!
+ERROR!
+
+accounts!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 14:43:17' prior: 50934080!
+accountSummary
+
+	^accounts ifNotEmpty: [ accounts first accountSummary ] ifEmpty: [ OrderedCollection with: 'Balance = 0' ].! !
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:43:18'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 14:43:20'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 14:43:23) CuisUniversity-4384.image priorSource: 19271798!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:43:27' prior: 50934087!
+test17
+
+	| portfolio anAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	Deposit register: 100 on: anAccount.
+	
+	portfolio add: anAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:44:34'!
+test18
+
+	| portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount .
+	
+	portfolio add: firstAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:44:35' prior: 50934327!
+test18
+
+	| portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+	
+	portfolio add: firstAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:44:42' prior: 50934345!
+test18
+
+	| portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+	
+	portfolio add: firstAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 14:46:12' prior: 50934363!
+test18
+
+	| portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+	
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 14:46:13'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 14:58:39' prior: 50934236!
+accountSummary
+
+	| summary |
+
+	summary := 	accounts collect: [ :anAccount | 			
+		anAccount accountSummary removeLast. 
+		anAccount		] flatten.
+	
+	summary addLast: ('Balance = ', self balance asString).
+	^summary.! !
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 14:58:40'!
+ERROR!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 14:58:53' prior: 50934403!
+accountSummary
+
+	| summary |
+
+	summary := 	accounts collect: [ :anAccount | 			
+		anAccount accountSummary removeLast. 
+		anAccount		].
+	
+	summary addLast: ('Balance = ', self balance asString).
+	^summary.! !
+
+summary!
+
+self!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 14:59:26'!
+FAILURE!
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:00:05' prior: 50934416!
+accountSummary
+
+	| summary |
+
+	summary := 	accounts collect: [ :anAccount | 			
+		anAccount accountSummary removeLast.
+		anAccount		].
+	
+	summary addLast: ('Balance = ', self balance asString).
+	^summary.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:01:08' prior: 50934429!
+accountSummary
+
+	| summary |
+
+	summary := 	accounts collect: [ :anAccount |
+		| anAccountSummary |
+		anAccountSummary := anAccount accountSummary.
+		anAccountSummary removeLast.
+		anAccountSummary.
+	].
+	
+	summary addLast: ('Balance = ', self balance asString).
+	^summary.! !
+!Portfolio methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:01:24' prior: 50934439!
+accountSummary
+
+	| summary |
+
+	summary := (	accounts collect: [ :anAccount |
+		| anAccountSummary |
+		anAccountSummary := anAccount accountSummary.
+		anAccountSummary removeLast.
+		anAccountSummary.
+	]) flatten.
+	
+	summary addLast: ('Balance = ', self balance asString).
+	^summary.! !
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:01:36'!
+FAILURE!
+
+self balance!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:02:05' prior: 50934381!
+test18
+
+	| portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+	
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:02:06'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 15:02:10) CuisUniversity-4384.image priorSource: 19285085!
+!Account methodsFor: 'reports' stamp: 'DS 11/15/2020 15:03:26'!
+accountSummary
+
+	self subclassResponsibility.! !
+!ReceptiveAccount methodsFor: 'reports' stamp: 'DS 11/15/2020 15:08:04' prior: 50933788 overrides: 50934555!
+accountSummary
+
+	| summary |
+
+	summary := OrderedCollection with: ('Balance = ', (self balance asString)).
+	transactions do: [ :aTransaction | summary addFirst: [ aTransaction reportPrint ] ].
+
+"			(aTransaction isKindOf: Deposit) ifTrue: [ summary addFirst: 'Deposito por ', (aTransaction value asString) ].
+		(aTransaction isKindOf: Withdraw) ifTrue: [ summary addFirst: 'Extraccion por ', (aTransaction value asString) ].
+		(aTransaction isKindOf: TransferDeposit ) ifTrue: [ summary addFirst: 'Salida por transferencia de ', (aTransaction value asString) ].
+		(aTransaction isKindOf: TransferWithdraw ) ifTrue: [ summary addFirst: 'Entrada por transferencia de ', (aTransaction value asString) ].
+	]."
+
+	^summary.! !
+!ReceptiveAccount methodsFor: 'reports' stamp: 'DS 11/15/2020 15:09:58' prior: 50934560 overrides: 50934555!
+accountSummary
+
+	| summary |
+
+	summary := OrderedCollection with: ('Balance = ', (self balance asString)).
+	transactions do: [ :aTransaction | 	aTransaction addToSummary: summary].
+
+"			(aTransaction isKindOf: Deposit) ifTrue: [ summary addFirst: 'Deposito por ', (aTransaction value asString) ].
+		(aTransaction isKindOf: Withdraw) ifTrue: [ summary addFirst: 'Extraccion por ', (aTransaction value asString) ].
+		(aTransaction isKindOf: TransferDeposit ) ifTrue: [ summary addFirst: 'Salida por transferencia de ', (aTransaction value asString) ].
+		(aTransaction isKindOf: TransferWithdraw ) ifTrue: [ summary addFirst: 'Entrada por transferencia de ', (aTransaction value asString) ].
+	]."
+
+	^summary.! !
+!ReceptiveAccount methodsFor: 'reports' stamp: 'DS 11/15/2020 15:10:04' prior: 50934586 overrides: 50934555!
+accountSummary
+
+	| summary |
+
+	summary := OrderedCollection with: ('Balance = ', (self balance asString)).
+	transactions do: [ :aTransaction | 	aTransaction addToSummary: summary].
+
+"		(aTransaction isKindOf: Deposit) ifTrue: [ summary addFirst: 'Deposito por ', (aTransaction value asString) ].
+		(aTransaction isKindOf: Withdraw) ifTrue: [ summary addFirst: 'Extraccion por ', (aTransaction value asString) ].
+		(aTransaction isKindOf: TransferDeposit ) ifTrue: [ summary addFirst: 'Salida por transferencia de ', (aTransaction value asString) ].
+		(aTransaction isKindOf: TransferWithdraw ) ifTrue: [ summary addFirst: 'Entrada por transferencia de ', (aTransaction value asString) ].
+	]."
+
+	^summary.! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 15:10:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:10:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:10:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 15:10:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 15:10:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 15:10:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 15:10:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09 stamp: 'DS 11/15/2020 15:10:30'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10 stamp: 'DS 11/15/2020 15:10:30'!
+ERROR!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'DS 11/15/2020 15:10:30'!
+ERROR!
+!Deposit methodsFor: 'nil' stamp: 'DS 11/15/2020 15:11:40'!
+addToSummary: aSummary
+
+	^aSummary addFirst: 'Deposito por ', (value asString).! !
+!Withdraw methodsFor: 'nil' stamp: 'DS 11/15/2020 15:12:23'!
+addToSummary: aSummary
+
+	^aSummary addFirst: 'Extraccion por ', (value asString).! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 15:12:26'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:12:26'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:12:26'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 15:12:26'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 15:12:26'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 15:12:26'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 15:12:26'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09 stamp: 'DS 11/15/2020 15:12:26'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10 stamp: 'DS 11/15/2020 15:12:26'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'DS 11/15/2020 15:12:26'!
+ERROR!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'DS 11/15/2020 15:12:26'!
+ERROR!
+!TransferDeposit methodsFor: 'nil' stamp: 'DS 11/15/2020 15:13:25'!
+addToSummary: aSummary
+
+	^aSummary addFirst: 'Salida por transferencia de ', (self value asString ).! !
+!TransferWithdraw methodsFor: 'nil' stamp: 'DS 11/15/2020 15:13:38'!
+addToSummary: aSummary
+
+	^aSummary addFirst: 'Entrada por transferencia de ', (self value asString ).! !
+!TransferWithdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:13:39' prior: 50934724!
+addToSummary: aSummary
+
+	^aSummary addFirst: 'Entrada por transferencia de ', (self value asString).! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 15:13:42'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:13:42'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:13:42'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 15:13:42'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 15:13:42'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 15:13:42'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 15:13:42'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09 stamp: 'DS 11/15/2020 15:13:42'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10 stamp: 'DS 11/15/2020 15:13:42'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'DS 11/15/2020 15:13:42'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:13:43'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 15:13:50) CuisUniversity-4384.image priorSource: 19292842!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'DS 11/15/2020 15:14:15' prior: 50934612 overrides: 50934555!
+accountSummary
+
+	| summary |
+
+	summary := OrderedCollection with: ('Balance = ', (self balance asString)).
+	transactions do: [ :aTransaction | 	aTransaction addToSummary: summary].
+	^summary.! !
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:15:47'!
+test09AnEmptyAccountShouldHaveReportWithBalanceInZero
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.! !
+
+!methodRemoval: ReceptiveAccountTest #test09 stamp: 'DS 11/15/2020 15:15:47'!
+test09
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:16:16'!
+test10AnAccountWithDepositShouldHaveAffectedBalance
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .! !
+
+!methodRemoval: ReceptiveAccountTest #test10 stamp: 'DS 11/15/2020 15:16:16'!
+test10
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:17:55' prior: 50934870!
+test10AnAccountWithDepositShouldHaveAffectedBalance
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 100' with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .! !
+
+!testRun: #ReceptiveAccountTest #test10AnAccountWithDepositShouldHaveAffectedBalance stamp: 'DS 11/15/2020 15:17:55'!
+FAILURE!
+
+account accountSummary!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:18:30' prior: 50934895!
+test10AnAccountWithDepositShouldHaveAffectedBalance
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 100' with: 'Deposito por 100' with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .! !
+
+!testRun: #ReceptiveAccountTest #test10AnAccountWithDepositShouldHaveAffectedBalance stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09AnEmptyAccountShouldHaveReportWithBalanceInZero stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10AnAccountWithDepositShouldHaveAffectedBalance stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11 stamp: 'DS 11/15/2020 15:18:33'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 15:18:36) CuisUniversity-4384.image priorSource: 19301920!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:18:49'!
+test09EmptyAccountShouldHaveReportWithBalanceInZero
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.! !
+
+!methodRemoval: ReceptiveAccountTest #test09AnEmptyAccountShouldHaveReportWithBalanceInZero stamp: 'DS 11/15/2020 15:18:49'!
+test09AnEmptyAccountShouldHaveReportWithBalanceInZero
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:18:53'!
+test10AccountWithDepositShouldHaveAffectedBalance
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 100' with: 'Deposito por 100' with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .! !
+
+!methodRemoval: ReceptiveAccountTest #test10AnAccountWithDepositShouldHaveAffectedBalance stamp: 'DS 11/15/2020 15:18:53'!
+test10AnAccountWithDepositShouldHaveAffectedBalance
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 100' with: 'Deposito por 100' with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:19:32'!
+test11ATransferShouldHaveAffectAccountSummaryOfBothComponents
+
+	| aFromAccount aToAccount |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+
+	self assert: (aFromAccount accountSummary) equals: (OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100' ).
+	self assert: (aToAccount accountSummary) equals: (OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100').! !
+
+!methodRemoval: ReceptiveAccountTest #test11 stamp: 'DS 11/15/2020 15:19:32'!
+test11
+
+	| aFromAccount aToAccount |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+
+	self assert: (aFromAccount accountSummary) equals: (OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100' ).
+	self assert: (aToAccount accountSummary) equals: (OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100').!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:19:49'!
+test11TransferShouldHaveAffectAccountSummaryOfBothComponents
+
+	| aFromAccount aToAccount |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+
+	self assert: (aFromAccount accountSummary) equals: (OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100' ).
+	self assert: (aToAccount accountSummary) equals: (OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100').! !
+
+!methodRemoval: ReceptiveAccountTest #test11ATransferShouldHaveAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 15:19:49'!
+test11ATransferShouldHaveAffectAccountSummaryOfBothComponents
+
+	| aFromAccount aToAccount |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+
+	self assert: (aFromAccount accountSummary) equals: (OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100' ).
+	self assert: (aToAccount accountSummary) equals: (OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100').!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:20:02'!
+test11TransferShouldAffectAccountSummaryOfBothComponents
+
+	| aFromAccount aToAccount |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+
+	self assert: (aFromAccount accountSummary) equals: (OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100' ).
+	self assert: (aToAccount accountSummary) equals: (OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100').! !
+
+!methodRemoval: ReceptiveAccountTest #test11TransferShouldHaveAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 15:20:02'!
+test11TransferShouldHaveAffectAccountSummaryOfBothComponents
+
+	| aFromAccount aToAccount |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+
+	self assert: (aFromAccount accountSummary) equals: (OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100' ).
+	self assert: (aToAccount accountSummary) equals: (OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100').!
+
+----SNAPSHOT----(15 November 2020 15:20:11) CuisUniversity-4384.image priorSource: 19306249!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:27:15'!
+test12
+
+	| account |
+	
+	account := ReceptiveAccount new.
+
+	self assert: (account netOfTransferences) equals: 0.! !
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'DS 11/15/2020 15:27:18'!
+ERROR!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'DS 11/15/2020 15:27:30'!
+netOfTransferences
+	self shouldBeImplemented.! !
+!ReceptiveAccount methodsFor: 'reports' stamp: 'DS 11/15/2020 15:27:38' prior: 50935151!
+netOfTransferences
+
+	^0.! !
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09EmptyAccountShouldHaveReportWithBalanceInZero stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10AccountWithDepositShouldHaveAffectedBalance stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'DS 11/15/2020 15:27:41'!
+PASSED!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:29:14'!
+test13
+
+	| accountFrom accountTo |
+
+	accountFrom := ReceptiveAccount new.
+	accountTo := ReceptiveAccount new.
+	Transfer register: 100 from: accountFrom to: accountTo.
+
+	self assert: (accountFrom netOfTransferences) equals: -100.
+	self assert: (accountTo netOfTransferences) equals: 100.! !
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'DS 11/15/2020 15:29:18'!
+FAILURE!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'DS 11/15/2020 15:34:53' prior: 50935156!
+netOfTransferences
+
+	| net |
+
+	net := 0.
+	transactions do: [ :aTransaction | 
+		(aTransaction isKindOf: TransferDeposit) ifTrue: [ net := net - aTransaction value ].
+		(aTransaction isKindOf: TransferWithdraw) ifTrue: [ net := net + aTransaction value ].
+	].
+
+	^net.! !
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09EmptyAccountShouldHaveReportWithBalanceInZero stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10AccountWithDepositShouldHaveAffectedBalance stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'DS 11/15/2020 15:34:56'!
+PASSED!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:36:26'!
+test19
+
+	| portfolio |
+	
+	portfolio := Portfolio new.
+
+	self assert: (portfolio netOfTransferences) equals: 0.! !
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/15/2020 15:36:27'!
+ERROR!
+!Portfolio methodsFor: 'reports' stamp: 'DS 11/15/2020 15:36:39'!
+netOfTransferences
+	self shouldBeImplemented.! !
+!Portfolio methodsFor: 'reports' stamp: 'DS 11/15/2020 15:36:44' prior: 50935283!
+netOfTransferences
+
+	^0.! !
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/15/2020 15:36:45'!
+PASSED!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:38:44'!
+test20
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: (portfolio netOfTransferences) equals: 100.! !
+
+!testRun: #PortfolioTest #test20 stamp: 'DS 11/15/2020 15:38:44'!
+FAILURE!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:39:22' prior: 50935361!
+test20
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).! !
+
+!testRun: #PortfolioTest #test20 stamp: 'DS 11/15/2020 15:39:23'!
+FAILURE!
+!Portfolio methodsFor: 'reports' stamp: 'DS 11/15/2020 15:42:38' prior: 50935288!
+netOfTransferences
+
+	^accounts sum: [ :anAccount | anAccount netOfTransferences ].! !
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/15/2020 15:42:39'!
+ERROR!
+
+!testRun: #PortfolioTest #test20 stamp: 'DS 11/15/2020 15:42:39'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/15/2020 15:42:39'!
+ERROR!
+!Portfolio methodsFor: 'reports' stamp: 'DS 11/15/2020 15:42:48' prior: 50935391!
+netOfTransferences
+
+	^accounts sum: [ :anAccount | anAccount netOfTransferences ] ifEmpty: [0].! !
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test20 stamp: 'DS 11/15/2020 15:42:50'!
+PASSED!
+
+!testRun: #PortfolioTest #test20 stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+!testRun: #PortfolioTest #test20 stamp: 'DS 11/15/2020 15:43:07'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 15:43:10) CuisUniversity-4384.image priorSource: 19311628!
+!ReceptiveAccount methodsFor: 'reports' stamp: 'DS 11/15/2020 15:45:58' prior: 50935218!
+netOfTransferences
+
+	^transactions
+		inject: 0
+		into: [ :currentNet :transaction | transaction affectNet: currentNet  ].! !
+!ReceptiveAccount methodsFor: 'reports' stamp: 'DS 11/15/2020 15:46:27' prior: 50935624!
+netOfTransferences
+
+	^transactions
+		inject: 0
+		into: [ :currentNet :transaction | transaction affectNet: currentNet ].! !
+!TransferDeposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:47:09'!
+affectNet: aNet
+
+	^aNet - (self value).! !
+!TransferWithdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:47:28'!
+affectNet: aNet
+
+	^aNet + (self value).! !
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #PortfolioTest #test20 stamp: 'DS 11/15/2020 15:47:31'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09EmptyAccountShouldHaveReportWithBalanceInZero stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10AccountWithDepositShouldHaveAffectedBalance stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'DS 11/15/2020 15:47:32'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 15:47:40) CuisUniversity-4384.image priorSource: 19327018!
+!Deposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:49:01'!
+affectSummary: aSummary
+
+	^aSummary addFirst: 'Deposito por ', (value asString).! !
+!TransferDeposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:49:01'!
+affectSummary: aSummary
+
+	^aSummary addFirst: 'Salida por transferencia de ', (self value asString ).! !
+!TransferWithdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:49:01'!
+affectSummary: aSummary
+
+	^aSummary addFirst: 'Entrada por transferencia de ', (self value asString).! !
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:49:01'!
+affectSummary: aSummary
+
+	^aSummary addFirst: 'Extraccion por ', (value asString).! !
+!ReceptiveAccount methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 15:49:01' prior: 50934840 overrides: 50934555!
+accountSummary
+
+	| summary |
+
+	summary := OrderedCollection with: ('Balance = ', (self balance asString)).
+	transactions do: [ :aTransaction | 	aTransaction affectSummary: summary].
+	^summary.! !
+
+!methodRemoval: Deposit #addToSummary: stamp: 'DS 11/15/2020 15:49:01'!
+addToSummary: aSummary
+
+	^aSummary addFirst: 'Deposito por ', (value asString).!
+
+!methodRemoval: TransferDeposit #addToSummary: stamp: 'DS 11/15/2020 15:49:01'!
+addToSummary: aSummary
+
+	^aSummary addFirst: 'Salida por transferencia de ', (self value asString ).!
+
+!methodRemoval: TransferWithdraw #addToSummary: stamp: 'DS 11/15/2020 15:49:01'!
+addToSummary: aSummary
+
+	^aSummary addFirst: 'Entrada por transferencia de ', (self value asString).!
+
+!methodRemoval: Withdraw #addToSummary: stamp: 'DS 11/15/2020 15:49:01'!
+addToSummary: aSummary
+
+	^aSummary addFirst: 'Extraccion por ', (value asString).!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09EmptyAccountShouldHaveReportWithBalanceInZero stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10AccountWithDepositShouldHaveAffectedBalance stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12 stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13 stamp: 'DS 11/15/2020 15:49:04'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test16 stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test17 stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test18 stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test19 stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+
+!testRun: #PortfolioTest #test20 stamp: 'DS 11/15/2020 15:49:06'!
+PASSED!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:51:07'!
+test16EmptyPortfolioShouldHaveReportWithBalanceInZero
+
+	| portfolio expectedAccountSummary |
+	
+	portfolio := Portfolio new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!methodRemoval: PortfolioTest #test16 stamp: 'DS 11/15/2020 15:51:07'!
+test16
+
+	| portfolio expectedAccountSummary |
+	
+	portfolio := Portfolio new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:52:56'!
+test17DoATransactionInAccountOfPortfolioAffectHisBalance
+
+	| portfolio anAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	Deposit register: 100 on: anAccount.
+	
+	portfolio add: anAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!methodRemoval: PortfolioTest #test17 stamp: 'DS 11/15/2020 15:52:56'!
+test17
+
+	| portfolio anAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	Deposit register: 100 on: anAccount.
+	
+	portfolio add: anAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:54:05'!
+test17TransactionInAccountOfPortfolioAffectHisBalance
+
+	| portfolio anAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	Deposit register: 100 on: anAccount.
+	
+	portfolio add: anAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!methodRemoval: PortfolioTest #test17DoATransactionInAccountOfPortfolioAffectHisBalance stamp: 'DS 11/15/2020 15:54:05'!
+test17DoATransactionInAccountOfPortfolioAffectHisBalance
+
+	| portfolio anAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	Deposit register: 100 on: anAccount.
+	
+	portfolio add: anAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:55:41'!
+test10AccountWithTransactionsShouldHaveAffectedBalance
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 100' with: 'Deposito por 100' with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .! !
+
+!methodRemoval: ReceptiveAccountTest #test10AccountWithDepositShouldHaveAffectedBalance stamp: 'DS 11/15/2020 15:55:41'!
+test10AccountWithDepositShouldHaveAffectedBalance
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 100' with: 'Deposito por 100' with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:57:00'!
+test16EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero
+
+	| portfolio expectedAccountSummary |
+	
+	portfolio := Portfolio new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!methodRemoval: PortfolioTest #test16EmptyPortfolioShouldHaveReportWithBalanceInZero stamp: 'DS 11/15/2020 15:57:00'!
+test16EmptyPortfolioShouldHaveReportWithBalanceInZero
+
+	| portfolio expectedAccountSummary |
+	
+	portfolio := Portfolio new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:57:44'!
+test17TransactionsInAccountOfPortfolioShouldAffectHisAccountSummary
+
+	| portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+	
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!methodRemoval: PortfolioTest #test18 stamp: 'DS 11/15/2020 15:57:44'!
+test18
+
+	| portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+	
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.!
+
+!methodRemoval: PortfolioTest #test17TransactionInAccountOfPortfolioAffectHisBalance stamp: 'DS 11/15/2020 15:58:06'!
+test17TransactionInAccountOfPortfolioAffectHisBalance
+
+	| portfolio anAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	anAccount := ReceptiveAccount new.
+	Deposit register: 100 on: anAccount.
+	
+	portfolio add: anAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Balance = 100'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 15:58:55'!
+test17TransactionsInPortfolioShouldAffectHisAccountSummary
+
+	| portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+	
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+
+!methodRemoval: PortfolioTest #test17TransactionsInAccountOfPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 15:58:55'!
+test17TransactionsInAccountOfPortfolioShouldAffectHisAccountSummary
+
+	| portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+	
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:00:31'!
+test10AccountWithTransactionsShouldHaveAffectedHisAccountSummary
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 100' with: 'Deposito por 100' with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .! !
+
+!methodRemoval: ReceptiveAccountTest #test10AccountWithTransactionsShouldHaveAffectedBalance stamp: 'DS 11/15/2020 16:00:31'!
+test10AccountWithTransactionsShouldHaveAffectedBalance
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 100' with: 'Deposito por 100' with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:00:52'!
+test09EmptyAccountShouldHaveAccountSummarytWithBalanceInZero
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.! !
+
+!methodRemoval: ReceptiveAccountTest #test09EmptyAccountShouldHaveReportWithBalanceInZero stamp: 'DS 11/15/2020 16:00:52'!
+test09EmptyAccountShouldHaveReportWithBalanceInZero
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:01:57'!
+test12EmptyAccountShouldHaveNetTrasnferencesInZero
+
+	| account |
+	
+	account := ReceptiveAccount new.
+
+	self assert: (account netOfTransferences) equals: 0.! !
+
+!methodRemoval: ReceptiveAccountTest #test12 stamp: 'DS 11/15/2020 16:01:57'!
+test12
+
+	| account |
+	
+	account := ReceptiveAccount new.
+
+	self assert: (account netOfTransferences) equals: 0.!
+!ReceptiveAccountTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:02:23'!
+test13TransferShouldAffectNetTransferencesOfBothComponents
+
+	| accountFrom accountTo |
+
+	accountFrom := ReceptiveAccount new.
+	accountTo := ReceptiveAccount new.
+	Transfer register: 100 from: accountFrom to: accountTo.
+
+	self assert: (accountFrom netOfTransferences) equals: -100.
+	self assert: (accountTo netOfTransferences) equals: 100.! !
+
+!methodRemoval: ReceptiveAccountTest #test13 stamp: 'DS 11/15/2020 16:02:23'!
+test13
+
+	| accountFrom accountTo |
+
+	accountFrom := ReceptiveAccount new.
+	accountTo := ReceptiveAccount new.
+	Transfer register: 100 from: accountFrom to: accountTo.
+
+	self assert: (accountFrom netOfTransferences) equals: -100.
+	self assert: (accountTo netOfTransferences) equals: 100.!
+
+----SNAPSHOT----(15 November 2020 16:02:25) CuisUniversity-4384.image priorSource: 19331463!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:02:48'!
+test18EmptyPortfolioShouldHaveNetTransferenceInZero
+
+	| portfolio |
+	
+	portfolio := Portfolio new.
+
+	self assert: (portfolio netOfTransferences) equals: 0.! !
+
+!methodRemoval: PortfolioTest #test19 stamp: 'DS 11/15/2020 16:02:48'!
+test19
+
+	| portfolio |
+	
+	portfolio := Portfolio new.
+
+	self assert: (portfolio netOfTransferences) equals: 0.!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:05:04'!
+test19NetOfTransferencesShouldAffectHisAdderAccount
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).! !
+
+!methodRemoval: PortfolioTest #test20 stamp: 'DS 11/15/2020 16:05:04'!
+test20
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:05:18'!
+test19NetOfTransferencesShouldAffectHisReceiverAccount
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).! !
+
+!methodRemoval: PortfolioTest #test19NetOfTransferencesShouldAffectHisAdderAccount stamp: 'DS 11/15/2020 16:05:18'!
+test19NetOfTransferencesShouldAffectHisAdderAccount
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:06:58'!
+test19PortfolioNetOfTransferencesShouldBeAffecedFortHisAccounts
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).! !
+
+!methodRemoval: PortfolioTest #test19NetOfTransferencesShouldAffectHisReceiverAccount stamp: 'DS 11/15/2020 16:06:58'!
+test19NetOfTransferencesShouldAffectHisReceiverAccount
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).!
+
+----SNAPSHOT----(15 November 2020 16:07:01) CuisUniversity-4384.image priorSource: 19347460!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:07:13'!
+test19PortfolioNetOfTransferencesShouldBeAffecedByHisAccounts
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).! !
+
+!methodRemoval: PortfolioTest #test19PortfolioNetOfTransferencesShouldBeAffecedFortHisAccounts stamp: 'DS 11/15/2020 16:07:13'!
+test19PortfolioNetOfTransferencesShouldBeAffecedFortHisAccounts
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:07:22'!
+test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).! !
+
+!methodRemoval: PortfolioTest #test19PortfolioNetOfTransferencesShouldBeAffecedByHisAccounts stamp: 'DS 11/15/2020 16:07:22'!
+test19PortfolioNetOfTransferencesShouldBeAffecedByHisAccounts
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).!
+
+----SNAPSHOT----(15 November 2020 16:07:25) CuisUniversity-4384.image priorSource: 19350576!
+
+----SNAPSHOT----(15 November 2020 16:07:44) CuisUniversity-4384.image priorSource: 19352509!
+
+Object subclass: #AccountSummary
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #AccountSummary category: 'Portfolio-Solucion' stamp: 'DS 11/15/2020 16:09:48'!
+Object subclass: #AccountSummary
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+TestCase subclass: #AccountSummaryTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #AccountSummaryTest category: 'Portfolio-Solucion' stamp: 'DS 11/15/2020 16:12:24'!
+TestCase subclass: #AccountSummaryTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!AccountSummaryTest methodsFor: 'no messages' stamp: 'DS 11/15/2020 16:20:10'!
+test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero
+
+	| accountSummary expectedAccountSummary |
+
+	accountSummary := AccountSummary for: (ReceptiveAccount new).
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: expectedAccountSummary equals: (accountSummary summary).! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:20:14'!
+ERROR!
+!AccountSummary class methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:20:33'!
+for: aReceptiveAccount 
+	self shouldBeImplemented.! !
+!AccountSummary class methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:21:11' prior: 50936464!
+for: anAccount
+
+	^self new initializeFor: anAccount.
+! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:21:13'!
+ERROR!
+!AccountSummary methodsFor: 'initialize' stamp: 'DS 11/15/2020 16:21:20'!
+initializeFor: anAccount 
+	self shouldBeImplemented.
+	account := anAccount.! !
+!AccountSummary methodsFor: 'initialize' stamp: 'DS 11/15/2020 16:21:26' prior: 50936478!
+initializeFor: anAccount 
+
+	account := anAccount.! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:21:28'!
+ERROR!
+!AccountSummary methodsFor: 'summaring' stamp: 'DS 11/15/2020 16:21:40'!
+summary
+	self shouldBeImplemented.! !
+!AccountSummary methodsFor: 'summaring' stamp: 'DS 11/15/2020 16:21:52' prior: 50936493!
+summary
+
+	^OrderedCollection with: 'Balance = 0'.! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:21:54'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:21:54'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 16:21:58) CuisUniversity-4384.image priorSource: 19352603!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:23:21'!
+test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary
+
+	| accountSummary account expectedAccountSummary |
+
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+	
+	accountSummary := AccountSummary for: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 100' with: 'Deposito por 100' with: 'Balance = 0'.
+
+	self assert: expectedAccountSummary equals: (accountSummary summary).! !
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:23:23'!
+FAILURE!
+!AccountSummary methodsFor: 'summaring' stamp: 'DS 11/15/2020 16:31:07' prior: 50936497!
+summary
+
+
+	| summary |
+
+	summary := OrderedCollection with: ('Balance = ', (account balance asString)).
+	account transactions do: [ :aTransaction | 	aTransaction affectSummary: summary].
+	^summary! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:31:21'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:31:21'!
+PASSED!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:31:52'!
+test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero
+
+	| portfolio expectedAccountSummary |
+	
+	portfolio := Portfolio new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.! !
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:32:28' prior: 50936553!
+test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero
+
+	| accountSummary expectedAccountSummary |
+	
+	accountSummary := AccountSummary for: (Portfolio new).
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.! !
+
+!testRun: #AccountSummaryTest #test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:32:28'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:32:28'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:32:28'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:32:28'!
+PASSED!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:33:33'!
+test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts
+
+	| accountSummary portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+	accountSummary := AccountSummary for: portfolio.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).! !
+
+!methodRemoval: AccountSummaryTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 16:33:46'!
+test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts
+
+	| accountSummary portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+	accountSummary := AccountSummary for: portfolio.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:34:48'!
+test04TransactionsInPortfolioShouldAffectHisAccountSummary
+
+	| accountSummary portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+	
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+	
+	accountSummary := AccountSummary for: portfolio.
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.! !
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:34:49'!
+FAILURE!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:35:01' prior: 50936628!
+test04TransactionsInPortfolioShouldAffectHisAccountSummary
+
+	| accountSummary portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+	
+	accountSummary := AccountSummary for: portfolio.
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.! !
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:35:28'!
+FAILURE!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:35:49' prior: 50936656!
+test04TransactionsInPortfolioShouldAffectHisAccountSummary
+
+	| accountSummary portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+	
+	accountSummary := AccountSummary for: portfolio.
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 50' with: 'Deposito por 100' with: 'Balance = 50'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.! !
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:35:50'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:35:50'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:35:50'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:35:50'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:35:50'!
+PASSED!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:36:04' prior: 50936684!
+test04TransactionsInPortfolioShouldAffectHisAccountSummary
+
+	| accountSummary portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	accountSummary := AccountSummary for: portfolio.
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 50' with: 'Deposito por 100' with: 'Balance = 50'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.! !
+
+self deprecatedMethod!
+
+self deprecatedMethod!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:42:29' prior: 50936388!
+test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+	Deposit register: 100 on: toAccount.
+
+	self assert: 200 equals: (portfolio netOfTransferences).! !
+
+!testRun: #PortfolioTest #test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 16:42:30'!
+ERROR!
+!Deposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:43:27'!
+affectNet: aNet
+
+	^aNet.! !
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:43:40'!
+affectNet: aNet
+
+	^aNet.! !
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test11TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test12EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 16:43:44'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test16EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test17TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test18EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 16:43:46'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 16:43:46'!
+FAILURE!
+
+!testRun: #PortfolioTest #test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 16:43:46'!
+FAILURE!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:44:03' prior: 50936754!
+test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+	Deposit register: 100 on: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).! !
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test16EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test17TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test18EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 16:44:05'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 16:44:08) CuisUniversity-4384.image priorSource: 19355488!
+!PortfolioTest methodsFor: 'reports' stamp: 'DS 11/15/2020 16:45:26' prior: 50936906!
+test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+	Deposit register: 100 on: toAccount.
+	Withdraw register: 100 on: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).! !
+
+!testRun: #PortfolioTest #test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test16EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test17TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test18EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 16:45:29'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 16:45:33) CuisUniversity-4384.image priorSource: 19370996!
+!Deposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:49:23' prior: 50935762!
+affectSummary: anAccountSummary
+
+	^anAccountSummary affectSummaryForDeposit.! !
+!AccountSummary methodsFor: 'nil' stamp: 'DS 11/15/2020 16:49:59'!
+affectSummaryForDeposit: aDeposit
+
+	^'Deposito por ', aDeposit value asString.! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:50:02'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:50:02'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:50:02'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:50:02'!
+ERROR!
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:50:09' prior: 50937100!
+affectSummaryForDeposit: aDeposit
+
+	^'Deposito por ', (aDeposit value asString).! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:50:23'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:50:23'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:50:23'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:50:23'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:50:28'!
+ERROR!
+!AccountSummary methodsFor: 'summaring' stamp: 'DS 11/15/2020 16:51:03' prior: 50936535!
+summary
+
+
+	| summary |
+
+	summary := OrderedCollection with: ('Balance = ', (account balance asString)).
+	account transactions do: [ :aTransaction | 	aTransaction affectSummary: self ].
+	^summary! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:51:06'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:51:06'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:51:06'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:51:06'!
+ERROR!
+!Deposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:51:25' prior: 50937095!
+affectSummary: anAccountSummary
+
+	^anAccountSummary affectSummaryForDeposit: self.! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:51:33'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:51:33'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:51:33'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:51:33'!
+ERROR!
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:51:58' prior: 50935780!
+affectSummary: anAccountSummary
+
+	^anAccountSummary affectSummaryForWithDraw: self.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:52:31'!
+affectSummaryForWithdraw: aWithdraw
+
+	^'Extraccion por ', (aWithdraw value asString).! !
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:52:37' prior: 50937199!
+affectSummary: anAccountSummary
+
+	^anAccountSummary affectSummaryForWithdraw: self.! !
+!AccountSummary methodsFor: 'summaring' stamp: 'DS 11/15/2020 16:53:56' prior: 50937150!
+summary
+
+
+	| summary |
+
+	account transactions do: [ :aTransaction |  summary addLast: (	aTransaction affectSummary: self) ].
+	summary := OrderedCollection with: ('Balance = ', (account balance asString)).
+	^summary! !
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:54:12' prior: 50936513!
+test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary
+
+	| accountSummary account expectedAccountSummary |
+
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+	
+	accountSummary := AccountSummary for: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 100' with: 'Balance = 0'.
+
+	self assert: expectedAccountSummary equals: (accountSummary summary).! !
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:54:14'!
+ERROR!
+!AccountSummary methodsFor: 'summaring' stamp: 'DS 11/15/2020 16:55:10' prior: 50937217!
+summary
+
+
+	| summary |
+
+	summary := OrderedCollection new.
+	account transactions do: [ :aTransaction |  summary addLast: (	aTransaction affectSummary: self) ].
+	summary addLast: ('Balance = ', (account balance asString)).
+	^summary! !
+!AccountSummary methodsFor: 'summaring' stamp: 'DS 11/15/2020 16:55:13' prior: 50937250!
+summary
+
+	| summary |
+
+	summary := OrderedCollection new.
+	account transactions do: [ :aTransaction |  summary addLast: (	aTransaction affectSummary: self) ].
+	summary addLast: ('Balance = ', (account balance asString)).
+	^summary! !
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:55:14'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:55:14'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:55:14'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:55:14'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:55:14'!
+FAILURE!
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:55:14'!
+FAILURE!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:55:27' prior: 50936729!
+test04TransactionsInPortfolioShouldAffectHisAccountSummary
+
+	| accountSummary portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	accountSummary := AccountSummary for: portfolio.
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.! !
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:55:28'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:55:33'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:55:33'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:55:33'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:55:33'!
+PASSED!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:57:43'!
+test03TransferShouldAffectAccountSummaryOfBothComponents
+
+	| aFromAccount aToAccount |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+
+	self assert: (aFromAccount accountSummary) equals: (OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100' ).
+	self assert: (aToAccount accountSummary) equals: (OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100').! !
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:57:47'!
+test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero
+
+	| accountSummary expectedAccountSummary |
+	
+	accountSummary := AccountSummary for: (Portfolio new).
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.! !
+
+!methodRemoval: AccountSummaryTest #test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:57:47'!
+test03EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero
+
+	| accountSummary expectedAccountSummary |
+	
+	accountSummary := AccountSummary for: (Portfolio new).
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:57:51'!
+test05TransactionsInPortfolioShouldAffectHisAccountSummary
+
+	| accountSummary portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	accountSummary := AccountSummary for: portfolio.
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.! !
+
+!methodRemoval: AccountSummaryTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:57:51'!
+test04TransactionsInPortfolioShouldAffectHisAccountSummary
+
+	| accountSummary portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	accountSummary := AccountSummary for: portfolio.
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 16:58:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 16:58:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 16:58:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 16:58:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 16:58:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 16:58:00'!
+PASSED!
+!TransferDeposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:58:33' prior: 50935768!
+affectSummary: anAccountSummary
+
+	^anAccountSummary affectSummaryForTransferDeposit: self.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:59:05'!
+affectSummaryForTransferDeposit: aTransferDeposit
+
+	^'Salida por transferencia de ', (aTransferDeposit value asString ).! !
+!TransferWithdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:59:43' prior: 50935774!
+affectSummary: anAccountSummary
+
+	^anAccountSummary affectSummaryForTransferWithdraw: self.! !
+!AccountSummary methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 16:59:59'!
+affectSummaryForTransferWithdraw: aTransferWithdraw
+
+	^'Entrada por transferencia de ', (aTransferWithdraw value asString)! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:00:03'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:00:03'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:00:03'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:00:03'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:00:03'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:00:03'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:01:10'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:01:10'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:01:10'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:01:10'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:01:10'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:01:10'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:01:29'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:01:29'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:01:29'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:01:29'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:01:29'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:01:29'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:02:06'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:02:06'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:02:06'!
+ERROR!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:02:06'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:02:06'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:02:06'!
+ERROR!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:04:51' prior: 50937341!
+test03TransferShouldAffectAccountSummaryOfBothComponents
+
+	| accountSummaryFrom accountSummaryTo aFromAccount aToAccount expectedAccountSummaryFrom expectedAccountSummaryTo |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+	
+	accountSummaryFrom := AccountSummary for: aFromAccount.
+	expectedAccountSummaryFrom := OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100'.
+
+	accountSummaryTo := AccountSummary for: aToAccount.
+	expectedAccountSummaryTo := OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100'.	
+
+	self assert: expectedAccountSummaryFrom equals: (accountSummaryFrom summary).
+	self assert: expectedAccountSummaryTo equals: (accountSummaryTo summary).! !
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:04:51'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:04:51'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:04:51'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:04:51'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:04:51'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:04:51'!
+PASSED!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:04:55' prior: 50937585!
+test03TransferShouldAffectAccountSummaryOfBothComponents
+
+	| accountSummaryFrom accountSummaryTo aFromAccount aToAccount expectedAccountSummaryFrom expectedAccountSummaryTo |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+	
+	accountSummaryFrom := AccountSummary for: aFromAccount.
+	expectedAccountSummaryFrom := OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100'.
+
+	accountSummaryTo := AccountSummary for: aToAccount.
+	expectedAccountSummaryTo := OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100'.	
+
+	self assert: expectedAccountSummaryFrom equals: (accountSummaryFrom summary).
+	self assert: expectedAccountSummaryTo equals: accountSummaryTo summary.! !
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test16EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test17TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:04:56'!
+ERROR!
+
+!testRun: #PortfolioTest #test18EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #PortfolioTest #test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test09EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test10AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:04:56'!
+ERROR!
+
+!testRun: #ReceptiveAccountTest #test11TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:04:56'!
+ERROR!
+
+!testRun: #ReceptiveAccountTest #test12EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test13TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferShouldHaveAffectedBalanceOfParticipants stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferShouldNotHaveTheSameOriginAndDestinyAccount stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:04:56'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:05:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:05:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:05:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:05:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:05:00'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:05:00'!
+PASSED!
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:05:05' prior: 50937639!
+test03TransferShouldAffectAccountSummaryOfBothComponents
+
+	| accountSummaryFrom accountSummaryTo aFromAccount aToAccount expectedAccountSummaryFrom expectedAccountSummaryTo |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+	
+	accountSummaryFrom := AccountSummary for: aFromAccount.
+	expectedAccountSummaryFrom := OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100'.
+
+	accountSummaryTo := AccountSummary for: aToAccount.
+	expectedAccountSummaryTo := OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100'.	
+
+	self assert: expectedAccountSummaryFrom equals: accountSummaryFrom summary.
+	self assert: expectedAccountSummaryTo equals: accountSummaryTo summary.! !
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:05:11' prior: 50937228!
+test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary
+
+	| accountSummary account expectedAccountSummary |
+
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+	
+	accountSummary := AccountSummary for: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 100' with: 'Balance = 0'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.! !
+!AccountSummaryTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:05:15' prior: 50936447!
+test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero
+
+	| accountSummary expectedAccountSummary |
+
+	accountSummary := AccountSummary for: (ReceptiveAccount new).
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: expectedAccountSummary equals: accountSummary summary.! !
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:05:16'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:05:16'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:05:16'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:05:16'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:05:16'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:05:16'!
+PASSED!
+
+Object subclass: #NetOfTrasnferences
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #NetOfTrasnferences category: 'Portfolio-Solucion' stamp: 'DS 11/15/2020 17:08:38'!
+Object subclass: #NetOfTrasnferences
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+TestCase subclass: #NetOfTrasnferencesTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #NetOfTrasnferencesTest category: 'Portfolio-Solucion' stamp: 'DS 11/15/2020 17:09:02'!
+TestCase subclass: #NetOfTrasnferencesTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!NetOfTrasnferencesTest methodsFor: 'no messages' stamp: 'DS 11/15/2020 17:10:05'!
+test01EmptyAccountShouldHaveNetTrasnferencesInZero
+
+	| account netOfTrasnferences |
+	
+	account := ReceptiveAccount new.
+	netOfTrasnferences := NetOfTrasnferences for: account.
+
+	self assert: 0 equals: netOfTrasnferences net.! !
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:10:09'!
+ERROR!
+!NetOfTrasnferences class methodsFor: 'instance creation' stamp: 'DS 11/15/2020 17:10:15'!
+for: aReceptiveAccount 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeFor: aReceptiveAccount ! !
+!NetOfTrasnferences class methodsFor: 'instance creation' stamp: 'DS 11/15/2020 17:10:28' prior: 50938005!
+for: anAccount
+
+	^self new initializeFor: anAccount.! !
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:10:29'!
+ERROR!
+!NetOfTrasnferences methodsFor: 'initialize' stamp: 'DS 11/15/2020 17:10:38'!
+initializeFor: anAccount 
+	self shouldBeImplemented.
+	account := anAccount.! !
+!NetOfTrasnferences methodsFor: 'initialize' stamp: 'DS 11/15/2020 17:10:42' prior: 50938023!
+initializeFor: anAccount 
+
+	account := anAccount.! !
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:10:44'!
+ERROR!
+!NetOfTrasnferences methodsFor: 'netting' stamp: 'DS 11/15/2020 17:10:56'!
+net
+	self shouldBeImplemented.! !
+!NetOfTrasnferences methodsFor: 'netting' stamp: 'DS 11/15/2020 17:11:01' prior: 50938037!
+net
+
+	^0.! !
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:11:03'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:11:03'!
+PASSED!
+!NetOfTrasnferencesTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:13:12'!
+test02TransferShouldAffectNetTransferencesOfBothComponents
+
+	| accountFrom accountTo netOfTransferencesFrom netOfTransferencesTo |
+
+	accountFrom := ReceptiveAccount new.
+	accountTo := ReceptiveAccount new.
+	Transfer register: 100 from: accountFrom to: accountTo.
+
+	netOfTransferencesFrom := NetOfTrasnferences for: accountFrom.
+	netOfTransferencesTo := NetOfTrasnferences for: accountTo.
+
+	self assert: -100 equals: netOfTransferencesFrom net.
+	self assert: 100 equals: netOfTransferencesTo net.! !
+
+!testRun: #NetOfTrasnferencesTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:13:14'!
+FAILURE!
+!NetOfTrasnferences methodsFor: 'netting' stamp: 'DS 11/15/2020 17:13:42' prior: 50938041!
+net
+
+	^account transactions
+		inject: 0
+		into: [ :currentNet :transaction | transaction affectNet: currentNet ].! !
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:13:46'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:13:46'!
+PASSED!
+!NetOfTrasnferencesTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:14:29'!
+test03EmptyPortfolioShouldHaveNetTransferenceInZero
+
+	| portfolio netOfTransferences |
+	
+	portfolio := Portfolio new.
+	netOfTransferences := NetOfTrasnferences for: portfolio.
+
+	self assert: 0 equals: netOfTransferences net.! !
+
+!testRun: #NetOfTrasnferencesTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:14:29'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:14:29'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:14:29'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:14:29'!
+PASSED!
+!NetOfTrasnferencesTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:15:08'!
+test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts
+
+	| portfolio fromAccount toAccount netOfTrnasference |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+	Deposit register: 100 on: toAccount.
+	Withdraw register: 100 on: toAccount.
+	
+	netOfTrnasference := NetOfTrasnferences for: portfolio.
+
+	self assert: 100 equals: netOfTrnasference net.! !
+
+!testRun: #NetOfTrasnferencesTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:15:13'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:15:13'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:15:13'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:15:13'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:15:13'!
+PASSED!
+!Deposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:15:47' prior: 50936773!
+affectNet: aNetOfTransferences
+
+	^aNetOfTransferences affectNetForDeposit: self.! !
+!TransferDeposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:16:25' prior: 50935638!
+affectNet: aNetOfTransferences
+
+	^aNetOfTransferences affectNetForTransferDeposit: self.! !
+!TransferWithdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:16:48' prior: 50935642!
+affectNet: aNetOfTransference
+
+	^aNetOfTransference affectNetForTransferWithdraw: self.! !
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:17:07' prior: 50936777!
+affectNet: aNetOfTransference
+
+	^aNetOfTransference affectNetForWithdraw: self.! !
+!NetOfTrasnferences methodsFor: 'netting' stamp: 'DS 11/15/2020 17:17:58' prior: 50938076!
+net
+
+	^account transactions sum: [ :aTransaction | aTransaction affectNet: self ].! !
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:18:02'!
+ERROR!
+
+!testRun: #NetOfTrasnferencesTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:18:02'!
+ERROR!
+
+!testRun: #NetOfTrasnferencesTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:18:02'!
+ERROR!
+
+!testRun: #NetOfTrasnferencesTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:18:02'!
+ERROR!
+!NetOfTrasnferences methodsFor: 'nil' stamp: 'DS 11/15/2020 17:18:18'!
+affectNetForDeposit: aDeposit
+
+	^0.! !
+
+1 negative!
+
+1 negated !
+!NetOfTrasnferences methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:20:11'!
+affectNetForTransferDeposit: aTransferDeposit
+
+	^aTransferDeposit value negated.! !
+!NetOfTrasnferences methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:20:29'!
+affectNetForTransferWithdraw: aTransferWithdraw
+
+	^aTransferWithdraw value.! !
+!NetOfTrasnferences methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:20:40'!
+affectNetForWithdraw: aWithdraw
+
+	^0.! !
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:20:46'!
+ERROR!
+
+!testRun: #NetOfTrasnferencesTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:20:46'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:20:46'!
+ERROR!
+
+!testRun: #NetOfTrasnferencesTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:20:46'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:20:47'!
+ERROR!
+!NetOfTrasnferences methodsFor: 'netting' stamp: 'DS 11/15/2020 17:21:07' prior: 50938183!
+net
+
+	^account transactions sum: [ :aTransaction | aTransaction affectNet: self ] ifEmpty: [ 0 ].! !
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:21:09'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:21:10'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:21:13'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:21:13'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:21:13'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:21:13'!
+PASSED!
+
+Object subclass: #AccountReport
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #AccountReport category: 'Portfolio-Solucion' stamp: 'DS 11/15/2020 17:21:28'!
+Object subclass: #AccountReport
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classRemoval: #AccountReport stamp: 'DS 11/15/2020 17:21:36'!
+Object subclass: #AccountReport
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+----SNAPSHOT----(15 November 2020 17:21:43) CuisUniversity-4384.image priorSource: 19374110!
+
+Object subclass: #AccountReport
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #AccountReport category: 'Portfolio-Solucion' stamp: 'DS 11/15/2020 17:21:58'!
+Object subclass: #AccountReport
+	instanceVariableNames: 'account'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+AccountReport subclass: #AccountSummary
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #AccountSummary category: 'Portfolio-Solucion' stamp: 'DS 11/15/2020 17:22:09'!
+AccountReport subclass: #AccountSummary
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+AccountReport subclass: #NetOfTrasnferences
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #NetOfTrasnferences category: 'Portfolio-Solucion' stamp: 'DS 11/15/2020 17:22:18'!
+AccountReport subclass: #NetOfTrasnferences
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:22:30'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:22:30'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:22:30'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:22:30'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:22:30'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:22:33'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:22:33'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:22:33'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:22:33'!
+PASSED!
+
+!methodRemoval: AccountSummary #initializeFor: stamp: 'DS 11/15/2020 17:22:47'!
+initializeFor: anAccount 
+
+	account := anAccount.!
+
+!methodRemoval: NetOfTrasnferences #initializeFor: stamp: 'DS 11/15/2020 17:22:54'!
+initializeFor: anAccount 
+
+	account := anAccount.!
+!AccountReport methodsFor: 'nil' stamp: 'DS 11/15/2020 17:23:10'!
+initializeFor: anAccount
+
+	account := anAccount.! !
+!AccountReport class methodsFor: 'no messages' stamp: 'DS 11/15/2020 17:24:08'!
+for: anAccount
+
+	^self new initializeFor: anAccount.! !
+
+!methodRemoval: NetOfTrasnferences class #for: stamp: 'DS 11/15/2020 17:24:34'!
+for: anAccount
+
+	^self new initializeFor: anAccount.!
+
+!methodRemoval: AccountSummary class #for: stamp: 'DS 11/15/2020 17:24:37'!
+for: anAccount
+
+	^self new initializeFor: anAccount.
+!
+
+!testRun: #AccountSummaryTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:24:40'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:24:40'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:24:40'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:24:40'!
+PASSED!
+
+!testRun: #AccountSummaryTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:24:40'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:24:43'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:24:43'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:24:43'!
+PASSED!
+
+!testRun: #NetOfTrasnferencesTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:24:43'!
+PASSED!
+
+TestCase subclass: #AccountReportTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classDefinition: #AccountReportTest category: 'Portfolio-Solucion' stamp: 'DS 11/15/2020 17:25:03'!
+TestCase subclass: #AccountReportTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classRemoval: #AccountReportTest stamp: 'DS 11/15/2020 17:25:11'!
+TestCase subclass: #AccountReportTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+
+!classRenamed: #AccountSummaryTest as: #AccountReportTest stamp: 'DS 11/15/2020 17:25:18'!
+Smalltalk renameClassNamed: #AccountSummaryTest as: #AccountReportTest!
+!AccountReportTest methodsFor: 'net of transference' stamp: 'DS 11/15/2020 17:25:53'!
+test01EmptyAccountShouldHaveNetTrasnferencesInZero
+
+	| account netOfTrasnferences |
+	
+	account := ReceptiveAccount new.
+	netOfTrasnferences := NetOfTrasnferences for: account.
+
+	self assert: 0 equals: netOfTrasnferences net.! !
+!AccountReportTest methodsFor: 'net of transference' stamp: 'DS 11/15/2020 17:26:43'!
+test02TransferShouldAffectNetTransferencesOfBothComponents
+
+	| accountFrom accountTo netOfTransferencesFrom netOfTransferencesTo |
+
+	accountFrom := ReceptiveAccount new.
+	accountTo := ReceptiveAccount new.
+	Transfer register: 100 from: accountFrom to: accountTo.
+
+	netOfTransferencesFrom := NetOfTrasnferences for: accountFrom.
+	netOfTransferencesTo := NetOfTrasnferences for: accountTo.
+
+	self assert: -100 equals: netOfTransferencesFrom net.
+	self assert: 100 equals: netOfTransferencesTo net.! !
+!AccountReportTest methodsFor: 'net of transference' stamp: 'DS 11/15/2020 17:26:53'!
+test03EmptyPortfolioShouldHaveNetTransferenceInZero
+
+	| portfolio netOfTransferences |
+	
+	portfolio := Portfolio new.
+	netOfTransferences := NetOfTrasnferences for: portfolio.
+
+	self assert: 0 equals: netOfTransferences net.! !
+!AccountReportTest methodsFor: 'net of transference' stamp: 'DS 11/15/2020 17:27:01'!
+test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts
+
+	| portfolio fromAccount toAccount netOfTrnasference |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+	Deposit register: 100 on: toAccount.
+	Withdraw register: 100 on: toAccount.
+	
+	netOfTrnasference := NetOfTrasnferences for: portfolio.
+
+	self assert: 100 equals: netOfTrnasference net.! !
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:27:04'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:27:04'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:27:04'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:27:04'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:27:04'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:27:04'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:27:04'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:27:04'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:27:04'!
+PASSED!
+
+!classRemoval: #NetOfTrasnferencesTest stamp: 'DS 11/15/2020 17:27:07'!
+TestCase subclass: #NetOfTrasnferencesTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!AccountReport methodsFor: 'affect' stamp: 'DS 11/15/2020 17:29:29'!
+affectForDeposit: aDeposit
+
+	self subclassResponsibility.! !
+!AccountReport methodsFor: 'affect' stamp: 'DS 11/15/2020 17:29:38'!
+affectForTransferDeposit: aTransferDeposit
+
+	self subclassResponsibility.! !
+!AccountReport methodsFor: 'affect' stamp: 'DS 11/15/2020 17:29:48'!
+affectForTransferWithdraw: aTransferWithdraw
+
+	self subclassResponsibility.! !
+!AccountReport methodsFor: 'affect' stamp: 'DS 11/15/2020 17:30:01'!
+affectForWithdraw: aWithdraw
+
+	self subclassResponsibility.! !
+!Deposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:33:59'!
+affectReport: anAccountReport
+
+	^anAccountReport affectReportForDeposit: self.! !
+!AccountReport methodsFor: 'affect' stamp: 'DS 11/15/2020 17:34:07'!
+affectReportForDeposit: aDeposit
+
+	self subclassResponsibility.! !
+
+!methodRemoval: AccountReport #affectForDeposit: stamp: 'DS 11/15/2020 17:34:07'!
+affectForDeposit: aDeposit
+
+	self subclassResponsibility.!
+!AccountReport methodsFor: 'affect' stamp: 'DS 11/15/2020 17:34:12'!
+affectReportForTransferDeposit: aTransferDeposit
+
+	self subclassResponsibility.! !
+
+!methodRemoval: AccountReport #affectForTransferDeposit: stamp: 'DS 11/15/2020 17:34:12'!
+affectForTransferDeposit: aTransferDeposit
+
+	self subclassResponsibility.!
+!AccountReport methodsFor: 'affect' stamp: 'DS 11/15/2020 17:34:17'!
+affectReportForTransferWithdraw: aTransferWithdraw
+
+	self subclassResponsibility.! !
+
+!methodRemoval: AccountReport #affectForTransferWithdraw: stamp: 'DS 11/15/2020 17:34:17'!
+affectForTransferWithdraw: aTransferWithdraw
+
+	self subclassResponsibility.!
+!AccountReport methodsFor: 'affect' stamp: 'DS 11/15/2020 17:34:24'!
+affectReportForWithdraw: aWithdraw
+
+	self subclassResponsibility.! !
+
+!methodRemoval: AccountReport #affectForWithdraw: stamp: 'DS 11/15/2020 17:34:24'!
+affectForWithdraw: aWithdraw
+
+	self subclassResponsibility.!
+!AccountSummary methodsFor: 'summaring' stamp: 'DS 11/15/2020 17:37:16' prior: 50937261!
+summary
+
+	| summary |
+
+	summary := OrderedCollection new.
+	account transactions do: [ :aTransaction |  summary addLast: (	aTransaction affectReport: self) ].
+	summary addLast: ('Balance = ', (account balance asString)).
+	^summary! !
+!NetOfTrasnferences methodsFor: 'netting' stamp: 'DS 11/15/2020 17:37:31' prior: 50938247!
+net
+
+	^account transactions sum: [ :aTransaction | aTransaction affectReport: self ] ifEmpty: [ 0 ].! !
+!AccountSummary methodsFor: 'affect' stamp: 'DS 11/15/2020 17:37:51' overrides: 50938588!
+affectReportForDeposit: aDeposit
+
+	^'Deposito por ', (aDeposit value asString).! !
+
+!methodRemoval: AccountSummary #affectSummaryForDeposit: stamp: 'DS 11/15/2020 17:37:51'!
+affectSummaryForDeposit: aDeposit
+
+	^'Deposito por ', (aDeposit value asString).!
+!AccountSummary methodsFor: 'affect' stamp: 'DS 11/15/2020 17:38:11' overrides: 50938597!
+affectReportForTransferDeposit: aTransferDeposit
+
+	^'Salida por transferencia de ', (aTransferDeposit value asString ).! !
+
+!methodRemoval: AccountSummary #affectSummaryForTransferDeposit: stamp: 'DS 11/15/2020 17:38:11'!
+affectSummaryForTransferDeposit: aTransferDeposit
+
+	^'Salida por transferencia de ', (aTransferDeposit value asString ).!
+!AccountSummary methodsFor: 'affect' stamp: 'DS 11/15/2020 17:38:23' overrides: 50938607!
+affectReportForTransferWithdraw: aTransferWithdraw
+
+	^'Entrada por transferencia de ', (aTransferWithdraw value asString)! !
+
+!methodRemoval: AccountSummary #affectSummaryForTransferWithdraw: stamp: 'DS 11/15/2020 17:38:23'!
+affectSummaryForTransferWithdraw: aTransferWithdraw
+
+	^'Entrada por transferencia de ', (aTransferWithdraw value asString)!
+!AccountSummary methodsFor: 'affect' stamp: 'DS 11/15/2020 17:38:33' overrides: 50938618!
+affectReportForWithdraw: aWithdraw
+
+	^'Extraccion por ', (aWithdraw value asString).! !
+
+!methodRemoval: AccountSummary #affectSummaryForWithdraw: stamp: 'DS 11/15/2020 17:38:33'!
+affectSummaryForWithdraw: aWithdraw
+
+	^'Extraccion por ', (aWithdraw value asString).!
+!NetOfTrasnferences methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:38:46' overrides: 50938588!
+affectReportForDeposit: aDeposit
+
+	^0.! !
+
+!methodRemoval: NetOfTrasnferences #affectNetForDeposit: stamp: 'DS 11/15/2020 17:38:46'!
+affectNetForDeposit: aDeposit
+
+	^0.!
+!NetOfTrasnferences methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:38:54' overrides: 50938597!
+affectReportForTransferDeposit: aTransferDeposit
+
+	^aTransferDeposit value negated.! !
+
+!methodRemoval: NetOfTrasnferences #affectNetForTransferDeposit: stamp: 'DS 11/15/2020 17:38:54'!
+affectNetForTransferDeposit: aTransferDeposit
+
+	^aTransferDeposit value negated.!
+!NetOfTrasnferences methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:39:01' overrides: 50938607!
+affectReportForTransferWithdraw: aTransferWithdraw
+
+	^aTransferWithdraw value.! !
+
+!methodRemoval: NetOfTrasnferences #affectNetForTransferWithdraw: stamp: 'DS 11/15/2020 17:39:01'!
+affectNetForTransferWithdraw: aTransferWithdraw
+
+	^aTransferWithdraw value.!
+!NetOfTrasnferences methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:39:09' overrides: 50938618!
+affectReportForWithdraw: aWithdraw
+
+	^0.! !
+
+!methodRemoval: NetOfTrasnferences #affectNetForWithdraw: stamp: 'DS 11/15/2020 17:39:09'!
+affectNetForWithdraw: aWithdraw
+
+	^0.!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:39:19'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:39:19'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:39:19'!
+ERROR!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:39:19'!
+ERROR!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:39:19'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:39:19'!
+ERROR!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:39:19'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:39:19'!
+ERROR!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:39:19'!
+ERROR!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:39:23'!
+ERROR!
+!TransferDeposit methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:40:43'!
+affectReport: anAccountReport
+
+	^anAccountReport affectReportForTransferDeposit: self.! !
+!TransferWithdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:41:09'!
+affectReport: anAccountReport
+
+	^anAccountReport affectReportForTransferWithdraw: self.! !
+!Withdraw methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 17:41:37'!
+affectReport: anAccountReport
+
+	^anAccountReport affectReportForWithdraw: self.! !
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:41:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:41:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:41:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:41:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:41:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:41:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:41:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:41:40'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:41:40'!
+PASSED!
+
+!methodRemoval: Deposit #affectSummary: stamp: 'DS 11/15/2020 17:42:17'!
+affectSummary: anAccountSummary
+
+	^anAccountSummary affectSummaryForDeposit: self.!
+
+!methodRemoval: Deposit #affectNet: stamp: 'DS 11/15/2020 17:42:20'!
+affectNet: aNetOfTransferences
+
+	^aNetOfTransferences affectNetForDeposit: self.!
+
+!methodRemoval: TransferDeposit #affectSummary: stamp: 'DS 11/15/2020 17:42:48'!
+affectSummary: anAccountSummary
+
+	^anAccountSummary affectSummaryForTransferDeposit: self.!
+
+!methodRemoval: TransferDeposit #affectNet: stamp: 'DS 11/15/2020 17:42:49'!
+affectNet: aNetOfTransferences
+
+	^aNetOfTransferences affectNetForTransferDeposit: self.!
+
+!methodRemoval: TransferWithdraw #affectSummary: stamp: 'DS 11/15/2020 17:43:13'!
+affectSummary: anAccountSummary
+
+	^anAccountSummary affectSummaryForTransferWithdraw: self.!
+
+!methodRemoval: TransferWithdraw #affectNet: stamp: 'DS 11/15/2020 17:43:15'!
+affectNet: aNetOfTransference
+
+	^aNetOfTransference affectNetForTransferWithdraw: self.!
+
+!methodRemoval: Withdraw #affectSummary: stamp: 'DS 11/15/2020 17:43:24'!
+affectSummary: anAccountSummary
+
+	^anAccountSummary affectSummaryForWithdraw: self.!
+
+!methodRemoval: Withdraw #affectNet: stamp: 'DS 11/15/2020 17:43:26'!
+affectNet: aNetOfTransference
+
+	^aNetOfTransference affectNetForWithdraw: self.!
+
+----SNAPSHOT----(15 November 2020 17:43:35) CuisUniversity-4384.image priorSource: 19412656!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:43:49'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:43:49'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:43:49'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:43:49'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:43:49'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:43:49'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:43:49'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:43:49'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:43:49'!
+PASSED!
+!AccountTransaction methodsFor: 'affect report' stamp: 'DS 11/15/2020 17:49:39'!
+affectReport: anAccountReport
+
+	self subclassResponsibility.! !
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:49:48'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:49:48'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:49:48'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:49:48'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:49:48'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:49:48'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:49:48'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:49:48'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:49:48'!
+PASSED!
+
+!methodRemoval: Portfolio #accountSummary stamp: 'DS 11/15/2020 17:50:08'!
+accountSummary
+
+	| summary |
+
+	summary := (	accounts collect: [ :anAccount |
+		| anAccountSummary |
+		anAccountSummary := anAccount accountSummary.
+		anAccountSummary removeLast.
+		anAccountSummary.
+	]) flatten.
+	
+	summary addLast: ('Balance = ', self balance asString).
+	^summary.!
+
+!methodRemoval: Portfolio #netOfTransferences stamp: 'DS 11/15/2020 17:50:08'!
+netOfTransferences
+
+	^accounts sum: [ :anAccount | anAccount netOfTransferences ] ifEmpty: [0].!
+
+!methodRemoval: ReceptiveAccount #accountSummary stamp: 'DS 11/15/2020 17:50:12'!
+accountSummary
+
+	| summary |
+
+	summary := OrderedCollection with: ('Balance = ', (self balance asString)).
+	transactions do: [ :aTransaction | 	aTransaction affectSummary: summary].
+	^summary.!
+
+!methodRemoval: ReceptiveAccount #netOfTransferences stamp: 'DS 11/15/2020 17:50:12'!
+netOfTransferences
+
+	^transactions
+		inject: 0
+		into: [ :currentNet :transaction | transaction affectNet: currentNet ].!
+
+!methodRemoval: ReceptiveAccountTest #test09EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:51:08'!
+test09EmptyAccountShouldHaveAccountSummarytWithBalanceInZero
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary.!
+
+!methodRemoval: ReceptiveAccountTest #test10AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:51:08'!
+test10AccountWithTransactionsShouldHaveAffectedHisAccountSummary
+
+	| account expectedAccountSummary |
+	
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Extraccion por 100' with: 'Deposito por 100' with: 'Balance = 0'.
+
+	self assert: (account accountSummary) equals: expectedAccountSummary .!
+
+!methodRemoval: ReceptiveAccountTest #test11TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:51:08'!
+test11TransferShouldAffectAccountSummaryOfBothComponents
+
+	| aFromAccount aToAccount |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+
+	self assert: (aFromAccount accountSummary) equals: (OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100' ).
+	self assert: (aToAccount accountSummary) equals: (OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100').!
+
+!methodRemoval: ReceptiveAccountTest #test12EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:51:08'!
+test12EmptyAccountShouldHaveNetTrasnferencesInZero
+
+	| account |
+	
+	account := ReceptiveAccount new.
+
+	self assert: (account netOfTransferences) equals: 0.!
+
+!methodRemoval: ReceptiveAccountTest #test13TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:51:08'!
+test13TransferShouldAffectNetTransferencesOfBothComponents
+
+	| accountFrom accountTo |
+
+	accountFrom := ReceptiveAccount new.
+	accountTo := ReceptiveAccount new.
+	Transfer register: 100 from: accountFrom to: accountTo.
+
+	self assert: (accountFrom netOfTransferences) equals: -100.
+	self assert: (accountTo netOfTransferences) equals: 100.!
+
+!methodRemoval: PortfolioTest #test16EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:51:14'!
+test16EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero
+
+	| portfolio expectedAccountSummary |
+	
+	portfolio := Portfolio new.
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.!
+
+!methodRemoval: PortfolioTest #test17TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:51:14'!
+test17TransactionsInPortfolioShouldAffectHisAccountSummary
+
+	| portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+	
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: (portfolio accountSummary) equals: expectedAccountSummary.!
+
+!methodRemoval: PortfolioTest #test18EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:51:14'!
+test18EmptyPortfolioShouldHaveNetTransferenceInZero
+
+	| portfolio |
+	
+	portfolio := Portfolio new.
+
+	self assert: (portfolio netOfTransferences) equals: 0.!
+
+!methodRemoval: PortfolioTest #test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:51:14'!
+test19PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts
+
+	| portfolio fromAccount toAccount |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+	Deposit register: 100 on: toAccount.
+	Withdraw register: 100 on: toAccount.
+
+	self assert: 100 equals: (portfolio netOfTransferences).!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:51:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:51:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:51:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:51:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:51:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:51:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:51:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:51:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:51:22'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferShouldHaveAffectedBalanceOfParticipants stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferShouldNotHaveTheSameOriginAndDestinyAccount stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+
+!testRun: #TransferTest #test05 stamp: 'DS 11/15/2020 17:51:24'!
+PASSED!
+!TransferTest methodsFor: 'tests' stamp: 'DS 11/15/2020 17:52:01'!
+test05TransferShouldNotRegisterANegativeAmmount
+
+	| aFromAccount aToAccount |
+
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+
+	self should: [Transfer register: -1 from: aFromAccount to: aToAccount .	]
+	raise: Error
+	withMessageText: Transfer canNotTransferNegativeAmountErrorDescription.! !
+
+!methodRemoval: TransferTest #test05 stamp: 'DS 11/15/2020 17:52:01'!
+test05
+
+	| aFromAccount aToAccount |
+
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+
+	self should: [Transfer register: -1 from: aFromAccount to: aToAccount .	]
+	raise: Error
+	withMessageText: Transfer canNotTransferNegativeAmountErrorDescription.!
+
+----SNAPSHOT----(15 November 2020 17:52:14) CuisUniversity-4384.image priorSource: 19431143!
+!Transfer class methodsFor: 'instance creation' stamp: 'DS 11/15/2020 17:55:55' prior: 50933736!
+register: aValue from: aFromReceptiveAccount to: aToReceptiveAccount
+
+	| transfer deposit withdraw |
+
+	self assertAccount: aFromReceptiveAccount isNotTheSameAccount: aToReceptiveAccount.
+	self assertNegativeAmount: aValue.
+
+	transfer := self new.	
+
+	deposit := TransferDeposit for: transfer.
+	withdraw := TransferWithdraw for: transfer.
+
+	aFromReceptiveAccount register: deposit.
+	aToReceptiveAccount register: withdraw.
+
+	^transfer initializeRegister: aValue withDeposit: aFromReceptiveAccount andWithdraw: aToReceptiveAccount.! !
+!Transfer methodsFor: 'initialize' stamp: 'DS 11/15/2020 17:56:55'!
+initializeRegister: aValue withDeposit: aDeposit andWithdraw: aWithdraw
+
+	value := aValue.
+	deposit := aDeposit.
+	withdraw := aWithdraw.! !
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'DS 11/15/2020 17:57:47'!
+FAILURE!
+
+!testRun: #TransferTest #test02TransferShouldHaveAffectedBalanceOfParticipants stamp: 'DS 11/15/2020 17:57:47'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'DS 11/15/2020 17:57:47'!
+ERROR!
+
+!testRun: #TransferTest #test04TransferShouldNotHaveTheSameOriginAndDestinyAccount stamp: 'DS 11/15/2020 17:57:47'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferShouldNotRegisterANegativeAmmount stamp: 'DS 11/15/2020 17:57:47'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'DS 11/15/2020 17:57:49'!
+ERROR!
+
+!methodRemoval: AccountTransaction #transferPair stamp: 'DS 11/15/2020 17:59:15'!
+transferPair
+	self shouldBeImplemented.!
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'DS 11/15/2020 17:59:20'!
+FAILURE!
+
+!testRun: #TransferTest #test02TransferShouldHaveAffectedBalanceOfParticipants stamp: 'DS 11/15/2020 17:59:20'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'DS 11/15/2020 17:59:20'!
+ERROR!
+
+!testRun: #TransferTest #test04TransferShouldNotHaveTheSameOriginAndDestinyAccount stamp: 'DS 11/15/2020 17:59:20'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferShouldNotRegisterANegativeAmmount stamp: 'DS 11/15/2020 17:59:20'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'DS 11/15/2020 17:59:21'!
+ERROR!
+
+transference depositTransaction!
+!Transfer class methodsFor: 'instance creation' stamp: 'DS 11/15/2020 18:00:38' prior: 50939323!
+register: aValue from: aFromReceptiveAccount to: aToReceptiveAccount
+
+	| transfer deposit withdraw |
+
+	self assertAccount: aFromReceptiveAccount isNotTheSameAccount: aToReceptiveAccount.
+	self assertNegativeAmount: aValue.
+
+	transfer := self new.	
+
+	deposit := TransferDeposit for: transfer.
+	withdraw := TransferWithdraw for: transfer.
+
+	aFromReceptiveAccount register: deposit.
+	aToReceptiveAccount register: withdraw.
+
+	^transfer initializeRegister: aValue withDeposit: deposit andWithdraw: withdraw.! !
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'DS 11/15/2020 18:00:47'!
+PASSED!
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'DS 11/15/2020 18:00:49'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #AccountReportTest #test01EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #AccountReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #AccountReportTest #test02TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #AccountReportTest #test03EmptyPortfolioShouldHaveNetTransferenceInZero stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #AccountReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #AccountReportTest #test04EmptyPortfolioShouldHaveAccountSummaryWithBalanceInZero stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #AccountReportTest #test04PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #AccountReportTest #test05TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferShouldHaveAffectedBalanceOfParticipants stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferShouldNotHaveTheSameOriginAndDestinyAccount stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferShouldNotRegisterANegativeAmmount stamp: 'DS 11/15/2020 18:00:53'!
+PASSED!
+
+!methodRemoval: Transfer #initializeRegister:from:to: stamp: 'DS 11/15/2020 18:01:01'!
+initializeRegister: aValue from: aFromReceptiveAccount to: aToReceptiveAccount 
+
+	value := aValue.
+	deposit := TransferDeposit for: self.
+	withdraw := TransferWithdraw for: self.
+
+	aFromReceptiveAccount register: deposit.
+	aToReceptiveAccount register: withdraw.!
+
+----SNAPSHOT----(15 November 2020 18:01:08) CuisUniversity-4384.image priorSource: 19445405!
+
+----SNAPSHOT----(15 November 2020 18:05:10) CuisUniversity-4384.image priorSource: 19453684!
