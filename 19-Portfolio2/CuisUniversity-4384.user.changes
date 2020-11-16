@@ -10664,3 +10664,2172 @@ PASSED!
 ----SNAPSHOT----(15 November 2020 21:44:58) CuisUniversity-4384.image priorSource: 19590285!
 
 ----QUIT----(15 November 2020 21:46:19) CuisUniversity-4384.image priorSource: 19593039!
+
+----STARTUP---- (15 November 2020 21:46:23) as /mnt/sdb5/Ingenieria1/CuisUniversity/CuisUniversity-4384.image!
+
+
+!classDefinition: #AccountsSummaryTree category: 'Portfolio-Solucion' stamp: 'DS 11/15/2020 23:07:52'!
+PortfolioReport subclass: #AccountsSummaryTree
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Portfolio-Solucion'!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:07:37'!
+test11
+
+	| namedPortfolio accountsSummaryTree expectedPortfolioTree |
+	
+	namedPortfolio := Portfolio named: 'Portfolio Fede'.
+
+	accountsSummaryTree := AccountsSummaryTree for: namedPortfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede' with: 'Balance = 0'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.! !
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:09:41'!
+ERROR!
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:09:48'!
+tree
+	self shouldBeImplemented.! !
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:10:17' prior: 50943968!
+tree
+
+	^OrderedCollection with: 'Portfolio Fede' with: 'Balance = 0'.! !
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:10:18'!
+PASSED!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:11:31' prior: 50943951!
+test11
+
+	| portfolio accountsSummaryTree expectedPortfolioTree |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede' with: 'Balance = 0'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.! !
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:11:35' prior: 50944023!
+test11
+
+	| accountsSummaryTree expectedPortfolioTree portfolio |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede' with: 'Balance = 0'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.! !
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:15:33'!
+test12
+
+	| accountsSummaryTree expectedPortfolioTree portfolio account |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+	account := Account named: 'Cuenta Diego'.
+
+	portfolio add: account.
+	Deposit register: 100 on: account.	
+	Withdraw register: 50 on: account.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede' 
+		with: (tab, 'Deposito por 100')
+		with: (tab, 'Extraccion por 50')
+		with: (tab, 'Balance = 50')
+		with: 'Balance = 50'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.! !
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:15:35'!
+ERROR!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:15:46' prior: 50944051!
+test12
+
+	| accountsSummaryTree expectedPortfolioTree portfolio account |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+	account := ReceptiveAccount named: 'Cuenta Diego'.
+
+	portfolio add: account.
+	Deposit register: 100 on: account.	
+	Withdraw register: 50 on: account.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede' 
+		with: (tab, 'Deposito por 100')
+		with: (tab, 'Extraccion por 50')
+		with: (tab, 'Balance = 50')
+		with: 'Balance = 50'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.! !
+
+!methodRemoval: Account #accountSummary stamp: 'DS 11/15/2020 23:16:58'!
+accountSummary
+
+	self subclassResponsibility.!
+!Account methodsFor: 'affect report' stamp: 'DS 11/15/2020 23:17:07'!
+affectReport: anAccountReport
+
+	self subclassResponsibility.! !
+!Account methodsFor: 'affect report' stamp: 'DS 11/15/2020 23:17:21'!
+affectReportUsingTransactions: anAccountReport
+
+	self subclassResponsibility.! !
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:17:30'!
+FAILURE!
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:21:03' prior: 50943973!
+tree
+ 	| tree |
+	tree := (portfolio affectReportUsingAccounts: self) flatten.
+	
+	tree addFirst: portfolio yourName.
+	tree addLast: ('Balance = ', portfolio balance asString).
+	^tree! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:21:14'!
+PASSED!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:21:14'!
+ERROR!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:21:14'!
+ERROR!
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:21:46'!
+affectUsing: anAccount
+
+	^anAccount affectReport: self.! !
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:23:03'!
+affectReportForReceptiveAccount: aReceptiveAccount 
+
+	^(AccountSummary for: aReceptiveAccount) summary.! !
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:25:46' prior: 50944174!
+affectReportForReceptiveAccount: aReceptiveAccount 
+
+	^(AccountSummary for: aReceptiveAccount) summary collect: [ :aSummaryLine | '    ', aSummaryLine ].! !
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:27:58'!
+affectReportForPortfolio: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := (aPortfolio affectReportUsingAccounts: self) flatten collect: [ :aName | '    ', aName ].
+	childrenNames addFirst: '    ', aPortfolio yourName.
+	childrenNames addLast: ('    ', 'Balance = ', aPortfolio balance asString).
+
+	^childrenNames.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:28:03'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 23:28:06) CuisUniversity-4384.image priorSource: 19593133!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:33:20'!
+test13
+
+	| expectedPortfolioTree accountsTree rootPortfolio secondPorfolio thirdPortfolio fedeAccount diegoAccount |
+
+	fedeAccount := ReceptiveAccount named: 'Cuenta de Fede'.
+	diegoAccount := ReceptiveAccount named: 'Cuenta de Diego'.
+	thirdPortfolio := Portfolio named: 'Portfolio 3er nivel' with: fedeAccount.
+	secondPorfolio := Portfolio named: 'Portfolio 2do nivel' with: thirdPortfolio.
+	rootPortfolio := Portfolio named: 'Root Portfolio' with: secondPorfolio.
+
+	Deposit register: 100 on: fedeAccount.
+	Transfer register: 100 from: fedeAccount to: diegoAccount.
+	
+	expectedPortfolioTree := OrderedCollection new.
+	expectedPortfolioTree add: 'Root Portfolio'.
+	expectedPortfolioTree add: (tab, 'Portfolio 2do nivel').
+	expectedPortfolioTree add: (tab, tab, 'Portfolio 3er nivel').
+	expectedPortfolioTree add: (tab, tab, tab, 'Cuenta de Fede').
+	expectedPortfolioTree add: (tab, tab, tab, 'Deposito por 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Salida por transferencia de 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, 'Balance = 0').
+	expectedPortfolioTree add: ('Balance = 0').
+
+	accountsTree := AccountsTree for: rootPortfolio.
+
+	self assert: expectedPortfolioTree equals:  accountsTree tree.! !
+
+!testRun: #ReportTest #test13 stamp: 'DS 11/15/2020 23:33:24'!
+FAILURE!
+
+!testRun: #ReportTest #test13 stamp: 'DS 11/15/2020 23:33:39'!
+FAILURE!
+
+accountsTree tree!
+
+self!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:34:14' prior: 50944249!
+test13
+
+	| expectedPortfolioTree accountsSumaryTree rootPortfolio secondPorfolio thirdPortfolio fedeAccount diegoAccount |
+
+	fedeAccount := ReceptiveAccount named: 'Cuenta de Fede'.
+	diegoAccount := ReceptiveAccount named: 'Cuenta de Diego'.
+	thirdPortfolio := Portfolio named: 'Portfolio 3er nivel' with: fedeAccount.
+	secondPorfolio := Portfolio named: 'Portfolio 2do nivel' with: thirdPortfolio.
+	rootPortfolio := Portfolio named: 'Root Portfolio' with: secondPorfolio.
+
+	Deposit register: 100 on: fedeAccount.
+	Transfer register: 100 from: fedeAccount to: diegoAccount.
+	
+	expectedPortfolioTree := OrderedCollection new.
+	expectedPortfolioTree add: 'Root Portfolio'.
+	expectedPortfolioTree add: (tab, 'Portfolio 2do nivel').
+	expectedPortfolioTree add: (tab, tab, 'Portfolio 3er nivel').
+	expectedPortfolioTree add: (tab, tab, tab, 'Cuenta de Fede').
+	expectedPortfolioTree add: (tab, tab, tab, 'Deposito por 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Salida por transferencia de 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, 'Balance = 0').
+	expectedPortfolioTree add: ('Balance = 0').
+
+	accountsSumaryTree := AccountsSummaryTree for: rootPortfolio.
+
+	self assert: expectedPortfolioTree equals:  accountsSumaryTree tree.! !
+
+!testRun: #ReportTest #test13 stamp: 'DS 11/15/2020 23:34:19'!
+FAILURE!
+
+accountsSumaryTree tree!
+
+self!
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:37:42' prior: 50944181!
+affectReportForReceptiveAccount: aReceptiveAccount 
+
+	| summary |
+
+	summary := (AccountSummary for: aReceptiveAccount) summary.
+	summary collect: [ :aSummaryLine | '    ', aSummaryLine ].
+	summary addFirst: aReceptiveAccount yourName.
+
+	^summary.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:37:43'!
+PASSED!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:37:43'!
+FAILURE!
+
+!testRun: #ReportTest #test13 stamp: 'DS 11/15/2020 23:37:43'!
+FAILURE!
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:37:51'!
+PASSED!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:37:53'!
+FAILURE!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:37:53'!
+FAILURE!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:38:28' prior: 50944075!
+test12
+
+	| accountsSummaryTree expectedPortfolioTree portfolio account |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+	account := ReceptiveAccount named: 'Cuenta Diego'.
+
+	portfolio add: account.
+	Deposit register: 100 on: account.	
+	Withdraw register: 50 on: account.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede'
+		with: (tab, 'Cuenta Diego')
+		with: (tab, 'Deposito por 100')
+		with: (tab, 'Extraccion por 50')
+		with: (tab, 'Balance = 50')
+		with: 'Balance = 50'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.! !
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:38:29'!
+FAILURE!
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:39:06'!
+PASSED!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:39:07'!
+FAILURE!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:39:07'!
+FAILURE!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:39:16' prior: 50944413!
+test12
+
+	| accountsSummaryTree expectedPortfolioTree portfolio account |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+	account := ReceptiveAccount named: 'Cuenta Diego'.
+
+	portfolio add: account.
+	Deposit register: 100 on: account.	
+	Withdraw register: 50 on: account.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection
+		with: 'Portfolio Fede'
+		with: (tab, 'Cuenta Diego')
+		with: (tab, 'Deposito por 100')
+		with: (tab, 'Extraccion por 50')
+		with: (tab, 'Balance = 50')
+		with: 'Balance = 50'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.! !
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:39:47'!
+FAILURE!
+
+accountsSummaryTree tree!
+
+self!
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:40:20' prior: 50944348!
+affectReportForReceptiveAccount: aReceptiveAccount 
+
+	| summary |
+
+	summary := (AccountSummary for: aReceptiveAccount) summary.
+	summary collect: [ :aSummaryLine | '    ', aSummaryLine ].
+	summary addFirst: ('    ', aReceptiveAccount yourName).
+
+	^summary.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:40:22'!
+PASSED!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:40:22'!
+FAILURE!
+
+!testRun: #ReportTest #test13 stamp: 'DS 11/15/2020 23:40:22'!
+FAILURE!
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:40:28'!
+PASSED!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:40:28'!
+FAILURE!
+
+!testRun: #ReportTest #test13 stamp: 'DS 11/15/2020 23:40:28'!
+FAILURE!
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:40:31'!
+PASSED!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:40:31'!
+FAILURE!
+
+!testRun: #ReportTest #test13 stamp: 'DS 11/15/2020 23:40:31'!
+FAILURE!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:40:32'!
+FAILURE!
+
+accountsSummaryTree tree!
+
+self!
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:41:09' prior: 50944472!
+affectReportForReceptiveAccount: aReceptiveAccount 
+
+	| summary |
+
+	summary := (AccountSummary for: aReceptiveAccount) summary.
+	summary := summary collect: [ :aSummaryLine | '    ', aSummaryLine ].
+	summary addFirst: ('    ', aReceptiveAccount yourName).
+
+	^summary.! !
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:41:25' prior: 50944627!
+affectReportForReceptiveAccount: aReceptiveAccount 
+
+	| summary |
+
+	summary := (AccountSummary for: aReceptiveAccount) summary.
+	summary addFirst: aReceptiveAccount yourName.
+	summary := summary collect: [ :aSummaryLine | '    ', aSummaryLine ].
+
+	^summary.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test11 stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test12 stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+!testRun: #ReportTest #test13 stamp: 'DS 11/15/2020 23:41:30'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 23:41:32) CuisUniversity-4384.image priorSource: 19603041!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:42:24'!
+test11PortfolioWithoutAccountsShouldHaveAccountsSummaryTreeWithOnlyHisName
+
+	| accountsSummaryTree expectedPortfolioTree portfolio |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede' with: 'Balance = 0'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.! !
+
+!methodRemoval: ReportTest #test11 stamp: 'DS 11/15/2020 23:42:24'!
+test11
+
+	| accountsSummaryTree expectedPortfolioTree portfolio |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede' with: 'Balance = 0'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:43:17'!
+test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance
+
+	| accountsSummaryTree expectedPortfolioTree portfolio |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede' with: 'Balance = 0'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.! !
+
+!methodRemoval: ReportTest #test11PortfolioWithoutAccountsShouldHaveAccountsSummaryTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:43:17'!
+test11PortfolioWithoutAccountsShouldHaveAccountsSummaryTreeWithOnlyHisName
+
+	| accountsSummaryTree expectedPortfolioTree portfolio |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede' with: 'Balance = 0'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:43:45'!
+test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab
+
+	| accountsSummaryTree expectedPortfolioTree portfolio account |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+	account := ReceptiveAccount named: 'Cuenta Diego'.
+
+	portfolio add: account.
+	Deposit register: 100 on: account.	
+	Withdraw register: 50 on: account.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection
+		with: 'Portfolio Fede'
+		with: (tab, 'Cuenta Diego')
+		with: (tab, 'Deposito por 100')
+		with: (tab, 'Extraccion por 50')
+		with: (tab, 'Balance = 50')
+		with: 'Balance = 50'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.! !
+
+!methodRemoval: ReportTest #test12 stamp: 'DS 11/15/2020 23:43:45'!
+test12
+
+	| accountsSummaryTree expectedPortfolioTree portfolio account |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+	account := ReceptiveAccount named: 'Cuenta Diego'.
+
+	portfolio add: account.
+	Deposit register: 100 on: account.	
+	Withdraw register: 50 on: account.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection
+		with: 'Portfolio Fede'
+		with: (tab, 'Cuenta Diego')
+		with: (tab, 'Deposito por 100')
+		with: (tab, 'Extraccion por 50')
+		with: (tab, 'Balance = 50')
+		with: 'Balance = 50'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree tree.!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:44:01'!
+test13PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs
+
+	| expectedPortfolioTree accountsSumaryTree rootPortfolio secondPorfolio thirdPortfolio fedeAccount diegoAccount |
+
+	fedeAccount := ReceptiveAccount named: 'Cuenta de Fede'.
+	diegoAccount := ReceptiveAccount named: 'Cuenta de Diego'.
+	thirdPortfolio := Portfolio named: 'Portfolio 3er nivel' with: fedeAccount.
+	secondPorfolio := Portfolio named: 'Portfolio 2do nivel' with: thirdPortfolio.
+	rootPortfolio := Portfolio named: 'Root Portfolio' with: secondPorfolio.
+
+	Deposit register: 100 on: fedeAccount.
+	Transfer register: 100 from: fedeAccount to: diegoAccount.
+	
+	expectedPortfolioTree := OrderedCollection new.
+	expectedPortfolioTree add: 'Root Portfolio'.
+	expectedPortfolioTree add: (tab, 'Portfolio 2do nivel').
+	expectedPortfolioTree add: (tab, tab, 'Portfolio 3er nivel').
+	expectedPortfolioTree add: (tab, tab, tab, 'Cuenta de Fede').
+	expectedPortfolioTree add: (tab, tab, tab, 'Deposito por 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Salida por transferencia de 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, 'Balance = 0').
+	expectedPortfolioTree add: ('Balance = 0').
+
+	accountsSumaryTree := AccountsSummaryTree for: rootPortfolio.
+
+	self assert: expectedPortfolioTree equals:  accountsSumaryTree tree.! !
+
+!methodRemoval: ReportTest #test13 stamp: 'DS 11/15/2020 23:44:01'!
+test13
+
+	| expectedPortfolioTree accountsSumaryTree rootPortfolio secondPorfolio thirdPortfolio fedeAccount diegoAccount |
+
+	fedeAccount := ReceptiveAccount named: 'Cuenta de Fede'.
+	diegoAccount := ReceptiveAccount named: 'Cuenta de Diego'.
+	thirdPortfolio := Portfolio named: 'Portfolio 3er nivel' with: fedeAccount.
+	secondPorfolio := Portfolio named: 'Portfolio 2do nivel' with: thirdPortfolio.
+	rootPortfolio := Portfolio named: 'Root Portfolio' with: secondPorfolio.
+
+	Deposit register: 100 on: fedeAccount.
+	Transfer register: 100 from: fedeAccount to: diegoAccount.
+	
+	expectedPortfolioTree := OrderedCollection new.
+	expectedPortfolioTree add: 'Root Portfolio'.
+	expectedPortfolioTree add: (tab, 'Portfolio 2do nivel').
+	expectedPortfolioTree add: (tab, tab, 'Portfolio 3er nivel').
+	expectedPortfolioTree add: (tab, tab, tab, 'Cuenta de Fede').
+	expectedPortfolioTree add: (tab, tab, tab, 'Deposito por 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Salida por transferencia de 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, 'Balance = 0').
+	expectedPortfolioTree add: ('Balance = 0').
+
+	accountsSumaryTree := AccountsSummaryTree for: rootPortfolio.
+
+	self assert: expectedPortfolioTree equals:  accountsSumaryTree tree.!
+!ReportTest methodsFor: 'accounts summary tree' stamp: 'DS 11/15/2020 23:44:08'!
+test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs
+
+	| expectedPortfolioTree accountsSumaryTree rootPortfolio secondPorfolio thirdPortfolio fedeAccount diegoAccount |
+
+	fedeAccount := ReceptiveAccount named: 'Cuenta de Fede'.
+	diegoAccount := ReceptiveAccount named: 'Cuenta de Diego'.
+	thirdPortfolio := Portfolio named: 'Portfolio 3er nivel' with: fedeAccount.
+	secondPorfolio := Portfolio named: 'Portfolio 2do nivel' with: thirdPortfolio.
+	rootPortfolio := Portfolio named: 'Root Portfolio' with: secondPorfolio.
+
+	Deposit register: 100 on: fedeAccount.
+	Transfer register: 100 from: fedeAccount to: diegoAccount.
+	
+	expectedPortfolioTree := OrderedCollection new.
+	expectedPortfolioTree add: 'Root Portfolio'.
+	expectedPortfolioTree add: (tab, 'Portfolio 2do nivel').
+	expectedPortfolioTree add: (tab, tab, 'Portfolio 3er nivel').
+	expectedPortfolioTree add: (tab, tab, tab, 'Cuenta de Fede').
+	expectedPortfolioTree add: (tab, tab, tab, 'Deposito por 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Salida por transferencia de 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, 'Balance = 0').
+	expectedPortfolioTree add: ('Balance = 0').
+
+	accountsSumaryTree := AccountsSummaryTree for: rootPortfolio.
+
+	self assert: expectedPortfolioTree equals:  accountsSumaryTree tree.! !
+
+!methodRemoval: ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:44:08'!
+test13PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs
+
+	| expectedPortfolioTree accountsSumaryTree rootPortfolio secondPorfolio thirdPortfolio fedeAccount diegoAccount |
+
+	fedeAccount := ReceptiveAccount named: 'Cuenta de Fede'.
+	diegoAccount := ReceptiveAccount named: 'Cuenta de Diego'.
+	thirdPortfolio := Portfolio named: 'Portfolio 3er nivel' with: fedeAccount.
+	secondPorfolio := Portfolio named: 'Portfolio 2do nivel' with: thirdPortfolio.
+	rootPortfolio := Portfolio named: 'Root Portfolio' with: secondPorfolio.
+
+	Deposit register: 100 on: fedeAccount.
+	Transfer register: 100 from: fedeAccount to: diegoAccount.
+	
+	expectedPortfolioTree := OrderedCollection new.
+	expectedPortfolioTree add: 'Root Portfolio'.
+	expectedPortfolioTree add: (tab, 'Portfolio 2do nivel').
+	expectedPortfolioTree add: (tab, tab, 'Portfolio 3er nivel').
+	expectedPortfolioTree add: (tab, tab, tab, 'Cuenta de Fede').
+	expectedPortfolioTree add: (tab, tab, tab, 'Deposito por 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Salida por transferencia de 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, 'Balance = 0').
+	expectedPortfolioTree add: ('Balance = 0').
+
+	accountsSumaryTree := AccountsSummaryTree for: rootPortfolio.
+
+	self assert: expectedPortfolioTree equals:  accountsSumaryTree tree.!
+
+----SNAPSHOT----(15 November 2020 23:44:13) CuisUniversity-4384.image priorSource: 19617456!
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:44:22'!
+PASSED!
+!Report methodsFor: 'making' stamp: 'DS 11/15/2020 23:44:40'!
+make
+
+	self subclassResponsibility.! !
+!AccountReport methodsFor: 'affect using' stamp: 'DS 11/15/2020 23:47:39' prior: 50943889!
+affectUsing: aTransaction
+
+	self subclassResponsibility.! !
+!PortfolioReport methodsFor: 'affect using' stamp: 'DS 11/15/2020 23:48:19'!
+affectUsing: anAccount
+
+	self subclassResponsibility.! !
+!PortfolioReport methodsFor: 'affect' stamp: 'DS 11/15/2020 23:48:59'!
+affectReportForReceptiveAccount: aReceptiveAccount 
+
+	self subclassResponsibility.! !
+!PortfolioReport methodsFor: 'affect' stamp: 'DS 11/15/2020 23:49:01' prior: 50945063!
+affectReportForReceptiveAccount: aReceptiveAccount
+
+	self subclassResponsibility.! !
+!PortfolioReport methodsFor: 'affect' stamp: 'DS 11/15/2020 23:49:16'!
+affectReportForPortfolio: aPortfolio
+
+	self subclassResponsibility.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:51:00'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 23:52:15) CuisUniversity-4384.image priorSource: 19626976!
+
+!methodRemoval: CodeFileBrowser #infoViewContents stamp: 'DS 11/15/2020 23:53:14'!
+infoViewContents
+	| theClass selector useLabel |
+	useLabel _ self baseCodeSource baseLabel.
+	editSelection == #newClass ifTrue: [
+		^ caseCodeSource
+			ifNil: [ 'No file selected' ]
+			ifNotNil: [ caseCodeSource summary ]].
+	self selectedClass ifNil: [ ^ '' ].
+	theClass _ self pvtBaseClassOrMetaclass.
+	editSelection == #editClass ifTrue: [
+		^ theClass
+			ifNil: [ 'Class not in the ' , useLabel ]
+			ifNotNil: [ 'Class exists already in the ' , useLabel ]].
+	editSelection == #editMessage ifFalse: [ ^ '' ].
+	selector _ self selectedMessageName.
+	^ (theClass notNil and: [ theClass includesSelector: selector ])
+		ifTrue: [ 'Method already exists' , self extraInfo ]
+		ifFalse: [			
+			(self classOrMetaClassOrganizer isRemoved: selector)
+				ifTrue: [ 'Method not in the ' , useLabel ]
+				ifFalse: [ '**NEW** Method not in the ' , useLabel ]]!
+!AccountSummary methodsFor: 'making' stamp: 'DS 11/15/2020 23:53:37' overrides: 50945049!
+make
+
+    | summary |
+
+    summary := account affectReportUsingTransactions: self.
+    summary addLast: 'Balance = ', (account balance asString).
+
+    ^summary.! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:53:37' prior: 50943139!
+test04TransactionsInPortfolioShouldAffectHisAccountSummary
+
+	| accountSummary portfolio firstAccount secondAccount expectedAccountSummary |
+
+	portfolio := Portfolio new.
+	firstAccount := ReceptiveAccount new.
+	secondAccount := ReceptiveAccount new.
+
+	Deposit register: 100 on: firstAccount.
+	Withdraw register: 50 on: secondAccount.
+
+	portfolio add: firstAccount.
+	portfolio add: secondAccount.
+
+	accountSummary := AccountSummary for: portfolio.
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 50' with: 'Balance = 50'.
+
+	self assert: expectedAccountSummary equals: accountSummary make.! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:53:37' prior: 50940156!
+test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary
+
+	| accountSummary account expectedAccountSummary |
+
+	account := ReceptiveAccount new.
+	Deposit register: 100 on: account.
+	Withdraw register: 100 on: account.
+	
+	accountSummary := AccountSummary for: account.
+
+	expectedAccountSummary := OrderedCollection with: 'Deposito por 100' with: 'Extraccion por 100' with: 'Balance = 0'.
+
+	self assert: expectedAccountSummary equals: accountSummary make.! !
+!AccountsSummaryTree methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:53:37' prior: 50944639 overrides: 50945069!
+affectReportForReceptiveAccount: aReceptiveAccount 
+
+	| summary |
+
+	summary := (AccountSummary for: aReceptiveAccount) make.
+	summary addFirst: aReceptiveAccount yourName.
+	summary := summary collect: [ :aSummaryLine | '    ', aSummaryLine ].
+
+	^summary.! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:53:37' prior: 50940143!
+test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero
+
+	| accountSummary expectedAccountSummary |
+
+	accountSummary := AccountSummary for: (ReceptiveAccount new).
+	expectedAccountSummary := OrderedCollection with: 'Balance = 0'.
+
+	self assert: expectedAccountSummary equals: accountSummary make.! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:53:37' prior: 50943082!
+test03TransferShouldAffectAccountSummaryOfBothComponents
+
+	| accountSummaryFrom accountSummaryTo aFromAccount aToAccount expectedAccountSummaryFrom expectedAccountSummaryTo |
+	
+	aFromAccount := ReceptiveAccount new.
+	aToAccount := ReceptiveAccount new.
+	Transfer register: 100 from: aFromAccount to: aToAccount.
+	
+	accountSummaryFrom := AccountSummary for: aFromAccount.
+	expectedAccountSummaryFrom := OrderedCollection with: 'Salida por transferencia de 100' with: 'Balance = -100'.
+
+	accountSummaryTo := AccountSummary for: aToAccount.
+	expectedAccountSummaryTo := OrderedCollection with: 'Entrada por transferencia de 100' with: 'Balance = 100'.	
+
+	self assert: expectedAccountSummaryFrom equals: accountSummaryFrom make.
+	self assert: expectedAccountSummaryTo equals: accountSummaryTo make.! !
+
+!methodRemoval: AccountSummary #summary stamp: 'DS 11/15/2020 23:53:37'!
+summary
+
+    | summary |
+
+    summary := account affectReportUsingTransactions: self.
+    summary addLast: 'Balance = ', (account balance asString).
+
+    ^summary.!
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:53:40'!
+PASSED!
+!NetOfTrasnferences methodsFor: 'making' stamp: 'DS 11/15/2020 23:53:57' overrides: 50945049!
+make
+
+    ^(account affectReportUsingTransactions: self) sum: [ :aValueTransaction | aValueTransaction ] ifEmpty: [ 0 ].! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:53:57' prior: 50943185!
+test05EmptyAccountShouldHaveNetTrasnferencesInZero
+
+	| account netOfTrasnferences |
+	
+	account := ReceptiveAccount new.
+	netOfTrasnferences := NetOfTrasnferences for: account.
+
+	self assert: 0 equals: netOfTrasnferences make.! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:53:57' prior: 50943216!
+test06TransferShouldAffectNetTransferencesOfBothComponents
+
+	| accountFrom accountTo netOfTransferencesFrom netOfTransferencesTo |
+
+	accountFrom := ReceptiveAccount new.
+	accountTo := ReceptiveAccount new.
+	Transfer register: 100 from: accountFrom to: accountTo.
+
+	netOfTransferencesFrom := NetOfTrasnferences for: accountFrom.
+	netOfTransferencesTo := NetOfTrasnferences for: accountTo.
+
+	self assert: -100 equals: netOfTransferencesFrom make.
+	self assert: 100 equals: netOfTransferencesTo make.! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:53:57' prior: 50943254!
+test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts
+
+	| portfolio fromAccount toAccount netOfTrnasference |
+
+	portfolio := Portfolio new.
+	fromAccount := ReceptiveAccount new.
+	toAccount := ReceptiveAccount new.
+
+	portfolio add: toAccount.
+
+	Transfer register: 100 from: fromAccount to: toAccount.
+	Deposit register: 100 on: toAccount.
+	Withdraw register: 100 on: toAccount.
+	
+	netOfTrnasference := NetOfTrasnferences for: portfolio.
+
+	self assert: 100 equals: netOfTrnasference make.! !
+
+!methodRemoval: NetOfTrasnferences #net stamp: 'DS 11/15/2020 23:53:57'!
+net
+
+    ^(account affectReportUsingTransactions: self) sum: [ :aValueTransaction | aValueTransaction ] ifEmpty: [ 0 ].!
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:53:58'!
+PASSED!
+!AccountsSummaryTree methodsFor: 'making' stamp: 'DS 11/15/2020 23:54:17' overrides: 50945049!
+make
+ 	| tree |
+	tree := (portfolio affectReportUsingAccounts: self) flatten.
+	
+	tree addFirst: portfolio yourName.
+	tree addLast: ('Balance = ', portfolio balance asString).
+	^tree! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:54:17' prior: 50944727!
+test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance
+
+	| accountsSummaryTree expectedPortfolioTree portfolio |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Fede' with: 'Balance = 0'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree make.! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:54:17' prior: 50944760!
+test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab
+
+	| accountsSummaryTree expectedPortfolioTree portfolio account |
+	
+	portfolio := Portfolio named: 'Portfolio Fede'.
+	account := ReceptiveAccount named: 'Cuenta Diego'.
+
+	portfolio add: account.
+	Deposit register: 100 on: account.	
+	Withdraw register: 50 on: account.
+
+	accountsSummaryTree := AccountsSummaryTree for: portfolio.
+	expectedPortfolioTree := OrderedCollection
+		with: 'Portfolio Fede'
+		with: (tab, 'Cuenta Diego')
+		with: (tab, 'Deposito por 100')
+		with: (tab, 'Extraccion por 50')
+		with: (tab, 'Balance = 50')
+		with: 'Balance = 50'.
+
+	self assert: expectedPortfolioTree equals: accountsSummaryTree make.! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:54:17' prior: 50944898!
+test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs
+
+	| expectedPortfolioTree accountsSumaryTree rootPortfolio secondPorfolio thirdPortfolio fedeAccount diegoAccount |
+
+	fedeAccount := ReceptiveAccount named: 'Cuenta de Fede'.
+	diegoAccount := ReceptiveAccount named: 'Cuenta de Diego'.
+	thirdPortfolio := Portfolio named: 'Portfolio 3er nivel' with: fedeAccount.
+	secondPorfolio := Portfolio named: 'Portfolio 2do nivel' with: thirdPortfolio.
+	rootPortfolio := Portfolio named: 'Root Portfolio' with: secondPorfolio.
+
+	Deposit register: 100 on: fedeAccount.
+	Transfer register: 100 from: fedeAccount to: diegoAccount.
+	
+	expectedPortfolioTree := OrderedCollection new.
+	expectedPortfolioTree add: 'Root Portfolio'.
+	expectedPortfolioTree add: (tab, 'Portfolio 2do nivel').
+	expectedPortfolioTree add: (tab, tab, 'Portfolio 3er nivel').
+	expectedPortfolioTree add: (tab, tab, tab, 'Cuenta de Fede').
+	expectedPortfolioTree add: (tab, tab, tab, 'Deposito por 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Salida por transferencia de 100').
+	expectedPortfolioTree add: (tab, tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, tab, 'Balance = 0').
+	expectedPortfolioTree add: (tab, 'Balance = 0').
+	expectedPortfolioTree add: ('Balance = 0').
+
+	accountsSumaryTree := AccountsSummaryTree for: rootPortfolio.
+
+	self assert: expectedPortfolioTree equals:  accountsSumaryTree make.! !
+
+!methodRemoval: AccountsSummaryTree #tree stamp: 'DS 11/15/2020 23:54:17'!
+tree
+ 	| tree |
+	tree := (portfolio affectReportUsingAccounts: self) flatten.
+	
+	tree addFirst: portfolio yourName.
+	tree addLast: ('Balance = ', portfolio balance asString).
+	^tree!
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:54:19'!
+PASSED!
+!AccountsTree methodsFor: 'making' stamp: 'DS 11/15/2020 23:54:29' overrides: 50945049!
+make
+ 	| tree |
+	tree := (portfolio affectReportUsingAccounts: self) flatten.
+	
+	tree addFirst: portfolio yourName.
+	^tree! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:54:29' prior: 50943581!
+test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName
+
+	| namedPortfolio portfolioTree expectedPortfolioTree |
+	
+	namedPortfolio := Portfolio named: 'Portfolio Diego'. 
+	
+	portfolioTree := AccountsTree for: namedPortfolio.
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Diego'.
+
+	self assert: expectedPortfolioTree equals: portfolioTree make.! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:54:29' prior: 50943544!
+test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab
+
+	| namedPortfolio namedAccount portfolioTree expectedPortfolioTree |
+	
+	namedAccount := ReceptiveAccount named: 'Cuenta Fede'.
+	namedPortfolio := Portfolio named: 'Portfolio Diego' with: namedAccount. 
+	
+	portfolioTree := AccountsTree for: namedPortfolio.
+
+	expectedPortfolioTree := OrderedCollection with: 'Portfolio Diego' with: (tab, 'Cuenta Fede').
+
+	self assert: expectedPortfolioTree equals: portfolioTree make.! !
+!ReportTest methodsFor: 'as yet unclassified' stamp: 'DS 11/15/2020 23:54:29' prior: 50943488!
+test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs
+
+	| expectedPortfolioTree accountsTree rootPortfolio secondPorfolio thirdPortfolio receptiveAccount |
+
+	receptiveAccount := ReceptiveAccount named: 'Cuenta de Fede'.
+	thirdPortfolio := Portfolio named: 'Portfolio 3er nivel' with: receptiveAccount.
+	secondPorfolio := Portfolio named: 'Portfolio 2do nivel' with: thirdPortfolio.
+	rootPortfolio := Portfolio named: 'Root Portfolio' with: secondPorfolio.
+	
+	expectedPortfolioTree := OrderedCollection with: 'Root Portfolio'
+		with: (tab, 'Portfolio 2do nivel')
+		with: (tab, tab, 'Portfolio 3er nivel')
+		with: (tab, tab, tab, 'Cuenta de Fede').
+		
+	accountsTree := AccountsTree for: rootPortfolio.
+
+	self assert: expectedPortfolioTree equals:  accountsTree make.! !
+
+!methodRemoval: AccountsTree #tree stamp: 'DS 11/15/2020 23:54:29'!
+tree
+ 	| tree |
+	tree := (portfolio affectReportUsingAccounts: self) flatten.
+	
+	tree addFirst: portfolio yourName.
+	^tree!
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/15/2020 23:54:31'!
+PASSED!
+
+----SNAPSHOT----(15 November 2020 23:54:33) CuisUniversity-4384.image priorSource: 19631389!
+!AccountSummary methodsFor: 'making' stamp: 'DS 11/15/2020 23:55:17' prior: 50945164 overrides: 50945049!
+make
+
+	| summary |
+
+	summary := account affectReportUsingTransactions: self.
+	summary addLast: 'Balance = ', (account balance asString).
+
+	^summary.! !
+!AccountSummary methodsFor: 'affect using' stamp: 'DS 11/15/2020 23:55:26' prior: 50941136 overrides: 50945054!
+affectUsing: aTransaction
+
+	^aTransaction affectReport: self.! !
+!AccountsTree methodsFor: 'making' stamp: 'DS 11/15/2020 23:56:59' prior: 50945603 overrides: 50945049!
+make
+
+ 	| tree |
+
+	tree := (portfolio affectReportUsingAccounts: self) flatten.	
+	tree addFirst: portfolio yourName.
+
+	^tree! !
+!PortfolioReport methodsFor: 'tab' stamp: 'DS 11/15/2020 23:58:14'!
+tab: aString
+
+	^'    ', aString.! !
+
+'' tab.!
+
+'' tab: 4.!
+
+$ time: 4.!
+!AccountsSummaryTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:00:03' prior: 50944189 overrides: 50945074!
+affectReportForPortfolio: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := (aPortfolio affectReportUsingAccounts: self) flatten.
+	childrenNames addFirst: aPortfolio yourName.
+	childrenNames collect: [ :aName | self tab: aName ].
+
+	childrenNames addLast: (self tab: 'Balance = ', aPortfolio balance asString).
+
+	^childrenNames.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:00:05'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:00:05'!
+FAILURE!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:00:05'!
+FAILURE!
+!AccountsSummaryTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:00:23' prior: 50945761 overrides: 50945074!
+affectReportForPortfolio: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := (aPortfolio affectReportUsingAccounts: self) flatten.
+	childrenNames addFirst: aPortfolio yourName.
+	childrenNames collect: [ :aName | self tab: aName ].
+
+	childrenNames addLast: (self tab: ('Balance = ', aPortfolio balance asString)).
+
+	^childrenNames.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:00:26'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:00:26'!
+FAILURE!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:00:26'!
+FAILURE!
+!AccountsSummaryTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:00:46' prior: 50945833 overrides: 50945074!
+affectReportForPortfolio: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := (aPortfolio affectReportUsingAccounts: self) flatten.
+	childrenNames addFirst: aPortfolio yourName.
+	childrenNames := childrenNames collect: [ :aName | self tab: aName ].
+
+	childrenNames addLast: (self tab: ('Balance = ', aPortfolio balance asString)).
+
+	^childrenNames.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:00:48'!
+PASSED!
+!AccountsSummaryTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:00:56' prior: 50945905 overrides: 50945074!
+affectReportForPortfolio: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := (aPortfolio affectReportUsingAccounts: self) flatten.
+	childrenNames addFirst: aPortfolio yourName.
+	childrenNames := childrenNames collect: [ :aName | self tab: aName ].
+
+	childrenNames addLast: (self tab: 'Balance = ', aPortfolio balance asString).
+
+	^childrenNames.! !
+!AccountsSummaryTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:01:04' prior: 50945215 overrides: 50945069!
+affectReportForReceptiveAccount: aReceptiveAccount 
+
+	| summary |
+
+	summary := (AccountSummary for: aReceptiveAccount) make.
+	summary addFirst: aReceptiveAccount yourName.
+	summary := summary collect: [ :aSummaryLine | self tab: aSummaryLine ].
+
+	^summary.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:01:14'!
+PASSED!
+!AccountReport methodsFor: 'balance' stamp: 'DS 11/16/2020 00:02:36'!
+balance
+
+	^'Balance = ', (account balance asString).! !
+!AccountSummary methodsFor: 'making' stamp: 'DS 11/16/2020 00:02:43' prior: 50945733 overrides: 50945049!
+make
+
+	| summary |
+
+	summary := account affectReportUsingTransactions: self.
+	summary addLast: self balance.
+
+	^summary.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:02:45'!
+PASSED!
+!PortfolioReport methodsFor: 'balance' stamp: 'DS 11/16/2020 00:03:02'!
+balance
+
+	^'Balance = ', (portfolio balance asString).! !
+!AccountsSummaryTree methodsFor: 'making' stamp: 'DS 11/16/2020 00:03:13' prior: 50945444 overrides: 50945049!
+make
+ 	| tree |
+	tree := (portfolio affectReportUsingAccounts: self) flatten.
+	
+	tree addFirst: portfolio yourName.
+	tree addLast: self balance.
+	^tree! !
+!Report methodsFor: 'string balance' stamp: 'DS 11/16/2020 00:04:00'!
+balanceOf: anAccount
+
+	^'Balance = ', (anAccount balance asString).! !
+!Report methodsFor: 'string balance' stamp: 'DS 11/16/2020 00:04:11'!
+balanceAsString: anAccount
+
+	^'Balance = ', (anAccount balance asString).! !
+
+!methodRemoval: AccountReport #balance stamp: 'DS 11/16/2020 00:04:17'!
+balance
+
+	^'Balance = ', (account balance asString).!
+!AccountSummary methodsFor: 'making' stamp: 'DS 11/16/2020 00:04:35' prior: 50946058 overrides: 50945049!
+make
+
+	| summary |
+
+	summary := account affectReportUsingTransactions: self.
+	summary addLast: (self balanceAsString: account).
+
+	^summary.! !
+
+!methodRemoval: PortfolioReport #balance stamp: 'DS 11/16/2020 00:04:45'!
+balance
+
+	^'Balance = ', (portfolio balance asString).!
+!AccountsSummaryTree methodsFor: 'making' stamp: 'DS 11/16/2020 00:05:00' prior: 50946123 overrides: 50945049!
+make
+ 	| tree |
+	tree := (portfolio affectReportUsingAccounts: self) flatten.
+	
+	tree addFirst: portfolio yourName.
+	tree addLast: (self balanceAsString: portfolio).
+	^tree! !
+!AccountsSummaryTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:05:23' prior: 50945973 overrides: 50945074!
+affectReportForPortfolio: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := (aPortfolio affectReportUsingAccounts: self) flatten.
+	childrenNames addFirst: aPortfolio yourName.
+	childrenNames := childrenNames collect: [ :aName | self tab: aName ].
+
+	childrenNames addLast: (self tab: (self balanceAsString: aPortfolio)).
+
+	^childrenNames.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:05:25'!
+PASSED!
+!AccountsTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:06:27' prior: 50942391 overrides: 50945074!
+affectReportForPortfolio: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := (aPortfolio affectReportUsingAccounts: self) flatten.
+	childrenNames addFirst: aPortfolio yourName.
+	childrenNames := childrenNames collect: [ :aName | self tab: aName ].
+	
+	^childrenNames.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:06:30'!
+PASSED!
+!AccountsTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:06:40' prior: 50941912 overrides: 50945069!
+affectReportForReceptiveAccount: aReceptiveAccount 
+
+	^self tab: aReceptiveAccount yourName.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:06:48'!
+PASSED!
+!AccountsTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:11:52'!
+makeTreeFor: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := (aPortfolio affectReportUsingAccounts: self) flatten.
+	childrenNames addFirst: aPortfolio yourName.
+	childrenNames := childrenNames collect: [ :aName | self tab: aName ].	
+	
+	^childrenNames.! !
+!PortfolioReport methodsFor: 'private' stamp: 'DS 11/16/2020 00:12:08'!
+makeTreeFor: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := (aPortfolio affectReportUsingAccounts: self) flatten.
+	childrenNames addFirst: aPortfolio yourName.
+	childrenNames := childrenNames collect: [ :aName | self tab: aName ].	
+	
+	^childrenNames.! !
+!AccountsSummaryTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:12:37' prior: 50946168 overrides: 50945074!
+affectReportForPortfolio: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := self makeTreeFor: aPortfolio.
+
+	childrenNames addLast: (self tab: (self balanceAsString: aPortfolio)).
+
+	^childrenNames.! !
+!AccountsSummaryTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:12:39' prior: 50946381 overrides: 50945074!
+affectReportForPortfolio: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := self makeTreeFor: aPortfolio.
+	childrenNames addLast: (self tab: (self balanceAsString: aPortfolio)).
+
+	^childrenNames.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:12:40'!
+PASSED!
+
+!methodRemoval: AccountsTree #makeTreeFor: stamp: 'DS 11/16/2020 00:12:44'!
+makeTreeFor: aPortfolio
+
+	| childrenNames |
+
+	childrenNames := (aPortfolio affectReportUsingAccounts: self) flatten.
+	childrenNames addFirst: aPortfolio yourName.
+	childrenNames := childrenNames collect: [ :aName | self tab: aName ].	
+	
+	^childrenNames.!
+!AccountsTree methodsFor: 'affect' stamp: 'DS 11/16/2020 00:12:57' prior: 50946235 overrides: 50945074!
+affectReportForPortfolio: aPortfolio
+
+	^self makeTreeFor: aPortfolio.! !
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:12:58'!
+PASSED!
+
+----SNAPSHOT----(16 November 2020 00:13:36) CuisUniversity-4384.image priorSource: 19650509!
+
+!testRun: #PortfolioTest #test01BalanceOfPortfolioWithoutAccountsIsZero stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test02BalanceOfPortfolioWithOneAccountIsAccountBalance stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test03BalanceOfPortfolioIsCalculatedRecursivelyOnPortfolios stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test04PortfolioWithoutAccountsHasNoRegisteredTransaction stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test05PortfolioHasRegisteredItsAccountsTransactions stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test06PortfolioLooksForRegisteredTransactionsRecursively stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test07PortfolioHasNoTransactionWhenHasNoAccounts stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test08PortfolioTransactionsIncludesAllItsAccountsTransactions stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test09PortfolioTransactionsAreCalculatedRecursively stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test10PortfolioCanNotIncludeTheSameAccountMoreThanOnce stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test11PortfolioCanNotIncludeAccountOfItsPortfolios stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test12PortfolioCanNotIncludeItself stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test13ComposedPortfolioCanNotHaveParentPortfolioAccount stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test14ComposedPortfolioCanNotHaveAccountOfAnyRootParentRecursively stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test15PortfolioCanNotIncludeAnyOfTheComposedAccountOfPortfolioToAdd stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #PortfolioTest #test16PortfolioWithoutNameShouldInitializeWithDefaultName stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test01ReceptiveAccountHaveZeroAsBalanceWhenCreated stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test02DepositIncreasesBalanceOnTransactionValue stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test03WithdrawDecreasesBalanceOnTransactionValue stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test04WithdrawValueMustBePositive stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test05ReceptiveAccountKnowsRegisteredTransactions stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test06ReceptiveAccountDoNotKnowNotRegisteredTransactions stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test07AccountKnowsItsTransactions stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReceptiveAccountTest #test08ReceptiveAccountWithoutNameShouldInitializeWithDefaultName stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test01EmptyAccountShouldHaveAccountSummarytWithBalanceInZero stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test02AccountWithTransactionsShouldHaveAffectedHisAccountSummary stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test03TransferShouldAffectAccountSummaryOfBothComponents stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test04TransactionsInPortfolioShouldAffectHisAccountSummary stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test05EmptyAccountShouldHaveNetTrasnferencesInZero stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test06TransferShouldAffectNetTransferencesOfBothComponents stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test07PortfolioNetOfTransferencesShouldBeAffectedByHisAccounts stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test08PortfolioWithoutAccountsShouldHaveAccountsTreeWithOnlyHisName stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test09PortfolioWithOneLevelShouldHaveAccountTreeWithOneTab stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test10PortfolioWithMoreThanOneLevelShouldHaveAccountsTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test11EmptyPortfolioShouldHaveAccountsSummaryTreeWithHisNameAndZeroBalance stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test12PortfolioWithOneLevelShouldHaveAccountSummaryTreeWithOneTab stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #ReportTest #test13PortfolioWithMoreThanOneLevelShouldHaveAccountsSummaryTreeWithRespectiveTabs stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #TransferTest #test01ParticipantsShouldHaveTheirRespectiveTransferComponent stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #TransferTest #test02TransferShouldHaveAffectedBalanceOfParticipants stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #TransferTest #test03TransferComponentsCanNavigateToTheirPairComponent stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #TransferTest #test04TransferShouldNotHaveTheSameOriginAndDestinyAccount stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
+
+!testRun: #TransferTest #test05TransferShouldNotRegisterANegativeAmmount stamp: 'DS 11/16/2020 00:14:16'!
+PASSED!
