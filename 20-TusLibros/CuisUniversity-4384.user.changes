@@ -9862,3 +9862,890 @@ PASSED!
 ----SNAPSHOT----(17 November 2020 12:12:59) CuisUniversity-4384.image priorSource: 17246617!
 
 ----QUIT----(17 November 2020 12:13:08) CuisUniversity-4384.image priorSource: 17342078!
+
+----STARTUP---- (17 November 2020 23:56:36) as /mnt/sdb5/Ingenieria1/CuisUniversity/CuisUniversity-4384.image!
+
+
+----End fileIn of /mnt/sdb5/Ingenieria1/CuisUniversity/TusLibros-Solucion.st----!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/17/2020 23:56:46'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/17/2020 23:56:46'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/17/2020 23:56:46'!
+PASSED!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:07:12'!
+test04
+	
+	| catalog aCart |
+
+	catalog := 	OrderedCollection with: isbn2.
+	aCart := Cart with: catalog.
+
+	self should: [ aCart add: isbn1 withOcurrences: 1. ]
+		raise: Error
+		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
+
+!testRun: #CartTest #test04 stamp: 'DS 11/18/2020 00:10:53'!
+ERROR!
+!Cart class methodsFor: 'instance creation' stamp: 'DS 11/18/2020 00:11:03'!
+with: anOrderedCollection 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeWith: anOrderedCollection ! !
+!Cart class methodsFor: 'instance creation' stamp: 'DS 11/18/2020 00:12:34' prior: 50946811!
+with: aCatalog
+
+	^self new initializeWith: aCatalog.! !
+
+!testRun: #CartTest #test04 stamp: 'DS 11/18/2020 00:12:35'!
+ERROR!
+
+!classDefinition: #Cart category: 'TusLibros-Solucion' stamp: 'DS 11/18/2020 00:12:41'!
+Object subclass: #Cart
+	instanceVariableNames: 'books catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!Cart methodsFor: 'initialization' stamp: 'DS 11/18/2020 00:12:41'!
+initializeWith: aCatalog 
+	self shouldBeImplemented.
+	catalog := aCatalog.! !
+!Cart methodsFor: 'initialization' stamp: 'DS 11/18/2020 00:12:44' prior: 50946834!
+initializeWith: aCatalog 
+
+	catalog := aCatalog.! !
+!Cart methodsFor: 'initialization' stamp: 'DS 11/18/2020 00:13:25' prior: 50946840!
+initializeWith: aCatalog 
+
+	catalog := aCatalog.
+	books := Bag new.! !
+
+!testRun: #CartTest #test04 stamp: 'DS 11/18/2020 00:13:25'!
+ERROR!
+!Cart class methodsFor: 'error descriptions' stamp: 'DS 11/18/2020 00:13:39'!
+bookIsOutOfCatalogErrorDescription
+	self shouldBeImplemented.! !
+!Cart class methodsFor: 'error descriptions' stamp: 'DS 11/18/2020 00:26:48' prior: 50946852!
+bookIsOutOfCatalogErrorDescription
+
+	^'The book you are trying to add is out of catalog'.! !
+
+!testRun: #CartTest #test04 stamp: 'DS 11/18/2020 00:26:49'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'DS 11/18/2020 00:28:36' prior: 50946775!
+add: aBook withOcurrences: ocurrences
+
+	(catalog includes: aBook) ifFalse: [ self error: self class bookIsOutOfCatalogErrorDescription ].
+
+	books add: aBook withOccurrences: ocurrences.! !
+
+!testRun: #CartTest #test04 stamp: 'DS 11/18/2020 00:28:38'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:28:38'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:28:38'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:28:38'!
+ERROR!
+
+!testRun: #CartTest #test04 stamp: 'DS 11/18/2020 00:28:38'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:28:38'!
+ERROR!
+
+!testRun: #CartTest #test04 stamp: 'DS 11/18/2020 00:29:00'!
+PASSED!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:29:39' prior: 50946732!
+test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes
+	
+	| catalog aCart |
+
+	catalog := 	OrderedCollection with: isbn1.
+	aCart := Cart new.
+	
+	aCart add: isbn1 withOcurrences: 5.
+	
+	self assert: 5 equals: (aCart ocurrencesOf: isbn1).! !
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:29:52' prior: 50946722!
+test02CartShouldHaveOneOcurrenceOnAddingOneBook
+	
+	| catalog aCart |
+
+	catalog := 	OrderedCollection with: isbn1.
+	aCart := Cart new.
+	aCart add: isbn1.
+	
+	self deny: aCart isEmpty.
+	self assert: (aCart isBookOnCart: isbn1).
+	self assert: 1 equals: (aCart ocurrencesOf: isbn1).! !
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:30:01' prior: 50946895!
+test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes
+	
+	| catalog aCart |
+
+	catalog := 	OrderedCollection with: isbn1.
+	aCart := Cart with: catalog.
+	
+	aCart add: isbn1 withOcurrences: 5.
+	
+	self assert: 5 equals: (aCart ocurrencesOf: isbn1).! !
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:30:10' prior: 50946906!
+test02CartShouldHaveOneOcurrenceOnAddingOneBook
+	
+	| catalog aCart |
+
+	catalog := 	OrderedCollection with: isbn1.
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+	
+	self deny: aCart isEmpty.
+	self assert: (aCart isBookOnCart: isbn1).
+	self assert: 1 equals: (aCart ocurrencesOf: isbn1).! !
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:30:29' prior: 50946714!
+test01NewCartIsEmptyWithNoOcurrences
+	
+	| catalog aCart |
+
+	catalog := 	OrderedCollection new.
+	aCart := Cart with: catalog.
+	
+	self assert: aCart isEmpty.
+	self assert: 0 equals: (aCart ocurrencesOf: isbn1).! !
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:30:30'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:30:30'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:30:30'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:30:30'!
+PASSED!
+
+!testRun: #CartTest #test04 stamp: 'DS 11/18/2020 00:30:30'!
+PASSED!
+
+----SNAPSHOT----(18 November 2020 00:30:34) CuisUniversity-4384.image priorSource: 19681423!
+
+TestCase subclass: #CartTest
+	instanceVariableNames: 'catalog isbn1 isbn2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:32:34' prior: 50946941!
+test01NewCartIsEmptyWithNoOcurrences
+	
+	| catalog1 aCart |
+
+	catalog1 := 	OrderedCollection new.
+	aCart := Cart with: catalog1.
+	
+	self assert: aCart isEmpty.
+	self assert: 0 equals: (aCart ocurrencesOf: isbn1).! !
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:32:50' prior: 50946918!
+test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes
+	
+	| catalog1 aCart |
+
+	catalog1 := 	OrderedCollection with: isbn1.
+	aCart := Cart with: catalog1.
+	
+	aCart add: isbn1 withOcurrences: 5.
+	
+	self assert: 5 equals: (aCart ocurrencesOf: isbn1).! !
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:32:55' prior: 50946799!
+test04
+	
+	| catalog1 aCart |
+
+	catalog1 := 	OrderedCollection with: isbn2.
+	aCart := Cart with: catalog1.
+
+	self should: [ aCart add: isbn1 withOcurrences: 1. ]
+		raise: Error
+		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
+!CartTest methodsFor: 'as yet unclassified' stamp: 'DS 11/18/2020 00:33:06' prior: 50946929!
+test02CartShouldHaveOneOcurrenceOnAddingOneBook
+	
+	|  aCart |
+
+	catalog := 	OrderedCollection with: isbn1.
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+	
+	self deny: aCart isEmpty.
+	self assert: (aCart isBookOnCart: isbn1).
+	self assert: 1 equals: (aCart ocurrencesOf: isbn1).! !
+
+!classDefinition: #CartTest category: 'TusLibros-Solucion' stamp: 'DS 11/18/2020 00:33:06'!
+TestCase subclass: #CartTest
+	instanceVariableNames: 'isbn1 isbn2 catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:33:19' prior: 50947006!
+test02CartShouldHaveOneOcurrenceOnAddingOneBook
+	
+	|  aCart |
+
+	catalog add: isbn1.
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+	
+	self deny: aCart isEmpty.
+	self assert: (aCart isBookOnCart: isbn1).
+	self assert: 1 equals: (aCart ocurrencesOf: isbn1).! !
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:33:35' prior: 50946995!
+test04
+	
+	| aCart |
+
+	catalog add: isbn2.
+	aCart := Cart with: catalog.
+
+	self should: [ aCart add: isbn1 withOcurrences: 1. ]
+		raise: Error
+		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:33:49' prior: 50946974!
+test01NewCartIsEmptyWithNoOcurrences
+	
+	| aCart |
+
+	aCart := Cart with: catalog.
+	
+	self assert: aCart isEmpty.
+	self assert: 0 equals: (aCart ocurrencesOf: isbn1).! !
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:34:01' prior: 50946984!
+test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes
+	
+	| aCart |
+
+	catalog add: isbn1.
+	aCart := Cart with: catalog.
+	
+	aCart add: isbn1 withOcurrences: 5.
+	
+	self assert: 5 equals: (aCart ocurrencesOf: isbn1).! !
+!CartTest methodsFor: 'setup' stamp: 'DS 11/18/2020 00:34:19' prior: 50946742 overrides: 16927572!
+setUp
+
+	catalog := OrderedCollection new.
+	isbn1 := 100000.
+	isbn2 := 100001.! !
+
+TestCase subclass: #CartTest
+	instanceVariableNames: 'catalog isbn1 isbn2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #CartTest category: 'TusLibros-Solucion' stamp: 'DS 11/18/2020 00:34:26'!
+TestCase subclass: #CartTest
+	instanceVariableNames: 'catalog isbn1 isbn2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:34:28'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:34:28'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:34:28'!
+PASSED!
+
+!testRun: #CartTest #test04 stamp: 'DS 11/18/2020 00:34:28'!
+PASSED!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:34:54'!
+test04CanNotAddBookOutOfCatalog
+	
+	| aCart |
+
+	catalog add: isbn2.
+	aCart := Cart with: catalog.
+
+	self should: [ aCart add: isbn1 withOcurrences: 1. ]
+		raise: Error
+		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
+
+!methodRemoval: CartTest #test04 stamp: 'DS 11/18/2020 00:34:54'!
+test04
+	
+	| aCart |
+
+	catalog add: isbn2.
+	aCart := Cart with: catalog.
+
+	self should: [ aCart add: isbn1 withOcurrences: 1. ]
+		raise: Error
+		withMessageText: Cart bookIsOutOfCatalogErrorDescription.!
+
+----SNAPSHOT----(18 November 2020 00:34:57) CuisUniversity-4384.image priorSource: 19690095!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:36:45'!
+test04CanNotAddBookWithNoOcurrencesOutOfCatalog
+	
+	| aCart |
+
+	catalog add: isbn2.
+	aCart := Cart with: catalog.
+
+	self should: [ aCart add: isbn1 withOcurrences: 1. ]
+		raise: Error
+		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
+
+!methodRemoval: CartTest #test04CanNotAddBookOutOfCatalog stamp: 'DS 11/18/2020 00:36:45'!
+test04CanNotAddBookOutOfCatalog
+	
+	| aCart |
+
+	catalog add: isbn2.
+	aCart := Cart with: catalog.
+
+	self should: [ aCart add: isbn1 withOcurrences: 1. ]
+		raise: Error
+		withMessageText: Cart bookIsOutOfCatalogErrorDescription.!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:37:10'!
+test05CanNotAddBookWithManyOcurrencesOutOfCatalog
+	
+	| aCart |
+
+	catalog add: isbn2.
+	aCart := Cart with: catalog.
+
+	self should: [ aCart add: isbn1 withOcurrences: 2. ]
+		raise: Error
+		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:37:14' prior: 50947117!
+test04CanNotAddBookWithNoOcurrencesOutOfCatalog
+	
+	| aCart |
+
+	catalog add: isbn2.
+	aCart := Cart with: catalog.
+
+	self should: [ aCart add: isbn1. ]
+		raise: Error
+		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
+
+!testRun: #CartTest #test04CanNotAddBookWithNoOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:37:15'!
+FAILURE!
+!Cart methodsFor: 'adding' stamp: 'DS 11/18/2020 00:37:48' prior: 50946771!
+add: aBook 
+
+	self add: aBook withOcurrences: 1.
+	 ! !
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:37:49'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:37:49'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:37:49'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddBookWithNoOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:37:49'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddBookWithManyOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:37:49'!
+PASSED!
+
+!methodRemoval: Cart #initialize stamp: 'DS 11/18/2020 00:38:25'!
+initialize
+	books := Bag new.!
+!Cart methodsFor: 'adding' stamp: 'DS 11/18/2020 00:38:43'!
+signalBookIsOutOfCatalog
+
+	^ self error: self class bookIsOutOfCatalogErrorDescription! !
+!Cart methodsFor: 'adding' stamp: 'DS 11/18/2020 00:38:43' prior: 50946865!
+add: aBook withOcurrences: ocurrences
+
+	(catalog includes: aBook) ifFalse: [ self signalBookIsOutOfCatalog ].
+
+	books add: aBook withOccurrences: ocurrences.! !
+
+----SNAPSHOT----(18 November 2020 00:38:55) CuisUniversity-4384.image priorSource: 19694835!
+
+----SNAPSHOT----(18 November 2020 00:39:09) CuisUniversity-4384.image priorSource: 19697568!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:42:38'!
+test06
+
+	| aCart |
+
+	aCart := Cart with: catalog.
+
+	self assert: aCart list isEmpty.! !
+
+!testRun: #CartTest #test06 stamp: 'DS 11/18/2020 00:42:39'!
+ERROR!
+!Cart methodsFor: 'accessing' stamp: 'DS 11/18/2020 00:42:47'!
+list
+	self shouldBeImplemented.! !
+!Cart methodsFor: 'accessing' stamp: 'DS 11/18/2020 00:42:56' prior: 50947213!
+list
+	^OrderedCollection new.! !
+
+!testRun: #CartTest #test06 stamp: 'DS 11/18/2020 00:42:57'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:42:57'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:42:57'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:42:57'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddBookWithNoOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:42:57'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddBookWithManyOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:42:57'!
+PASSED!
+
+!testRun: #CartTest #test06 stamp: 'DS 11/18/2020 00:42:57'!
+PASSED!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:43:55'!
+test07
+
+	| aCart |
+
+	catalog add: isbn1.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+
+	self assert: (OrderedCollection with: isbn1) equals: aCart list.! !
+
+!testRun: #CartTest #test07 stamp: 'DS 11/18/2020 00:43:56'!
+FAILURE!
+!Cart methodsFor: 'accessing' stamp: 'DS 11/18/2020 00:45:00' prior: 50947217!
+list
+	^ books ifEmpty: [		OrderedCollection new. ] ifNotEmpty: [ OrderedCollection with: books first ].! !
+
+!testRun: #CartTest #test07 stamp: 'DS 11/18/2020 00:45:01'!
+ERROR!
+
+books!
+
+self anyOne !
+!Cart methodsFor: 'accessing' stamp: 'DS 11/18/2020 00:45:36' prior: 50947253!
+list
+	^ books ifEmpty: [		OrderedCollection new. ] ifNotEmpty: [ OrderedCollection with: books anyOne ].! !
+
+!testRun: #CartTest #test07 stamp: 'DS 11/18/2020 00:45:38'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:45:38'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:45:38'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:45:38'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddBookWithNoOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:45:38'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddBookWithManyOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:45:38'!
+PASSED!
+
+!testRun: #CartTest #test06 stamp: 'DS 11/18/2020 00:45:38'!
+PASSED!
+
+!testRun: #CartTest #test07 stamp: 'DS 11/18/2020 00:45:38'!
+PASSED!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:46:18'!
+test08
+
+	| aCart |
+
+	catalog add: isbn1.
+	catalog add: isbn2.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+	aCart add: isbn2.
+
+	self assert: (OrderedCollection with: isbn1 with: isbn2) equals: aCart list.! !
+
+!testRun: #CartTest #test08 stamp: 'DS 11/18/2020 00:46:19'!
+FAILURE!
+
+books asOrderedCollection.!
+
+bag := Bag new.!
+
+bag add: 'h' withOccurrences: 2.!
+
+bag!
+
+bag asOrderedCollection !
+
+bag !
+!Cart methodsFor: 'accessing' stamp: 'DS 11/18/2020 00:48:16' prior: 50947262!
+list
+	^ books.! !
+
+!testRun: #CartTest #test08 stamp: 'DS 11/18/2020 00:48:17'!
+FAILURE!
+
+Bag with: isbn1 with: isbn2!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:48:36' prior: 50947292!
+test08
+
+	| aCart |
+
+	catalog add: isbn1.
+	catalog add: isbn2.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+	aCart add: isbn2.
+
+	self assert: (Bag with: isbn1 with: isbn2) equals: aCart list.! !
+
+!testRun: #CartTest #test08 stamp: 'DS 11/18/2020 00:48:38'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:48:38'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:48:38'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:48:38'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddBookWithNoOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:48:38'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddBookWithManyOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:48:38'!
+PASSED!
+
+!testRun: #CartTest #test06 stamp: 'DS 11/18/2020 00:48:38'!
+PASSED!
+
+!testRun: #CartTest #test07 stamp: 'DS 11/18/2020 00:48:38'!
+FAILURE!
+
+!testRun: #CartTest #test08 stamp: 'DS 11/18/2020 00:48:38'!
+PASSED!
+
+!testRun: #CartTest #test07 stamp: 'DS 11/18/2020 00:48:38'!
+FAILURE!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:48:44' prior: 50947243!
+test07
+
+	| aCart |
+
+	catalog add: isbn1.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+
+	self assert: (Bag with: isbn1) equals: aCart list.! !
+
+!testRun: #CartTest #test07 stamp: 'DS 11/18/2020 00:48:46'!
+PASSED!
+
+!testRun: #CartTest #test08 stamp: 'DS 11/18/2020 00:48:47'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:48:47'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:48:47'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:48:47'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddBookWithNoOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:48:47'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddBookWithManyOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:48:47'!
+PASSED!
+
+!testRun: #CartTest #test06 stamp: 'DS 11/18/2020 00:48:47'!
+PASSED!
+
+!testRun: #CartTest #test07 stamp: 'DS 11/18/2020 00:48:47'!
+PASSED!
+
+!testRun: #CartTest #test08 stamp: 'DS 11/18/2020 00:48:47'!
+PASSED!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:50:03'!
+test06NewCartHaveEmptyList
+
+	| aCart |
+
+	aCart := Cart with: catalog.
+
+	self assert: aCart list isEmpty.! !
+
+!methodRemoval: CartTest #test06 stamp: 'DS 11/18/2020 00:50:03'!
+test06
+
+	| aCart |
+
+	aCart := Cart with: catalog.
+
+	self assert: aCart list isEmpty.!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:51:30'!
+test07CartShouldHaveListWithOneOcurrenceOnAddingOneBook
+
+	| aCart |
+
+	catalog add: isbn1.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+
+	self assert: (Bag with: isbn1) equals: aCart list.! !
+
+!methodRemoval: CartTest #test07 stamp: 'DS 11/18/2020 00:51:30'!
+test07
+
+	| aCart |
+
+	catalog add: isbn1.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+
+	self assert: (Bag with: isbn1) equals: aCart list.!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:51:56'!
+test08CartShouldHaveListWithManyOcurrencesOnAddingManyBooks
+
+	| aCart |
+
+	catalog add: isbn1.
+	catalog add: isbn2.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+	aCart add: isbn2.
+
+	self assert: (Bag with: isbn1 with: isbn2) equals: aCart list.! !
+
+!methodRemoval: CartTest #test08 stamp: 'DS 11/18/2020 00:51:56'!
+test08
+
+	| aCart |
+
+	catalog add: isbn1.
+	catalog add: isbn2.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+	aCart add: isbn2.
+
+	self assert: (Bag with: isbn1 with: isbn2) equals: aCart list.!
+!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:52:34' prior: 50947415!
+test08CartShouldHaveListWithManyOcurrencesOnAddingManyBooks
+
+	| aCart |
+
+	catalog add: isbn1.
+	catalog add: isbn2.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1 withOcurrences: 2.
+	aCart add: isbn2.
+
+	self assert: (Bag with: isbn1 with: isbn1 with: isbn2) equals: aCart list.! !
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyOcurrencesOnAddingManyBooks stamp: 'DS 11/18/2020 00:52:35'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:52:35'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:52:35'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:52:35'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddBookWithNoOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:52:35'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddBookWithManyOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:52:35'!
+PASSED!
+
+!testRun: #CartTest #test06NewCartHaveEmptyList stamp: 'DS 11/18/2020 00:52:35'!
+PASSED!
+
+!testRun: #CartTest #test07CartShouldHaveListWithOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:52:35'!
+PASSED!
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyOcurrencesOnAddingManyBooks stamp: 'DS 11/18/2020 00:52:35'!
+PASSED!
+!CartTest methodsFor: 'list' stamp: 'DS 11/18/2020 00:54:34'!
+test09
+
+	| aCart list |
+
+	catalog add: isbn1.
+	catalog add: isbn2.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1 withOcurrences: 2.
+	aCart add: isbn2.
+	
+	list := aCart list.
+	list removeAll.
+
+	self assert: (Bag with: isbn1 with: isbn1 with: isbn2) equals: aCart list.! !
+
+!testRun: #CartTest #test09 stamp: 'DS 11/18/2020 00:54:36'!
+ERROR!
+
+bag := Bag new.!
+
+bag add: 'a'.!
+
+bag removeAll: 'a'.!
+
+bag add: 'a'.!
+
+bag add: 'a'.!
+
+bag!
+
+bag remove: 'a'.!
+
+bag!
+
+bag removeAllSuchThat: 'a'!
+
+bag removeAllFoundIn: 'a'.!
+
+bag!
+!CartTest methodsFor: 'list' stamp: 'DS 11/18/2020 00:58:11' prior: 50947477!
+test09
+
+	| aCart list |
+
+	catalog add: isbn1.
+	catalog add: isbn2.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+	aCart add: isbn2.
+	
+	list := aCart list.
+	list remove: isbn1.
+
+	self assert: (Bag with: isbn1 with: isbn2) equals: aCart list.! !
+
+!testRun: #CartTest #test09 stamp: 'DS 11/18/2020 00:58:11'!
+FAILURE!
+!Cart methodsFor: 'accessing' stamp: 'DS 11/18/2020 00:58:46' prior: 50947308!
+list
+
+	^books copy.! !
+
+!testRun: #CartTest #test09 stamp: 'DS 11/18/2020 00:58:50'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:58:50'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:58:50'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:58:50'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddBookWithNoOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:58:50'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddBookWithManyOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:58:50'!
+PASSED!
+
+!testRun: #CartTest #test06NewCartHaveEmptyList stamp: 'DS 11/18/2020 00:58:50'!
+PASSED!
+
+!testRun: #CartTest #test07CartShouldHaveListWithOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:58:50'!
+PASSED!
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyOcurrencesOnAddingManyBooks stamp: 'DS 11/18/2020 00:58:50'!
+PASSED!
+
+!testRun: #CartTest #test09 stamp: 'DS 11/18/2020 00:58:50'!
+PASSED!
+!CartTest methodsFor: 'list' stamp: 'DS 11/18/2020 00:59:50'!
+test09ListReturnedShouldBeACopyOfCartList
+
+	| aCart list |
+
+	catalog add: isbn1.
+	catalog add: isbn2.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+	aCart add: isbn2.
+	
+	list := aCart list.
+	list remove: isbn1.
+
+	self assert: (Bag with: isbn1 with: isbn2) equals: aCart list.! !
+
+!methodRemoval: CartTest #test09 stamp: 'DS 11/18/2020 00:59:50'!
+test09
+
+	| aCart list |
+
+	catalog add: isbn1.
+	catalog add: isbn2.
+
+	aCart := Cart with: catalog.
+	aCart add: isbn1.
+	aCart add: isbn2.
+	
+	list := aCart list.
+	list remove: isbn1.
+
+	self assert: (Bag with: isbn1 with: isbn2) equals: aCart list.!
+
+!testRun: #CartTest #test01NewCartIsEmptyWithNoOcurrences stamp: 'DS 11/18/2020 00:59:54'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:59:54'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes stamp: 'DS 11/18/2020 00:59:54'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddBookWithNoOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:59:54'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddBookWithManyOcurrencesOutOfCatalog stamp: 'DS 11/18/2020 00:59:54'!
+PASSED!
+
+!testRun: #CartTest #test06NewCartHaveEmptyList stamp: 'DS 11/18/2020 00:59:54'!
+PASSED!
+
+!testRun: #CartTest #test07CartShouldHaveListWithOneOcurrenceOnAddingOneBook stamp: 'DS 11/18/2020 00:59:54'!
+PASSED!
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyOcurrencesOnAddingManyBooks stamp: 'DS 11/18/2020 00:59:54'!
+PASSED!
+
+!testRun: #CartTest #test09ListReturnedShouldBeACopyOfCartList stamp: 'DS 11/18/2020 00:59:54'!
+PASSED!
+
+----SNAPSHOT----(18 November 2020 00:59:56) CuisUniversity-4384.image priorSource: 19697662!
