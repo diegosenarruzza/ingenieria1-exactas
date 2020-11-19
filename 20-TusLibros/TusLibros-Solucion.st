@@ -13,64 +13,66 @@ setUp
 	isbn2 := 100001.! !
 
 
-!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:33:49'!
-test01NewCartIsEmptyWithNoOcurrences
+!CartTest methodsFor: 'adding' stamp: 'DS 11/19/2020 00:26:21'!
+test01NewCartIsEmpty
 	
 	| aCart |
 
 	aCart := Cart with: catalog.
 	
-	self assert: aCart isEmpty.
-	self assert: 0 equals: (aCart ocurrencesOf: isbn1).! !
+	self assert: aCart isEmpty.! !
 
-!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:33:19'!
-test02CartShouldHaveOneOcurrenceOnAddingOneBook
+!CartTest methodsFor: 'adding' stamp: 'DS 11/19/2020 00:29:54'!
+test02CartShouldHaveOneOfABookWhenAddingIt
 	
 	|  aCart |
 
 	catalog add: isbn1.
+
 	aCart := Cart with: catalog.
-	aCart add: isbn1.
+	aCart add: 1 of: isbn1.
 	
 	self deny: aCart isEmpty.
-	self assert: (aCart isBookOnCart: isbn1).
-	self assert: 1 equals: (aCart ocurrencesOf: isbn1).! !
+	self assert: 1 equals: (aCart howManyOf: isbn1).! !
 
-!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:34:01'!
-test03CartShouldHaveManyOcurrencesOnAddingSameBookMultipleTimes
+!CartTest methodsFor: 'adding' stamp: 'DS 11/19/2020 00:30:14'!
+test03CartShouldHaveManyBooksWhenAddingMany
 	
 	| aCart |
 
 	catalog add: isbn1.
-	aCart := Cart with: catalog.
-	
-	aCart add: isbn1 withOcurrences: 5.
-	
-	self assert: 5 equals: (aCart ocurrencesOf: isbn1).! !
+	catalog add: isbn2.
 
-!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:37:14'!
-test04CanNotAddBookWithNoOcurrencesOutOfCatalog
+	aCart := Cart with: catalog.
+	aCart add: 5 of: isbn1.
+	aCart add: 2 of: isbn2.
+	
+	self assert: 5 equals: (aCart howManyOf: isbn1).
+	self assert: 2 equals: (aCart howManyOf: isbn2).! !
+
+!CartTest methodsFor: 'adding' stamp: 'DS 11/19/2020 00:21:38'!
+test04CanNotAddABookOutOfCatalog
 	
 	| aCart |
 
 	catalog add: isbn2.
 	aCart := Cart with: catalog.
 
-	self should: [ aCart add: isbn1. ]
+	self should: [ aCart add: 1 of: isbn1. ]
 		raise: Error
 		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
 
-!CartTest methodsFor: 'ocurrences' stamp: 'DS 11/18/2020 00:37:10'!
-test05CanNotAddBookWithManyOcurrencesOutOfCatalog
+!CartTest methodsFor: 'adding' stamp: 'DS 11/19/2020 00:21:46'!
+test05CanNotAddLessThanOneBook
 	
 	| aCart |
 
 	catalog add: isbn2.
 	aCart := Cart with: catalog.
 
-	self should: [ aCart add: isbn1 withOcurrences: 2. ]
+	self should: [ aCart add: -1 of: isbn2. ]
 		raise: Error
-		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
+		withMessageText: Cart canNotAddLessThanOneBookErrorDescription.! !
 
 
 !CartTest methodsFor: 'list' stamp: 'DS 11/18/2020 00:50:03'!
@@ -82,20 +84,20 @@ test06NewCartHaveEmptyList
 
 	self assert: aCart list isEmpty.! !
 
-!CartTest methodsFor: 'list' stamp: 'DS 11/18/2020 00:51:30'!
-test07CartShouldHaveListWithOneOcurrenceOnAddingOneBook
+!CartTest methodsFor: 'list' stamp: 'DS 11/19/2020 00:32:10'!
+test07CartShouldHaveListWithOneOfABookWhenAddingIt
 
 	| aCart |
 
 	catalog add: isbn1.
 
 	aCart := Cart with: catalog.
-	aCart add: isbn1.
+	aCart add: 1 of: isbn1.
 
-	self assert: (Bag with: isbn1) equals: aCart list.! !
+	self assert: (Dictionary newFromPairs: {isbn1. 1} ) equals: aCart list.! !
 
-!CartTest methodsFor: 'list' stamp: 'DS 11/18/2020 00:52:34'!
-test08CartShouldHaveListWithManyOcurrencesOnAddingManyBooks
+!CartTest methodsFor: 'list' stamp: 'DS 11/19/2020 00:32:37'!
+test08CartShouldHaveListWithManyBooksWhenAddingMany
 
 	| aCart |
 
@@ -103,13 +105,13 @@ test08CartShouldHaveListWithManyOcurrencesOnAddingManyBooks
 	catalog add: isbn2.
 
 	aCart := Cart with: catalog.
-	aCart add: isbn1 withOcurrences: 2.
-	aCart add: isbn2.
+	aCart add: 2 of: isbn1.
+	aCart add: 1 of: isbn2.
 
-	self assert: (Bag with: isbn1 with: isbn1 with: isbn2) equals: aCart list.! !
+	self assert: (Dictionary newFromPairs: {isbn1. 2. isbn2. 1}) equals: aCart list.! !
 
-!CartTest methodsFor: 'list' stamp: 'DS 11/18/2020 00:59:50'!
-test09ListReturnedShouldBeACopyOfCartList
+!CartTest methodsFor: 'list' stamp: 'DS 11/19/2020 00:34:26'!
+test09ModifyCartListShouldNotModifyTheCart
 
 	| aCart list |
 
@@ -117,13 +119,13 @@ test09ListReturnedShouldBeACopyOfCartList
 	catalog add: isbn2.
 
 	aCart := Cart with: catalog.
-	aCart add: isbn1.
-	aCart add: isbn2.
+	aCart add: 1 of: isbn1.
+	aCart add: 1 of: isbn2.
 	
 	list := aCart list.
-	list remove: isbn1.
+	list removeKey: isbn1.
 
-	self assert: (Bag with: isbn1 with: isbn2) equals: aCart list.! !
+	self assert: (Dictionary newFromPairs: {isbn1. 1. isbn2. 1}) equals: aCart list.! !
 
 
 !classDefinition: #Cart category: 'TusLibros-Solucion'!
@@ -133,15 +135,6 @@ Object subclass: #Cart
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!Cart methodsFor: 'testing' stamp: 'FedericoSabatini 11/17/2020 11:52:39'!
-isBookOnCart: aBookISBN
-	^books includes: aBookISBN.! !
-
-!Cart methodsFor: 'testing' stamp: 'FedericoSabatini 11/17/2020 11:51:44'!
-isEmpty
-	^books size = 0! !
-
-
 !Cart methodsFor: 'initialization' stamp: 'DS 11/18/2020 00:13:25'!
 initializeWith: aCatalog 
 
@@ -149,35 +142,41 @@ initializeWith: aCatalog
 	books := Bag new.! !
 
 
+!Cart methodsFor: 'adding' stamp: 'DS 11/19/2020 00:21:07'!
+add: aQuantity of: aBook
+
+	(aQuantity > 0) ifFalse: [ self signalCanNotAddLessThanOneBook ].
+	(catalog includes: aBook) ifFalse: [ self signalBookIsOutOfCatalog ].
+
+	books add: aBook withOccurrences: aQuantity.! !
+
+
+!Cart methodsFor: 'accessing' stamp: 'DS 11/19/2020 00:25:39'!
+howManyOf: aBook
+
+	^books occurrencesOf: aBook.! !
+
+!Cart methodsFor: 'accessing' stamp: 'DS 11/19/2020 00:07:22'!
+list
+
+	^books contents copy.! !
+
+
+!Cart methodsFor: 'testing' stamp: 'DS 11/19/2020 00:24:22'!
+isEmpty
+
+	^books isEmpty.! !
+
+
 !Cart methodsFor: 'errors' stamp: 'DS 11/18/2020 00:38:43'!
 signalBookIsOutOfCatalog
 
 	^ self error: self class bookIsOutOfCatalogErrorDescription! !
 
+!Cart methodsFor: 'errors' stamp: 'DS 11/18/2020 23:53:35'!
+signalCanNotAddLessThanOneBook
 
-!Cart methodsFor: 'adding' stamp: 'DS 11/18/2020 00:37:48'!
-add: aBook 
-
-	self add: aBook withOcurrences: 1.
-	 ! !
-
-!Cart methodsFor: 'adding' stamp: 'DS 11/18/2020 00:38:43'!
-add: aBook withOcurrences: ocurrences
-
-	(catalog includes: aBook) ifFalse: [ self signalBookIsOutOfCatalog ].
-
-	books add: aBook withOccurrences: ocurrences.! !
-
-
-!Cart methodsFor: 'ocurrences' stamp: 'FedericoSabatini 11/17/2020 11:52:36'!
-ocurrencesOf: aBookISBN
-	^books occurrencesOf: aBookISBN! !
-
-
-!Cart methodsFor: 'accessing' stamp: 'DS 11/18/2020 00:58:46'!
-list
-
-	^books copy.! !
+	^ self error: self class canNotAddLessThanOneBookErrorDescription! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -195,3 +194,8 @@ with: aCatalog
 bookIsOutOfCatalogErrorDescription
 
 	^'The book you are trying to add is out of catalog'.! !
+
+!Cart class methodsFor: 'error descriptions' stamp: 'DS 11/18/2020 23:51:26'!
+canNotAddLessThanOneBookErrorDescription
+
+	^'Can not add less than one book'.! !
