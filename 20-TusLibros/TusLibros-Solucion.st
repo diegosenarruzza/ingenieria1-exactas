@@ -5,10 +5,10 @@ TestCase subclass: #CartTest
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!CartTest methodsFor: 'setup' stamp: 'DS 11/18/2020 00:34:19'!
+!CartTest methodsFor: 'setup' stamp: 'FedericoSabatini 11/19/2020 19:20:29'!
 setUp
 
-	catalog := OrderedCollection new.
+	catalog := Dictionary new.
 	isbn1 := 100000.
 	isbn2 := 100001.! !
 
@@ -22,12 +22,12 @@ test01NewCartIsEmpty
 	
 	self assert: aCart isEmpty.! !
 
-!CartTest methodsFor: 'adding' stamp: 'DS 11/19/2020 00:29:54'!
+!CartTest methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:21:40'!
 test02CartShouldHaveOneOfABookWhenAddingIt
 	
 	|  aCart |
 
-	catalog add: isbn1.
+	catalog at: isbn1 put: 100.
 
 	aCart := Cart with: catalog.
 	aCart add: 1 of: isbn1.
@@ -35,13 +35,13 @@ test02CartShouldHaveOneOfABookWhenAddingIt
 	self deny: aCart isEmpty.
 	self assert: 1 equals: (aCart howManyOf: isbn1).! !
 
-!CartTest methodsFor: 'adding' stamp: 'DS 11/19/2020 00:30:14'!
+!CartTest methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:21:59'!
 test03CartShouldHaveManyBooksWhenAddingMany
 	
 	| aCart |
 
-	catalog add: isbn1.
-	catalog add: isbn2.
+	catalog at: isbn1 put: 100.
+	catalog at: isbn2 put: 100.
 
 	aCart := Cart with: catalog.
 	aCart add: 5 of: isbn1.
@@ -50,24 +50,24 @@ test03CartShouldHaveManyBooksWhenAddingMany
 	self assert: 5 equals: (aCart howManyOf: isbn1).
 	self assert: 2 equals: (aCart howManyOf: isbn2).! !
 
-!CartTest methodsFor: 'adding' stamp: 'DS 11/19/2020 00:21:38'!
+!CartTest methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:22:11'!
 test04CanNotAddABookOutOfCatalog
 	
 	| aCart |
 
-	catalog add: isbn2.
+	catalog at: isbn2 put: 100.
 	aCart := Cart with: catalog.
 
 	self should: [ aCart add: 1 of: isbn1. ]
 		raise: Error
 		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
 
-!CartTest methodsFor: 'adding' stamp: 'DS 11/19/2020 00:21:46'!
+!CartTest methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:22:24'!
 test05CanNotAddLessThanOneBook
 	
 	| aCart |
 
-	catalog add: isbn2.
+	catalog at: isbn2 put: 100.
 	aCart := Cart with: catalog.
 
 	self should: [ aCart add: -1 of: isbn2. ]
@@ -84,25 +84,25 @@ test06NewCartHaveEmptyList
 
 	self assert: aCart list isEmpty.! !
 
-!CartTest methodsFor: 'list' stamp: 'DS 11/19/2020 00:32:10'!
+!CartTest methodsFor: 'list' stamp: 'FedericoSabatini 11/19/2020 19:22:36'!
 test07CartShouldHaveListWithOneOfABookWhenAddingIt
 
 	| aCart |
 
-	catalog add: isbn1.
+	catalog at: isbn1 put: 100.
 
 	aCart := Cart with: catalog.
 	aCart add: 1 of: isbn1.
 
 	self assert: (Dictionary newFromPairs: {isbn1. 1} ) equals: aCart list.! !
 
-!CartTest methodsFor: 'list' stamp: 'DS 11/19/2020 00:32:37'!
+!CartTest methodsFor: 'list' stamp: 'FedericoSabatini 11/19/2020 19:22:48'!
 test08CartShouldHaveListWithManyBooksWhenAddingMany
 
 	| aCart |
 
-	catalog add: isbn1.
-	catalog add: isbn2.
+	catalog at: isbn1 put: 100.
+	catalog at: isbn2 put: 100.
 
 	aCart := Cart with: catalog.
 	aCart add: 2 of: isbn1.
@@ -110,13 +110,13 @@ test08CartShouldHaveListWithManyBooksWhenAddingMany
 
 	self assert: (Dictionary newFromPairs: {isbn1. 2. isbn2. 1}) equals: aCart list.! !
 
-!CartTest methodsFor: 'list' stamp: 'DS 11/19/2020 00:34:26'!
+!CartTest methodsFor: 'list' stamp: 'FedericoSabatini 11/19/2020 19:23:00'!
 test09ModifyCartListShouldNotModifyTheCart
 
 	| aCart list |
 
-	catalog add: isbn1.
-	catalog add: isbn2.
+	catalog at: isbn1 put: 100.
+	catalog at: isbn2 put: 100.
 
 	aCart := Cart with: catalog.
 	aCart add: 1 of: isbn1.
@@ -126,6 +126,117 @@ test09ModifyCartListShouldNotModifyTheCart
 	list removeKey: isbn1.
 
 	self assert: (Dictionary newFromPairs: {isbn1. 1. isbn2. 1}) equals: aCart list.! !
+
+
+!classDefinition: #CashierTest category: 'TusLibros-Solucion'!
+TestCase subclass: #CashierTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:53:04'!
+test01CannotInitializeCashierWithEmptyCart
+
+	| aCart aCatalog |
+	
+	aCatalog := Dictionary new.
+	aCart := Cart with: aCatalog.
+	
+	self should: [Cashier for: aCart with: aCatalog ]
+		raise: Error
+		withMessageText: Cashier creatingCashierWithEmptyCartErrorDescription.
+		! !
+
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:18:36'!
+test02CashierPriceShouldBeEqualToACartWithOneElement
+
+	| aCashier aCart aCatalog book |
+	
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: book.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 200 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:28:45'!
+test03CashierPriceShouldBeEqualToACartWithManyElements
+
+	| aCashier aCart aCatalog book book2 |
+	
+	book := 100001.
+	book2 := 100002.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+	aCatalog at: book2 put: 300.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: book.
+	aCart add: 1 of: book2.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 500 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:35:28'!
+test04
+
+	| aCashier aCart aCatalog book |
+	
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+
+	aCart := Cart with: aCatalog.
+	aCart add: 4 of: book.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 800 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 20:02:51'!
+test05
+
+	| aCreditCard aCashier aCart aCatalog book |
+	
+	aCreditCard := 90012225123.
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+
+	aCart := Cart with: aCatalog.
+	aCart add: 4 of: book.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self should: [aCashier checkoutWith: aCreditCard]
+		raise: Error
+		withMessageText: Cashier invalidCreditCardErrorDescription.
+	
+	
+	
+		! !
 
 
 !classDefinition: #Cart category: 'TusLibros-Solucion'!
@@ -142,12 +253,12 @@ initializeWith: aCatalog
 	books := Bag new.! !
 
 
-!Cart methodsFor: 'adding' stamp: 'DS 11/19/2020 00:21:07'!
+!Cart methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:19:22'!
 add: aQuantity of: aBook
 
 	(aQuantity > 0) ifFalse: [ self signalCanNotAddLessThanOneBook ].
-	(catalog includes: aBook) ifFalse: [ self signalBookIsOutOfCatalog ].
-
+	(catalog includesKey: aBook) ifFalse: [ self signalBookIsOutOfCatalog ].
+	
 	books add: aBook withOccurrences: aQuantity.! !
 
 
@@ -199,3 +310,51 @@ bookIsOutOfCatalogErrorDescription
 canNotAddLessThanOneBookErrorDescription
 
 	^'Can not add less than one book'.! !
+
+
+!classDefinition: #Cashier category: 'TusLibros-Solucion'!
+Object subclass: #Cashier
+	instanceVariableNames: 'cart catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!Cashier methodsFor: 'initialization' stamp: 'FedericoSabatini 11/19/2020 19:26:13'!
+initializeFor: aCart with: aCatalog 
+	cart := aCart.
+	catalog := aCatalog.! !
+
+
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 20:02:46'!
+checkoutWith: aCreditCard
+	self error: self class invalidCreditCardErrorDescription.! !
+
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:44:13'!
+purchaseCost
+
+	| purchaseSum|
+	
+	purchaseSum := 0.
+	cart list keysAndValuesDo: [ :aKey :aValue | purchaseSum := purchaseSum + (catalog at: aKey) * aValue].
+	^purchaseSum.
+	
+	! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'Cashier class' category: 'TusLibros-Solucion'!
+Cashier class
+	instanceVariableNames: ''!
+
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:04:16'!
+creatingCashierWithEmptyCartErrorDescription
+	^'Cannot create a cashier from an empty Cart'! !
+
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:54:35'!
+for: aCart with: aCatalog
+	aCart isEmpty ifTrue: [self error: self creatingCashierWithEmptyCartErrorDescription ].
+	^self new initializeFor: aCart with: aCatalog.! !
+
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:58:33'!
+invalidCreditCardErrorDescription
+	^'Invalid Credit Card error description'! !

@@ -12038,3 +12038,1051 @@ PASSED!
 
 !testRun: #CartTest #test09ModifyCartListShouldNotModifyTheCart stamp: 'DS 11/19/2020 00:34:30'!
 PASSED!
+
+----STARTUP---- (19 November 2020 17:08:01) as D:\facultad\Smalltalk\windows64\CuisUniversity-4384.image!
+
+
+!classRemoval: #Cart stamp: 'FedericoSabatini 11/19/2020 17:08:07'!
+Object subclass: #Cart
+	instanceVariableNames: 'books'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classRemoval: #CartTest stamp: 'FedericoSabatini 11/19/2020 17:08:07'!
+TestCase subclass: #CartTest
+	instanceVariableNames: 'isbn1 isbn2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+----End fileIn of D:\facultad\Smalltalk\windows64\TusLibros-Solucion.st----!
+
+Object subclass: #Catalog
+	instanceVariableNames: 'books catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+TestCase subclass: #Cashier
+	instanceVariableNames: 'catalog isbn1 isbn2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #Cashier category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 11/19/2020 18:51:31'!
+TestCase subclass: #Cashier
+	instanceVariableNames: 'catalog isbn1 isbn2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+----STARTUP---- (19 November 2020 18:52:13) as D:\facultad\Smalltalk\windows64\CuisUniversity-4384.image!
+
+
+!classRemoval: #Cart stamp: 'FedericoSabatini 11/19/2020 18:52:26'!
+Object subclass: #Cart
+	instanceVariableNames: 'books'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classRemoval: #CartTest stamp: 'FedericoSabatini 11/19/2020 18:52:26'!
+TestCase subclass: #CartTest
+	instanceVariableNames: 'isbn1 isbn2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+----End fileIn of D:\facultad\Smalltalk\windows64\TusLibros-Solucion.st----!
+
+Object subclass: #Cashier
+	instanceVariableNames: 'books catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #Cashier category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 11/19/2020 18:52:42'!
+Object subclass: #Cashier
+	instanceVariableNames: 'books catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!Cashier methodsFor: 'no messages' stamp: 'FedericoSabatini 11/19/2020 18:53:02'!
+CashierTest! !
+
+!methodRemoval: Cashier #CashierTest stamp: 'FedericoSabatini 11/19/2020 18:53:06'!
+CashierTest!
+
+TestCase subclass: #CashierTest
+	instanceVariableNames: 'catalog isbn1 isbn2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #CashierTest category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 11/19/2020 18:53:12'!
+TestCase subclass: #CashierTest
+	instanceVariableNames: 'catalog isbn1 isbn2'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+Object subclass: #Cashier
+	instanceVariableNames: 'cart'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #Cashier category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 11/19/2020 18:53:28'!
+Object subclass: #Cashier
+	instanceVariableNames: 'cart'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+TestCase subclass: #CashierTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #CashierTest category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 11/19/2020 18:53:35'!
+TestCase subclass: #CashierTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!CashierTest methodsFor: 'nil' stamp: 'FedericoSabatini 11/19/2020 18:55:00'!
+test01EmptyCartHasNoCost
+
+	| aCashier aCart |
+	
+	aCart := Cart 
+	! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:00:59' prior: 50873844!
+test01EmptyCartHasNoCost
+
+	| aCart aCatalog |
+	
+	aCatalog := OrderedCollection new.
+	aCart := Cart with: aCatalog.
+	
+	self should: [Cashier with: aCart. ]
+		error
+		! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:02:42'!
+test01CannotInitializeCashierWithEmptyCart
+
+	| aCart aCatalog |
+	
+	aCatalog := OrderedCollection new.
+	aCart := Cart with: aCatalog.
+	
+	self should: [Cashier with: aCart. ]
+		raise: Error
+		withMessageText: Cashier creatingCashierWithEmptyCartErrorDescription.
+		! !
+
+!methodRemoval: CashierTest #test01EmptyCartHasNoCost stamp: 'FedericoSabatini 11/19/2020 19:02:47'!
+test01EmptyCartHasNoCost
+
+	| aCart aCatalog |
+	
+	aCatalog := OrderedCollection new.
+	aCart := Cart with: aCatalog.
+	
+	self should: [Cashier with: aCart. ]
+		error
+		!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:03:42' prior: 50873859!
+test01CannotInitializeCashierWithEmptyCart
+
+	| aCart aCatalog |
+	
+	aCatalog := OrderedCollection new.
+	aCart := Cart with: aCatalog.
+	
+	self should: [Cashier for: aCart. ]
+		raise: Error
+		withMessageText: Cashier creatingCashierWithEmptyCartErrorDescription.
+		! !
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:03:45'!
+ERROR!
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:03:55'!
+creatingCashierWithEmptyCartErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:04:16' prior: 50873896!
+creatingCashierWithEmptyCartErrorDescription
+	^'Cannot create a cashier from an empty Cart'! !
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:04:21'!
+FAILURE!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:05:00' prior: 50873880!
+test01CannotInitializeCashierWithEmptyCart
+
+	| aCart aCatalog |
+	
+	aCatalog := OrderedCollection new.
+	aCart := Cart with: aCatalog.
+	
+	self should: [Cashier for: aCart. ]
+		raise: Error
+		withMessageText: Cashier creatingCashierWithEmptyCartErrorDescription.
+		! !
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:05:01'!
+FAILURE!
+!CashierTest methodsFor: 'assertions' stamp: 'FedericoSabatini 11/19/2020 19:05:08' overrides: 16927375!
+assert: aFalse description: aString 
+	self shouldBeImplemented.! !
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:05:16'!
+ERROR!
+
+!methodRemoval: CashierTest #assert:description: stamp: 'FedericoSabatini 11/19/2020 19:05:27'!
+assert: aFalse description: aString 
+	self shouldBeImplemented.!
+!Cashier class methodsFor: 'nil' stamp: 'FedericoSabatini 11/19/2020 19:06:48'!
+for: aCart
+	self error creatingCashierWithEmptyCartErrorDescription.! !
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:07:16' prior: 50873943!
+for: aCart
+	self error: self creatingCashierWithEmptyCartErrorDescription.! !
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:07:30'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:07:30'!
+PASSED!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:16:25'!
+test02CashierPriceShouldBeEqualToACartWithOneElement
+
+	| aCashier aCart aCatalog |
+	
+	aCatalog := Dictionary new.
+	aCatalog at: '100 años de soledad' put: 200.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: '100 años de soledad'.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 200 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:16:33' prior: 50873963!
+test02CashierPriceShouldBeEqualToACartWithOneElement
+
+	| aCashier aCart aCatalog |
+	
+	aCatalog := Dictionary new.
+	aCatalog at: '100 años de soledad' put: 200.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: '100 años de soledad'.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 200 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:16:50' prior: 50873978!
+test02CashierPriceShouldBeEqualToACartWithOneElement
+
+	| aCashier aCart aCatalog |
+	
+	aCatalog := Dictionary new.
+	aCatalog at: '100 años de soledad' put: 200.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: '100 años de soledad'.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 200 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:17:04'!
+ERROR!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:18:21' prior: 50873993!
+test02CashierPriceShouldBeEqualToACartWithOneElement
+
+	| aCashier aCart aCatalog book |
+	
+	book := '100 años de soledad'.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: book.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 200 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:18:24'!
+ERROR!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:18:36' prior: 50874012!
+test02CashierPriceShouldBeEqualToACartWithOneElement
+
+	| aCashier aCart aCatalog book |
+	
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: book.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 200 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:18:37'!
+ERROR!
+!Cart methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:19:22' prior: 50873731!
+add: aQuantity of: aBook
+
+	(aQuantity > 0) ifFalse: [ self signalCanNotAddLessThanOneBook ].
+	(catalog includesKey: aBook) ifFalse: [ self signalBookIsOutOfCatalog ].
+	
+	books add: aBook withOccurrences: aQuantity.! !
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:19:23'!
+ERROR!
+
+!testRun: #CartTest #test01NewCartIsEmpty stamp: 'FedericoSabatini 11/19/2020 19:19:32'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:19:32'!
+ERROR!
+
+!testRun: #CartTest #test03CartShouldHaveManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:19:32'!
+ERROR!
+
+!testRun: #CartTest #test04CanNotAddABookOutOfCatalog stamp: 'FedericoSabatini 11/19/2020 19:19:32'!
+FAILURE!
+
+!testRun: #CartTest #test05CanNotAddLessThanOneBook stamp: 'FedericoSabatini 11/19/2020 19:19:32'!
+PASSED!
+
+!testRun: #CartTest #test06NewCartHaveEmptyList stamp: 'FedericoSabatini 11/19/2020 19:19:33'!
+PASSED!
+
+!testRun: #CartTest #test07CartShouldHaveListWithOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:19:33'!
+ERROR!
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:19:33'!
+ERROR!
+
+!testRun: #CartTest #test09ModifyCartListShouldNotModifyTheCart stamp: 'FedericoSabatini 11/19/2020 19:19:33'!
+ERROR!
+!CartTest methodsFor: 'setup' stamp: 'FedericoSabatini 11/19/2020 19:20:29' prior: 50873626 overrides: 16927572!
+setUp
+
+	catalog := Dictionary new.
+	isbn1 := 100000.
+	isbn2 := 100001.! !
+
+!testRun: #CartTest #test02CartShouldHaveOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:20:41'!
+ERROR!
+
+!testRun: #CartTest #test02CartShouldHaveOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:20:41'!
+ERROR!
+!CartTest methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:21:40' prior: 50873637!
+test02CartShouldHaveOneOfABookWhenAddingIt
+	
+	|  aCart |
+
+	catalog at: isbn1 put: 100.
+
+	aCart := Cart with: catalog.
+	aCart add: 1 of: isbn1.
+	
+	self deny: aCart isEmpty.
+	self assert: 1 equals: (aCart howManyOf: isbn1).! !
+
+!testRun: #CartTest #test02CartShouldHaveOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:21:42'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmpty stamp: 'FedericoSabatini 11/19/2020 19:21:42'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:21:42'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:21:42'!
+ERROR!
+
+!testRun: #CartTest #test04CanNotAddABookOutOfCatalog stamp: 'FedericoSabatini 11/19/2020 19:21:42'!
+ERROR!
+
+!testRun: #CartTest #test05CanNotAddLessThanOneBook stamp: 'FedericoSabatini 11/19/2020 19:21:42'!
+ERROR!
+
+!testRun: #CartTest #test06NewCartHaveEmptyList stamp: 'FedericoSabatini 11/19/2020 19:21:42'!
+PASSED!
+
+!testRun: #CartTest #test07CartShouldHaveListWithOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:21:42'!
+ERROR!
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:21:42'!
+ERROR!
+
+!testRun: #CartTest #test09ModifyCartListShouldNotModifyTheCart stamp: 'FedericoSabatini 11/19/2020 19:21:42'!
+ERROR!
+
+!testRun: #CartTest #test03CartShouldHaveManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:21:45'!
+ERROR!
+!CartTest methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:21:59' prior: 50873646!
+test03CartShouldHaveManyBooksWhenAddingMany
+	
+	| aCart |
+
+	catalog at: isbn1 put: 100.
+	catalog at: isbn2 put: 100.
+
+	aCart := Cart with: catalog.
+	aCart add: 5 of: isbn1.
+	aCart add: 2 of: isbn2.
+	
+	self assert: 5 equals: (aCart howManyOf: isbn1).
+	self assert: 2 equals: (aCart howManyOf: isbn2).! !
+
+!testRun: #CartTest #test03CartShouldHaveManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:22:00'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddABookOutOfCatalog stamp: 'FedericoSabatini 11/19/2020 19:22:02'!
+ERROR!
+!CartTest methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:22:11' prior: 50873657!
+test04CanNotAddABookOutOfCatalog
+	
+	| aCart |
+
+	catalog at: isbn2 put: 100.
+	aCart := Cart with: catalog.
+
+	self should: [ aCart add: 1 of: isbn1. ]
+		raise: Error
+		withMessageText: Cart bookIsOutOfCatalogErrorDescription.! !
+
+!testRun: #CartTest #test04CanNotAddABookOutOfCatalog stamp: 'FedericoSabatini 11/19/2020 19:22:13'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddLessThanOneBook stamp: 'FedericoSabatini 11/19/2020 19:22:15'!
+ERROR!
+!CartTest methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:22:24' prior: 50873666!
+test05CanNotAddLessThanOneBook
+	
+	| aCart |
+
+	catalog at: isbn2 put: 100.
+	aCart := Cart with: catalog.
+
+	self should: [ aCart add: -1 of: isbn2. ]
+		raise: Error
+		withMessageText: Cart canNotAddLessThanOneBookErrorDescription.! !
+
+!testRun: #CartTest #test05CanNotAddLessThanOneBook stamp: 'FedericoSabatini 11/19/2020 19:22:25'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmpty stamp: 'FedericoSabatini 11/19/2020 19:22:25'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:22:25'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:22:25'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddABookOutOfCatalog stamp: 'FedericoSabatini 11/19/2020 19:22:25'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddLessThanOneBook stamp: 'FedericoSabatini 11/19/2020 19:22:25'!
+PASSED!
+
+!testRun: #CartTest #test06NewCartHaveEmptyList stamp: 'FedericoSabatini 11/19/2020 19:22:25'!
+PASSED!
+
+!testRun: #CartTest #test07CartShouldHaveListWithOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:22:25'!
+ERROR!
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:22:25'!
+ERROR!
+
+!testRun: #CartTest #test09ModifyCartListShouldNotModifyTheCart stamp: 'FedericoSabatini 11/19/2020 19:22:25'!
+ERROR!
+
+!testRun: #CartTest #test05CanNotAddLessThanOneBook stamp: 'FedericoSabatini 11/19/2020 19:22:28'!
+PASSED!
+
+!testRun: #CartTest #test07CartShouldHaveListWithOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:22:30'!
+ERROR!
+!CartTest methodsFor: 'list' stamp: 'FedericoSabatini 11/19/2020 19:22:36' prior: 50873681!
+test07CartShouldHaveListWithOneOfABookWhenAddingIt
+
+	| aCart |
+
+	catalog at: isbn1 put: 100.
+
+	aCart := Cart with: catalog.
+	aCart add: 1 of: isbn1.
+
+	self assert: (Dictionary newFromPairs: {isbn1. 1} ) equals: aCart list.! !
+
+!testRun: #CartTest #test07CartShouldHaveListWithOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:22:37'!
+PASSED!
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:22:38'!
+ERROR!
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:22:40'!
+ERROR!
+!CartTest methodsFor: 'list' stamp: 'FedericoSabatini 11/19/2020 19:22:48' prior: 50873690!
+test08CartShouldHaveListWithManyBooksWhenAddingMany
+
+	| aCart |
+
+	catalog at: isbn1 put: 100.
+	catalog at: isbn2 put: 100.
+
+	aCart := Cart with: catalog.
+	aCart add: 2 of: isbn1.
+	aCart add: 1 of: isbn2.
+
+	self assert: (Dictionary newFromPairs: {isbn1. 2. isbn2. 1}) equals: aCart list.! !
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:22:49'!
+PASSED!
+
+!testRun: #CartTest #test09ModifyCartListShouldNotModifyTheCart stamp: 'FedericoSabatini 11/19/2020 19:22:51'!
+ERROR!
+!CartTest methodsFor: 'list' stamp: 'FedericoSabatini 11/19/2020 19:22:59' prior: 50873701!
+test09ModifyCartListShouldNotModifyTheCart
+
+	| aCart list |
+
+	catalog at: isbn1 put: 100.
+	catalog at: isbn1 put: 100.
+
+	aCart := Cart with: catalog.
+	aCart add: 1 of: isbn1.
+	aCart add: 1 of: isbn2.
+	
+	list := aCart list.
+	list removeKey: isbn1.
+
+	self assert: (Dictionary newFromPairs: {isbn1. 1. isbn2. 1}) equals: aCart list.! !
+!CartTest methodsFor: 'list' stamp: 'FedericoSabatini 11/19/2020 19:23:00' prior: 50874292!
+test09ModifyCartListShouldNotModifyTheCart
+
+	| aCart list |
+
+	catalog at: isbn1 put: 100.
+	catalog at: isbn2 put: 100.
+
+	aCart := Cart with: catalog.
+	aCart add: 1 of: isbn1.
+	aCart add: 1 of: isbn2.
+	
+	list := aCart list.
+	list removeKey: isbn1.
+
+	self assert: (Dictionary newFromPairs: {isbn1. 1. isbn2. 1}) equals: aCart list.! !
+
+!testRun: #CartTest #test09ModifyCartListShouldNotModifyTheCart stamp: 'FedericoSabatini 11/19/2020 19:23:01'!
+PASSED!
+
+!testRun: #CartTest #test01NewCartIsEmpty stamp: 'FedericoSabatini 11/19/2020 19:23:12'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:23:12'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:23:12'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddABookOutOfCatalog stamp: 'FedericoSabatini 11/19/2020 19:23:12'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddLessThanOneBook stamp: 'FedericoSabatini 11/19/2020 19:23:12'!
+PASSED!
+
+!testRun: #CartTest #test06NewCartHaveEmptyList stamp: 'FedericoSabatini 11/19/2020 19:23:12'!
+PASSED!
+
+!testRun: #CartTest #test07CartShouldHaveListWithOneOfABookWhenAddingIt stamp: 'FedericoSabatini 11/19/2020 19:23:12'!
+PASSED!
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyBooksWhenAddingMany stamp: 'FedericoSabatini 11/19/2020 19:23:12'!
+PASSED!
+
+!testRun: #CartTest #test09ModifyCartListShouldNotModifyTheCart stamp: 'FedericoSabatini 11/19/2020 19:23:12'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:23:26'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:23:26'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:23:26'!
+ERROR!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:23:26'!
+ERROR!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:23:33' prior: 50873913!
+test01CannotInitializeCashierWithEmptyCart
+
+	| aCart aCatalog |
+	
+	aCatalog := Dictionary new.
+	aCart := Cart with: aCatalog.
+	
+	self should: [Cashier for: aCart. ]
+		raise: Error
+		withMessageText: Cashier creatingCashierWithEmptyCartErrorDescription.
+		! !
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:23:34'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:23:34'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:23:34'!
+ERROR!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:23:34'!
+ERROR!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:23:41'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:23:49'!
+ERROR!
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:23:59'!
+for: aCart with: aDictionary 
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:24:48' prior: 50874407!
+for: aCart with: aCatalog
+	^self initializeFor: aCart with: aCatalog.! !
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:24:51'!
+ERROR!
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:25:52' prior: 50874413!
+for: aCart with: aCatalog
+	^self new initializeFor: aCart with: aCatalog.! !
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:25:59'!
+ERROR!
+
+!classDefinition: #Cashier category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 11/19/2020 19:26:09'!
+Object subclass: #Cashier
+	instanceVariableNames: 'cart catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!Cashier methodsFor: 'initialization' stamp: 'FedericoSabatini 11/19/2020 19:26:09'!
+initializeFor: aCart with: aCatalog 
+	self shouldBeImplemented.
+	cart := aCart.
+	catalog := aCatalog.! !
+!Cashier methodsFor: 'initialization' stamp: 'FedericoSabatini 11/19/2020 19:26:13' prior: 50874440!
+initializeFor: aCart with: aCatalog 
+	cart := aCart.
+	catalog := aCatalog.! !
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:26:14'!
+ERROR!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:26:22'!
+purchaseCost
+	self shouldBeImplemented.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:26:31' prior: 50874457!
+purchaseCost
+	^200! !
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:26:35'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:26:35'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:26:36'!
+PASSED!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:28:30'!
+test03CashierPriceShouldBeEqualToACartWithManyElements
+
+	| aCashier aCart aCatalog book book2 |
+	
+	book := 100001.
+	book2 := 100002.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: book.
+	aCart add: 1 of: book2.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 200 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:28:38' prior: 50874478!
+test03CashierPriceShouldBeEqualToACartWithManyElements
+
+	| aCashier aCart aCatalog book book2 |
+	
+	book := 100001.
+	book2 := 100002.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+	aCatalog at: book2 put: 300.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: book.
+	aCart add: 1 of: book2.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 200 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:28:45' prior: 50874494!
+test03CashierPriceShouldBeEqualToACartWithManyElements
+
+	| aCashier aCart aCatalog book book2 |
+	
+	book := 100001.
+	book2 := 100002.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+	aCatalog at: book2 put: 300.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: book.
+	aCart add: 1 of: book2.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 500 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+
+!testRun: #CashierTest #test03CashierPriceShouldBeEqualToACartWithManyElements stamp: 'FedericoSabatini 11/19/2020 19:28:50'!
+FAILURE!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:34:45' prior: 50874462!
+purchaseCost
+	^cart list keys sum: [ :anElement | catalog at: anElement ]
+	! !
+
+!testRun: #CashierTest #test03CashierPriceShouldBeEqualToACartWithManyElements stamp: 'FedericoSabatini 11/19/2020 19:34:48'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:34:48'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:34:48'!
+PASSED!
+
+!testRun: #CashierTest #test03CashierPriceShouldBeEqualToACartWithManyElements stamp: 'FedericoSabatini 11/19/2020 19:34:48'!
+PASSED!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:35:28'!
+test04
+
+	| aCashier aCart aCatalog book |
+	
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+
+	aCart := Cart with: aCatalog.
+	aCart add: 4 of: book.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self assert: 800 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+
+!testRun: #CashierTest #test04 stamp: 'FedericoSabatini 11/19/2020 19:35:34'!
+FAILURE!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:36:07' prior: 50874532!
+purchaseCost
+	^cart list keys sum: [ :anElement | catalog at: anElement * (cart howManyOf: anElement)]
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:36:14' prior: 50874570!
+purchaseCost
+	^cart list keys sum: [ :anElement | (catalog at: anElement) * (cart howManyOf: anElement)]
+	! !
+
+!testRun: #CashierTest #test04 stamp: 'FedericoSabatini 11/19/2020 19:36:18'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:36:18'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:36:18'!
+PASSED!
+
+!testRun: #CashierTest #test03CashierPriceShouldBeEqualToACartWithManyElements stamp: 'FedericoSabatini 11/19/2020 19:36:18'!
+PASSED!
+
+!testRun: #CashierTest #test04 stamp: 'FedericoSabatini 11/19/2020 19:36:18'!
+PASSED!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:40:02' prior: 50874577!
+purchaseCost
+	^cart list keysAndValuesDo: [ :aKey :aValue | (catalog at: aKey) * aValue]
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:41:35' prior: 50874602!
+purchaseCost
+
+	| purchaseSum|
+	
+	purchaseSum := 0.
+	
+	^cart list keysAndValuesDo: [ :aKey :aValue | purchaseSum := purchaseSum + (catalog at: aKey) * aValue] 
+	
+	! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:41:37' prior: 50874609!
+purchaseCost
+
+	| purchaseSum|
+	
+	purchaseSum := 0.
+	^cart list keysAndValuesDo: [ :aKey :aValue | purchaseSum := purchaseSum + (catalog at: aKey) * aValue] 
+	
+	! !
+
+!testRun: #CashierTest #test04 stamp: 'FedericoSabatini 11/19/2020 19:41:40'!
+FAILURE!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:41:56' prior: 50874618!
+purchaseCost
+
+	| purchaseSum|
+	
+	purchaseSum := 0.
+	cart list keysAndValuesDo: [ :aKey :aValue | purchaseSum := purchaseSum + (catalog at: aKey) * aValue].
+	^purchaseSum.
+	
+	! !
+
+!testRun: #CashierTest #test04 stamp: 'FedericoSabatini 11/19/2020 19:41:58'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:41:58'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:41:58'!
+PASSED!
+
+!testRun: #CashierTest #test03CashierPriceShouldBeEqualToACartWithManyElements stamp: 'FedericoSabatini 11/19/2020 19:41:58'!
+PASSED!
+
+!testRun: #CashierTest #test04 stamp: 'FedericoSabatini 11/19/2020 19:41:59'!
+PASSED!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:44:13' prior: 50874630!
+purchaseCost
+
+	| purchaseSum|
+	
+	purchaseSum := 0.
+	cart list keysAndValuesDo: [ :aKey :aValue | purchaseSum := purchaseSum + (catalog at: aKey) * aValue].
+	^purchaseSum.
+	
+	! !
+
+----SNAPSHOT----(19 November 2020 19:45:14) CuisUniversity-4384.image priorSource: 17342172!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:53:04' prior: 50874372!
+test01CannotInitializeCashierWithEmptyCart
+
+	| aCart aCatalog |
+	
+	aCatalog := Dictionary new.
+	aCart := Cart with: aCatalog.
+	
+	self should: [Cashier for: aCart with: aCatalog ]
+		raise: Error
+		withMessageText: Cashier creatingCashierWithEmptyCartErrorDescription.
+		! !
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:53:05'!
+FAILURE!
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:54:35' prior: 50874423!
+for: aCart with: aCatalog
+	aCart isEmpty ifTrue: [self error: self creatingCashierWithEmptyCartErrorDescription ].
+	^self new initializeFor: aCart with: aCatalog.! !
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:54:36'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 19:54:36'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 19:54:36'!
+PASSED!
+
+!testRun: #CashierTest #test03CashierPriceShouldBeEqualToACartWithManyElements stamp: 'FedericoSabatini 11/19/2020 19:54:37'!
+PASSED!
+
+!testRun: #CashierTest #test04 stamp: 'FedericoSabatini 11/19/2020 19:54:37'!
+PASSED!
+
+!methodRemoval: Cashier class #for: stamp: 'FedericoSabatini 11/19/2020 19:54:53'!
+for: aCart
+	self error: self creatingCashierWithEmptyCartErrorDescription.!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:57:43'!
+test05
+
+	| aCreditCard aCashier aCart aCatalog book |
+	
+	aCreditCard := 90012225123.
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+
+	aCart := Cart with: aCatalog.
+	aCart add: 4 of: book.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self should: [aCashier checkoutWith: aCreditCard]
+		raise: Error
+		withMessageText: Cashier invalidCreditCardErrorDescription.
+	
+	
+	
+		! !
+
+!testRun: #CashierTest #test05 stamp: 'FedericoSabatini 11/19/2020 19:57:49'!
+ERROR!
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:58:13'!
+invalidCreditCardErrorDescription
+	self shouldBeImplemented.! !
+!Cashier class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 19:58:33' prior: 50874736!
+invalidCreditCardErrorDescription
+	^'Invalid Credit Card error description'! !
+
+!testRun: #CashierTest #test05 stamp: 'FedericoSabatini 11/19/2020 19:58:34'!
+FAILURE!
+
+!testRun: #CashierTest #test05 stamp: 'FedericoSabatini 11/19/2020 19:58:47'!
+FAILURE!
+
+!testRun: #CashierTest #test05 stamp: 'FedericoSabatini 11/19/2020 19:58:55'!
+FAILURE!
+
+!testRun: #CashierTest #test05 stamp: 'FedericoSabatini 11/19/2020 20:01:02'!
+FAILURE!
+
+!testRun: #CashierTest #test05 stamp: 'FedericoSabatini 11/19/2020 20:01:02'!
+FAILURE!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 20:01:34' prior: 50874717!
+test05
+
+	| aCreditCard aCashier aCart aCatalog book |
+	
+	aCreditCard := 90012225123.
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+
+	aCart := Cart with: aCatalog.
+	aCart add: 4 of: book.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	aCashier checkoutWith: aCreditCard.
+	
+	self should: [aCashier checkoutWith: aCreditCard]
+		raise: Error
+		withMessageText: Cashier invalidCreditCardErrorDescription.
+	
+	
+	
+		! !
+
+!testRun: #CashierTest #test05 stamp: 'FedericoSabatini 11/19/2020 20:01:34'!
+ERROR!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 20:01:43'!
+checkoutWith: aSmallInteger 
+	self shouldBeImplemented.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 20:02:46' prior: 50874782!
+checkoutWith: aCreditCard
+	self error: self class invalidCreditCardErrorDescription.! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/19/2020 20:02:51' prior: 50874762!
+test05
+
+	| aCreditCard aCashier aCart aCatalog book |
+	
+	aCreditCard := 90012225123.
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+
+	aCart := Cart with: aCatalog.
+	aCart add: 4 of: book.
+	
+	aCashier := Cashier for: aCart with: aCatalog.
+	
+	self should: [aCashier checkoutWith: aCreditCard]
+		raise: Error
+		withMessageText: Cashier invalidCreditCardErrorDescription.
+	
+	
+	
+		! !
+
+!testRun: #CashierTest #test05 stamp: 'FedericoSabatini 11/19/2020 20:02:51'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'FedericoSabatini 11/19/2020 20:02:51'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'FedericoSabatini 11/19/2020 20:02:51'!
+PASSED!
+
+!testRun: #CashierTest #test03CashierPriceShouldBeEqualToACartWithManyElements stamp: 'FedericoSabatini 11/19/2020 20:02:51'!
+PASSED!
+
+!testRun: #CashierTest #test04 stamp: 'FedericoSabatini 11/19/2020 20:02:51'!
+PASSED!
+
+!testRun: #CashierTest #test05 stamp: 'FedericoSabatini 11/19/2020 20:02:51'!
+PASSED!
+
+----SNAPSHOT----(19 November 2020 20:03:00) CuisUniversity-4384.image priorSource: 17376465!
