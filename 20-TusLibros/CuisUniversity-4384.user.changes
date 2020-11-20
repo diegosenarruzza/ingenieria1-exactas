@@ -13086,3 +13086,821 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(19 November 2020 20:03:00) CuisUniversity-4384.image priorSource: 17376465!
+
+----STARTUP---- (19 November 2020 21:00:11) as /mnt/sdb5/Ingenieria1/CuisUniversity/CuisUniversity-4384.image!
+
+
+----End fileIn of /mnt/sdb5/Ingenieria1/CuisUniversity/TusLibros-Solucion.st----!
+
+!testRun: #CartTest #test01NewCartIsEmpty stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test02CartShouldHaveOneOfABookWhenAddingIt stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test03CartShouldHaveManyBooksWhenAddingMany stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddABookOutOfCatalog stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddLessThanOneBook stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test06NewCartHaveEmptyList stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test07CartShouldHaveListWithOneOfABookWhenAddingIt stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test08CartShouldHaveListWithManyBooksWhenAddingMany stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CartTest #test09ModifyCartListShouldNotModifyTheCart stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CashierTest #test03CashierPriceShouldBeEqualToACartWithManyElements stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CashierTest #test04 stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+
+!testRun: #CashierTest #test05 stamp: 'DS 11/19/2020 21:00:30'!
+PASSED!
+!Cart methodsFor: 'private accesing' stamp: 'DS 11/19/2020 21:03:02'!
+catalog
+
+	^catalog.! !
+!Cashier methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:03:18' prior: 50949554!
+purchaseCost
+
+	| purchaseSum|
+	
+	purchaseSum := 0.
+	cart list keysAndValuesDo: [ :aKey :aValue | purchaseSum := purchaseSum + (cart catalog at: aKey) * aValue].
+	^purchaseSum.
+	
+	! !
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'DS 11/19/2020 21:03:19'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'DS 11/19/2020 21:03:19'!
+PASSED!
+
+!testRun: #CashierTest #test03CashierPriceShouldBeEqualToACartWithManyElements stamp: 'DS 11/19/2020 21:03:19'!
+PASSED!
+
+!testRun: #CashierTest #test04 stamp: 'DS 11/19/2020 21:03:19'!
+PASSED!
+
+!testRun: #CashierTest #test05 stamp: 'DS 11/19/2020 21:03:19'!
+PASSED!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:03:45' prior: 50949642!
+purchaseCost
+
+	| purchaseSum |
+	
+	purchaseSum := 0.
+	cart list keysAndValuesDo: [ :aKey :aValue | purchaseSum := purchaseSum + (cart catalog at: aKey) * aValue].
+	^purchaseSum.
+	
+	! !
+
+	| purchaseSum |!
+!Cashier methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:03:50' prior: 50949667!
+purchaseCost
+
+	| purchaseSum |
+
+	purchaseSum := 0.
+	cart list keysAndValuesDo: [ :aKey :aValue | purchaseSum := purchaseSum + (cart catalog at: aKey) * aValue].
+	^purchaseSum.
+	
+	! !
+!Cashier class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 21:05:00'!
+for: aCart
+
+	aCart isEmpty ifTrue: [self error: self creatingCashierWithEmptyCartErrorDescription ].
+
+	^self new initializeFor: aCart.! !
+!Cashier class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 21:05:24'!
+assertEmptyCart: aCart
+
+	^ aCart isEmpty ifTrue: [self error: self creatingCashierWithEmptyCartErrorDescription ]! !
+!Cashier class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 21:05:24' prior: 50949686!
+for: aCart
+
+	self assertEmptyCart: aCart.
+
+	^self new initializeFor: aCart.! !
+!Cashier methodsFor: 'initialization' stamp: 'DS 11/19/2020 21:05:44'!
+initializeFor: aCart
+
+	cart := aCart.! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:06:01' prior: 50949390!
+test01CannotInitializeCashierWithEmptyCart
+
+	| aCart aCatalog |
+
+	aCatalog := Dictionary new.
+	aCart := Cart with: aCatalog.
+
+	self should: [Cashier for: aCart ]
+		raise: Error
+		withMessageText: Cashier creatingCashierWithEmptyCartErrorDescription.
+		! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:06:08' prior: 50949402!
+test02CashierPriceShouldBeEqualToACartWithOneElement
+
+	| aCashier aCart aCatalog book |
+	
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: book.
+	
+	aCashier := Cashier for: aCart.
+	
+	self assert: 200 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:06:17' prior: 50949416!
+test03CashierPriceShouldBeEqualToACartWithManyElements
+
+	| aCashier aCart aCatalog book book2 |
+	
+	book := 100001.
+	book2 := 100002.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+	aCatalog at: book2 put: 300.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: book.
+	aCart add: 1 of: book2.
+	
+	aCashier := Cashier for: aCart.
+
+	self assert: 500 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:06:21' prior: 50949432!
+test04
+
+	| aCashier aCart aCatalog book |
+	
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+
+	aCart := Cart with: aCatalog.
+	aCart add: 4 of: book.
+	
+	aCashier := Cashier for: aCart.
+	
+	self assert: 800 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:06:27' prior: 50949444!
+test05
+
+	| aCreditCard aCashier aCart aCatalog book |
+	
+	aCreditCard := 90012225123.
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+
+	aCart := Cart with: aCatalog.
+	aCart add: 4 of: book.
+	
+	aCashier := Cashier for: aCart.
+	
+	self should: [aCashier checkoutWith: aCreditCard]
+		raise: Error
+		withMessageText: Cashier invalidCreditCardErrorDescription.
+	
+	
+	
+		! !
+
+!testRun: #CashierTest #test05 stamp: 'DS 11/19/2020 21:06:28'!
+PASSED!
+
+!testRun: #CashierTest #test01CannotInitializeCashierWithEmptyCart stamp: 'DS 11/19/2020 21:06:28'!
+PASSED!
+
+!testRun: #CashierTest #test02CashierPriceShouldBeEqualToACartWithOneElement stamp: 'DS 11/19/2020 21:06:28'!
+PASSED!
+
+!testRun: #CashierTest #test03CashierPriceShouldBeEqualToACartWithManyElements stamp: 'DS 11/19/2020 21:06:28'!
+PASSED!
+
+!testRun: #CashierTest #test04 stamp: 'DS 11/19/2020 21:06:28'!
+PASSED!
+
+!testRun: #CashierTest #test05 stamp: 'DS 11/19/2020 21:06:28'!
+PASSED!
+
+!methodRemoval: Cashier class #for:with: stamp: 'DS 11/19/2020 21:06:34'!
+for: aCart with: aCatalog
+	aCart isEmpty ifTrue: [self error: self creatingCashierWithEmptyCartErrorDescription ].
+	^self new initializeFor: aCart with: aCatalog.!
+
+Object subclass: #Cashier
+	instanceVariableNames: 'cart'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #Cashier category: 'TusLibros-Solucion' stamp: 'DS 11/19/2020 21:06:39'!
+Object subclass: #Cashier
+	instanceVariableNames: 'cart'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!methodRemoval: Cashier #initializeFor:with: stamp: 'DS 11/19/2020 21:06:42'!
+initializeFor: aCart with: aCatalog 
+	cart := aCart.
+	catalog := aCatalog.!
+
+----SNAPSHOT----(19 November 2020 21:06:58) CuisUniversity-4384.image priorSource: 19763637!
+!CashierTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:07:30' prior: 50949721!
+test02CashierPriceShouldBeEqualToACartWithOneElement
+
+	| aCashier aCart aCatalog book |
+
+	book := 100001.
+
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+	
+	aCart := Cart with: aCatalog.
+	aCart add: 1 of: book.
+	
+	aCashier := Cashier for: aCart.
+	
+	self assert: 200 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+!CashierTest methodsFor: 'tests' stamp: 'DS 11/19/2020 21:10:34'!
+test04CashierPriceShouldBeEqualToACartWithManyOfSameElements
+
+	| aCashier aCart aCatalog book |
+	
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+
+	aCart := Cart with: aCatalog.
+	aCart add: 4 of: book.
+	
+	aCashier := Cashier for: aCart.
+	
+	self assert: 800 equals: aCashier purchaseCost.
+	
+	
+	
+		! !
+
+!methodRemoval: CashierTest #test04 stamp: 'DS 11/19/2020 21:10:34'!
+test04
+
+	| aCashier aCart aCatalog book |
+	
+	book := 100001.
+	
+	aCatalog := Dictionary new.
+	aCatalog at: book put: 200.
+
+	aCart := Cart with: aCatalog.
+	aCart add: 4 of: book.
+	
+	aCashier := Cashier for: aCart.
+	
+	self assert: 800 equals: aCashier purchaseCost.
+	
+	
+	
+		!
+
+Object subclass: #CreditCard
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #CreditCard category: 'TusLibros-Solucion' stamp: 'DS 11/19/2020 21:17:41'!
+Object subclass: #CreditCard
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+TestCase subclass: #CreditCardTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #CreditCardTest category: 'TusLibros-Solucion' stamp: 'DS 11/19/2020 21:18:05'!
+TestCase subclass: #CreditCardTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+02/2024!
+
+2024/02!
+
+February/2024!
+
+2024/February!
+
+02/10/2024!
+
+February!
+
+2020!
+
+GregorianYear with: 2020.!
+
+GregorianYear number: 2020.!
+
+GregorianYear number: 2020; december!
+
+g := GregorianYear number: 2020.!
+
+g december !
+
+g december !
+
+2020/December!
+
+December/2020!
+
+GregorianMonthOfYear aprilOf: 2024.!
+
+April, 2020!
+!CreditCardTest methodsFor: 'no messages' stamp: 'DS 11/19/2020 21:44:53'!
+test01
+
+	| number expirationDate owner |
+	
+	number := '123412341234123'.
+	expirationDate  := February, 2021.
+	owner := 'FedeSaba S.A.'.
+
+	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner ]
+		raise: Error
+		withMessageText: CreditCard invalidNumberErrorDescription.! !
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 21:45:10'!
+ERROR!
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 21:45:15'!
+invalidNumberErrorDescription
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeInvalidNumberErrorDescription! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 21:45:36' prior: 50949908!
+invalidNumberErrorDescription
+
+	^'Invalid number of credit card'.! !
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 21:45:38'!
+FAILURE!
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:45:46' prior: 50949893!
+test01
+
+	| number expirationDate owner |
+	
+	number := '123412341234123'.
+	expirationDate  := February, 2021.
+	owner := 'FedeSaba S.A.'.
+
+	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
+		raise: Error
+		withMessageText: CreditCard invalidNumberErrorDescription.! !
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 21:45:50'!
+FAILURE!
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:46:06' prior: 50949925!
+test01
+
+	| number expirationDate owner |
+	
+	number := '123412341234123'.
+	expirationDate  := February, 2021.
+	owner := 'FedeSaba S.A.'.
+CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner.
+	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
+		raise: Error
+		withMessageText: CreditCard invalidNumberErrorDescription.! !
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 21:46:06'!
+ERROR!
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 21:46:12'!
+withNumber: aString withExpirationDate: aGregorianMonthOfYear andOwner: aString3 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeWithNumber: aString withExpirationDate: aGregorianMonthOfYear andOwner: aString3 ! !
+
+0012!
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 21:47:17' prior: 50949959!
+withNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner
+
+	^self new initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner.! !
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 21:47:19'!
+ERROR!
+
+!classDefinition: #CreditCard category: 'TusLibros-Solucion' stamp: 'DS 11/19/2020 21:47:46'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'creditCardNumber'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #CreditCard category: 'TusLibros-Solucion' stamp: 'DS 11/19/2020 21:47:47'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'creditCardNumber expirationDate'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #CreditCard category: 'TusLibros-Solucion' stamp: 'DS 11/19/2020 21:47:47'!
+Object subclass: #CreditCard
+	instanceVariableNames: 'creditCardNumber expirationDate owner'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!CreditCard methodsFor: 'initialization' stamp: 'DS 11/19/2020 21:47:47'!
+initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner 
+	self shouldBeImplemented.
+	creditCardNumber := aCreditCardNumber.
+	expirationDate := anExpirationDate.
+	owner := anOwner.! !
+!CreditCard methodsFor: 'initialization' stamp: 'DS 11/19/2020 21:48:01' prior: 50950007!
+initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner
+
+	creditCardNumber := aCreditCardNumber.
+	expirationDate := anExpirationDate.
+	owner := anOwner.! !
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 21:48:01'!
+FAILURE!
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:48:08' prior: 50949941!
+test01
+
+	| number expirationDate owner |
+	
+	number := '123412341234123'.
+	expirationDate  := February, 2021.
+	owner := 'FedeSaba S.A.'.
+
+	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
+		raise: Error
+		withMessageText: CreditCard invalidNumberErrorDescription.! !
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 21:48:12'!
+FAILURE!
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 21:48:53' prior: 50949972!
+withNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner
+
+	self error: self invalidNumberErrorDescription.
+
+	^self new initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner.! !
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 21:48:57'!
+PASSED!
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 21:48:57'!
+PASSED!
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:49:50'!
+test02
+
+	| number expirationDate owner |
+	
+	number := '1234123412341234'.
+	expirationDate  := February, 2021.
+	owner := ''.
+
+	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
+		raise: Error
+		withMessageText: CreditCard invalidOwnerErrorDescription.! !
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 21:49:52'!
+ERROR!
+!CreditCard class methodsFor: 'error descriptions' stamp: 'DS 11/19/2020 21:50:02'!
+invalidOwnerErrorDescription
+	self shouldBeImplemented.! !
+!CreditCard class methodsFor: 'error descriptions' stamp: 'DS 11/19/2020 21:50:24' prior: 50950076!
+invalidOwnerErrorDescription
+
+	^'Owner can not be empty'.! !
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 21:50:25'!
+FAILURE!
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 21:50:34'!
+FAILURE!
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 21:50:43'!
+FAILURE!
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 21:51:50' prior: 50950045!
+withNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner
+
+	(aCreditCardNumber size < 16) ifTrue: [	self error: self invalidNumberErrorDescription].
+	anOwner ifEmpty: [self error: self invalidOwnerErrorDescription].
+
+	^self new initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner.! !
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 21:51:52'!
+PASSED!
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 21:51:52'!
+PASSED!
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 21:51:52'!
+PASSED!
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:52:24'!
+test03
+
+	| number expirationDate owner |
+	
+	number := '1234123412341234'.
+	expirationDate  := February, 2021.
+	owner := ''.
+
+	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
+		raise: Error
+		withMessageText: CreditCard invalidOwnerErrorDescription.! !
+
+!methodRemoval: CreditCardTest #test02 stamp: 'DS 11/19/2020 21:52:24'!
+test02
+
+	| number expirationDate owner |
+	
+	number := '1234123412341234'.
+	expirationDate  := February, 2021.
+	owner := ''.
+
+	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
+		raise: Error
+		withMessageText: CreditCard invalidOwnerErrorDescription.!
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 21:53:01'!
+test02
+
+	| number expirationDate owner |
+	
+	number := '123412341234123a'.
+	expirationDate  := February, 2021.
+	owner := 'FedeSaba S.A.'.
+
+	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
+		raise: Error
+		withMessageText: CreditCard invalidNumberErrorDescription.! !
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 21:53:02'!
+FAILURE!
+
+'123412341234123a'!
+
+'123412341234123a' isInteger !
+
+'123412341234123' isInteger !
+
+'123412341234123' asInteger!
+
+'0123412341234123' asInteger!
+
+'123412341234123a' asInteger!
+
+'123412341234123    a' asInteger!
+
+'000123412341234123' do: [:a | a]!
+
+'000123412341234123' do: [:a | a isNumber]!
+
+'000123412341234123' collect: [:a | a isNumber]!
+
+'000123412341234123' asArray!
+
+'000123412341234123' asArray anySatisfy: [:a | a isNumber]!
+
+'000123412341234123' asArray anySatisfy: [:a | a isDigit]!
+
+'a000123412341234123' asArray anySatisfy: [:a | a isDigit]!
+
+'a000123412341234123' asArray anySatisfy: [:a | a isDigit not]!
+
+'000123412341234123' asArray anySatisfy: [:a | a isDigit not]!
+
+'0.0000123412341234123' asArray anySatisfy: [:a | a isDigit not]!
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 22:04:55'!
+FAILURE!
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 22:04:55'!
+FAILURE!
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 22:06:06' prior: 50950094!
+withNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner
+
+	(aCreditCardNumber size < 16 or: [(aCreditCardNumber asArray anySatisfy: [:aNumber | aNumber isDigit not])])
+		ifTrue: [	self error: self invalidNumberErrorDescription].
+	
+	anOwner ifEmpty: [self error: self invalidOwnerErrorDescription].
+
+	^self new initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner.! !
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 22:06:32'!
+PASSED!
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 22:06:32'!
+PASSED!
+
+!testRun: #CreditCardTest #test03 stamp: 'DS 11/19/2020 22:06:32'!
+PASSED!
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 22:06:37'!
+PASSED!
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 22:06:37'!
+PASSED!
+
+!testRun: #CreditCardTest #test03 stamp: 'DS 11/19/2020 22:06:37'!
+PASSED!
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 22:07:54'!
+test04
+
+	| number expirationDate owner |
+	
+	number := '1234123412341234'.
+	expirationDate  := 'Verano del 92'.
+	owner := ''.
+
+	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
+		raise: Error
+		withMessageText: CreditCard invalidOwnerErrorDescription.! !
+
+!testRun: #CreditCardTest #test04 stamp: 'DS 11/19/2020 22:07:56'!
+PASSED!
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 22:07:56'!
+PASSED!
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 22:07:56'!
+PASSED!
+
+!testRun: #CreditCardTest #test03 stamp: 'DS 11/19/2020 22:07:56'!
+PASSED!
+
+!testRun: #CreditCardTest #test04 stamp: 'DS 11/19/2020 22:07:56'!
+PASSED!
+!CreditCardTest methodsFor: 'as yet unclassified' stamp: 'DS 11/19/2020 22:08:17' prior: 50950214!
+test04
+
+	| number expirationDate owner |
+	
+	number := '1234123412341234'.
+	expirationDate  := 'Verano del 92'.
+	owner := 'Fede Saba S.A.'.
+
+	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
+		raise: Error
+		withMessageText: CreditCard invalidExpirationDateErrorDescription.! !
+
+!testRun: #CreditCardTest #test04 stamp: 'DS 11/19/2020 22:08:20'!
+ERROR!
+!CreditCard class methodsFor: 'error descriptions' stamp: 'DS 11/19/2020 22:08:33'!
+invalidExpirationDateErrorDescription
+	self shouldBeImplemented.! !
+!CreditCard class methodsFor: 'error descriptions' stamp: 'DS 11/19/2020 22:08:48' prior: 50950255!
+invalidExpirationDateErrorDescription
+
+	^'Invalid format of Expiration Date'.! !
+
+!testRun: #CreditCardTest #test04 stamp: 'DS 11/19/2020 22:08:50'!
+FAILURE!
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 22:09:46' prior: 50950183!
+withNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner
+
+	(aCreditCardNumber size < 16 or: [(aCreditCardNumber asArray anySatisfy: [:aNumber | aNumber isDigit not])])
+		ifTrue: [	self error: self invalidNumberErrorDescription].
+	
+	anOwner ifEmpty: [self error: self invalidOwnerErrorDescription].
+	(anExpirationDate isKindOf: GregorianMonthOfYear) ifFalse: [self error: self invalidExpirationDateErrorDescription ].
+
+	^self new initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner.! !
+
+!testRun: #CreditCardTest #test04 stamp: 'DS 11/19/2020 22:09:47'!
+PASSED!
+
+!testRun: #CreditCardTest #test01 stamp: 'DS 11/19/2020 22:09:47'!
+PASSED!
+
+!testRun: #CreditCardTest #test02 stamp: 'DS 11/19/2020 22:09:47'!
+PASSED!
+
+!testRun: #CreditCardTest #test03 stamp: 'DS 11/19/2020 22:09:47'!
+PASSED!
+
+!testRun: #CreditCardTest #test04 stamp: 'DS 11/19/2020 22:09:47'!
+PASSED!
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 22:10:19'!
+assertValidCreditCardNumber: aCreditCardNumber
+
+	^ (aCreditCardNumber size < 16 or: [(aCreditCardNumber asArray anySatisfy: [:aNumber | aNumber isDigit not])])
+		ifTrue: [	self error: self invalidNumberErrorDescription]! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 22:10:19' prior: 50950270!
+withNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner
+
+	self assertValidCreditCardNumber: aCreditCardNumber.
+	
+	anOwner ifEmpty: [self error: self invalidOwnerErrorDescription].
+	(anExpirationDate isKindOf: GregorianMonthOfYear) ifFalse: [self error: self invalidExpirationDateErrorDescription ].
+
+	^self new initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner.! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 22:10:30'!
+assertValidOwner: anOwner
+
+	^ anOwner ifEmpty: [self error: self invalidOwnerErrorDescription]! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 22:10:30' prior: 50950313!
+withNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner
+
+	self assertValidCreditCardNumber: aCreditCardNumber.
+	
+	self assertValidOwner: anOwner.
+	(anExpirationDate isKindOf: GregorianMonthOfYear) ifFalse: [self error: self invalidExpirationDateErrorDescription ].
+
+	^self new initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner.! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 22:10:43'!
+assertValidFormatExpirationDate: anExpirationDate
+
+	^ (anExpirationDate isKindOf: GregorianMonthOfYear) ifFalse: [self error: self invalidExpirationDateErrorDescription ]! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 22:10:43' prior: 50950337!
+withNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner
+
+	self assertValidCreditCardNumber: aCreditCardNumber.
+	
+	self assertValidOwner: anOwner.
+	self assertValidFormatExpirationDate: anExpirationDate.
+
+	^self new initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner.! !
+!CreditCard class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 22:10:46' prior: 50950362!
+withNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner
+
+	self assertValidCreditCardNumber: aCreditCardNumber.
+	self assertValidOwner: anOwner.
+	self assertValidFormatExpirationDate: anExpirationDate.
+
+	^self new initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate andOwner: anOwner.! !
+!CreditCard class methodsFor: 'assertions' stamp: 'DS 11/19/2020 22:11:47' prior: 50950302!
+assertValidCreditCardNumber: aCreditCardNumber
+
+	^(aCreditCardNumber size < 16 or: [(aCreditCardNumber asArray anySatisfy: [:aNumber | aNumber isDigit not])])
+		ifTrue: [	self error: self invalidNumberErrorDescription]! !
+!CreditCard class methodsFor: 'assertions' stamp: 'DS 11/19/2020 22:12:22' prior: 50950390!
+assertValidCreditCardNumber: aCreditCardNumber
+
+	^(aCreditCardNumber size < 16 
+		or: [ aCreditCardNumber asArray anySatisfy: [:aNumber | aNumber isDigit not] ]
+	) ifTrue: [	self error: self invalidNumberErrorDescription].! !
+!CreditCard class methodsFor: 'assertions' stamp: 'DS 11/19/2020 22:12:26' prior: 50950400!
+assertValidCreditCardNumber: aCreditCardNumber
+
+	^(aCreditCardNumber size < 16
+		or: [ aCreditCardNumber asArray anySatisfy: [:aNumber | aNumber isDigit not] ]
+	) ifTrue: [	self error: self invalidNumberErrorDescription].! !
+!CreditCard class methodsFor: 'assertions' stamp: 'DS 11/19/2020 22:12:34' prior: 50950353!
+assertValidFormatExpirationDate: anExpirationDate
+
+	^ (anExpirationDate isKindOf: GregorianMonthOfYear) ifFalse: [self error: self invalidExpirationDateErrorDescription ].! !
+!CreditCard class methodsFor: 'assertions' stamp: 'DS 11/19/2020 22:12:37' prior: 50950330!
+assertValidOwner: anOwner
+
+	^ anOwner ifEmpty: [self error: self invalidOwnerErrorDescription].! !
