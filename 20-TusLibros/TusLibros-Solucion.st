@@ -130,113 +130,103 @@ test09ModifyCartListShouldNotModifyTheCart
 
 !classDefinition: #CashierTest category: 'TusLibros-Solucion'!
 TestCase subclass: #CashierTest
-	instanceVariableNames: ''
+	instanceVariableNames: 'commonCart creditCard expiratedCreditCard successCashier'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!CashierTest methodsFor: 'tests' stamp: 'DS 11/19/2020 21:06:01'!
-test01CannotInitializeCashierWithEmptyCart
+!CashierTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:23:11'!
+test01CannotCheckoutForAnEmptyCart
 
-	| aCart aCatalog |
+	| aCart |
 
-	aCatalog := Dictionary new.
-	aCart := Cart with: aCatalog.
+	aCart := Cart with: (Dictionary new).
 
-	self should: [Cashier for: aCart ]
+	self should: [successCashier checkoutWith: creditCard for: aCart ]
 		raise: Error
-		withMessageText: Cashier creatingCashierWithEmptyCartErrorDescription.
-		! !
+		withMessageText: Cashier emptyCartErrorDescription.
 
-!CashierTest methodsFor: 'tests' stamp: 'DS 11/19/2020 21:07:30'!
-test02CashierPriceShouldBeEqualToACartWithOneElement
+	self assert: (OrderedCollection new) equals: successCashier sales.! !
 
-	| aCashier aCart aCatalog book |
+!CashierTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:37:35'!
+test02ShouldRegisterAnSaleForACartWithOneItem
 
-	book := 100001.
+	| receipt |
 
-	aCatalog := Dictionary new.
-	aCatalog at: book put: 200.
-	
-	aCart := Cart with: aCatalog.
-	aCart add: 1 of: book.
-	
-	aCashier := Cashier for: aCart.
-	
-	self assert: 200 equals: aCashier purchaseCost.
-	
-	
-	
-		! !
+	receipt := 200.
 
-!CashierTest methodsFor: 'tests' stamp: 'DS 11/19/2020 21:06:17'!
-test03CashierPriceShouldBeEqualToACartWithManyElements
+	self assert: receipt equals: (successCashier checkoutWith: creditCard for: commonCart).
+	self assert: (OrderedCollection with: 200) equals: successCashier sales.! !
 
-	| aCashier aCart aCatalog book book2 |
-	
-	book := 100001.
-	book2 := 100002.
-	
-	aCatalog := Dictionary new.
-	aCatalog at: book put: 200.
-	aCatalog at: book2 put: 300.
-	
-	aCart := Cart with: aCatalog.
-	aCart add: 1 of: book.
-	aCart add: 1 of: book2.
-	
-	aCashier := Cashier for: aCart.
+!CashierTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:37:41'!
+test03ShouldRegisterAnSaleForACartWithManyItems
 
-	self assert: 500 equals: aCashier purchaseCost.
+	| book receipt |
 	
-	
-	
-		! !
+	book := 200002.
+	commonCart add: 1 of: book.
 
-!CashierTest methodsFor: 'tests' stamp: 'DS 11/19/2020 21:10:34'!
-test04CashierPriceShouldBeEqualToACartWithManyOfSameElements
+	receipt := 500.
 
-	| aCashier aCart aCatalog book |
+	self assert: receipt equals: (successCashier checkoutWith: creditCard for: commonCart ).
+	self assert: (OrderedCollection with: 500) equals: successCashier sales.! !
+
+!CashierTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:37:48'!
+test04ShouldRegisterAnSaleForACartWithManyOfSameItems
+
+	| book receipt |
 	
 	book := 100001.
-	
-	aCatalog := Dictionary new.
-	aCatalog at: book put: 200.
+	commonCart add: 3 of: book.
 
-	aCart := Cart with: aCatalog.
-	aCart add: 4 of: book.
-	
-	aCashier := Cashier for: aCart.
-	
-	self assert: 800 equals: aCashier purchaseCost.
-	
-	
-	
-		! !
+	receipt := 800.
 
-!CashierTest methodsFor: 'tests' stamp: 'DS 11/19/2020 21:06:27'!
-test05
+	self assert: receipt equals: (successCashier checkoutWith: creditCard for: commonCart).
+	self assert: (OrderedCollection with: 800) equals: successCashier sales.! !
 
-	| aCreditCard aCashier aCart aCatalog book |
-	
-	aCreditCard := 90012225123.
-	book := 100001.
-	
-	aCatalog := Dictionary new.
-	aCatalog at: book put: 200.
+!CashierTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:35:53'!
+test05ShouldNotRegisterAnSaleIfCreditCardHasExpired
 
-	aCart := Cart with: aCatalog.
-	aCart add: 4 of: book.
-	
-	aCashier := Cashier for: aCart.
-	
-	self should: [aCashier checkoutWith: aCreditCard]
+	|  aCashier |
+
+	aCashier := Cashier with: (SuccessMerchantProcesor new).
+
+	self should: [aCashier checkoutWith: expiratedCreditCard for: commonCart]
 		raise: Error
-		withMessageText: Cashier invalidCreditCardErrorDescription.
+		withMessageText: Cashier expiratedCreditCardErrorDescription.
+
+	self assert: (OrderedCollection new) equals: aCashier sales.
+	! !
+
+!CashierTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:36:15'!
+test06ShouldNotRegisterAnSaleIfMPRaiseAnEexception
+
+	| aCashier mp |
+
+	mp := ErrorMerchantProcesor new.
+	aCashier := Cashier with: mp.
 	
+	self should: [aCashier checkoutWith: creditCard for: commonCart ]
+		raise: Error
+		withMessageText: ErrorMerchantProcesor errorDescription.
 	
-	
-		! !
+	self assert: (OrderedCollection new) equals: aCashier sales.! !
+
+
+!CashierTest methodsFor: 'setUp' stamp: 'DS 11/22/2020 19:58:42'!
+setUp
+
+	| book1 book2 |
+	book1 := 100001.
+	book2 := 200002.
+
+	commonCart := Cart with: (Dictionary newFromPairs: {book1.200. book2.300 }).
+	commonCart add: 1 of: book1.
+
+	expiratedCreditCard := CreditCard withNumber: '1234123412341234' withExpirationDate: (February, 2020) andOwner: 'Fede'.
+	creditCard := CreditCard withNumber: '1234123412341234' withExpirationDate: (February, 2022) andOwner: 'Fede'.
+
+	successCashier := Cashier with: (SuccessMerchantProcesor new).! !
 
 
 !classDefinition: #CreditCardTest category: 'TusLibros-Solucion'!
@@ -246,80 +236,82 @@ TestCase subclass: #CreditCardTest
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!CreditCardTest methodsFor: 'tests' stamp: 'DS 11/19/2020 21:48:08'!
-test01
+!CreditCardTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:49:35'!
+assertCreateCreditCardWithNumber: anNumber withExpirationDate: anExpirationDate andOwner: anOwner shouldRaiseErrorDescription: anErrorDescription 
 
-	| number expirationDate owner |
-	
-	number := '123412341234123'.
-	expirationDate  := February, 2021.
-	owner := 'FedeSaba S.A.'.
-
-	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
+	self should: [ CreditCard withNumber: anNumber withExpirationDate: anExpirationDate andOwner: anOwner . ]
 		raise: Error
-		withMessageText: CreditCard invalidNumberErrorDescription.! !
+		withMessageText: anErrorDescription.! !
 
-!CreditCardTest methodsFor: 'tests' stamp: 'DS 11/19/2020 21:53:01'!
-test02
+!CreditCardTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:56:40'!
+test01CreditCardNumberShouldHave16Characters
 
-	| number expirationDate owner |
-	
-	number := '123412341234123a'.
-	expirationDate  := February, 2021.
-	owner := 'FedeSaba S.A.'.
+	self
+		assertCreateCreditCardWithNumber: '123412341234123'
+		withExpirationDate: February, 2021
+		andOwner: 'FedeSaba S.A.'
+		shouldRaiseErrorDescription: CreditCard invalidNumberErrorDescription.! !
 
-	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
-		raise: Error
-		withMessageText: CreditCard invalidNumberErrorDescription.! !
+!CreditCardTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:56:55'!
+test02CreditCardNumberShouldBeAnStringOfDigits
 
-!CreditCardTest methodsFor: 'tests' stamp: 'DS 11/19/2020 21:52:24'!
-test03
+	self 
+		assertCreateCreditCardWithNumber: '123412341234123a'
+		withExpirationDate:  February, 2021
+		andOwner:  'FedeSaba S.A.'
+		shouldRaiseErrorDescription: CreditCard invalidNumberErrorDescription.! !
 
-	| number expirationDate owner |
-	
-	number := '1234123412341234'.
-	expirationDate  := February, 2021.
-	owner := ''.
+!CreditCardTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:57:06'!
+test03CreditCardOwnerCanNotBeEmpty
 
-	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
-		raise: Error
-		withMessageText: CreditCard invalidOwnerErrorDescription.! !
+	self 
+		assertCreateCreditCardWithNumber: '1234123412341234'
+		withExpirationDate:  February, 2021
+		andOwner:  ''
+		shouldRaiseErrorDescription: CreditCard invalidOwnerErrorDescription.! !
 
-!CreditCardTest methodsFor: 'tests' stamp: 'DS 11/19/2020 22:08:17'!
-test04
+!CreditCardTest methodsFor: 'tests' stamp: 'DS 11/22/2020 19:57:28'!
+test04CreditCardExpirationDateShouldBeAnGregorianMonthOfYear
 
-	| number expirationDate owner |
-	
-	number := '1234123412341234'.
-	expirationDate  := 'Verano del 92'.
-	owner := 'Fede Saba S.A.'.
-
-	self should: [ CreditCard withNumber: number withExpirationDate: expirationDate andOwner: owner. ]
-		raise: Error
-		withMessageText: CreditCard invalidExpirationDateErrorDescription.! !
+	self 
+		assertCreateCreditCardWithNumber: '1234123412341234'
+		withExpirationDate:  'Verano del 92'
+		andOwner:  'FedeSaba S.A.'
+		shouldRaiseErrorDescription: CreditCard invalidExpirationDateErrorDescription.! !
 
 
 !classDefinition: #Cart category: 'TusLibros-Solucion'!
 Object subclass: #Cart
-	instanceVariableNames: 'books catalog'
+	instanceVariableNames: 'items catalog'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!Cart methodsFor: 'initialization' stamp: 'DS 11/18/2020 00:13:25'!
+!Cart methodsFor: 'initialization' stamp: 'DS 11/22/2020 19:44:51'!
 initializeWith: aCatalog 
 
 	catalog := aCatalog.
-	books := Bag new.! !
+	items := Bag new.! !
 
 
-!Cart methodsFor: 'adding' stamp: 'FedericoSabatini 11/19/2020 19:19:22'!
-add: aQuantity of: aBook
+!Cart methodsFor: 'assertions' stamp: 'DS 11/22/2020 19:45:26'!
+assertAddMoreThanZeroItems: aQuantity
 
-	(aQuantity > 0) ifFalse: [ self signalCanNotAddLessThanOneBook ].
-	(catalog includesKey: aBook) ifFalse: [ self signalBookIsOutOfCatalog ].
-	
-	books add: aBook withOccurrences: aQuantity.! !
+	^ (aQuantity > 0) ifFalse: [ self signalCanNotAddLessThanOneItem ]! !
+
+!Cart methodsFor: 'assertions' stamp: 'DS 11/22/2020 19:44:23'!
+assertItemIsInCatalog: anItem
+
+	^ (catalog includesKey: anItem) ifFalse: [ self signalBookIsOutOfCatalog ]! !
+
+
+!Cart methodsFor: 'adding' stamp: 'DS 11/22/2020 19:44:51'!
+add: aQuantity of: anItem
+
+	self assertAddMoreThanZeroItems: aQuantity.
+	self assertItemIsInCatalog: anItem.
+
+	items add: anItem withOccurrences: aQuantity.! !
 
 
 !Cart methodsFor: 'private accesing' stamp: 'DS 11/19/2020 21:03:02'!
@@ -328,21 +320,30 @@ catalog
 	^catalog.! !
 
 
-!Cart methodsFor: 'accessing' stamp: 'DS 11/19/2020 00:25:39'!
-howManyOf: aBook
+!Cart methodsFor: 'accessing' stamp: 'DS 11/22/2020 19:45:03'!
+howManyOf: anItem
 
-	^books occurrencesOf: aBook.! !
+	^items occurrencesOf: anItem.! !
 
-!Cart methodsFor: 'accessing' stamp: 'DS 11/19/2020 00:07:22'!
+!Cart methodsFor: 'accessing' stamp: 'DS 11/22/2020 19:44:51'!
 list
 
-	^books contents copy.! !
+	^items contents copy.! !
+
+!Cart methodsFor: 'accessing' stamp: 'DS 11/22/2020 18:28:40'!
+purchaseCost
+
+	| purchaseSum |
+
+	purchaseSum := 0.
+	self list keysAndValuesDo: [ :aKey :aValue | purchaseSum := purchaseSum + (catalog at: aKey) * aValue].
+	^purchaseSum.! !
 
 
-!Cart methodsFor: 'testing' stamp: 'DS 11/19/2020 00:24:22'!
+!Cart methodsFor: 'testing' stamp: 'DS 11/22/2020 19:44:51'!
 isEmpty
 
-	^books isEmpty.! !
+	^items isEmpty.! !
 
 
 !Cart methodsFor: 'errors' stamp: 'DS 11/18/2020 00:38:43'!
@@ -350,8 +351,8 @@ signalBookIsOutOfCatalog
 
 	^ self error: self class bookIsOutOfCatalogErrorDescription! !
 
-!Cart methodsFor: 'errors' stamp: 'DS 11/18/2020 23:53:35'!
-signalCanNotAddLessThanOneBook
+!Cart methodsFor: 'errors' stamp: 'DS 11/22/2020 19:45:26'!
+signalCanNotAddLessThanOneItem
 
 	^ self error: self class canNotAddLessThanOneBookErrorDescription! !
 
@@ -380,31 +381,60 @@ canNotAddLessThanOneBookErrorDescription
 
 !classDefinition: #Cashier category: 'TusLibros-Solucion'!
 Object subclass: #Cashier
-	instanceVariableNames: 'cart'
+	instanceVariableNames: 'mp sales'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!Cashier methodsFor: 'initialization' stamp: 'DS 11/19/2020 21:05:44'!
-initializeFor: aCart
+!Cashier methodsFor: 'initialization' stamp: 'DS 11/22/2020 18:30:54'!
+initializeWith: anMP
 
-	cart := aCart.! !
+	mp := anMP.
+	sales := OrderedCollection new.! !
 
 
-!Cashier methodsFor: 'checkout' stamp: 'FedericoSabatini 11/19/2020 20:02:46'!
-checkoutWith: aCreditCard
-	self error: self class invalidCreditCardErrorDescription.! !
+!Cashier methodsFor: 'exceptions' stamp: 'DS 11/22/2020 19:38:37'!
+signalEmptyCart
 
-!Cashier methodsFor: 'checkout' stamp: 'DS 11/19/2020 21:03:50'!
-purchaseCost
+	^ self error: self class emptyCartErrorDescription! !
 
-	| purchaseSum |
+!Cashier methodsFor: 'exceptions' stamp: 'DS 11/22/2020 19:39:22'!
+signalExpiredCreditCard
 
-	purchaseSum := 0.
-	cart list keysAndValuesDo: [ :aKey :aValue | purchaseSum := purchaseSum + (cart catalog at: aKey) * aValue].
-	^purchaseSum.
-	
-	! !
+	^ self error: self class expiratedCreditCardErrorDescription! !
+
+
+!Cashier methodsFor: 'assertions' stamp: 'DS 11/22/2020 19:38:43'!
+assertNotEmptyCart: aCart
+
+	aCart isEmpty ifTrue: [self signalEmptyCart ].! !
+
+!Cashier methodsFor: 'assertions' stamp: 'DS 11/22/2020 19:39:31'!
+assertNotExpiredCreditCard: aCreditCard
+
+	(aCreditCard expirationDate < GregorianMonthOfYear current) ifTrue: [ self signalExpiredCreditCard ].! !
+
+
+!Cashier methodsFor: 'checkout' stamp: 'DS 11/22/2020 19:39:59'!
+checkoutWith: aCreditCard for: aCart
+
+	| ammount |
+
+	self assertNotEmptyCart: aCart.
+	self assertNotExpiredCreditCard: aCreditCard.
+
+	ammount := aCart purchaseCost.
+
+	mp debit: ammount from: aCreditCard.
+	sales add: ammount.
+
+	^ammount.! !
+
+
+!Cashier methodsFor: 'accesing' stamp: 'DS 11/22/2020 18:04:17'!
+sales
+
+	^sales.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
@@ -412,27 +442,20 @@ purchaseCost
 Cashier class
 	instanceVariableNames: ''!
 
-!Cashier class methodsFor: 'error descriptions' stamp: 'FedericoSabatini 11/19/2020 19:04:16'!
-creatingCashierWithEmptyCartErrorDescription
+!Cashier class methodsFor: 'error descriptions' stamp: 'DS 11/22/2020 18:37:20'!
+emptyCartErrorDescription
 	^'Cannot create a cashier from an empty Cart'! !
 
-!Cashier class methodsFor: 'error descriptions' stamp: 'FedericoSabatini 11/19/2020 19:58:33'!
-invalidCreditCardErrorDescription
-	^'Invalid Credit Card error description'! !
+!Cashier class methodsFor: 'error descriptions' stamp: 'DS 11/22/2020 16:43:05'!
+expiratedCreditCardErrorDescription
+
+	^'The Credit Card has expired'.! !
 
 
-!Cashier class methodsFor: 'assertions' stamp: 'DS 11/19/2020 21:05:24'!
-assertEmptyCart: aCart
+!Cashier class methodsFor: 'instance creation' stamp: 'DS 11/22/2020 18:30:43'!
+with: anMP
 
-	^ aCart isEmpty ifTrue: [self error: self creatingCashierWithEmptyCartErrorDescription ]! !
-
-
-!Cashier class methodsFor: 'instance creation' stamp: 'DS 11/19/2020 21:05:24'!
-for: aCart
-
-	self assertEmptyCart: aCart.
-
-	^self new initializeFor: aCart.! !
+	^self new initializeWith: anMP.! !
 
 
 !classDefinition: #CreditCard category: 'TusLibros-Solucion'!
@@ -449,16 +472,22 @@ initializeWithNumber: aCreditCardNumber withExpirationDate: anExpirationDate and
 	expirationDate := anExpirationDate.
 	owner := anOwner.! !
 
+
+!CreditCard methodsFor: 'accessing' stamp: 'DS 11/22/2020 17:01:54'!
+expirationDate
+
+	^expirationDate.! !
+
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
 !classDefinition: 'CreditCard class' category: 'TusLibros-Solucion'!
 CreditCard class
 	instanceVariableNames: ''!
 
-!CreditCard class methodsFor: 'assertions' stamp: 'DS 11/19/2020 22:12:26'!
+!CreditCard class methodsFor: 'assertions' stamp: 'DS 11/22/2020 19:59:18'!
 assertValidCreditCardNumber: aCreditCardNumber
 
-	^(aCreditCardNumber size < 16
+	^(aCreditCardNumber size ~= 16
 		or: [ aCreditCardNumber asArray anySatisfy: [:aNumber | aNumber isDigit not] ]
 	) ifTrue: [	self error: self invalidNumberErrorDescription].! !
 
@@ -497,3 +526,53 @@ invalidNumberErrorDescription
 invalidOwnerErrorDescription
 
 	^'Owner can not be empty'.! !
+
+
+!classDefinition: #MerchantProcesorSimulator category: 'TusLibros-Solucion'!
+Object subclass: #MerchantProcesorSimulator
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!MerchantProcesorSimulator methodsFor: 'debit' stamp: 'DS 11/22/2020 17:41:27'!
+debit: anAmmount from: aCreditCard
+
+	self subclassResponsibility.! !
+
+
+!classDefinition: #ErrorMerchantProcesor category: 'TusLibros-Solucion'!
+MerchantProcesorSimulator subclass: #ErrorMerchantProcesor
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!ErrorMerchantProcesor methodsFor: 'debit' stamp: 'DS 11/22/2020 17:31:30'!
+debit: anAmmount from: aCreditCard 
+
+	self error: self class errorDescription.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'ErrorMerchantProcesor class' category: 'TusLibros-Solucion'!
+ErrorMerchantProcesor class
+	instanceVariableNames: ''!
+
+!ErrorMerchantProcesor class methodsFor: 'as yet unclassified' stamp: 'DS 11/22/2020 17:24:59'!
+errorDescription
+
+	^'Can not process the credit card'.! !
+
+
+!classDefinition: #SuccessMerchantProcesor category: 'TusLibros-Solucion'!
+MerchantProcesorSimulator subclass: #SuccessMerchantProcesor
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!SuccessMerchantProcesor methodsFor: 'debit' stamp: 'DS 11/22/2020 17:13:56'!
+debit: anAmmount from: aCreditCard 
+
+	^anAmmount.! !
