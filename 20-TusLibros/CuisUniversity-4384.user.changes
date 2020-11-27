@@ -17115,3 +17115,555 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(22 November 2020 19:59:26) CuisUniversity-4384.image priorSource: 19913624!
+
+----QUIT----(22 November 2020 19:59:59) CuisUniversity-4384.image priorSource: 19919423!
+
+----STARTUP---- (26 November 2020 17:39:45) as /mnt/sdb5/Ingenieria1/CuisUniversity/CuisUniversity-4384.image!
+
+
+Object subclass: #FacadeTusLibros
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #FacadeTusLibros category: 'TusLibros-Solucion' stamp: 'DS 11/26/2020 20:40:54'!
+Object subclass: #FacadeTusLibros
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+TestCase subclass: #FacadeTusLibrosTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #FacadeTusLibrosTest category: 'TusLibros-Solucion' stamp: 'DS 11/26/2020 20:41:18'!
+TestCase subclass: #FacadeTusLibrosTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!FacadeTusLibrosTest methodsFor: 'no messages' stamp: 'DS 11/26/2020 20:47:56'!
+test01
+
+	| tusLibros cartId |
+	
+	tusLibros := FacadeTusLibros new.
+	cartId := tusLibros createCartForUser: 1 withPassword: 'password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartId).! !
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 20:48:05'!
+ERROR!
+!FacadeTusLibros methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 20:48:26'!
+createCartForUser: aSmallInteger withPassword: aString 
+	self shouldBeImplemented.! !
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 20:48:55' prior: 50954167!
+test01
+
+	| tusLibros cartId |
+	
+	tusLibros := FacadeTusLibros new.
+	cartId := tusLibros createCartForUser: 1 withPassword: 'password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartId).! !
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 20:48:56'!
+ERROR!
+!FacadeTusLibros methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 20:49:37' prior: 50954179!
+createCartForUser: anID withPassword: aPassword
+
+! !
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 20:49:37'!
+ERROR!
+!FacadeTusLibros methodsFor: 'list' stamp: 'DS 11/26/2020 20:49:52'!
+listCartFor: aFacadeTusLibros 
+	self shouldBeImplemented.! !
+!FacadeTusLibros methodsFor: 'list' stamp: 'DS 11/26/2020 20:50:18' prior: 50954205!
+listCartFor: aCartID
+
+	^Dictionary new.! !
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 20:50:19'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 20:50:19'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 20:50:24'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 20:50:24'!
+PASSED!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 20:55:49'!
+test02
+
+	| tusLibros cartId authenticator |
+	
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+	cartId := tusLibros createCartForUser: 1 withPassword: 'bad password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartId).! !
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 20:57:42' prior: 50954225!
+test02
+
+	| tusLibros authenticator |
+	
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 1 withPassword: 'bad password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 20:57:45'!
+ERROR!
+!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/26/2020 20:58:00'!
+with: aDictionary 
+	self shouldBeImplemented.! !
+!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/26/2020 20:58:26' prior: 50954254!
+with: anAuthenticator
+
+	^self new initializeWith: anAuthenticator.! !
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 20:58:27'!
+ERROR!
+
+!classDefinition: #FacadeTusLibros category: 'TusLibros-Solucion' stamp: 'DS 11/26/2020 20:58:49'!
+Object subclass: #FacadeTusLibros
+	instanceVariableNames: 'authenticator'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/26/2020 20:58:49'!
+initializeWith: anAuthenticator 
+	self shouldBeImplemented.
+	authenticator := anAuthenticator.! !
+!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/26/2020 20:58:55' prior: 50954275!
+initializeWith: anAuthenticator 
+
+	authenticator := anAuthenticator.! !
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 20:58:57'!
+ERROR!
+!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/26/2020 20:59:06'!
+badAuthenticationErrorDescription
+	self shouldBeImplemented.! !
+!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/26/2020 20:59:50' prior: 50954290!
+badAuthenticationErrorDescription
+
+	^'Dont exist an user with this password'.! !
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 20:59:51'!
+FAILURE!
+
+d := Dictionary newFromPairs: {10001. 200}.!
+
+d at: 2!
+!FacadeTusLibros methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:04:34' prior: 50954198!
+createCartForUser: anID withPassword: aPassword
+
+	authenticator at: anID ifAbsent: [self error: self class badAuthenticationErrorDescription ].
+	(authenticator at: anID = aPassword) ifFalse: [self error: self class badAuthenticationErrorDescription ].
+
+! !
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:04:37'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:05:06' prior: 50954306!
+createCartForUser: anID withPassword: aPassword
+
+	(authenticator at: anID = aPassword) ifFalse: [self error: self class badAuthenticationErrorDescription ].
+
+! !
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:05:12'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:05:12'!
+FAILURE!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:06:25' prior: 50954185!
+test01
+
+	| tusLibros userID cartID |
+
+	userID := 1.
+	tusLibros := FacadeTusLibros new.
+	cartID := tusLibros createCartForUser: userID withPassword: 'password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:06:25'!
+ERROR!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:06:44' prior: 50954238!
+test02
+
+	| tusLibros authenticator userID |
+
+	userID := 1.
+	authenticator := Dictionary with: userID -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: userID withPassword: 'bad password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:06:45'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:06:53'!
+FAILURE!
+
+authenticator!
+
+self!
+
+authenticator at: userID!
+!FacadeTusLibros methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:08:41' prior: 50954320!
+createCartForUser: anID withPassword: aPassword
+
+	((authenticator at: anID) = aPassword) ifFalse: [self error: self class badAuthenticationErrorDescription ].
+
+! !
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:08:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:08:43'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:08:43'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:08:43'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:08:43'!
+ERROR!
+
+authenticator at: anID!
+
+authenticator!
+
+anAuthenticator!
+
+tusLibros!
+
+tusLibros!
+
+FacadeTusLibros with: authenticator!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:11:54'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:11:58'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:11:58'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:11:58'!
+ERROR!
+!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/26/2020 21:13:01' prior: 50954282!
+initializeWith: anAuthenticator 
+
+	authenticator := anAuthenticator.! !
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:13:19'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:13:23'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:13:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:13:23'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:13:28'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:13:28'!
+ERROR!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:14:03' prior: 50954334!
+test01
+
+	| tusLibros userID cartID authenticator |
+
+	userID := 1.
+	authenticator := Dictionary with: userID -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+	cartID := tusLibros createCartForUser: userID withPassword: 'password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:14:04'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:14:04'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:14:04'!
+PASSED!
+
+----SNAPSHOT----(26 November 2020 21:14:08) CuisUniversity-4384.image priorSource: 19919517!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:29:34' prior: 50954425!
+test01
+
+	| tusLibros userID cartID authenticator |
+
+	userID := 1.
+	authenticator := Dictionary with: userID -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:29:35'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:29:35'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:29:35'!
+PASSED!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:29:55' prior: 50954449!
+test01
+
+	| tusLibros userID cartID authenticator |
+
+	userID := 1.
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:29:59'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:29:59'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:29:59'!
+PASSED!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:30:06' prior: 50954348!
+test02
+
+	| tusLibros authenticator userID |
+
+	userID := 1.
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 1 withPassword: 'bad password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:30:08'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:30:08'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:30:08'!
+PASSED!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:33:39'!
+test03
+
+	| tusLibros authenticator userID |
+
+	userID := 1.
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 2 withPassword: 'password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:33:46' prior: 50954512!
+test03
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 2 withPassword: 'password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+!testRun: #FacadeTusLibrosTest #test03 stamp: 'DS 11/26/2020 21:33:47'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:34:26' prior: 50954369!
+createCartForUser: anID withPassword: aPassword
+
+	authenticator at: anID ifAbsent: [self error: self class badAuthenticationErrorDescription ].
+	((authenticator at: anID) = aPassword) ifFalse: [self error: self class badAuthenticationErrorDescription].
+
+! !
+
+!testRun: #FacadeTusLibrosTest #test03 stamp: 'DS 11/26/2020 21:34:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:34:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:34:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03 stamp: 'DS 11/26/2020 21:34:30'!
+PASSED!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:34:38' prior: 50954491!
+test02
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 1 withPassword: 'bad password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:34:46' prior: 50954470!
+test01
+
+	| tusLibros cartID authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:34:47'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:34:47'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:34:47'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03 stamp: 'DS 11/26/2020 21:34:47'!
+PASSED!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:39:04'!
+test01CreateCartHaveEmptyList
+
+	| tusLibros cartID authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
+
+!methodRemoval: FacadeTusLibrosTest #test01 stamp: 'DS 11/26/2020 21:39:04'!
+test01
+
+	| tusLibros cartID authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:39:29'!
+test02CannotCreateCartWithInvalidPassword
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 1 withPassword: 'bad password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+!methodRemoval: FacadeTusLibrosTest #test02 stamp: 'DS 11/26/2020 21:39:29'!
+test02
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 1 withPassword: 'bad password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:39:50'!
+test03CannotCreateCartWithUnkowedUser
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 2 withPassword: 'password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+!methodRemoval: FacadeTusLibrosTest #test03 stamp: 'DS 11/26/2020 21:39:50'!
+test03
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 2 withPassword: 'password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:40:16'!
+test03CannotCreateCartWithUnknowedUser
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 2 withPassword: 'password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+!methodRemoval: FacadeTusLibrosTest #test03CannotCreateCartWithUnkowedUser stamp: 'DS 11/26/2020 21:40:16'!
+test03CannotCreateCartWithUnkowedUser
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 2 withPassword: 'password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:40:29'!
+test03CannotCreateCartWithUnknownUser
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 2 withPassword: 'password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+!methodRemoval: FacadeTusLibrosTest #test03CannotCreateCartWithUnknowedUser stamp: 'DS 11/26/2020 21:40:29'!
+test03CannotCreateCartWithUnknowedUser
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 2 withPassword: 'password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.!
+
+----SNAPSHOT----(26 November 2020 21:40:35) CuisUniversity-4384.image priorSource: 19929429!

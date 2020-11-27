@@ -280,6 +280,49 @@ test04CreditCardExpirationDateShouldBeAnGregorianMonthOfYear
 		shouldRaiseErrorDescription: CreditCard invalidExpirationDateErrorDescription.! !
 
 
+!classDefinition: #FacadeTusLibrosTest category: 'TusLibros-Solucion'!
+TestCase subclass: #FacadeTusLibrosTest
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!FacadeTusLibrosTest methodsFor: 'tests' stamp: 'DS 11/26/2020 21:39:04'!
+test01CreateCartHaveEmptyList
+
+	| tusLibros cartID authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'password'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
+
+!FacadeTusLibrosTest methodsFor: 'tests' stamp: 'DS 11/26/2020 21:39:29'!
+test02CannotCreateCartWithInvalidPassword
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 1 withPassword: 'bad password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+!FacadeTusLibrosTest methodsFor: 'tests' stamp: 'DS 11/26/2020 21:40:29'!
+test03CannotCreateCartWithUnknownUser
+
+	| tusLibros authenticator |
+
+	authenticator := Dictionary with: 1 -> 'password'.
+	tusLibros := FacadeTusLibros with: authenticator.
+
+	self should: [		tusLibros createCartForUser: 2 withPassword: 'password'.		]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+
 !classDefinition: #Cart category: 'TusLibros-Solucion'!
 Object subclass: #Cart
 	instanceVariableNames: 'items catalog'
@@ -526,6 +569,51 @@ invalidNumberErrorDescription
 invalidOwnerErrorDescription
 
 	^'Owner can not be empty'.! !
+
+
+!classDefinition: #FacadeTusLibros category: 'TusLibros-Solucion'!
+Object subclass: #FacadeTusLibros
+	instanceVariableNames: 'authenticator'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!FacadeTusLibros methodsFor: 'as yet unclassified' stamp: 'DS 11/26/2020 21:34:26'!
+createCartForUser: anID withPassword: aPassword
+
+	authenticator at: anID ifAbsent: [self error: self class badAuthenticationErrorDescription ].
+	((authenticator at: anID) = aPassword) ifFalse: [self error: self class badAuthenticationErrorDescription].
+
+! !
+
+
+!FacadeTusLibros methodsFor: 'list' stamp: 'DS 11/26/2020 20:50:18'!
+listCartFor: aCartID
+
+	^Dictionary new.! !
+
+
+!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/26/2020 21:13:01'!
+initializeWith: anAuthenticator 
+
+	authenticator := anAuthenticator.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'FacadeTusLibros class' category: 'TusLibros-Solucion'!
+FacadeTusLibros class
+	instanceVariableNames: ''!
+
+!FacadeTusLibros class methodsFor: 'instance creation' stamp: 'DS 11/26/2020 20:58:26'!
+with: anAuthenticator
+
+	^self new initializeWith: anAuthenticator.! !
+
+
+!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/26/2020 20:59:50'!
+badAuthenticationErrorDescription
+
+	^'Dont exist an user with this password'.! !
 
 
 !classDefinition: #MerchantProcesorSimulator category: 'TusLibros-Solucion'!
