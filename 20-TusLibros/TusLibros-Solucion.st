@@ -387,8 +387,8 @@ test07CannotAddToUnknownCartID
 		withMessageText: FacadeTusLibros unknownCartIDErrorDescription.! !
 
 
-!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:26:45'!
-test08
+!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:24'!
+test08CheckoutShouldBeRegisterInSalesBook
 
 	| tusLibros cartID |
 
@@ -401,8 +401,8 @@ test08
 	self assert: 100 equals: (tusLibros salesBook first total).
 	self assert: 1 equals: (tusLibros salesBook size).! !
 
-!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:27:23'!
-test09
+!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:54'!
+test09CannotCheckoutWhnCreditCardHasNotCredit
 
 	| tusLibros cartID |
 

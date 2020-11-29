@@ -5381,3 +5381,104 @@ PASSED!
 PASSED!
 
 ----SNAPSHOT----(29 November 2020 19:27:28) CuisUniversity-4384.image priorSource: 17692296!
+!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:24'!
+test08CheckoutShouldBeRegisterInSalesBook
+
+	| tusLibros cartID |
+
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: 100 equals: (self tusLibros: tusLibros checkoutCartID: cartID).
+	self assert: 100 equals: (tusLibros salesBook first total).
+	self assert: 1 equals: (tusLibros salesBook size).! !
+
+!methodRemoval: FacadeTusLibrosTest #test08 stamp: 'DS 11/29/2020 19:31:24'!
+test08
+
+	| tusLibros cartID |
+
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: 100 equals: (self tusLibros: tusLibros checkoutCartID: cartID).
+	self assert: 100 equals: (tusLibros salesBook first total).
+	self assert: 1 equals: (tusLibros salesBook size).!
+!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:45'!
+test09CannotCheckoutWhnCreditCardHasNoCredit
+
+	| tusLibros cartID |
+
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
+
+	debitBehavior := [ :anAmount :aCreditCard | self error: Cashier creditCardHasNoCreditErrorMessage].
+	
+	self should: [ self tusLibros: tusLibros checkoutCartID: cartID ]
+		raise: Error
+		withMessageText: Cashier creditCardHasNoCreditErrorMessage.
+		
+	self assert: tusLibros salesBook isEmpty.! !
+
+!methodRemoval: FacadeTusLibrosTest #test09 stamp: 'DS 11/29/2020 19:31:45'!
+test09
+
+	| tusLibros cartID |
+
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
+
+	debitBehavior := [ :anAmount :aCreditCard | self error: Cashier creditCardHasNoCreditErrorMessage].
+	
+	self should: [ self tusLibros: tusLibros checkoutCartID: cartID ]
+		raise: Error
+		withMessageText: Cashier creditCardHasNoCreditErrorMessage.
+		
+	self assert: tusLibros salesBook isEmpty.!
+
+----SNAPSHOT----(29 November 2020 19:31:49) CuisUniversity-4384.image priorSource: 17708716!
+!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:54'!
+test09CannotCheckoutWhnCreditCardHasNotCredit
+
+	| tusLibros cartID |
+
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
+
+	debitBehavior := [ :anAmount :aCreditCard | self error: Cashier creditCardHasNoCreditErrorMessage].
+	
+	self should: [ self tusLibros: tusLibros checkoutCartID: cartID ]
+		raise: Error
+		withMessageText: Cashier creditCardHasNoCreditErrorMessage.
+		
+	self assert: tusLibros salesBook isEmpty.! !
+
+!methodRemoval: FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNoCredit stamp: 'DS 11/29/2020 19:31:54'!
+test09CannotCheckoutWhnCreditCardHasNoCredit
+
+	| tusLibros cartID |
+
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
+
+	debitBehavior := [ :anAmount :aCreditCard | self error: Cashier creditCardHasNoCreditErrorMessage].
+	
+	self should: [ self tusLibros: tusLibros checkoutCartID: cartID ]
+		raise: Error
+		withMessageText: Cashier creditCardHasNoCreditErrorMessage.
+		
+	self assert: tusLibros salesBook isEmpty.!
+
+----SNAPSHOT----(29 November 2020 19:47:33) CuisUniversity-4384.image priorSource: 17711109!
