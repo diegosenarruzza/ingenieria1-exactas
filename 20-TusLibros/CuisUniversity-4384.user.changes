@@ -5482,3 +5482,2415 @@ test09CannotCheckoutWhnCreditCardHasNoCredit
 	self assert: tusLibros salesBook isEmpty.!
 
 ----SNAPSHOT----(29 November 2020 19:47:33) CuisUniversity-4384.image priorSource: 17711109!
+
+----QUIT----(29 November 2020 19:48:42) CuisUniversity-4384.image priorSource: 17712530!
+
+----STARTUP---- (30 November 2020 17:13:30) as /mnt/sdb5/Ingenieria1/CuisUniversity/CuisUniversity-4384.image!
+
+!Cart methodsFor: 'accesing' stamp: 'DS 11/30/2020 17:45:34' prior: 50881858!
+items
+
+	^ Bag newFrom: items copy.
+	"| ocurrences |
+	
+	ocurrences := Dictionary new.
+	
+	items do: [ :item | (ocurrences includesKey: item) 
+		ifTrue: [ocurrences at: item put: (ocurrences at: item) + 1] 
+		ifFalse: [ocurrences at: item put: 1]].
+	
+	^ocurrences."! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 17:45:52'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 17:45:52'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 17:45:52'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 17:45:52'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:45:52'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:45:52'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 17:45:52'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 17:45:52'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 17:45:52'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 17:45:52'!
+PASSED!
+!Cart methodsFor: 'accesing' stamp: 'DS 11/30/2020 17:46:49' prior: 50885177!
+items
+
+	^items copy.! !
+!FacadeTusLibros methodsFor: 'cart actions' stamp: 'DS 11/30/2020 17:47:21' prior: 50882039!
+listCartFor: aCartID
+
+	^Bag newFrom: (carts at: aCartID) items.! !
+!FacadeTusLibros methodsFor: 'cart actions' stamp: 'DS 11/30/2020 17:47:32' prior: 50885228!
+listCartFor: aCartID
+
+	^Dictionary newFrom: (carts at: aCartID) items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 17:47:33'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 17:47:33'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 17:47:33'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 17:47:33'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:47:33'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:47:33'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 17:47:33'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 17:47:33'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 17:47:33'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 17:47:33'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:47:35'!
+ERROR!
+!FacadeTusLibros methodsFor: 'cart actions' stamp: 'DS 11/30/2020 17:47:49' prior: 50885233!
+listCartFor: aCartID
+
+	^Bag newFrom: (carts at: aCartID) items.! !
+
+o := OrderedCollection new.!
+
+o asDictionary !
+!FacadeTusLibros methodsFor: 'cart actions' stamp: 'DS 11/30/2020 17:48:52' prior: 50885278!
+listCartFor: aCartID
+
+	^(carts at: aCartID) items asDictionary.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 17:48:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 17:48:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 17:48:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 17:48:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:48:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:48:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 17:48:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 17:48:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 17:48:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 17:48:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:48:56'!
+ERROR!
+!FacadeTusLibros methodsFor: 'cart actions' stamp: 'DS 11/30/2020 17:50:18' prior: 50885285!
+listCartFor: aCartID
+
+	^Bag newFrom: (carts at: aCartID) items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 17:50:20'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 17:50:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 17:50:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 17:50:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:50:20'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:50:20'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 17:50:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 17:50:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 17:50:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 17:50:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 17:50:22'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:50:26'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:50:31'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'cart actions' stamp: 'DS 11/30/2020 17:51:00' prior: 50885329!
+listCartFor: aCartID
+
+	^Bag new: (carts at: aCartID) items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 17:51:02'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 17:51:02'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 17:51:02'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 17:51:02'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:51:02'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:51:02'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 17:51:02'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 17:51:02'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 17:51:02'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 17:51:02'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:51:04'!
+ERROR!
+!FacadeTusLibros methodsFor: 'cart actions' stamp: 'DS 11/30/2020 17:52:17' prior: 50885381!
+listCartFor: aCartID
+
+	^Dictionary new: (carts at: aCartID) items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 17:52:22'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 17:52:22'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 17:52:22'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 17:52:22'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:52:22'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:52:22'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 17:52:22'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 17:52:22'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 17:52:22'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 17:52:22'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:52:24'!
+ERROR!
+!FacadeTusLibros methodsFor: 'cart actions' stamp: 'DS 11/30/2020 17:54:50' prior: 50885426!
+listCartFor: aCartID
+
+	^Bag new addAll: (carts at: aCartID) items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 17:54:57'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 17:54:57'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 17:54:57'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 17:54:57'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:54:57'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:54:57'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 17:54:57'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 17:54:57'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 17:54:57'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 17:54:57'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:54:59'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'cart actions' stamp: 'FedericoSabatini 11/29/2020 16:44:54' prior: 50885471!
+listCartFor: aCartID
+
+	^(carts at: aCartID) items.! !
+!Cart methodsFor: 'accesing' stamp: 'FedericoSabatini 11/29/2020 16:36:53' prior: 50885224!
+items
+	
+	| ocurrences |
+	
+	ocurrences := Dictionary new.
+	
+	items do: [ :item | (ocurrences includesKey: item) 
+		ifTrue: [ocurrences at: item put: (ocurrences at: item) + 1] 
+		ifFalse: [ocurrences at: item put: 1]].
+	
+	^ocurrences.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 17:56:05'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 17:56:05'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 17:56:05'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 17:56:05'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 17:56:05'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 17:56:05'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 17:56:05'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 17:56:05'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 17:56:05'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 17:56:05'!
+PASSED!
+!FacadeTusLibrosTest methodsFor: 'nil' stamp: 'DS 11/30/2020 18:18:14'!
+test11
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: self defaultCatalog andExpiringTime: 0*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.! !
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 18:21:35' prior: 50885568!
+test11
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: self defaultCatalog andExpiringTime: 0*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemNotSellByTheStore ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:21:49'!
+ERROR!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 18:22:03' prior: 50885581!
+test11
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: 0*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemNotSellByTheStore ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:22:04'!
+ERROR!
+!FacadeTusLibros class methodsFor: 'instance creation' stamp: 'DS 11/30/2020 18:22:11'!
+withAuthenticator: aDictionary withCatalog: aDictionary2 andExpiringTime: aSimpleMeasure 
+	"DO NOT FORGET TO RENAME COLLABORATORS AND REMOVE THIS COMMENT!!!!"
+	self shouldBeImplemented.
+	^self new initializeWithAuthenticator: aDictionary withCatalog: aDictionary2 andExpiringTime: aSimpleMeasure ! !
+!FacadeTusLibros class methodsFor: 'instance creation' stamp: 'DS 11/30/2020 18:22:57' prior: 50885624!
+withAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime
+
+	^self new initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime.! !
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:22:59'!
+ERROR!
+
+!classDefinition: #FacadeTusLibros category: 'TusLibros-Solucion' stamp: 'DS 11/30/2020 18:23:05'!
+Object subclass: #FacadeTusLibros
+	instanceVariableNames: 'authenticator carts currentID catalog salesBook expiringTime'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/30/2020 18:23:05'!
+initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime 
+	self shouldBeImplemented.
+	authenticator := anAuthenticator.
+	catalog := aCatalog.
+	expiringTime := anExpiringTime.! !
+!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/30/2020 18:23:16' prior: 50885658!
+initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime 
+
+	authenticator := anAuthenticator.
+	catalog := aCatalog.
+	expiringTime := anExpiringTime.! !
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:23:20'!
+ERROR!
+!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/30/2020 18:23:43' prior: 50885668!
+initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime 
+
+	authenticator := anAuthenticator.
+	catalog := aCatalog.
+	expiringTime := anExpiringTime.
+	carts := Dictionary new.
+	currentID := 0.! !
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:23:48'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:23:48'!
+ERROR!
+!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/30/2020 18:24:02'!
+cartTimeExpiredErrorDescription
+	self shouldBeImplemented.! !
+!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/30/2020 18:24:49' prior: 50885696!
+cartTimeExpiredErrorDescription
+
+	^'Your cart has expired'.! !
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:24:54'!
+FAILURE!
+
+Time now!
+
+Time now + 30*minute!
+
+30*minute!
+
+30*minute!
+
+Timespan new!
+
+Timespan now!
+
+Timespan current!
+
+self + 30*minute!
+
+self + 30*minute!
+
+Timespan starting: DateAndTime now duration: 30*minute!
+
+t := Timespan starting: DateAndTime now duration: 30*minute!
+
+t end!
+
+FixedGregorianDate today!
+
+GregorianDateTime now!
+
+TimeOfDay now !
+
+t := TimeOfDay now.!
+
+t next: 30*minute.!
+
+t next: 0*minute.!
+
+t next: 1*minute < TimeOfDay now.!
+
+t next: (1*minute) < TimeOfDay now.!
+
+GregorianDateTime now!
+
+t := GregorianDateTime now.!
+
+t next: 1*minute!
+
+(t next: 1*minute) < GregorianDateTime now!
+
+(t next: 0*minute) < GregorianDateTime now!
+
+t := GregorianDateTime now. November .!
+
+t := GregorianDateTime now.!
+
+(t next: 0*minute) < GregorianDateTime now!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:44:09' prior: 50884617!
+createCartForUser: anID withPassword: aPassword 
+
+	| cart expirationTime |
+
+	self assertAuthenticate: anID withPassword: aPassword.
+	
+	currentID := currentID + 1.
+	cart := Cart acceptingItemsOf: catalog.
+	expirationTime := GregorianDateTime now next: expiringTime.
+	carts at: currentID put: {cart. expirationTime}.
+
+	^currentID.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:44:13'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:44:13'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:44:13'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:44:13'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:44:13'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:44:13'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:44:13'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:44:13'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:44:13'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:44:13'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:44:13'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:44:18'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:44:34'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:44:34'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:44:34'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:44:34'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:44:34'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:44:34'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:44:34'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:44:34'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:44:34'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:44:34'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:44:34'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:44:36'!
+ERROR!
+!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'DS 11/30/2020 18:45:42' prior: 50883680!
+tusLibros
+
+	| authenticator |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+
+	^FacadeTusLibros withAuthenticator: authenticator withCatalog: self defaultCatalog andExpiringTime: 0*minute.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:45:47'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:45:47'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:45:47'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:45:47'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:45:47'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:45:47'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:45:47'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:45:47'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:45:47'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:45:47'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:45:47'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/30/2020 18:47:15' prior: 50883525!
+assertUnkownCartID: aCartID
+
+	^carts at: aCartID ifAbsent: [self signalUnknownCartID ].! !
+!FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/30/2020 18:48:11' prior: 50885877!
+assertUnkownCartID: aCartID
+
+	^(carts at: aCartID ifAbsent: [ self signalUnknownCartID ]) first.! !
+!FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/30/2020 18:48:27'!
+cartWith: aCartID
+
+	^(carts at: aCartID ifAbsent: [ self signalUnknownCartID ]) first.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:48:45' prior: 50883550!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aCart := self cartWith: aCartID.
+	aCart add: aQuantity of: anItem.
+	
+	! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:49:05' prior: 50884801!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard cart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	cart := self cartWith: aCartID.
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	^cashier checkOut.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:49:54' prior: 50885517!
+listCartFor: aCartID
+
+	^(carts at: aCartID) first items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:49:56'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:49:56'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:49:56'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:49:56'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:49:56'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:49:56'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:49:56'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:49:56'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:49:56'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:49:56'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:49:56'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:49:57'!
+ERROR!
+!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/30/2020 18:50:38' prior: 50885680!
+initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime 
+
+	authenticator := anAuthenticator.
+	catalog := aCatalog.
+	expiringTime := anExpiringTime.
+	carts := Dictionary new.
+	currentID := 0.
+	salesBook := OrderedCollection new.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:50:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:50:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:50:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:50:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:50:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:50:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:50:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:50:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:50:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:50:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:50:41'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:50:41'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/30/2020 18:51:35' prior: 50885889!
+cartWith: aCartID
+
+	^(carts at: aCartID ifAbsent: [ self signalUnknownCartID ]).! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:51:43' prior: 50885895!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aCart := self cartWith: aCartID first.
+	aCart add: aQuantity of: anItem.
+	
+	! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:51:47' prior: 50885904!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard cart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	cart := self cartWith: aCartID first.
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	^cashier checkOut.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:52:36' prior: 50886027!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aCart := self cartWith: aCartID.
+	
+	(aCart second < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	
+	aCart add: aQuantity of: anItem.
+	
+	! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:52:38' prior: 50886053!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aCart := self cartWith: aCartID.
+	
+	(aCart second < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	
+	aCart first add: aQuantity of: anItem.
+	
+	! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:52:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:52:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:52:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:52:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:52:41'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:52:41'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:52:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:52:41'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:52:41'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:52:41'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:52:41'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:52:45'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:52:46'!
+ERROR!
+!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'DS 11/30/2020 18:52:58' prior: 50885829!
+tusLibros
+
+	| authenticator |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+
+	^FacadeTusLibros withAuthenticator: authenticator withCatalog: self defaultCatalog andExpiringTime: 30*minute.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:53:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:53:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:53:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:53:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:53:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:53:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:53:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:53:00'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:53:00'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:53:00'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:53:00'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:53:02'!
+ERROR!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:53:12' prior: 50886036!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard cart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	cart := (self cartWith: aCartID )first.
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	^cashier checkOut.! !
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:53:14'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:53:15'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:53:16'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:53:16'!
+PASSED!
+
+----SNAPSHOT----(30 November 2020 18:53:29) CuisUniversity-4384.image priorSource: 17712624!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 18:54:19'!
+test12
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: 0*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros listCartFor: cartID]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 18:54:20' prior: 50886208!
+test12
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: 0*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros listCartFor: cartID ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 18:54:21'!
+FAILURE!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 18:57:55'!
+test11CannotListAnUnknownCartID
+
+	| tusLibros |
+
+	tusLibros := testObjectsFactory tusLibros.
+	self should: [ tusLibros listCartFor: 1 ]
+		raise: Error
+		withMessageText: FacadeTusLibros unknownCartIDErrorDescription .! !
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 18:57:56'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:58:25' prior: 50885921!
+listCartFor: aCartID
+
+	^self cartWith: aCartID first items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:58:27'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:58:27'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:58:27'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:58:27'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:58:27'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:58:27'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:58:27'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:58:27'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:58:27'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:58:27'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:58:27'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 18:58:27'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 18:58:27'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:58:42' prior: 50886260!
+listCartFor: aCartID
+
+	^(self cartWith: aCartID) first items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 18:58:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 18:58:44'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 18:58:44'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:59:47' prior: 50886309!
+listCartFor: aCartID
+
+	| cart |
+	cart := self cartWith: aCartID.
+	
+	(cart second < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	^cart first items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 18:59:50'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 18:59:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:59:51'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 18:59:51'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 18:59:51'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 18:59:53'!
+FAILURE!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:00:17' prior: 50885603!
+test11
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: 0*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!testRun: #FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 19:00:19'!
+FAILURE!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:00:45'!
+test13
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: 0*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros listCartFor: cartID ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!methodRemoval: FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:00:45'!
+test12
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: 0*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros listCartFor: cartID ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:00:48'!
+test12
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: 0*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!methodRemoval: FacadeTusLibrosTest #test11 stamp: 'DS 11/30/2020 19:00:48'!
+test11
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: 0*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:00:52'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:00:54'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:00:54'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:01:20'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:01:20'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:01:20'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:01:25'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:01:35'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:01:35'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:01:35'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:01:35'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:01:39'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:01:39'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:01:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:01:42'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:01:42'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:01:44'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:01:47'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:02:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:02:00'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:02:00'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:02:01'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:02:02'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:02:11'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:02:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:02:42'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:02:45'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:02:45'!
+FAILURE!
+
+----SNAPSHOT----(30 November 2020 19:03:21) CuisUniversity-4384.image priorSource: 17745736!
+
+----QUIT----(30 November 2020 19:03:27) CuisUniversity-4384.image priorSource: 17762744!
+
+----STARTUP---- (30 November 2020 19:03:58) as /mnt/sdb5/Ingenieria1/linux64/CuisUniversity-4384.image!
+
+
+----End fileIn of /mnt/sdb5/Ingenieria1/linux64/TusLibros-Solucion.st----!
+
+!testRun: #CartTest #test01NewCartsAreCreatedEmpty stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CartTest #test02CanNotAddItemsThatDoNotBelongToStore stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CartTest #test03AfterAddingAnItemTheCartIsNotEmptyAnymore stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CartTest #test04CanNotAddNonPositiveNumberOfItems stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CartTest #test05CanNotAddMoreThanOneItemNotSellByTheStore stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CartTest #test06CartRemembersAddedItems stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CartTest #test07CartDoesNotHoldNotAddedItems stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CartTest #test08CartRemembersTheNumberOfAddedItems stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CashierTest #test01CanNotCheckoutAnEmptyCart stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CashierTest #test02CalculatedTotalIsCorrect stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CashierTest #test03CanNotCheckoutWithAnExpiredCreditCart stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CashierTest #test04CheckoutRegistersASale stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CashierTest #test05CashierChargesCreditCardUsingMerchantProcessor stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CashierTest #test06CashierDoesNotSaleWhenTheCreditCardHasNoCredit stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CreditCardTest #test01CreditCardNumberShouldHave16Characters stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #CreditCardTest #test02CreditCardOwnerCanNotBeEmpty stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:04:31'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:04:31'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:04:31'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:04:32'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:04:35'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:04:40'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:04:40'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:04:43'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:04:43'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:04:46'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:04:46'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:04:47'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:04:50'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:04:50'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:04:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:12'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:12'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:16'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:16'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:18'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:18'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:21'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:23'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:05:23'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:05:23'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:05:26'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:26'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:05:26'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:28'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:05:30'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:05:32'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:06:38' prior: 50868626!
+createCartForUser: anID withPassword: aPassword 
+
+	| cart expirationTime |
+
+	self assertAuthenticate: anID withPassword: aPassword.
+	
+	currentID := currentID + 1.
+	cart := Cart acceptingItemsOf: catalog.
+	expirationTime := GregorianDateTime now.
+	carts at: currentID put: {cart. expirationTime}.
+
+	^currentID.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:06:50' prior: 50868597!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aCart := self cartWith: aCartID.
+	
+	(aCart second next: expiringTime < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	
+	aCart first add: aQuantity of: anItem.
+	
+	! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:06:55' prior: 50869111!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aCart := self cartWith: aCartID.
+	
+	((aCart second next: expiringTime) < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	
+	aCart first add: aQuantity of: anItem.
+	
+	! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:07:00'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:07:00'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:07:00'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:07:01'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:07:03'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:07:07'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:07:07'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:07:07'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:07:07'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:07:07'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:07:07'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:07:07'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:07:07'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:07:07'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:07:07'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:07:07'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:07:07'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:07:07'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:07:08'!
+ERROR!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 18:52:38' prior: 50869124!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aCart := self cartWith: aCartID.
+	
+	(aCart second < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	
+	aCart first add: aQuantity of: anItem.
+	
+	! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:06:38' prior: 50869098!
+createCartForUser: anID withPassword: aPassword 
+
+	| cart expirationTime |
+
+	self assertAuthenticate: anID withPassword: aPassword.
+	
+	currentID := currentID + 1.
+	cart := Cart acceptingItemsOf: catalog.
+	expirationTime := GregorianDateTime now.
+	carts at: currentID put: {cart. expirationTime}.
+
+	^currentID.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:07:52' prior: 50869247!
+createCartForUser: anID withPassword: aPassword 
+
+	| cart expirationTime |
+
+	self assertAuthenticate: anID withPassword: aPassword.
+	
+	currentID := currentID + 1.
+	cart := Cart acceptingItemsOf: catalog.
+	expirationTime := GregorianDateTime now next: expiringTime.
+	carts at: currentID put: {cart. expirationTime}.
+
+	^currentID.! !
+
+-1*minute!
+
+GregorianDateTime now!
+
+t := GregorianDateTime now.!
+
+t next: -1*minute!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:09:04' prior: 50868260!
+test12
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: -1*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:09:10' prior: 50868279!
+test13
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: -1*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros listCartFor: cartID ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:09:11'!
+PASSED!
+
+----SNAPSHOT----(30 November 2020 19:09:17) CuisUniversity-4384.image priorSource: 17155564!
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:11:06'!
+test14
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: -1*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ self tusLibros: tusLibros checkoutCartID: cartID ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!testRun: #FacadeTusLibrosTest #test14 stamp: 'DS 11/30/2020 19:11:09'!
+FAILURE!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:11:47' prior: 50868609!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard cart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	cart := self cartWith: aCartID.
+	
+	(cart second < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: cart first charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	^cashier checkOut.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test14 stamp: 'DS 11/30/2020 19:11:49'!
+PASSED!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:15:46' prior: 50869260!
+createCartForUser: anID withPassword: aPassword 
+
+	| cart expirationTime |
+
+	self assertAuthenticate: anID withPassword: aPassword.
+	
+	currentID := currentID + 1.
+	cart := Cart acceptingItemsOf: catalog.
+	expirationTime := GregorianDateTime now.
+	carts at: currentID put: {cart. expirationTime}.
+
+	^currentID.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:15:54' prior: 50869234!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aCart := self cartWith: aCartID.
+	
+	(aCart second next: expiringTime < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	
+	aCart first add: aQuantity of: anItem.
+	
+	! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:16:02' prior: 50869383!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard cart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	cart := self cartWith: aCartID.
+	
+	(cart second next: expiringTime < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: cart first charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	^cashier checkOut.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:16:10' prior: 50868639!
+listCartFor: aCartID
+
+	| cart |
+	cart := self cartWith: aCartID.
+	
+	(cart second  next: expiringTime < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	^cart first items.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:16:12' prior: 50869497!
+listCartFor: aCartID
+
+	| cart |
+	cart := self cartWith: aCartID.
+	
+	(cart second next: expiringTime < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	^cart first items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:16:15'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:16:15'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:16:15'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:16:15'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:16:15'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:16:15'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:16:15'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:16:15'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:16:15'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:16:15'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:16:15'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:16:15'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:16:15'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test14 stamp: 'DS 11/30/2020 19:16:15'!
+FAILURE!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:16:18'!
+ERROR!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:16:49' prior: 50869463!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aCart := self cartWith: aCartID.
+	
+	((aCart second next: expiringTime) < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	
+	aCart first add: aQuantity of: anItem.
+	
+	! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:18:00' prior: 50869450!
+createCartForUser: anID withPassword: aPassword 
+
+	| cart expirationTime |
+
+	self assertAuthenticate: anID withPassword: aPassword.
+	
+	currentID := currentID + 1.
+	cart := Cart acceptingItemsOf: catalog.
+	expirationTime := GregorianDateTime now next: expiringTime.
+	carts at: currentID put: {cart. expirationTime}.
+
+	^currentID.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:18:06' prior: 50869567!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aCart := self cartWith: aCartID.
+	
+	(aCart second < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	
+	aCart first add: aQuantity of: anItem.
+	
+	! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:18:12' prior: 50869476!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard cart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	cart := self cartWith: aCartID.
+	
+	(cart second < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: cart first charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	^cashier checkOut.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:18:17' prior: 50869507!
+listCartFor: aCartID
+
+	| cart |
+	cart := self cartWith: aCartID.
+	
+	(cart second  < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	^cart first items.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:18:18' prior: 50869628!
+listCartFor: aCartID
+
+	| cart |
+	cart := self cartWith: aCartID.
+	
+	(cart second < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	^cart first items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test14 stamp: 'DS 11/30/2020 19:18:18'!
+PASSED!
+
+----SNAPSHOT----(30 November 2020 19:18:22) CuisUniversity-4384.image priorSource: 17206670!
+
+Object subclass: #SessionCart
+	instanceVariableNames: 'cart expiringTimestamp'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #SessionCart category: 'TusLibros-Solucion' stamp: 'DS 11/30/2020 19:21:33'!
+Object subclass: #SessionCart
+	instanceVariableNames: 'cart expiringTimestamp'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!SessionCart class methodsFor: 'no messages' stamp: 'DS 11/30/2020 19:22:48'!
+for: aCart expiringAt: aGregorianDateTime
+
+	^self newFor: aCart expiringAt: aGregorianDateTime.! !
+!SessionCart methodsFor: 'no messages' stamp: 'DS 11/30/2020 19:23:44'!
+initializeFor: aCart expiringAt: aGregorianDateTime
+
+	cart := aCart.
+	expiringTimestamp := aGregorianDateTime.! !
+!SessionCart methodsFor: 'accesing' stamp: 'DS 11/30/2020 19:24:06'!
+cart
+
+	^cart.! !
+!SessionCart methodsFor: 'accesing' stamp: 'DS 11/30/2020 19:24:16'!
+expiringTimestamp
+
+	^expiringTimestamp.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:25:05' prior: 50869580!
+createCartForUser: anID withPassword: aPassword 
+
+	| cart expirationTime |
+
+	self assertAuthenticate: anID withPassword: aPassword.
+	
+	currentID := currentID + 1.
+	cart := Cart acceptingItemsOf: catalog.
+	expirationTime := GregorianDateTime now next: expiringTime.
+	carts at: currentID put: (SessionCart for: cart expiringAt: expirationTime).
+
+	^currentID.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:26:25' prior: 50869594!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aSessionCart |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart expiringTimestamp < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	
+	aSessionCart cart add: aQuantity of: anItem.
+	
+	! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:26:39' prior: 50869607!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard aSessionCart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart second < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart first charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	^cashier checkOut.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:26:51' prior: 50869757!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard aSessionCart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart expiringTimestamp < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	^cashier checkOut.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:27:06' prior: 50869637!
+listCartFor: aCartID
+
+	| aSessionCart |
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart second < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	^aSessionCart first items.! !
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:27:23' prior: 50869801!
+listCartFor: aCartID
+
+	| aSessionCart |
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart expiringTimestamp < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	^aSessionCart cart items.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:27:25'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:27:25'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:27:25'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:27:25'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:27:25'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:27:25'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:27:25'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:27:25'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:27:25'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:27:25'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:27:25'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:27:25'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:27:25'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test14 stamp: 'DS 11/30/2020 19:27:25'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:27:50'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:27:50'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:27:50'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:27:50'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:27:50'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:27:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:27:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:27:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:27:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:27:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:27:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:27:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:27:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:27:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:27:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:27:55'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:27:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:27:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test14 stamp: 'DS 11/30/2020 19:27:55'!
+ERROR!
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:27:56'!
+ERROR!
+!SessionCart class methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:28:13' prior: 50869708!
+for: aCart expiringAt: aGregorianDateTime
+
+	^self new initializateFor: aCart expiringAt: aGregorianDateTime.! !
+!SessionCart class methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:28:27' prior: 50869934!
+for: aCart expiringAt: aGregorianDateTime
+
+	^self new initializeFor: aCart expiringAt: aGregorianDateTime.! !
+
+!testRun: #FacadeTusLibrosTest #test01CreateCartHaveEmptyList stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test02CannotCreateCartWithInvalidPassword stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test03CannotCreateCartWithUnknownUser stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test04CannotAssignSameIDForDifferentCarts stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test05AddedItemIsIncludedInCartList stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test07CannotAddToUnknownCartID stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test10CannotCheckoutToUnknownCartID stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test11CannotListAnUnknownCartID stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test12 stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test13 stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+!testRun: #FacadeTusLibrosTest #test14 stamp: 'DS 11/30/2020 19:28:30'!
+PASSED!
+
+----SNAPSHOT----(30 November 2020 19:28:36) CuisUniversity-4384.image priorSource: 17217331!

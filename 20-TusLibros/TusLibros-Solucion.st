@@ -443,6 +443,59 @@ tusLibros: aFacadeTusLibros checkoutCartID: aCartID
 		throught: self
 		on: testObjectsFactory today.! !
 
+
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 18:57:55'!
+test11CannotListAnUnknownCartID
+
+	| tusLibros |
+
+	tusLibros := testObjectsFactory tusLibros.
+	self should: [ tusLibros listCartFor: 1 ]
+		raise: Error
+		withMessageText: FacadeTusLibros unknownCartIDErrorDescription .! !
+
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:09:04'!
+test12
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: -1*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:09:10'!
+test13
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: -1*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros listCartFor: cartID ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:11:06'!
+test14
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: -1*minute.
+
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ self tusLibros: tusLibros checkoutCartID: cartID ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
 
 !classDefinition: #Cart category: 'TusLibros-Solucion'!
 Object subclass: #Cart
@@ -697,7 +750,7 @@ withNumber: aNumber withOwner: anOwner expiringOn: aMonth
 
 !classDefinition: #FacadeTusLibros category: 'TusLibros-Solucion'!
 Object subclass: #FacadeTusLibros
-	instanceVariableNames: 'authenticator carts currentID catalog salesBook'
+	instanceVariableNames: 'authenticator carts currentID catalog salesBook expiringTime'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
@@ -711,34 +764,70 @@ initializeWith: anAuthenticator and: aCatalog
 	currentID := 0.
 	salesBook := OrderedCollection new.! !
 
+!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/30/2020 18:50:38'!
+initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime 
 
-!FacadeTusLibros methodsFor: 'cart actions' stamp: 'DS 11/29/2020 18:22:10'!
+	authenticator := anAuthenticator.
+	catalog := aCatalog.
+	expiringTime := anExpiringTime.
+	carts := Dictionary new.
+	currentID := 0.
+	salesBook := OrderedCollection new.! !
+
+
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:26:25'!
 addToCart: aCartID aQuantity: aQuantity of: anItem
 	
-	| aCart |
+	| aSessionCart |
 
-	self assertUnkownCartID: aCartID.	
+	"self assertUnkownCartID: aCartID.	"
 
-	aCart := carts at: aCartID.
-	aCart add: aQuantity of: anItem.
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart expiringTimestamp < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	
+	aSessionCart cart add: aQuantity of: anItem.
 	
 	! !
 
-!FacadeTusLibros methodsFor: 'cart actions' stamp: 'FedericoSabatini 11/29/2020 16:44:54'!
-listCartFor: aCartID
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:26:51'!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
 
-	^(carts at: aCartID) items.! !
+	| creditCard aSessionCart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart expiringTimestamp < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
 
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
 
-!FacadeTusLibros methodsFor: 'create - auth' stamp: 'DS 11/29/2020 19:01:02'!
+	^cashier checkOut.! !
+
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:25:05'!
 createCartForUser: anID withPassword: aPassword 
+
+	| cart expirationTime |
 
 	self assertAuthenticate: anID withPassword: aPassword.
 	
 	currentID := currentID + 1.
-	carts at: currentID put: (Cart acceptingItemsOf: catalog).
+	cart := Cart acceptingItemsOf: catalog.
+	expirationTime := GregorianDateTime now next: expiringTime.
+	carts at: currentID put: (SessionCart for: cart expiringAt: expirationTime).
 
 	^currentID.! !
+
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:27:23'!
+listCartFor: aCartID
+
+	| aSessionCart |
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart expiringTimestamp < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+
+	^aSessionCart cart items.! !
 
 
 !FacadeTusLibros methodsFor: 'errors' stamp: 'DS 11/29/2020 18:52:50'!
@@ -759,24 +848,15 @@ assertAuthenticate: anID withPassword: aPassword
 		ifTrue: [self error: self class badAuthenticationErrorDescription].
 ! !
 
-!FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/29/2020 18:21:20'!
+!FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/30/2020 18:48:11'!
 assertUnkownCartID: aCartID
 
-	^ (carts includesKey: aCartID) ifFalse: [self signalUnknownCartID ]! !
+	^(carts at: aCartID ifAbsent: [ self signalUnknownCartID ]) first.! !
 
+!FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/30/2020 18:51:35'!
+cartWith: aCartID
 
-!FacadeTusLibros methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:21:47'!
-checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
-
-	| creditCard cart cashier |
-	
-	self assertUnkownCartID: aCartID.
-
-	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
-	cart := carts at: aCartID.
-	cashier := Cashier toCheckout: cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
-
-	^cashier checkOut.! !
+	^(carts at: aCartID ifAbsent: [ self signalUnknownCartID ]).! !
 
 
 !FacadeTusLibros methodsFor: 'accessing' stamp: 'DS 11/29/2020 19:08:20'!
@@ -794,11 +874,21 @@ FacadeTusLibros class
 with: anAuthenticator and: aCatalog 
 	^self new initializeWith: anAuthenticator and: aCatalog.! !
 
+!FacadeTusLibros class methodsFor: 'instance creation' stamp: 'DS 11/30/2020 18:22:57'!
+withAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime
+
+	^self new initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime.! !
+
 
 !FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'FedericoSabatini 11/29/2020 15:39:11'!
 badAuthenticationErrorDescription
 
     ^'Dont exist an user with this password'.! !
+
+!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/30/2020 18:24:49'!
+cartTimeExpiredErrorDescription
+
+	^'Your cart has expired'.! !
 
 
 !FacadeTusLibros class methodsFor: 'as yet unclassified' stamp: 'DS 11/29/2020 18:18:17'!
@@ -835,6 +925,42 @@ of: aTotal
 
 	"should assert total is not negative or 0!!"
 	^self new initializeTotal: aTotal ! !
+
+
+!classDefinition: #SessionCart category: 'TusLibros-Solucion'!
+Object subclass: #SessionCart
+	instanceVariableNames: 'cart expiringTimestamp'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!SessionCart methodsFor: 'accesing' stamp: 'DS 11/30/2020 19:24:06'!
+cart
+
+	^cart.! !
+
+!SessionCart methodsFor: 'accesing' stamp: 'DS 11/30/2020 19:24:16'!
+expiringTimestamp
+
+	^expiringTimestamp.! !
+
+
+!SessionCart methodsFor: 'initialization' stamp: 'DS 11/30/2020 19:23:44'!
+initializeFor: aCart expiringAt: aGregorianDateTime
+
+	cart := aCart.
+	expiringTimestamp := aGregorianDateTime.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'SessionCart class' category: 'TusLibros-Solucion'!
+SessionCart class
+	instanceVariableNames: ''!
+
+!SessionCart class methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:28:27'!
+for: aCart expiringAt: aGregorianDateTime
+
+	^self new initializeFor: aCart expiringAt: aGregorianDateTime.! !
 
 
 !classDefinition: #StoreTestObjectsFactory category: 'TusLibros-Solucion'!
@@ -916,14 +1042,14 @@ initialize
 	today := DateAndTime now! !
 
 
-!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'DS 11/29/2020 18:30:39'!
+!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'DS 11/30/2020 18:52:58'!
 tusLibros
 
 	| authenticator |
 
 	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
 
-	^FacadeTusLibros with: authenticator and: self defaultCatalog.! !
+	^FacadeTusLibros withAuthenticator: authenticator withCatalog: self defaultCatalog andExpiringTime: 30*minute.! !
 
 
 !StoreTestObjectsFactory methodsFor: 'date' stamp: 'HernanWilkinson 6/17/2013 18:37'!
