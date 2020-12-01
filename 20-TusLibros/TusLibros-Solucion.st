@@ -286,12 +286,13 @@ TestCase subclass: #InternalRestInterfaceTest
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!InternalRestInterfaceTest methodsFor: 'adding' stamp: 'DS 11/29/2020 18:32:15'!
+!InternalRestInterfaceTest methodsFor: 'adding' stamp: 'FedericoSabatini 12/1/2020 18:17:17'!
 test05AddedItemIsIncludedInCartList
 
 	| tusLibros cartID expectedCartList |
 
-	expectedCartList := Dictionary with: testObjectsFactory itemSellByTheStore -> 1.
+	expectedCartList := Bag new.
+	expectedCartList add: testObjectsFactory itemSellByTheStore withOccurrences: 1.
 
 	tusLibros := testObjectsFactory tusLibros.	
 	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
@@ -299,13 +300,15 @@ test05AddedItemIsIncludedInCartList
 	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
 	self assert: expectedCartList equals: (tusLibros listCartFor: cartID).! !
 
-!InternalRestInterfaceTest methodsFor: 'adding' stamp: 'DS 11/29/2020 18:33:29'!
+!InternalRestInterfaceTest methodsFor: 'adding' stamp: 'FedericoSabatini 12/1/2020 18:18:07'!
 test06AddedItemsInDifferentsCartsAreInRespectiveLists
 
 	| tusLibros firstCartID secondCartID expectedFirstCart expectedSecondCart |
 
-	expectedFirstCart := Dictionary with: testObjectsFactory itemSellByTheStore -> 5.
-	expectedSecondCart := Dictionary with: testObjectsFactory itemSellByTheStore -> 10.
+	expectedFirstCart := Bag new.
+	expectedFirstCart add: testObjectsFactory itemSellByTheStore withOccurrences: 5.
+	expectedSecondCart := Bag new. 
+	expectedSecondCart add: testObjectsFactory itemSellByTheStore withOccurrences: 10.
 
 	tusLibros := testObjectsFactory tusLibros.	
 	firstCartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
@@ -473,7 +476,7 @@ tusLibros: aFacadeTusLibros checkoutCartID: aCartID
 		on: testObjectsFactory today.! !
 
 
-!InternalRestInterfaceTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:30:39'!
+!InternalRestInterfaceTest methodsFor: 'create' stamp: 'FedericoSabatini 12/1/2020 18:13:53'!
 test01CreateCartHaveEmptyList
 
 	| tusLibros cartID |
@@ -481,7 +484,7 @@ test01CreateCartHaveEmptyList
 	tusLibros := testObjectsFactory tusLibros.
 	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
 
-	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
+	self assert: (Bag new) equals: (tusLibros listCartFor: cartID).! !
 
 !InternalRestInterfaceTest methodsFor: 'create' stamp: 'DS 11/30/2020 22:16:51'!
 test02CannotCreateCartWithInvalidPassword
@@ -611,18 +614,10 @@ add: aQuantity of: anItem
 	1 to: aQuantity do: [ :aNumber | items add: anItem ]! !
 
 
-!Cart methodsFor: 'accesing' stamp: 'FedericoSabatini 11/29/2020 16:36:53'!
+!Cart methodsFor: 'accesing' stamp: 'FedericoSabatini 12/1/2020 18:19:05'!
 items
 	
-	| ocurrences |
-	
-	ocurrences := Dictionary new.
-	
-	items do: [ :item | (ocurrences includesKey: item) 
-		ifTrue: [ocurrences at: item put: (ocurrences at: item) + 1] 
-		ifFalse: [ocurrences at: item put: 1]].
-	
-	^ocurrences.! !
+	^items asBag.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
