@@ -279,14 +279,14 @@ test02CreditCardOwnerCanNotBeEmpty
 		shouldRaiseErrorDescription: CreditCard invalidOwnerErrorDescription.! !
 
 
-!classDefinition: #FacadeTusLibrosTest category: 'TusLibros-Solucion'!
-TestCase subclass: #FacadeTusLibrosTest
+!classDefinition: #InternalRestInterfaceTest category: 'TusLibros-Solucion'!
+TestCase subclass: #InternalRestInterfaceTest
 	instanceVariableNames: 'testObjectsFactory debitBehavior clockBehavior'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!FacadeTusLibrosTest methodsFor: 'adding' stamp: 'DS 11/29/2020 18:32:15'!
+!InternalRestInterfaceTest methodsFor: 'adding' stamp: 'DS 11/29/2020 18:32:15'!
 test05AddedItemIsIncludedInCartList
 
 	| tusLibros cartID expectedCartList |
@@ -299,7 +299,7 @@ test05AddedItemIsIncludedInCartList
 	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
 	self assert: expectedCartList equals: (tusLibros listCartFor: cartID).! !
 
-!FacadeTusLibrosTest methodsFor: 'adding' stamp: 'DS 11/29/2020 18:33:29'!
+!InternalRestInterfaceTest methodsFor: 'adding' stamp: 'DS 11/29/2020 18:33:29'!
 test06AddedItemsInDifferentsCartsAreInRespectiveLists
 
 	| tusLibros firstCartID secondCartID expectedFirstCart expectedSecondCart |
@@ -317,7 +317,7 @@ test06AddedItemsInDifferentsCartsAreInRespectiveLists
 	self assert: expectedFirstCart equals: (tusLibros listCartFor: firstCartID).
 	self assert: expectedSecondCart equals: (tusLibros listCartFor: secondCartID).! !
 
-!FacadeTusLibrosTest methodsFor: 'adding' stamp: 'DS 11/29/2020 18:33:44'!
+!InternalRestInterfaceTest methodsFor: 'adding' stamp: 'DS 11/30/2020 22:16:51'!
 test07CannotAddToUnknownCartID
 
 	| tusLibros |
@@ -326,97 +326,87 @@ test07CannotAddToUnknownCartID
 
 	self should: [tusLibros addToCart: 1 aQuantity: 5 of: testObjectsFactory itemSellByTheStore]
 		raise: Error
-		withMessageText: FacadeTusLibros unknownCartIDErrorDescription.! !
+		withMessageText: InternalRestInterface unknownCartIDErrorDescription.! !
 
 
-!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 18:57:55'!
-test11CannotListAnUnknownCartID
+!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'DS 11/30/2020 22:16:22'!
+assertUpdatedTimeToCartAfter: aTusLibrosBlock
 
-	| tusLibros |
+	| tusLibros cartID checkIfExpired updatedTime |
 
-	tusLibros := testObjectsFactory tusLibros.
-	self should: [ tusLibros listCartFor: 1 ]
+	tusLibros := testObjectsFactory tusLibros: self.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
+
+	checkIfExpired := false.
+	clockBehavior := [
+		checkIfExpired
+			ifFalse: [
+				checkIfExpired := true.
+				testObjectsFactory now next: 10*minute.
+			] ifTrue: [
+				updatedTime :=  testObjectsFactory now next: 5*minute.
+				updatedTime.
+			].		
+	].
+	aTusLibrosBlock value: tusLibros value: cartID.
+
+	self assert: (testObjectsFactory now next: 5*minute) equals: updatedTime.! !
+
+!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'DS 11/30/2020 22:23:54'!
+shouldRaiseCartTimeExpiredErrorWhen: aTusLibrosBlock
+
+	| tusLibros cartID |
+	
+	tusLibros := testObjectsFactory tusLibros: self.		
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	clockBehavior := [ testObjectsFactory now next: 31*minute ].
+
+	self should: [ aTusLibrosBlock value: tusLibros value: cartID ]
 		raise: Error
-		withMessageText: FacadeTusLibros unknownCartIDErrorDescription .! !
+		withMessageText: InternalRestInterface cartTimeExpiredErrorDescription.! !
 
-!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/30/2020 21:00:16'!
+!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'DS 11/30/2020 22:23:54'!
 test12CannotAddOnExpiredCart
 
-	| authenticator tusLibros cartID |
+	self shouldRaiseCartTimeExpiredErrorWhen: [ :anInternalRestInterface :aCartID | 
+		anInternalRestInterface addToCart: aCartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore
+	].! !
 
-	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
-	
-	tusLibros := FacadeTusLibros 
-		withAuthenticator: authenticator 
-		withCatalog: testObjectsFactory defaultCatalog 
-		usingClock: self.
-		
-	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
-	
-	clockBehavior := [ testObjectsFactory now next: 31*minute ].
-
-	self should: [ tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore ]
-		raise: Error
-		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
-
-!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/30/2020 21:00:14'!
+!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'DS 11/30/2020 22:23:54'!
 test13CannotListOnExpiredCart
 
-	| authenticator tusLibros cartID |
+	self shouldRaiseCartTimeExpiredErrorWhen: [ :anInternalRestInterface :aCartID |
+		anInternalRestInterface listCartFor: aCartID
+	].! !
 
-	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
-	tusLibros := FacadeTusLibros 
-		withAuthenticator: authenticator 
-		withCatalog: testObjectsFactory defaultCatalog 
-		usingClock: self.
-		
-	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
-	
-	clockBehavior := [ testObjectsFactory now next: 31*minute ].
-
-	self should: [ tusLibros listCartFor: cartID ]
-		raise: Error
-		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
-
-!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/30/2020 21:00:11'!
+!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'DS 11/30/2020 22:23:54'!
 test14CannotCheckoutOnExpiredCart
 
-	| authenticator tusLibros cartID |
+	self shouldRaiseCartTimeExpiredErrorWhen: [ :anInternalRestInterface :aCartID |
+		self tusLibros: anInternalRestInterface checkoutCartID: aCartID
+	].! !
 
-	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
-	tusLibros := FacadeTusLibros 
-		withAuthenticator: authenticator 
-		withCatalog: testObjectsFactory defaultCatalog 
-		usingClock: self.
-		
-	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
-	
-	clockBehavior := [ testObjectsFactory now next: 31*minute ].
+!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'DS 11/30/2020 22:22:32'!
+test15AddAnItemShouldRestartExpirationTime
 
-	self should: [ self tusLibros: tusLibros checkoutCartID: cartID ]
-		raise: Error
-		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+	self assertUpdatedTimeToCartAfter: [ :anInternalRestInterface :aCartID | 
+		anInternalRestInterface addToCart: aCartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
+	].! !
 
-!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/30/2020 21:26:15'!
-test15
+!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'DS 11/30/2020 22:20:12'!
+test16ListCartShouldRestartExpirationTime
 
-	| authenticator tusLibros cartID |
+	self assertUpdatedTimeToCartAfter: [ :anInternalRestInterface :aCartID | anInternalRestInterface listCartFor: aCartID ].! !
 
-	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
-	
-	tusLibros := FacadeTusLibros 
-		withAuthenticator: authenticator 
-		withCatalog: testObjectsFactory defaultCatalog 
-		usingClock: self.
-		
-	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
-	
-	clockBehavior := [ testObjectsFactory now next: 10*minute ].
-	
-	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.! !
+!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'DS 11/30/2020 22:21:05'!
+test17CheckoutShouldRestartExpirationTime
+
+	self assertUpdatedTimeToCartAfter: [ :anInternalRestInterface :aCartID | self tusLibros: anInternalRestInterface checkoutCartID: aCartID].! !
 
 
-!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:24'!
+!InternalRestInterfaceTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:24'!
 test08CheckoutShouldBeRegisterInSalesBook
 
 	| tusLibros cartID |
@@ -430,7 +420,7 @@ test08CheckoutShouldBeRegisterInSalesBook
 	self assert: 100 equals: (tusLibros salesBook first total).
 	self assert: 1 equals: (tusLibros salesBook size).! !
 
-!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:54'!
+!InternalRestInterfaceTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:54'!
 test09CannotCheckoutWhnCreditCardHasNotCredit
 
 	| tusLibros cartID |
@@ -448,7 +438,7 @@ test09CannotCheckoutWhnCreditCardHasNotCredit
 		
 	self assert: tusLibros salesBook isEmpty.! !
 
-!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:08:04'!
+!InternalRestInterfaceTest methodsFor: 'checkout' stamp: 'DS 11/30/2020 22:16:51'!
 test10CannotCheckoutToUnknownCartID
 
 	| tusLibros |
@@ -457,11 +447,21 @@ test10CannotCheckoutToUnknownCartID
 
 	self should: [ self tusLibros: tusLibros checkoutCartID: 1 ]
 		raise: Error
-		withMessageText: FacadeTusLibros unknownCartIDErrorDescription.
+		withMessageText: InternalRestInterface unknownCartIDErrorDescription.
 		
 	self assert: tusLibros salesBook isEmpty.! !
 
-!FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 18:44:41'!
+!InternalRestInterfaceTest methodsFor: 'checkout' stamp: 'DS 11/30/2020 22:16:51'!
+test11CannotListAnUnknownCartID
+
+	| tusLibros |
+
+	tusLibros := testObjectsFactory tusLibros.
+	self should: [ tusLibros listCartFor: 1 ]
+		raise: Error
+		withMessageText: InternalRestInterface unknownCartIDErrorDescription .! !
+
+!InternalRestInterfaceTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 18:44:41'!
 tusLibros: aFacadeTusLibros checkoutCartID: aCartID
 
 	^aFacadeTusLibros
@@ -473,7 +473,7 @@ tusLibros: aFacadeTusLibros checkoutCartID: aCartID
 		on: testObjectsFactory today.! !
 
 
-!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:30:39'!
+!InternalRestInterfaceTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:30:39'!
 test01CreateCartHaveEmptyList
 
 	| tusLibros cartID |
@@ -483,7 +483,7 @@ test01CreateCartHaveEmptyList
 
 	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
 
-!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:30:39'!
+!InternalRestInterfaceTest methodsFor: 'create' stamp: 'DS 11/30/2020 22:16:51'!
 test02CannotCreateCartWithInvalidPassword
 
 	| tusLibros |
@@ -492,9 +492,9 @@ test02CannotCreateCartWithInvalidPassword
 
 	self should: [ tusLibros createCartForUser: 1 withPassword: 'bad password'.]
 		raise: Error
- 		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+ 		withMessageText: InternalRestInterface badAuthenticationErrorDescription.! !
 
-!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:32:41'!
+!InternalRestInterfaceTest methodsFor: 'create' stamp: 'DS 11/30/2020 22:16:51'!
 test03CannotCreateCartWithUnknownUser
 
 	| tusLibros |
@@ -503,9 +503,9 @@ test03CannotCreateCartWithUnknownUser
 
 	self should: [ tusLibros createCartForUser: 3 withPassword: 'pass'. ]
 		raise: Error
-		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+		withMessageText: InternalRestInterface badAuthenticationErrorDescription.! !
 
-!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:31:15'!
+!InternalRestInterfaceTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:31:15'!
 test04CannotAssignSameIDForDifferentCarts
 
 	| tusLibros cartID cartID2 |
@@ -518,18 +518,18 @@ test04CannotAssignSameIDForDifferentCarts
 	self assert: (cartID ~= cartID2).! !
 
 
-!FacadeTusLibrosTest methodsFor: 'expiration clock protocol' stamp: 'FedericoSabatini 11/30/2020 20:32:30'!
+!InternalRestInterfaceTest methodsFor: 'expiration clock protocol' stamp: 'FedericoSabatini 11/30/2020 20:32:30'!
 now
 	^clockBehavior value.! !
 
 
-!FacadeTusLibrosTest methodsFor: 'merchant processor protocol' stamp: 'DS 11/29/2020 17:35:13'!
+!InternalRestInterfaceTest methodsFor: 'merchant processor protocol' stamp: 'DS 11/29/2020 17:35:13'!
 debit: anAmount from: aCreditCard 
 
 	^debitBehavior value: anAmount value: aCreditCard ! !
 
 
-!FacadeTusLibrosTest methodsFor: 'setup' stamp: 'FedericoSabatini 11/30/2020 21:12:28'!
+!InternalRestInterfaceTest methodsFor: 'setup' stamp: 'FedericoSabatini 11/30/2020 21:12:28'!
 setUp
 
 	testObjectsFactory := StoreTestObjectsFactory new.
@@ -789,14 +789,14 @@ withNumber: aNumber withOwner: anOwner expiringOn: aMonth
     ^self new initializeWithNumber: aNumber withOwner: anOwner expiringOn: aMonth.! !
 
 
-!classDefinition: #FacadeTusLibros category: 'TusLibros-Solucion'!
-Object subclass: #FacadeTusLibros
+!classDefinition: #InternalRestInterface category: 'TusLibros-Solucion'!
+Object subclass: #InternalRestInterface
 	instanceVariableNames: 'authenticator carts currentID catalog salesBook expiringTime clock'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!FacadeTusLibros methodsFor: 'initialization' stamp: 'FedericoSabatini 11/30/2020 20:35:11'!
+!InternalRestInterface methodsFor: 'initialization' stamp: 'FedericoSabatini 11/30/2020 20:35:11'!
 initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: aClock 
 	
 	authenticator := anAuthenticator.
@@ -809,7 +809,7 @@ initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: a
 	salesBook := OrderedCollection new.! !
 
 
-!FacadeTusLibros methodsFor: 'api rest' stamp: 'FedericoSabatini 11/30/2020 20:36:42'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'DS 11/30/2020 22:00:35'!
 addToCart: aCartID aQuantity: aQuantity of: anItem
 	
 	| aSessionCart |
@@ -819,12 +819,13 @@ addToCart: aCartID aQuantity: aQuantity of: anItem
 	aSessionCart := self cartWith: aCartID.
 	
 	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
 	
 	aSessionCart cart add: aQuantity of: anItem.
 	
 	! !
 
-!FacadeTusLibros methodsFor: 'api rest' stamp: 'FedericoSabatini 11/30/2020 20:55:18'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'DS 11/30/2020 22:00:47'!
 checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
 
 	| creditCard aSessionCart cashier |
@@ -833,13 +834,14 @@ checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aM
 	aSessionCart := self cartWith: aCartID.
 	
 	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
 
 	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
 	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
 
 	^cashier checkOut.! !
 
-!FacadeTusLibros methodsFor: 'api rest' stamp: 'FedericoSabatini 11/30/2020 20:37:47'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 11/30/2020 20:37:47'!
 createCartForUser: anID withPassword: aPassword 
 
 	| cart |
@@ -853,68 +855,69 @@ createCartForUser: anID withPassword: aPassword
 
 	^currentID.! !
 
-!FacadeTusLibros methodsFor: 'api rest' stamp: 'FedericoSabatini 11/30/2020 20:55:11'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'DS 11/30/2020 22:00:42'!
 listCartFor: aCartID
 
 	| aSessionCart |
 	aSessionCart := self cartWith: aCartID.
 	
 	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
 
 	^aSessionCart cart items.! !
 
 
-!FacadeTusLibros methodsFor: 'errors' stamp: 'DS 11/29/2020 18:52:50'!
+!InternalRestInterface methodsFor: 'errors' stamp: 'DS 11/29/2020 18:52:50'!
 signalBadAuthentication
 
 	^ self error: self class badAuthenticationErrorDescription! !
 
-!FacadeTusLibros methodsFor: 'errors' stamp: 'DS 11/29/2020 18:21:02'!
+!InternalRestInterface methodsFor: 'errors' stamp: 'DS 11/29/2020 18:21:02'!
 signalUnknownCartID
 
 	^ self error: self class unknownCartIDErrorDescription! !
 
 
-!FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/29/2020 19:00:47'!
+!InternalRestInterface methodsFor: 'assertions' stamp: 'DS 11/29/2020 19:00:47'!
 assertAuthenticate: anID withPassword: aPassword
 
 	( (authenticator includesKey: anID) not or: [(authenticator at: anID) ~= aPassword] 	)
 		ifTrue: [self error: self class badAuthenticationErrorDescription].
 ! !
 
-!FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/30/2020 18:51:35'!
+!InternalRestInterface methodsFor: 'assertions' stamp: 'DS 11/30/2020 18:51:35'!
 cartWith: aCartID
 
 	^(carts at: aCartID ifAbsent: [ self signalUnknownCartID ]).! !
 
 
-!FacadeTusLibros methodsFor: 'accessing' stamp: 'DS 11/29/2020 19:08:20'!
+!InternalRestInterface methodsFor: 'accessing' stamp: 'DS 11/29/2020 19:08:20'!
 salesBook
 
 	^salesBook.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
 
-!classDefinition: 'FacadeTusLibros class' category: 'TusLibros-Solucion'!
-FacadeTusLibros class
+!classDefinition: 'InternalRestInterface class' category: 'TusLibros-Solucion'!
+InternalRestInterface class
 	instanceVariableNames: ''!
 
-!FacadeTusLibros class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/30/2020 20:34:34'!
+!InternalRestInterface class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/30/2020 20:34:34'!
 withAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: aClock
 	^self new initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: aClock.! !
 
 
-!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'FedericoSabatini 11/29/2020 15:39:11'!
+!InternalRestInterface class methodsFor: 'error descriptions' stamp: 'FedericoSabatini 11/29/2020 15:39:11'!
 badAuthenticationErrorDescription
 
     ^'Dont exist an user with this password'.! !
 
-!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/30/2020 18:24:49'!
+!InternalRestInterface class methodsFor: 'error descriptions' stamp: 'DS 11/30/2020 18:24:49'!
 cartTimeExpiredErrorDescription
 
 	^'Your cart has expired'.! !
 
-!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/29/2020 18:18:17'!
+!InternalRestInterface class methodsFor: 'error descriptions' stamp: 'DS 11/29/2020 18:18:17'!
 unknownCartIDErrorDescription
 	^ 'Unknowed cart ID'.! !
 
@@ -1066,26 +1069,26 @@ initialize
 	gregorianDateTime := GregorianDateTime date: FixedGregorianDate today timeOfDay: TimeOfDay now.! !
 
 
-!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'FedericoSabatini 11/30/2020 20:58:40'!
+!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'DS 11/30/2020 22:16:51'!
 tusLibros
 
 	| authenticator |
 
 	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
 
-	^FacadeTusLibros 
+	^InternalRestInterface 
 		withAuthenticator: authenticator 
 		withCatalog: self defaultCatalog
 		usingClock: self.! !
 
-!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'FedericoSabatini 11/30/2020 20:57:14'!
+!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'DS 11/30/2020 22:16:51'!
 tusLibros: aClock
 
 	| authenticator |
 
 	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
 
-	^FacadeTusLibros 
+	^InternalRestInterface 
 		withAuthenticator: authenticator 
 		withCatalog: self defaultCatalog
 		usingClock: aClock.! !
