@@ -281,68 +281,10 @@ test02CreditCardOwnerCanNotBeEmpty
 
 !classDefinition: #FacadeTusLibrosTest category: 'TusLibros-Solucion'!
 TestCase subclass: #FacadeTusLibrosTest
-	instanceVariableNames: 'testObjectsFactory debitBehavior'
+	instanceVariableNames: 'testObjectsFactory debitBehavior clockBehavior'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
-
-!FacadeTusLibrosTest methodsFor: 'setup' stamp: 'DS 11/29/2020 17:35:28'!
-setUp
-
-	testObjectsFactory := StoreTestObjectsFactory new.
-	debitBehavior := [ :anAmount :aCreditCard | ].! !
-
-
-!FacadeTusLibrosTest methodsFor: 'merchant processor protocol' stamp: 'DS 11/29/2020 17:35:13'!
-debit: anAmount from: aCreditCard 
-
-	^debitBehavior value: anAmount value: aCreditCard ! !
-
-
-!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:30:39'!
-test01CreateCartHaveEmptyList
-
-	| tusLibros cartID |
-
-	tusLibros := testObjectsFactory tusLibros.
-	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
-
-	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
-
-!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:30:39'!
-test02CannotCreateCartWithInvalidPassword
-
-	| tusLibros |
-
-	tusLibros := testObjectsFactory tusLibros.
-
-	self should: [ tusLibros createCartForUser: 1 withPassword: 'bad password'.]
-		raise: Error
- 		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
-
-!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:32:41'!
-test03CannotCreateCartWithUnknownUser
-
-	| tusLibros |
-
-	tusLibros := testObjectsFactory tusLibros.
-
-	self should: [ tusLibros createCartForUser: 3 withPassword: 'pass'. ]
-		raise: Error
-		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
-
-!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:31:15'!
-test04CannotAssignSameIDForDifferentCarts
-
-	| tusLibros cartID cartID2 |
-
-	tusLibros := testObjectsFactory tusLibros.
-	
-	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
-	cartID2 := tusLibros createCartForUser: 2 withPassword: 'pass'.
-
-	self assert: (cartID ~= cartID2).! !
-
 
 !FacadeTusLibrosTest methodsFor: 'adding' stamp: 'DS 11/29/2020 18:32:15'!
 test05AddedItemIsIncludedInCartList
@@ -385,6 +327,93 @@ test07CannotAddToUnknownCartID
 	self should: [tusLibros addToCart: 1 aQuantity: 5 of: testObjectsFactory itemSellByTheStore]
 		raise: Error
 		withMessageText: FacadeTusLibros unknownCartIDErrorDescription.! !
+
+
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 18:57:55'!
+test11CannotListAnUnknownCartID
+
+	| tusLibros |
+
+	tusLibros := testObjectsFactory tusLibros.
+	self should: [ tusLibros listCartFor: 1 ]
+		raise: Error
+		withMessageText: FacadeTusLibros unknownCartIDErrorDescription .! !
+
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/30/2020 21:00:16'!
+test12CannotAddOnExpiredCart
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	
+	tusLibros := FacadeTusLibros 
+		withAuthenticator: authenticator 
+		withCatalog: testObjectsFactory defaultCatalog 
+		usingClock: self.
+		
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	clockBehavior := [ testObjectsFactory now next: 31*minute ].
+
+	self should: [ tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/30/2020 21:00:14'!
+test13CannotListOnExpiredCart
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros 
+		withAuthenticator: authenticator 
+		withCatalog: testObjectsFactory defaultCatalog 
+		usingClock: self.
+		
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	clockBehavior := [ testObjectsFactory now next: 31*minute ].
+
+	self should: [ tusLibros listCartFor: cartID ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/30/2020 21:00:11'!
+test14CannotCheckoutOnExpiredCart
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	tusLibros := FacadeTusLibros 
+		withAuthenticator: authenticator 
+		withCatalog: testObjectsFactory defaultCatalog 
+		usingClock: self.
+		
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	clockBehavior := [ testObjectsFactory now next: 31*minute ].
+
+	self should: [ self tusLibros: tusLibros checkoutCartID: cartID ]
+		raise: Error
+		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+
+!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 11/30/2020 21:26:15'!
+test15
+
+	| authenticator tusLibros cartID |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+	
+	tusLibros := FacadeTusLibros 
+		withAuthenticator: authenticator 
+		withCatalog: testObjectsFactory defaultCatalog 
+		usingClock: self.
+		
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	clockBehavior := [ testObjectsFactory now next: 10*minute ].
+	
+	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.! !
 
 
 !FacadeTusLibrosTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:24'!
@@ -444,57 +473,69 @@ tusLibros: aFacadeTusLibros checkoutCartID: aCartID
 		on: testObjectsFactory today.! !
 
 
-!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 18:57:55'!
-test11CannotListAnUnknownCartID
+!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:30:39'!
+test01CreateCartHaveEmptyList
+
+	| tusLibros cartID |
+
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self assert: (Dictionary new) equals: (tusLibros listCartFor: cartID).! !
+
+!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:30:39'!
+test02CannotCreateCartWithInvalidPassword
 
 	| tusLibros |
 
 	tusLibros := testObjectsFactory tusLibros.
-	self should: [ tusLibros listCartFor: 1 ]
+
+	self should: [ tusLibros createCartForUser: 1 withPassword: 'bad password'.]
 		raise: Error
-		withMessageText: FacadeTusLibros unknownCartIDErrorDescription .! !
+ 		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
 
-!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:09:04'!
-test12
+!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:32:41'!
+test03CannotCreateCartWithUnknownUser
 
-	| authenticator tusLibros cartID |
+	| tusLibros |
 
-	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
-	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: -1*minute.
+	tusLibros := testObjectsFactory tusLibros.
 
+	self should: [ tusLibros createCartForUser: 3 withPassword: 'pass'. ]
+		raise: Error
+		withMessageText: FacadeTusLibros badAuthenticationErrorDescription.! !
+
+!FacadeTusLibrosTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:31:15'!
+test04CannotAssignSameIDForDifferentCarts
+
+	| tusLibros cartID cartID2 |
+
+	tusLibros := testObjectsFactory tusLibros.
+	
 	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	cartID2 := tusLibros createCartForUser: 2 withPassword: 'pass'.
 
-	self should: [ tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore ]
-		raise: Error
-		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+	self assert: (cartID ~= cartID2).! !
 
-!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:09:10'!
-test13
 
-	| authenticator tusLibros cartID |
+!FacadeTusLibrosTest methodsFor: 'expiration clock protocol' stamp: 'FedericoSabatini 11/30/2020 20:32:30'!
+now
+	^clockBehavior value.! !
 
-	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
-	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: -1*minute.
 
-	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+!FacadeTusLibrosTest methodsFor: 'merchant processor protocol' stamp: 'DS 11/29/2020 17:35:13'!
+debit: anAmount from: aCreditCard 
 
-	self should: [ tusLibros listCartFor: cartID ]
-		raise: Error
-		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+	^debitBehavior value: anAmount value: aCreditCard ! !
 
-!FacadeTusLibrosTest methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:11:06'!
-test14
 
-	| authenticator tusLibros cartID |
+!FacadeTusLibrosTest methodsFor: 'setup' stamp: 'FedericoSabatini 11/30/2020 21:12:28'!
+setUp
 
-	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
-	tusLibros := FacadeTusLibros withAuthenticator: authenticator withCatalog: testObjectsFactory defaultCatalog andExpiringTime: -1*minute.
-
-	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
-
-	self should: [ self tusLibros: tusLibros checkoutCartID: cartID ]
-		raise: Error
-		withMessageText: FacadeTusLibros cartTimeExpiredErrorDescription.! !
+	testObjectsFactory := StoreTestObjectsFactory new.
+	
+	debitBehavior := [ :anAmount :aCreditCard | ].
+	clockBehavior := [ testObjectsFactory now ].! !
 
 
 !classDefinition: #Cart category: 'TusLibros-Solucion'!
@@ -750,32 +791,25 @@ withNumber: aNumber withOwner: anOwner expiringOn: aMonth
 
 !classDefinition: #FacadeTusLibros category: 'TusLibros-Solucion'!
 Object subclass: #FacadeTusLibros
-	instanceVariableNames: 'authenticator carts currentID catalog salesBook expiringTime'
+	instanceVariableNames: 'authenticator carts currentID catalog salesBook expiringTime clock'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/29/2020 19:08:45'!
-initializeWith: anAuthenticator and: aCatalog 
-
-	authenticator := anAuthenticator.
-	carts := Dictionary new. 
-	catalog := aCatalog.
-	currentID := 0.
-	salesBook := OrderedCollection new.! !
-
-!FacadeTusLibros methodsFor: 'initialization' stamp: 'DS 11/30/2020 18:50:38'!
-initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime 
-
+!FacadeTusLibros methodsFor: 'initialization' stamp: 'FedericoSabatini 11/30/2020 20:35:11'!
+initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: aClock 
+	
 	authenticator := anAuthenticator.
 	catalog := aCatalog.
-	expiringTime := anExpiringTime.
+	
+	clock := aClock.
+	
 	carts := Dictionary new.
 	currentID := 0.
 	salesBook := OrderedCollection new.! !
 
 
-!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:26:25'!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'FedericoSabatini 11/30/2020 20:36:42'!
 addToCart: aCartID aQuantity: aQuantity of: anItem
 	
 	| aSessionCart |
@@ -784,13 +818,13 @@ addToCart: aCartID aQuantity: aQuantity of: anItem
 
 	aSessionCart := self cartWith: aCartID.
 	
-	(aSessionCart expiringTimestamp < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
 	
 	aSessionCart cart add: aQuantity of: anItem.
 	
 	! !
 
-!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:26:51'!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'FedericoSabatini 11/30/2020 20:55:18'!
 checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
 
 	| creditCard aSessionCart cashier |
@@ -798,34 +832,34 @@ checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aM
 	"self assertUnkownCartID: aCartID."
 	aSessionCart := self cartWith: aCartID.
 	
-	(aSessionCart expiringTimestamp < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
 
 	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
 	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
 
 	^cashier checkOut.! !
 
-!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:25:05'!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'FedericoSabatini 11/30/2020 20:37:47'!
 createCartForUser: anID withPassword: aPassword 
 
-	| cart expirationTime |
+	| cart |
 
 	self assertAuthenticate: anID withPassword: aPassword.
 	
 	currentID := currentID + 1.
 	cart := Cart acceptingItemsOf: catalog.
-	expirationTime := GregorianDateTime now next: expiringTime.
-	carts at: currentID put: (SessionCart for: cart expiringAt: expirationTime).
+	
+	carts at: currentID put: (SessionCart for: cart expiringAt: (clock now next: 30*minute)).
 
 	^currentID.! !
 
-!FacadeTusLibros methodsFor: 'api rest' stamp: 'DS 11/30/2020 19:27:23'!
+!FacadeTusLibros methodsFor: 'api rest' stamp: 'FedericoSabatini 11/30/2020 20:55:11'!
 listCartFor: aCartID
 
 	| aSessionCart |
 	aSessionCart := self cartWith: aCartID.
 	
-	(aSessionCart expiringTimestamp < GregorianDateTime now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
 
 	^aSessionCart cart items.! !
 
@@ -848,11 +882,6 @@ assertAuthenticate: anID withPassword: aPassword
 		ifTrue: [self error: self class badAuthenticationErrorDescription].
 ! !
 
-!FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/30/2020 18:48:11'!
-assertUnkownCartID: aCartID
-
-	^(carts at: aCartID ifAbsent: [ self signalUnknownCartID ]) first.! !
-
 !FacadeTusLibros methodsFor: 'assertions' stamp: 'DS 11/30/2020 18:51:35'!
 cartWith: aCartID
 
@@ -870,14 +899,9 @@ salesBook
 FacadeTusLibros class
 	instanceVariableNames: ''!
 
-!FacadeTusLibros class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/29/2020 16:03:10'!
-with: anAuthenticator and: aCatalog 
-	^self new initializeWith: anAuthenticator and: aCatalog.! !
-
-!FacadeTusLibros class methodsFor: 'instance creation' stamp: 'DS 11/30/2020 18:22:57'!
-withAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime
-
-	^self new initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog andExpiringTime: anExpiringTime.! !
+!FacadeTusLibros class methodsFor: 'instance creation' stamp: 'FedericoSabatini 11/30/2020 20:34:34'!
+withAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: aClock
+	^self new initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: aClock.! !
 
 
 !FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'FedericoSabatini 11/29/2020 15:39:11'!
@@ -890,8 +914,7 @@ cartTimeExpiredErrorDescription
 
 	^'Your cart has expired'.! !
 
-
-!FacadeTusLibros class methodsFor: 'as yet unclassified' stamp: 'DS 11/29/2020 18:18:17'!
+!FacadeTusLibros class methodsFor: 'error descriptions' stamp: 'DS 11/29/2020 18:18:17'!
 unknownCartIDErrorDescription
 	^ 'Unknowed cart ID'.! !
 
@@ -965,7 +988,7 @@ for: aCart expiringAt: aGregorianDateTime
 
 !classDefinition: #StoreTestObjectsFactory category: 'TusLibros-Solucion'!
 Object subclass: #StoreTestObjectsFactory
-	instanceVariableNames: 'today debitBehavior'
+	instanceVariableNames: 'today debitBehavior gregorianDateTime'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
@@ -1036,21 +1059,42 @@ notExpiredCreditCardDate
 	^Month month: today monthIndex year: today yearNumber + 1.! !
 
 
-!StoreTestObjectsFactory methodsFor: 'initialization' stamp: 'HernanWilkinson 6/17/2013 18:37'!
+!StoreTestObjectsFactory methodsFor: 'initialization' stamp: 'FedericoSabatini 11/30/2020 20:46:25'!
 initialize
 
-	today := DateAndTime now! !
+	today := DateAndTime now.
+	gregorianDateTime := GregorianDateTime date: FixedGregorianDate today timeOfDay: TimeOfDay now.! !
 
 
-!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'DS 11/30/2020 18:52:58'!
+!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'FedericoSabatini 11/30/2020 20:58:40'!
 tusLibros
 
 	| authenticator |
 
 	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
 
-	^FacadeTusLibros withAuthenticator: authenticator withCatalog: self defaultCatalog andExpiringTime: 30*minute.! !
+	^FacadeTusLibros 
+		withAuthenticator: authenticator 
+		withCatalog: self defaultCatalog
+		usingClock: self.! !
 
+!StoreTestObjectsFactory methodsFor: 'tusLibros' stamp: 'FedericoSabatini 11/30/2020 20:57:14'!
+tusLibros: aClock
+
+	| authenticator |
+
+	authenticator := Dictionary with: 1 -> 'pass' with: 2 -> 'pass'.
+
+	^FacadeTusLibros 
+		withAuthenticator: authenticator 
+		withCatalog: self defaultCatalog
+		usingClock: aClock.! !
+
+
+!StoreTestObjectsFactory methodsFor: 'date' stamp: 'FedericoSabatini 11/30/2020 20:59:02'!
+now
+	
+	^gregorianDateTime! !
 
 !StoreTestObjectsFactory methodsFor: 'date' stamp: 'HernanWilkinson 6/17/2013 18:37'!
 today
