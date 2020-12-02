@@ -16040,3 +16040,112 @@ PASSED!
 ----SNAPSHOT----(2 December 2020 16:46:40) CuisUniversity-4384.image priorSource: 18097391!
 
 ----SNAPSHOT----(2 December 2020 16:49:12) CuisUniversity-4384.image priorSource: 18097484!
+!InternalRestInterfaceTest methodsFor: 'create' stamp: 'FedericoSabatini 12/2/2020 16:57:14'!
+test21CannotListPurchasesWithUnknownUser
+
+	| tusLibros |
+
+	tusLibros := testObjectsFactory tusLibros.
+
+	self should: [ tusLibros createCartForUser: 3 withPassword: 'pass'. ]
+		raise: Error
+		withMessageText: InternalRestInterface badAuthenticationErrorDescription.! !
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:57:45' prior: 50897204!
+test21CannotListPurchasesWithUnknownUser
+
+	| tusLibros expectedPurchases cartID  |
+
+	expectedPurchases := OrderedCollection with: '0'.
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+
+	self should: [ tusLibros createCartForUser: 3 withPassword: 'pass'. ]
+		raise: Error
+		withMessageText: InternalRestInterface badAuthenticationErrorDescription.! !
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:58:13' prior: 50897217!
+test21CannotListPurchasesWithUnknownUser
+
+	| tusLibros |
+
+	tusLibros := testObjectsFactory tusLibros.
+
+	self should: [ tusLibros listPurchasesWithUser: 3 withPassword: 'pass'. ]
+		raise: Error
+		withMessageText: InternalRestInterface badAuthenticationErrorDescription.! !
+
+!testRun: #InternalRestInterfaceTest #test21CannotListPurchasesWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:58:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 16:58:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 16:58:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:58:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 16:58:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 16:58:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test21CannotListPurchasesWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:58:21'!
+PASSED!
+
+----SNAPSHOT----(2 December 2020 16:58:32) CuisUniversity-4384.image priorSource: 18097577!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:59:17' prior: 50896240!
+listPurchasesWithUser: userID withPassword: pass
+
+	self assertAuthenticate: userID withPassword: pass.
+	
+	^(usersHistory at: userID) history.
+! !
+
+----SNAPSHOT----(2 December 2020 16:59:41) CuisUniversity-4384.image priorSource: 18101976!

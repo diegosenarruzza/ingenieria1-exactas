@@ -586,6 +586,17 @@ test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal
 	
 	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
 
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:58:13'!
+test21CannotListPurchasesWithUnknownUser
+
+	| tusLibros |
+
+	tusLibros := testObjectsFactory tusLibros.
+
+	self should: [ tusLibros listPurchasesWithUser: 3 withPassword: 'pass'. ]
+		raise: Error
+		withMessageText: InternalRestInterface badAuthenticationErrorDescription.! !
+
 
 !classDefinition: #Cart category: 'TusLibros-Solucion'!
 Object subclass: #Cart
@@ -919,11 +930,10 @@ listCartFor: aCartID
 
 	^aSessionCart cart items.! !
 
-!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:24:51'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:59:17'!
 listPurchasesWithUser: userID withPassword: pass
 
 	self assertAuthenticate: userID withPassword: pass.
-	
 	
 	^(usersHistory at: userID) history.
 ! !
