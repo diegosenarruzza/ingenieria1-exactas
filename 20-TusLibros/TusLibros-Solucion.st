@@ -408,6 +408,20 @@ test17CheckoutShouldRestartExpirationTime
 
 	self assertUpdatedTimeToCartAfter: [ :anInternalRestInterface :aCartID | self tusLibros: anInternalRestInterface checkoutCartID: aCartID].! !
 
+!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'FedericoSabatini 12/2/2020 12:21:56'!
+test21CannotListPurchasesOnExpiredCart
+
+	self shouldRaiseCartTimeExpiredErrorWhen: [ :anInternalRestInterface :aCartID | 
+		anInternalRestInterface listPurchases: aCartID.
+	].! !
+
+!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'FedericoSabatini 12/2/2020 12:21:52'!
+test22ListPurchasesOfCartShouldRestartExpirationTime
+
+	self assertUpdatedTimeToCartAfter: [ :anInternalRestInterface :aCartID | 
+		anInternalRestInterface listPurchases: aCartID.
+	].! !
+
 
 !InternalRestInterfaceTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:24'!
 test08CheckoutShouldBeRegisterInSalesBook
@@ -540,6 +554,50 @@ setUp
 	debitBehavior := [ :anAmount :aCreditCard | ].
 	clockBehavior := [ testObjectsFactory now ].! !
 
+
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 11:34:14'!
+test18listPurchasesShouldReturnZeroOnEmptyCart
+
+	| tusLibros expectedPurchases cartID  |
+
+	expectedPurchases := OrderedCollection with: '0'.
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 11:42:20'!
+test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal
+
+	| tusLibros expectedPurchases cartID |
+
+	expectedPurchases := OrderedCollection 
+		with: (testObjectsFactory itemSellByTheStore, ' -> ', testObjectsFactory itemSellByTheStorePrice asString)
+		with: testObjectsFactory itemSellByTheStorePrice asString.
+		
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 12:15:48'!
+test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal
+
+	| tusLibros expectedPurchases cartID |
+
+	expectedPurchases := OrderedCollection 
+		with: (testObjectsFactory itemSellByTheStore, ' -> ', (testObjectsFactory itemSellByTheStorePrice * 5) asString)
+		with: (testObjectsFactory itemSellByTheStorePrice * 5) asString.
+		
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 5 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+
 
 !classDefinition: #Cart category: 'TusLibros-Solucion'!
 Object subclass: #Cart
@@ -594,10 +652,10 @@ isEmpty
 	^items isEmpty ! !
 
 
-!Cart methodsFor: 'total' stamp: 'HernanWilkinson 6/17/2013 19:09'!
+!Cart methodsFor: 'total' stamp: 'FedericoSabatini 12/2/2020 11:57:59'!
 total
-
-	^ items sum: [ :anItem | catalog at: anItem ]! !
+	
+	^ items sum: [ :anItem | catalog at: anItem ] ifEmpty: [0]! !
 
 
 !Cart methodsFor: 'adding' stamp: 'HernanWilkinson 6/17/2013 17:44'!
@@ -860,6 +918,23 @@ listCartFor: aCartID
 	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
 
 	^aSessionCart cart items.! !
+
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 12:22:18'!
+listPurchases: aCartID
+
+	| aSessionCart purchaseList |
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
+	
+	purchaseList := OrderedCollection new.
+	
+	(aSessionCart cart items) asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (aSessionCart cart items occurrencesOf: cartKey)) asString].
+	purchaseList addLast: aSessionCart cart total asString.
+	
+	^purchaseList.! !
 
 
 !InternalRestInterface methodsFor: 'errors' stamp: 'DS 11/29/2020 18:52:50'!
