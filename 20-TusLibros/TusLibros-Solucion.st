@@ -409,7 +409,7 @@ test17CheckoutShouldRestartExpirationTime
 	self assertUpdatedTimeToCartAfter: [ :anInternalRestInterface :aCartID | self tusLibros: anInternalRestInterface checkoutCartID: aCartID].! !
 
 
-!InternalRestInterfaceTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:24'!
+!InternalRestInterfaceTest methodsFor: 'checkout' stamp: 'FedericoSabatini 12/2/2020 19:40:59'!
 test08CheckoutShouldBeRegisterInSalesBook
 
 	| tusLibros cartID |
@@ -541,25 +541,24 @@ setUp
 	clockBehavior := [ testObjectsFactory now ].! !
 
 
-!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 15:48:06'!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 19:29:05'!
 test18listPurchasesShouldReturnZeroWithNewUser
 
-	| tusLibros expectedPurchases cartID  |
+	| tusLibros expectedPurchases  |
 
-	expectedPurchases := OrderedCollection with: '0'.
+	expectedPurchases := OrderedCollection with: ('total' -> 0).
 	tusLibros := testObjectsFactory tusLibros.
-	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
 	
 	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
 
-!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:42:48'!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 19:30:50'!
 test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal
 
 	| tusLibros expectedPurchases cartID |
 
 	expectedPurchases := OrderedCollection 
-		with: (testObjectsFactory itemSellByTheStore, ' -> ', testObjectsFactory itemSellByTheStorePrice asString)
-		with: testObjectsFactory itemSellByTheStorePrice asString.
+		with: (testObjectsFactory itemSellByTheStore -> 1)
+		with: 'total' -> testObjectsFactory itemSellByTheStorePrice.
 		
 	tusLibros := testObjectsFactory tusLibros.
 	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
@@ -569,14 +568,14 @@ test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal
 	
 	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
 
-!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:46:19'!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 19:31:35'!
 test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal
 
 	| tusLibros expectedPurchases cartID |
 
 	expectedPurchases := OrderedCollection 
-		with: (testObjectsFactory itemSellByTheStore, ' -> ', (testObjectsFactory itemSellByTheStorePrice * 5) asString)
-		with: (testObjectsFactory itemSellByTheStorePrice * 5) asString.
+		with: (testObjectsFactory itemSellByTheStore -> 5)
+		with: 'total' -> (testObjectsFactory itemSellByTheStorePrice * 5).
 		
 	tusLibros := testObjectsFactory tusLibros.
 	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
@@ -848,7 +847,7 @@ Object subclass: #InternalRestInterface
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!InternalRestInterface methodsFor: 'initialization' stamp: 'FedericoSabatini 12/2/2020 16:29:10'!
+!InternalRestInterface methodsFor: 'initialization' stamp: 'FedericoSabatini 12/2/2020 19:41:07'!
 initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: aClock 
 	
 	authenticator := anAuthenticator.
@@ -860,9 +859,7 @@ initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: a
 	currentID := 0.
 	salesBook := OrderedCollection new.
 	
-	usersHistory := Dictionary new.
-	
-	authenticator keysDo: [:aKey | usersHistory at: aKey put: (UserHistory withCatalog: catalog)].! !
+	usersHistory := Dictionary new. ! !
 
 
 !InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:07:37'!
@@ -882,10 +879,10 @@ addToCart: aCartID aQuantity: aQuantity of: anItem
 	
 	! !
 
-!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:24:46'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 19:41:35'!
 checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
 
-	| creditCard aSessionCart owner cashier |
+	| creditCard aSessionCart owner purchases cashier|
 	
 	"self assertUnkownCartID: aCartID."
 	aSessionCart := self cartWith: aCartID.
@@ -897,12 +894,14 @@ checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aM
 	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
 	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
 
-	(usersHistory at: aSessionCart user) addCartSale: aSessionCart cart.
-
+	purchases := usersHistory at: aSessionCart user ifAbsent: 
+		[usersHistory at: aSessionCart user put: OrderedCollection new].
+	
+	purchases addLast: aSessionCart cart.
 	
 	^cashier checkOut.! !
 
-!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:25:29'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 19:18:35'!
 createCartForUser: anID withPassword: aPassword 
 
 	| cart |
@@ -913,8 +912,6 @@ createCartForUser: anID withPassword: aPassword
 	cart := Cart acceptingItemsOf: catalog.
 	
 	carts at: currentID put: (SessionCart for: cart expiringAt: (clock now next: 30*minute) withUser: anID).
-	
-	(usersHistory includes: anID) ifFalse: [usersHistory at: anID put: (UserHistory withCatalog: catalog)].
 
 	^currentID.! !
 
@@ -930,13 +927,27 @@ listCartFor: aCartID
 
 	^aSessionCart cart items.! !
 
-!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:59:17'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 19:50:26'!
 listPurchasesWithUser: userID withPassword: pass
 
+	| purchases items history sum |
+	
 	self assertAuthenticate: userID withPassword: pass.
 	
-	^(usersHistory at: userID) history.
-! !
+	purchases := OrderedCollection new.
+	items := Bag new.
+	
+	history := usersHistory at: userID ifAbsent: [OrderedCollection new].
+	history do: [:aCart | items addAll: aCart items].
+	
+	sum := 0.
+	history sum: [:aCart | sum := sum + aCart total ] ifEmpty: [0].
+	
+	items asSet do: [:aBook | purchases add: (aBook -> (items occurrencesOf: aBook))].	
+	
+	purchases add: ('total' -> sum).
+	
+	^purchases.! !
 
 
 !InternalRestInterface methodsFor: 'errors' stamp: 'DS 11/29/2020 18:52:50'!
@@ -1180,52 +1191,3 @@ now
 today
 	
 	^ today! !
-
-
-!classDefinition: #UserHistory category: 'TusLibros-Solucion'!
-Object subclass: #UserHistory
-	instanceVariableNames: 'purchases catalog'
-	classVariableNames: ''
-	poolDictionaries: ''
-	category: 'TusLibros-Solucion'!
-
-!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:32:15'!
-addCartSale: aCart
-
-	| purchaseCartList | 
-	purchaseCartList := aCart items.
-	
-	purchases addAll: purchaseCartList.! !
-
-!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:45:56'!
-history
-	
-	| purchaseList sum |
-	
-	purchaseList := OrderedCollection new.
-	
-	purchases asSet do: 
-		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (purchases occurrencesOf: cartKey)) asString].
-		
-	sum := 0.
-	purchases do: [:purchase | sum := (sum + catalog at: purchase)].
-	
-	purchaseList addLast: sum asString.
-	
-	^purchaseList.! !
-
-!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:32:30'!
-initializeWithCatalog: aCatalog
-	
-	catalog := aCatalog.
-	purchases := Bag new.! !
-
-"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
-
-!classDefinition: 'UserHistory class' category: 'TusLibros-Solucion'!
-UserHistory class
-	instanceVariableNames: ''!
-
-!UserHistory class methodsFor: 'instance creation' stamp: 'FedericoSabatini 12/2/2020 16:18:09'!
-withCatalog: withCatalog
-	^self new initializeWithCatalog: withCatalog! !
