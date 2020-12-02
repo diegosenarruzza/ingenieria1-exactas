@@ -14515,3 +14515,1528 @@ PASSED!
 ----SNAPSHOT----(2 December 2020 12:22:36) CuisUniversity-4384.image priorSource: 18022724!
 
 ----QUIT----(2 December 2020 12:22:50) CuisUniversity-4384.image priorSource: 18030778!
+
+----STARTUP---- (2 December 2020 15:29:47) as D:\facultad\Smalltalk\windows64\CuisUniversity-4384.image!
+
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 15:32:43' prior: 50894750!
+test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal
+
+	| tusLibros expectedPurchases cartID |
+
+	expectedPurchases := OrderedCollection 
+		with: (testObjectsFactory itemSellByTheStore, ' -> ', (testObjectsFactory itemSellByTheStorePrice * 5) asString)
+		with: (testObjectsFactory itemSellByTheStorePrice * 5) asString.
+		
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 10 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 15:32:43'!
+FAILURE!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 15:33:06' prior: 50895123!
+test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal
+
+	| tusLibros expectedPurchases cartID |
+
+	expectedPurchases := OrderedCollection 
+		with: (testObjectsFactory itemSellByTheStore, ' -> ', (testObjectsFactory itemSellByTheStorePrice * 5) asString)
+		with: (testObjectsFactory itemSellByTheStorePrice * 5) asString.
+		
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 5 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 15:33:08'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 15:33:08'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 15:33:08'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 15:33:08'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 15:33:08'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 15:33:08'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 15:33:08'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 15:33:08'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 15:33:08'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroOnEmptyCart stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test21CannotListPurchasesOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test22ListPurchasesOfCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:33:09'!
+PASSED!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 15:34:04' prior: 50895151!
+test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal
+
+	| tusLibros expectedPurchases cartID |
+
+	expectedPurchases := OrderedCollection 
+		with: (testObjectsFactory itemSellByTheStore, ' -> ', (testObjectsFactory itemSellByTheStorePrice * 5) asString)
+		with: (testObjectsFactory itemSellByTheStorePrice * 5) asString.
+		
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 5 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 15:41:47'!
+listPurchasesWithUser: userID withPassword: pass
+
+	| aSessionCart purchaseList |
+	
+	self assertAuthenticate: userID withPassword: pass.
+
+	
+	purchaseList := OrderedCollection new.
+	
+	(aSessionCart cart items) asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (aSessionCart cart items occurrencesOf: cartKey)) asString].
+	purchaseList addLast: aSessionCart cart total asString.
+	
+	^purchaseList.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 15:42:39' prior: 50895295!
+listPurchasesWithUser: userID withPassword: pass
+
+	| aSessionCart purchaseList |
+	
+	self assertAuthenticate: userID withPassword: pass.
+
+	
+	purchaseList := OrderedCollection new.
+	
+	(aSessionCart cart items) asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (aSessionCart cart items occurrencesOf: cartKey)) asString].
+	purchaseList addLast: aSessionCart cart total asString.
+	
+	^purchaseList.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 15:42:47' prior: 50895313!
+listPurchasesWithUser: userID withPassword: pass
+
+	
+	
+	self assertAuthenticate: userID withPassword: pass.
+! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 15:44:00' prior: 50895331!
+listPurchasesWithUser: userID withPassword: pass
+
+	self assertAuthenticate: userID withPassword: pass.
+! !
+
+Object subclass: #UserSalesHistory
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #UserSalesHistory category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 12/2/2020 15:46:19'!
+Object subclass: #UserSalesHistory
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 15:46:48'!
+test18listPurchasesShouldReturnZeroOnEmptyUser
+
+	| tusLibros expectedPurchases cartID  |
+
+	expectedPurchases := OrderedCollection with: '0'.
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+
+!methodRemoval: InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroOnEmptyCart stamp: 'FedericoSabatini 12/2/2020 15:46:53'!
+test18listPurchasesShouldReturnZeroOnEmptyCart
+
+	| tusLibros expectedPurchases cartID  |
+
+	expectedPurchases := OrderedCollection with: '0'.
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 15:47:21'!
+test18listPurchasesShouldReturnZeroWithNewUser
+
+	| tusLibros expectedPurchases cartID  |
+
+	expectedPurchases := OrderedCollection with: '0'.
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+
+!methodRemoval: InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroOnEmptyUser stamp: 'FedericoSabatini 12/2/2020 15:47:24'!
+test18listPurchasesShouldReturnZeroOnEmptyUser
+
+	| tusLibros expectedPurchases cartID  |
+
+	expectedPurchases := OrderedCollection with: '0'.
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 15:47:56' prior: 50895385!
+test18listPurchasesShouldReturnZeroWithNewUser
+
+	| tusLibros expectedPurchases cartID  |
+
+	expectedPurchases := OrderedCollection with: '0'.
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 15:48:06' prior: 50895414!
+test18listPurchasesShouldReturnZeroWithNewUser
+
+	| tusLibros expectedPurchases cartID  |
+
+	expectedPurchases := OrderedCollection with: '0'.
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
+!InternalRestInterfaceTest methodsFor: 'create' stamp: 'FedericoSabatini 12/2/2020 15:48:41' prior: 50891381!
+test04CannotAssignSameIDForDifferentCarts
+
+	| tusLibros cartID cartID2 |
+
+	tusLibros := testObjectsFactory tusLibros.
+	
+	cartID := tusLibros createCartForUser: '1'withPassword: 'pass'.
+	cartID2 := tusLibros createCartForUser: '2' withPassword: 'pass'.
+
+	self assert: (cartID ~= cartID2).! !
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 15:48:44'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 15:48:44'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 15:48:44'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 15:48:44'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 15:48:44'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 15:48:44'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 15:48:44'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 15:48:44'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 15:48:44'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 15:48:44'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+FAILURE!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test21CannotListPurchasesOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test22ListPurchasesOfCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:48:45'!
+PASSED!
+!InternalRestInterfaceTest methodsFor: 'create' stamp: 'FedericoSabatini 12/2/2020 15:48:50' prior: 50895444!
+test04CannotAssignSameIDForDifferentCarts
+
+	| tusLibros cartID cartID2 |
+
+	tusLibros := testObjectsFactory tusLibros.
+	
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	cartID2 := tusLibros createCartForUser: 2 withPassword: 'pass'.
+
+	self assert: (cartID ~= cartID2).! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 15:49:44' prior: 50895338!
+listPurchasesWithUser: userID withPassword: pass
+
+	self assertAuthenticate: userID withPassword: pass.
+	
+	^OrderedCollection with: '0'.	
+! !
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 15:49:51'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 15:49:51'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 15:49:51'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 15:49:51'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 15:49:51'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 15:49:51'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 15:49:51'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test21CannotListPurchasesOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test22ListPurchasesOfCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 15:49:52'!
+PASSED!
+
+!classRenamed: #UserSalesHistory as: #UserHistory stamp: 'FedericoSabatini 12/2/2020 15:51:39'!
+Smalltalk renameClassNamed: #UserSalesHistory as: #UserHistory!
+
+Object subclass: #InternalRestInterface
+	instanceVariableNames: 'authenticator carts currentID catalog salesBook expiringTime clock usersHistory'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #InternalRestInterface category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 12/2/2020 15:52:02'!
+Object subclass: #InternalRestInterface
+	instanceVariableNames: 'authenticator carts currentID catalog salesBook expiringTime clock usersHistory'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!InternalRestInterface methodsFor: 'initialization' stamp: 'FedericoSabatini 12/2/2020 15:52:33' prior: 50891697!
+initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: aClock 
+	
+	authenticator := anAuthenticator.
+	catalog := aCatalog.
+	
+	clock := aClock.
+	
+	carts := Dictionary new.
+	currentID := 0.
+	salesBook := OrderedCollection new.
+	
+	usersHistory := Dictionary new.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 15:58:26' prior: 50891749!
+createCartForUser: anID withPassword: aPassword 
+
+	| cart |
+
+	self assertAuthenticate: anID withPassword: aPassword.
+	
+	currentID := currentID + 1.
+	cart := Cart acceptingItemsOf: catalog.
+	
+	carts at: currentID put: (SessionCart for: cart expiringAt: (clock now next: 30*minute) withUser: anID).
+
+	^currentID.! !
+
+!classDefinition: #SessionCart category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 12/2/2020 15:59:01'!
+Object subclass: #SessionCart
+	instanceVariableNames: 'cart expiringTimestamp userID'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!SessionCart methodsFor: 'initialization' stamp: 'FedericoSabatini 12/2/2020 15:59:05'!
+initializeFor: aCart expiringAt: aGregorianDateTime withUser: anUserID
+
+	cart := aCart.
+	userID := anUserID.
+	expiringTimestamp := aGregorianDateTime.! !
+
+!methodRemoval: SessionCart #initializeFor:expiringAt: stamp: 'FedericoSabatini 12/2/2020 15:59:12'!
+initializeFor: aCart expiringAt: aGregorianDateTime
+
+	cart := aCart.
+	expiringTimestamp := aGregorianDateTime.!
+!SessionCart class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 15:59:46'!
+for: aCart expiringAt: aGregorianDateTime withUser: anUserID
+
+	^self new initializeFor: aCart expiringAt: aGregorianDateTime withUser: anUserID.! !
+
+!methodRemoval: SessionCart class #for:expiringAt: stamp: 'FedericoSabatini 12/2/2020 15:59:50'!
+for: aCart expiringAt: aGregorianDateTime
+
+	^self new initializeFor: aCart expiringAt: aGregorianDateTime.!
+!SessionCart methodsFor: 'nil' stamp: 'FedericoSabatini 12/2/2020 16:00:13'!
+user
+	^userID ! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:02:08' prior: 50891724!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard aSessionCart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	usersHistory 
+	^cashier checkOut.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:05:33' prior: 50895759!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard aSessionCart cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	(usersHistory includes: aSessionCart user) ifFalse: [usersHistory at: aSessionCart user put: UserHistory new].
+
+	
+	^cashier checkOut.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:07:18' prior: 50895785!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard aSessionCart owner cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	(usersHistory includes: aSessionCart user) ifFalse: [usersHistory at: aSessionCart user put: UserHistory new].
+
+	
+	^cashier checkOut.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:07:37' prior: 50891708!
+addToCart: aCartID aQuantity: aQuantity of: anItem
+	
+	| aSessionCart owner |
+
+	"self assertUnkownCartID: aCartID.	"
+
+	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
+	
+	aSessionCart cart add: aQuantity of: anItem.
+	
+	! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:07:48' prior: 50891761!
+listCartFor: aCartID
+
+	| aSessionCart owner |
+	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
+
+	^aSessionCart cart items.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:10:06' prior: 50895814!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard aSessionCart owner cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	(usersHistory includes: aSessionCart user) ifFalse: [usersHistory at: aSessionCart user put: UserHistory new].
+	(usersHistory at: aSessionCart user) addCartSale: aSessionCart cart.
+
+	
+	^cashier checkOut.! !
+!UserHistory methodsFor: 'nil' stamp: 'FedericoSabatini 12/2/2020 16:10:48'!
+addCartSale: aCart
+	! !
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:11:34'!
+history: userID
+	^OrderedCollection with: '0'.! !
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 16:11:56'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test21CannotListPurchasesOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:11:57'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test22ListPurchasesOfCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:11:58'!
+ERROR!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:13:26' prior: 50895563!
+listPurchasesWithUser: userID withPassword: pass
+
+	self assertAuthenticate: userID withPassword: pass.
+	
+	^(usersHistory at: userID) history.
+! !
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:13:36'!
+history
+	^OrderedCollection with: '0'.! !
+
+!methodRemoval: UserHistory #history: stamp: 'FedericoSabatini 12/2/2020 16:13:41'!
+history: userID
+	^OrderedCollection with: '0'.!
+
+Object subclass: #UserHistory
+	instanceVariableNames: 'purchases'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!classDefinition: #UserHistory category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 12/2/2020 16:14:37'!
+Object subclass: #UserHistory
+	instanceVariableNames: 'purchases'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:16:17'!
+historyWithCatalog: aCatalog
+	^OrderedCollection with: '0'.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:16:42' prior: 50896013!
+listPurchasesWithUser: userID withPassword: pass
+
+	self assertAuthenticate: userID withPassword: pass.
+	
+	^(usersHistory at: userID) historyWithCatalog: catalog.
+! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:16:52' prior: 50896048!
+listPurchasesWithUser: userID withPassword: pass
+
+	self assertAuthenticate: userID withPassword: pass.
+	
+	^(usersHistory at: userID) history.
+! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:17:11' prior: 50895879!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard aSessionCart owner cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	(usersHistory includes: aSessionCart user) ifFalse: [usersHistory at: aSessionCart user put: UserHistory with: catalog].
+	(usersHistory at: aSessionCart user) addCartSale: aSessionCart cart.
+
+	
+	^cashier checkOut.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:17:35' prior: 50896065!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard aSessionCart owner cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	(usersHistory includes: aSessionCart user) ifFalse: [usersHistory at: aSessionCart user put: UserHistory withCatalog: catalog].
+	(usersHistory at: aSessionCart user) addCartSale: aSessionCart cart.
+
+	
+	^cashier checkOut.! !
+!UserHistory class methodsFor: 'nil' stamp: 'FedericoSabatini 12/2/2020 16:18:09'!
+withCatalog: withCatalog
+	^self new initializeWithCatalog: withCatalog! !
+
+!methodRemoval: UserHistory #historyWithCatalog: stamp: 'FedericoSabatini 12/2/2020 16:18:33'!
+historyWithCatalog: aCatalog
+	^OrderedCollection with: '0'.!
+
+!classDefinition: #UserHistory category: 'TusLibros-Solucion' stamp: 'FedericoSabatini 12/2/2020 16:19:17'!
+Object subclass: #UserHistory
+	instanceVariableNames: 'purchases catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+!UserHistory methodsFor: 'nil' stamp: 'FedericoSabatini 12/2/2020 16:19:16'!
+initializeWithCatalog: aCatalog
+	
+	catalog := aCatalog.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:19:50' prior: 50896098!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard aSessionCart owner cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	(usersHistory includes: aSessionCart user) ifFalse: [usersHistory at: aSessionCart user put: (UserHistory withCatalog: catalog)].
+	(usersHistory at: aSessionCart user) addCartSale: aSessionCart cart.
+
+	
+	^cashier checkOut.! !
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:20:16'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:20:31'!
+ERROR!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:23:49' prior: 50896057!
+listPurchasesWithUser: userID withPassword: pass
+
+	self assertAuthenticate: userID withPassword: pass.
+	
+	(usersHistory includes: userID) ifFalse: [^UserHistory with: catalog].
+	
+	^(usersHistory at: userID) history.
+! !
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:24:08'!
+ERROR!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:24:46' prior: 50896154!
+checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
+
+	| creditCard aSessionCart owner cashier |
+	
+	"self assertUnkownCartID: aCartID."
+	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
+
+	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
+	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
+
+	(usersHistory at: aSessionCart user) addCartSale: aSessionCart cart.
+
+	
+	^cashier checkOut.! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:24:51' prior: 50896196!
+listPurchasesWithUser: userID withPassword: pass
+
+	self assertAuthenticate: userID withPassword: pass.
+	
+	
+	^(usersHistory at: userID) history.
+! !
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:25:29' prior: 50895704!
+createCartForUser: anID withPassword: aPassword 
+
+	| cart |
+
+	self assertAuthenticate: anID withPassword: aPassword.
+	
+	currentID := currentID + 1.
+	cart := Cart acceptingItemsOf: catalog.
+	
+	carts at: currentID put: (SessionCart for: cart expiringAt: (clock now next: 30*minute) withUser: anID).
+	
+	(usersHistory includes: anID) ifFalse: [usersHistory at: anID put: (UserHistory withCatalog: catalog)].
+
+	^currentID.! !
+!InternalRestInterface methodsFor: 'initialization' stamp: 'FedericoSabatini 12/2/2020 16:29:10' prior: 50895691!
+initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: aClock 
+	
+	authenticator := anAuthenticator.
+	catalog := aCatalog.
+	
+	clock := aClock.
+	
+	carts := Dictionary new.
+	currentID := 0.
+	salesBook := OrderedCollection new.
+	
+	usersHistory := Dictionary new.
+	
+	authenticator keysDo: [:aKey | usersHistory at: aKey put: (UserHistory withCatalog: catalog)].! !
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:29:39'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:29:40'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:29:41'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:29:41'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:29:41'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:29:41'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:29:41'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:29:41'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:29:41'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test21CannotListPurchasesOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:29:41'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test22ListPurchasesOfCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:29:41'!
+ERROR!
+
+!methodRemoval: InternalRestInterfaceTest #test22ListPurchasesOfCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:29:52'!
+test22ListPurchasesOfCartShouldRestartExpirationTime
+
+	self assertUpdatedTimeToCartAfter: [ :anInternalRestInterface :aCartID | 
+		anInternalRestInterface listPurchases: aCartID.
+	].!
+
+!methodRemoval: InternalRestInterfaceTest #test21CannotListPurchasesOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:29:54'!
+test21CannotListPurchasesOnExpiredCart
+
+	self shouldRaiseCartTimeExpiredErrorWhen: [ :anInternalRestInterface :aCartID | 
+		anInternalRestInterface listPurchases: aCartID.
+	].!
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 16:30:05'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 16:30:05'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:30:06'!
+ERROR!
+
+----SNAPSHOT----(2 December 2020 16:30:10) CuisUniversity-4384.image priorSource: 18030871!
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:32:15' prior: 50895911!
+addCartSale: aCart
+
+	| purchaseCartList | 
+	purchaseCartList := aCart items.
+	
+	purchases addAll: purchaseCartList.! !
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:32:30' prior: 50896148!
+initializeWithCatalog: aCatalog
+	
+	catalog := aCatalog.
+	purchases := Bag new.! !
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:35:20' prior: 50896021!
+history
+	
+	| purchaseList sum |
+	
+	purchaseList := OrderedCollection new.
+	
+	purchases asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (purchases occurrencesOf: cartKey)) asString].
+		
+	purchaseList addLast: (purchases sum: [] ifEmpty: [0]).
+	
+	^purchaseList.! !
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:36:38' prior: 50896498!
+history
+	
+	| purchaseList sum |
+	
+	purchaseList := OrderedCollection new.
+	
+	purchases asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (purchases occurrencesOf: cartKey)) asString].
+		
+	sum := 0.
+
+	purchaseList addLast: (purchases do: [:purchase | sum := sum + purchase]).
+	
+	^purchaseList.! !
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:36:40' prior: 50896511!
+history
+	
+	| purchaseList sum |
+	
+	purchaseList := OrderedCollection new.
+	
+	purchases asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (purchases occurrencesOf: cartKey)) asString].
+		
+	sum := 0.
+	purchaseList addLast: (purchases do: [:purchase | sum := sum + purchase]).
+	
+	^purchaseList.! !
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:36:49'!
+FAILURE!
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 16:37:31'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 16:37:31'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:37:31'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 16:37:31'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 16:37:31'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 16:37:31'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:37:31'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 16:37:31'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 16:37:31'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+FAILURE!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:37:32'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:37:38'!
+FAILURE!
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:38:33' prior: 50896525!
+history
+	
+	| purchaseList sum |
+	
+	purchaseList := OrderedCollection new.
+	
+	purchases asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (purchases occurrencesOf: cartKey)) asString].
+		
+	sum := 0.
+	purchaseList addLast: (purchases do: [:purchase | sum := sum + purchase]) asString.
+	
+	^purchaseList.! !
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:38:40'!
+FAILURE!
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:39:16' prior: 50896632!
+history
+	
+	| purchaseList sum |
+	
+	purchaseList := OrderedCollection new.
+	
+	purchases asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (purchases occurrencesOf: cartKey)) asString].
+		
+	sum := 0.
+	purchases do: [:purchase | sum := sum + purchase].
+	
+	purchaseList addLast: sum asString.
+	
+	^purchaseList.! !
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:39:19'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:39:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:39:20'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:39:20'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:39:24'!
+ERROR!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:39:51' prior: 50893674!
+test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal
+
+	| tusLibros expectedPurchases cartID |
+
+	expectedPurchases := OrderedCollection 
+		with: (testObjectsFactory itemSellByTheStore, ' -> ', testObjectsFactory itemSellByTheStorePrice asString)
+		with: testObjectsFactory itemSellByTheStorePrice asString.
+		
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:39:55' prior: 50895272!
+test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal
+
+	| tusLibros expectedPurchases cartID |
+
+	expectedPurchases := OrderedCollection 
+		with: (testObjectsFactory itemSellByTheStore, ' -> ', (testObjectsFactory itemSellByTheStorePrice * 5) asString)
+		with: (testObjectsFactory itemSellByTheStorePrice * 5) asString.
+		
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 5 of: testObjectsFactory itemSellByTheStore.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+FAILURE!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:39:58'!
+FAILURE!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:40:02'!
+FAILURE!
+
+!methodRemoval: InternalRestInterface #listPurchases: stamp: 'FedericoSabatini 12/2/2020 16:41:46'!
+listPurchases: aCartID
+
+	| aSessionCart purchaseList |
+	aSessionCart := self cartWith: aCartID.
+	
+	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
+	
+	purchaseList := OrderedCollection new.
+	
+	(aSessionCart cart items) asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (aSessionCart cart items occurrencesOf: cartKey)) asString].
+	purchaseList addLast: aSessionCart cart total asString.
+	
+	^purchaseList.!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:41:58'!
+FAILURE!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:42:48' prior: 50896755!
+test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal
+
+	| tusLibros expectedPurchases cartID |
+
+	expectedPurchases := OrderedCollection 
+		with: (testObjectsFactory itemSellByTheStore, ' -> ', testObjectsFactory itemSellByTheStorePrice asString)
+		with: testObjectsFactory itemSellByTheStorePrice asString.
+		
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
+	self tusLibros: tusLibros checkoutCartID: cartID.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:42:56'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:43:47'!
+ERROR!
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:44:05' prior: 50896651!
+history
+	
+	| purchaseList sum |
+	
+	purchaseList := OrderedCollection new.
+	
+	purchases asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (purchases occurrencesOf: cartKey)) asString].
+		
+	sum := 0.
+	purchases do: [:purchase | sum := (sum + purchase)].
+	
+	purchaseList addLast: sum asString.
+	
+	^purchaseList.! !
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 16:44:09'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+ERROR!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:44:10'!
+FAILURE!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:44:15'!
+ERROR!
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:45:56' prior: 50896952!
+history
+	
+	| purchaseList sum |
+	
+	purchaseList := OrderedCollection new.
+	
+	purchases asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (purchases occurrencesOf: cartKey)) asString].
+		
+	sum := 0.
+	purchases do: [:purchase | sum := (sum + catalog at: purchase)].
+	
+	purchaseList addLast: sum asString.
+	
+	^purchaseList.! !
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:45:58'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:46:02'!
+FAILURE!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:46:19' prior: 50896778!
+test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal
+
+	| tusLibros expectedPurchases cartID |
+
+	expectedPurchases := OrderedCollection 
+		with: (testObjectsFactory itemSellByTheStore, ' -> ', (testObjectsFactory itemSellByTheStorePrice * 5) asString)
+		with: (testObjectsFactory itemSellByTheStorePrice * 5) asString.
+		
+	tusLibros := testObjectsFactory tusLibros.
+	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
+	
+	tusLibros addToCart: cartID aQuantity: 5 of: testObjectsFactory itemSellByTheStore.
+	self tusLibros: tusLibros checkoutCartID: cartID.
+	
+	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:46:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test01CreateCartHaveEmptyList stamp: 'FedericoSabatini 12/2/2020 16:46:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test02CannotCreateCartWithInvalidPassword stamp: 'FedericoSabatini 12/2/2020 16:46:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test03CannotCreateCartWithUnknownUser stamp: 'FedericoSabatini 12/2/2020 16:46:20'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test04CannotAssignSameIDForDifferentCarts stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test05AddedItemIsIncludedInCartList stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test06AddedItemsInDifferentsCartsAreInRespectiveLists stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test07CannotAddToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test08CheckoutShouldBeRegisterInSalesBook stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test09CannotCheckoutWhnCreditCardHasNotCredit stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test10CannotCheckoutToUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test11CannotListAnUnknownCartID stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test12CannotAddOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test13CannotListOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test14CannotCheckoutOnExpiredCart stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test15AddAnItemShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test16ListCartShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test17CheckoutShouldRestartExpirationTime stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test18listPurchasesShouldReturnZeroWithNewUser stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+!testRun: #InternalRestInterfaceTest #test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal stamp: 'FedericoSabatini 12/2/2020 16:46:21'!
+PASSED!
+
+----SNAPSHOT----(2 December 2020 16:46:28) CuisUniversity-4384.image priorSource: 18074543!
+
+----SNAPSHOT----(2 December 2020 16:46:40) CuisUniversity-4384.image priorSource: 18097391!
+
+----SNAPSHOT----(2 December 2020 16:49:12) CuisUniversity-4384.image priorSource: 18097484!

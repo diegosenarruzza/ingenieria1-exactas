@@ -408,20 +408,6 @@ test17CheckoutShouldRestartExpirationTime
 
 	self assertUpdatedTimeToCartAfter: [ :anInternalRestInterface :aCartID | self tusLibros: anInternalRestInterface checkoutCartID: aCartID].! !
 
-!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'FedericoSabatini 12/2/2020 12:21:56'!
-test21CannotListPurchasesOnExpiredCart
-
-	self shouldRaiseCartTimeExpiredErrorWhen: [ :anInternalRestInterface :aCartID | 
-		anInternalRestInterface listPurchases: aCartID.
-	].! !
-
-!InternalRestInterfaceTest methodsFor: 'expiration tests' stamp: 'FedericoSabatini 12/2/2020 12:21:52'!
-test22ListPurchasesOfCartShouldRestartExpirationTime
-
-	self assertUpdatedTimeToCartAfter: [ :anInternalRestInterface :aCartID | 
-		anInternalRestInterface listPurchases: aCartID.
-	].! !
-
 
 !InternalRestInterfaceTest methodsFor: 'checkout' stamp: 'DS 11/29/2020 19:31:24'!
 test08CheckoutShouldBeRegisterInSalesBook
@@ -522,7 +508,7 @@ test03CannotCreateCartWithUnknownUser
 		raise: Error
 		withMessageText: InternalRestInterface badAuthenticationErrorDescription.! !
 
-!InternalRestInterfaceTest methodsFor: 'create' stamp: 'DS 11/29/2020 18:31:15'!
+!InternalRestInterfaceTest methodsFor: 'create' stamp: 'FedericoSabatini 12/2/2020 15:48:50'!
 test04CannotAssignSameIDForDifferentCarts
 
 	| tusLibros cartID cartID2 |
@@ -555,8 +541,8 @@ setUp
 	clockBehavior := [ testObjectsFactory now ].! !
 
 
-!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 11:34:14'!
-test18listPurchasesShouldReturnZeroOnEmptyCart
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 15:48:06'!
+test18listPurchasesShouldReturnZeroWithNewUser
 
 	| tusLibros expectedPurchases cartID  |
 
@@ -564,9 +550,9 @@ test18listPurchasesShouldReturnZeroOnEmptyCart
 	tusLibros := testObjectsFactory tusLibros.
 	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
 	
-	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
 
-!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 11:42:20'!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:42:48'!
 test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal
 
 	| tusLibros expectedPurchases cartID |
@@ -579,10 +565,11 @@ test19listPurchasesAfterAddToCartShouldIncludeBookAndTotal
 	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
 	
 	tusLibros addToCart: cartID aQuantity: 1 of: testObjectsFactory itemSellByTheStore.
+	self tusLibros: tusLibros checkoutCartID: cartID.
 	
-	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
 
-!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 12:15:48'!
+!InternalRestInterfaceTest methodsFor: 'list purchases' stamp: 'FedericoSabatini 12/2/2020 16:46:19'!
 test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal
 
 	| tusLibros expectedPurchases cartID |
@@ -595,8 +582,9 @@ test20listPurchasesAfterAddingMultipleBooksShouldIncludeBooksAndTotal
 	cartID := tusLibros createCartForUser: 1 withPassword: 'pass'.
 	
 	tusLibros addToCart: cartID aQuantity: 5 of: testObjectsFactory itemSellByTheStore.
+	self tusLibros: tusLibros checkoutCartID: cartID.
 	
-	self assert: expectedPurchases equals: (tusLibros listPurchases: cartID).! !
+	self assert: expectedPurchases equals: (tusLibros listPurchasesWithUser: 1 withPassword: 'pass').! !
 
 
 !classDefinition: #Cart category: 'TusLibros-Solucion'!
@@ -844,12 +832,12 @@ withNumber: aNumber withOwner: anOwner expiringOn: aMonth
 
 !classDefinition: #InternalRestInterface category: 'TusLibros-Solucion'!
 Object subclass: #InternalRestInterface
-	instanceVariableNames: 'authenticator carts currentID catalog salesBook expiringTime clock'
+	instanceVariableNames: 'authenticator carts currentID catalog salesBook expiringTime clock usersHistory'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
 
-!InternalRestInterface methodsFor: 'initialization' stamp: 'FedericoSabatini 11/30/2020 20:35:11'!
+!InternalRestInterface methodsFor: 'initialization' stamp: 'FedericoSabatini 12/2/2020 16:29:10'!
 initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: aClock 
 	
 	authenticator := anAuthenticator.
@@ -859,42 +847,51 @@ initializeWithAuthenticator: anAuthenticator withCatalog: aCatalog usingClock: a
 	
 	carts := Dictionary new.
 	currentID := 0.
-	salesBook := OrderedCollection new.! !
+	salesBook := OrderedCollection new.
+	
+	usersHistory := Dictionary new.
+	
+	authenticator keysDo: [:aKey | usersHistory at: aKey put: (UserHistory withCatalog: catalog)].! !
 
 
-!InternalRestInterface methodsFor: 'api rest' stamp: 'DS 11/30/2020 22:00:35'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:07:37'!
 addToCart: aCartID aQuantity: aQuantity of: anItem
 	
-	| aSessionCart |
+	| aSessionCart owner |
 
 	"self assertUnkownCartID: aCartID.	"
 
 	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
 	
 	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
-	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
 	
 	aSessionCart cart add: aQuantity of: anItem.
 	
 	! !
 
-!InternalRestInterface methodsFor: 'api rest' stamp: 'DS 11/30/2020 22:00:47'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:24:46'!
 checkOutCart: aCartID withCCN: anCCN withCCED: anCCED andCCO: anCCO throught: aMerchantProccesor on: aDate
 
-	| creditCard aSessionCart cashier |
+	| creditCard aSessionCart owner cashier |
 	
 	"self assertUnkownCartID: aCartID."
 	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
 	
 	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
-	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
 
 	creditCard := CreditCard withNumber: anCCN withOwner: anCCO expiringOn: anCCED.
 	cashier := Cashier toCheckout: aSessionCart cart charging: creditCard throught: aMerchantProccesor on: aDate registeringOn: salesBook.
 
+	(usersHistory at: aSessionCart user) addCartSale: aSessionCart cart.
+
+	
 	^cashier checkOut.! !
 
-!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 11/30/2020 20:37:47'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:25:29'!
 createCartForUser: anID withPassword: aPassword 
 
 	| cart |
@@ -904,37 +901,32 @@ createCartForUser: anID withPassword: aPassword
 	currentID := currentID + 1.
 	cart := Cart acceptingItemsOf: catalog.
 	
-	carts at: currentID put: (SessionCart for: cart expiringAt: (clock now next: 30*minute)).
+	carts at: currentID put: (SessionCart for: cart expiringAt: (clock now next: 30*minute) withUser: anID).
+	
+	(usersHistory includes: anID) ifFalse: [usersHistory at: anID put: (UserHistory withCatalog: catalog)].
 
 	^currentID.! !
 
-!InternalRestInterface methodsFor: 'api rest' stamp: 'DS 11/30/2020 22:00:42'!
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:07:48'!
 listCartFor: aCartID
 
-	| aSessionCart |
+	| aSessionCart owner |
 	aSessionCart := self cartWith: aCartID.
+	owner := aSessionCart user.
 	
 	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
-	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
+	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) withUser: owner).
 
 	^aSessionCart cart items.! !
 
-!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 12:22:18'!
-listPurchases: aCartID
+!InternalRestInterface methodsFor: 'api rest' stamp: 'FedericoSabatini 12/2/2020 16:24:51'!
+listPurchasesWithUser: userID withPassword: pass
 
-	| aSessionCart purchaseList |
-	aSessionCart := self cartWith: aCartID.
+	self assertAuthenticate: userID withPassword: pass.
 	
-	(aSessionCart expiringTimestamp < clock now) ifTrue: [ self error: self class cartTimeExpiredErrorDescription ].
-	carts at: aCartID put: (SessionCart for: aSessionCart cart expiringAt:  (clock now next: 30*minute) ).
 	
-	purchaseList := OrderedCollection new.
-	
-	(aSessionCart cart items) asSet do: 
-		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (aSessionCart cart items occurrencesOf: cartKey)) asString].
-	purchaseList addLast: aSessionCart cart total asString.
-	
-	^purchaseList.! !
+	^(usersHistory at: userID) history.
+! !
 
 
 !InternalRestInterface methodsFor: 'errors' stamp: 'DS 11/29/2020 18:52:50'!
@@ -1025,7 +1017,7 @@ of: aTotal
 
 !classDefinition: #SessionCart category: 'TusLibros-Solucion'!
 Object subclass: #SessionCart
-	instanceVariableNames: 'cart expiringTimestamp'
+	instanceVariableNames: 'cart expiringTimestamp userID'
 	classVariableNames: ''
 	poolDictionaries: ''
 	category: 'TusLibros-Solucion'!
@@ -1040,11 +1032,16 @@ expiringTimestamp
 
 	^expiringTimestamp.! !
 
+!SessionCart methodsFor: 'accesing' stamp: 'FedericoSabatini 12/2/2020 16:00:13'!
+user
+	^userID ! !
 
-!SessionCart methodsFor: 'initialization' stamp: 'DS 11/30/2020 19:23:44'!
-initializeFor: aCart expiringAt: aGregorianDateTime
+
+!SessionCart methodsFor: 'initialization' stamp: 'FedericoSabatini 12/2/2020 15:59:05'!
+initializeFor: aCart expiringAt: aGregorianDateTime withUser: anUserID
 
 	cart := aCart.
+	userID := anUserID.
 	expiringTimestamp := aGregorianDateTime.! !
 
 "-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
@@ -1053,10 +1050,10 @@ initializeFor: aCart expiringAt: aGregorianDateTime
 SessionCart class
 	instanceVariableNames: ''!
 
-!SessionCart class methodsFor: 'as yet unclassified' stamp: 'DS 11/30/2020 19:28:27'!
-for: aCart expiringAt: aGregorianDateTime
+!SessionCart class methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 15:59:46'!
+for: aCart expiringAt: aGregorianDateTime withUser: anUserID
 
-	^self new initializeFor: aCart expiringAt: aGregorianDateTime.! !
+	^self new initializeFor: aCart expiringAt: aGregorianDateTime withUser: anUserID.! !
 
 
 !classDefinition: #StoreTestObjectsFactory category: 'TusLibros-Solucion'!
@@ -1173,3 +1170,52 @@ now
 today
 	
 	^ today! !
+
+
+!classDefinition: #UserHistory category: 'TusLibros-Solucion'!
+Object subclass: #UserHistory
+	instanceVariableNames: 'purchases catalog'
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'TusLibros-Solucion'!
+
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:32:15'!
+addCartSale: aCart
+
+	| purchaseCartList | 
+	purchaseCartList := aCart items.
+	
+	purchases addAll: purchaseCartList.! !
+
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:45:56'!
+history
+	
+	| purchaseList sum |
+	
+	purchaseList := OrderedCollection new.
+	
+	purchases asSet do: 
+		[ :cartKey | purchaseList addLast: cartKey, ' -> ', ((catalog at: cartKey) * (purchases occurrencesOf: cartKey)) asString].
+		
+	sum := 0.
+	purchases do: [:purchase | sum := (sum + catalog at: purchase)].
+	
+	purchaseList addLast: sum asString.
+	
+	^purchaseList.! !
+
+!UserHistory methodsFor: 'as yet unclassified' stamp: 'FedericoSabatini 12/2/2020 16:32:30'!
+initializeWithCatalog: aCatalog
+	
+	catalog := aCatalog.
+	purchases := Bag new.! !
+
+"-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- "!
+
+!classDefinition: 'UserHistory class' category: 'TusLibros-Solucion'!
+UserHistory class
+	instanceVariableNames: ''!
+
+!UserHistory class methodsFor: 'instance creation' stamp: 'FedericoSabatini 12/2/2020 16:18:09'!
+withCatalog: withCatalog
+	^self new initializeWithCatalog: withCatalog! !
